@@ -1,0 +1,21 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react/react-in-jsx-scope": "off",
+    "@next/next/no-img-element": "error",
+    "@next/next/no-html-link-for-pages": "error",
+    "react/display-name": "off"
+  },
+  "ignorePatterns": [
+    ".next/**",
+    "node_modules/**",
+    "public/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    "out/**",
+    "*.config.js",
+    "*.config.ts"
+  ]
+} 
