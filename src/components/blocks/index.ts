@@ -28,4 +28,7 @@ export { PricingFilters } from './pricing-filters';
 export { PricingResultsSummary } from './pricing-results-summary';
 export { PricingServiceTable } from './pricing-service-table';
 export { PricingAccordion } from './pricing-accordion';
-export { PricingEmptyState } from './pricing-empty-state'; 
+export { PricingEmptyState } from './pricing-empty-state';
+
+// Export the BenefitsSection component
+export { BenefitsSection } from './benefits-section'; 

@@ -47,8 +47,9 @@ export default function ContactPage() {
           description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
           primaryCTA={{
             text: "Book Now",
-            href: "/booking",
-            icon: "calendar"
+            href: "https://book.vivispa.ca",
+            icon: "calendar",
+            external: true
           }}
           secondaryCTA={{
             text: "Call Us",

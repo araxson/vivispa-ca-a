@@ -74,7 +74,6 @@ export interface Location {
   mapUrl: string;
   bookingUrl: string;
   imageUrl: string;
-  squareId: string;
   coordinates: {
     lat: number;
     lng: number;
@@ -102,12 +101,11 @@ export const locations: Location[] = [
       { day: "Thursday", hours: "10:00 AM - 7:00 PM" },
       { day: "Friday", hours: "10:00 AM - 7:00 PM" },
       { day: "Saturday", hours: "10:00 AM - 5:00 PM" },
-      { day: "Sunday", hours: "12:00 PM - 5:00 PM" }
+      { day: "Sunday", hours: "10:00 PM - 5:00 PM" }
     ],
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=51.0448,-114.0756&query_place_id=ChIJK5_dH6JvcVMRPt_zrJWYfBE",
-    bookingUrl: "https://book.vivispa.ca",
+    mapUrl: "https://maps.app.goo.gl/t1RiWKVgCV2njuKP8",
+    bookingUrl: "/pricing",
     imageUrl: "/images/locations/downtown.webp",
-    squareId: "downtown-calgary",
     coordinates: {
       lat: 51.0448,
       lng: -114.0756
@@ -130,12 +128,11 @@ export const locations: Location[] = [
       { day: "Thursday", hours: "10:00 AM - 7:00 PM" },
       { day: "Friday", hours: "10:00 AM - 7:00 PM" },
       { day: "Saturday", hours: "10:00 AM - 5:00 PM" },
-      { day: "Sunday", hours: "12:00 PM - 5:00 PM" }
+      { day: "Sunday", hours: "10:00 PM - 5:00 PM" }
     ],
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=51.0690,-114.0580",
-    bookingUrl: "https://book.vivispa.ca",
+    mapUrl: "https://maps.app.goo.gl/Dss3vhTanPnDGE6t7",
+    bookingUrl: "/pricing",
     imageUrl: "/images/locations/edmonton-trail.webp",
-    squareId: "edmonton-trail-calgary",
     coordinates: {
       lat: 51.0690,
       lng: -114.0580

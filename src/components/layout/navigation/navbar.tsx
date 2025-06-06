@@ -134,9 +134,9 @@ export function Navbar() {
                 size="sm"
                 className="bg-primary hover:bg-primary/90 transition-colors duration-300"
               >
-                <Link href="/booking">
+                <a href="https://book.vivispa.ca" target="_blank" rel="noopener noreferrer">
                   Book Now
-                </Link>
+                </a>
               </Button>
             </div>
             
@@ -180,7 +180,7 @@ export function Navbar() {
                 size="sm"
                 className="transition-colors duration-300"
               >
-                <Link href="/booking">Book</Link>
+                <a href="https://book.vivispa.ca" target="_blank" rel="noopener noreferrer">Book</a>
               </Button>
               
               <div className="ml-2 pl-2 border-l border-border/30">
@@ -264,9 +264,9 @@ export function Navbar() {
                       className="w-full h-9 bg-primary hover:bg-primary/90 transition-colors duration-300 font-medium"
                       onClick={handleItemClick}
                     >
-                      <Link href="/booking" className="flex items-center justify-center">
+                      <a href="https://book.vivispa.ca" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                         Book Now
-                      </Link>
+                      </a>
                     </Button>
                   </div>
                 </div>

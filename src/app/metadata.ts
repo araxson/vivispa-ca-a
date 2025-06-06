@@ -14,8 +14,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'hsl(var(--background))' },
-    { media: '(prefers-color-scheme: dark)', color: 'hsl(var(--background))' },
+    { media: '(prefers-color-scheme: light)', color: 'oklch(1 0 0)' },
+    { media: '(prefers-color-scheme: dark)', color: 'oklch(0.145 0 0)' },
   ],
   colorScheme: 'light dark',
   viewportFit: 'cover',
@@ -161,9 +161,9 @@ export const defaultMetadata: Metadata = {
     'format-detection': 'telephone=no',
     'mobile-web-app-capable': 'yes',
     'msapplication-config': '/browserconfig.xml',
-    'msapplication-TileColor': 'hsl(var(--primary))',
+    'msapplication-TileColor': 'oklch(1 0 0)',
     'msapplication-tap-highlight': 'no',
-    'theme-color': 'hsl(var(--background))',
+    'theme-color': 'oklch(1 0 0)',
   },
 };
 

@@ -25,7 +25,10 @@ const roboto = Roboto({
 });
 
 // Export metadata and viewport for Next.js 15.2+ performance optimization
-export const metadata: Metadata = baseMetadata;
+export const metadata: Metadata = {
+  ...baseMetadata,
+  themeColor: "#FF92A5", // Pink color that matches your Vivi Spa branding
+};
 export { viewport };
 
 export default function RootLayout({

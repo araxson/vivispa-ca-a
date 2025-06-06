@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Card, Container, Section } from '@/components/ui';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ZoomIn } from "lucide-react";
 
 interface GalleryImage {
@@ -73,6 +73,9 @@ export function ServiceGallery({
               </DialogTrigger>
               
               <DialogContent className="max-w-5xl p-0 border-0 bg-transparent">
+                <DialogHeader className="sr-only">
+                  <DialogTitle>{image.alt}</DialogTitle>
+                </DialogHeader>
                 <div className="relative px-4 sm:px-6 md:px-8 lg:px-10">
                   <Image
                     src={image.src}

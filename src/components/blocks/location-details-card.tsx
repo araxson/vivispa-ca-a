@@ -96,7 +96,7 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
         {/* Action Buttons */}
         <div className="border-t pt-4">
           <div className="flex gap-3">
-            <Link 
+            <a 
               href={location.mapUrl} 
               target="_blank" 
               rel="noopener noreferrer"
@@ -104,14 +104,16 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
             >
               <MapPin className="w-4 h-4 mr-2" />
               Get Directions
-            </Link>
-            <Link 
-              href={`/booking?location=${location.id}`}
+            </a>
+            <a 
+              href={location.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center px-4 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               Book Appointment
-            </Link>
+            </a>
           </div>
         </div>
       </CardContent>

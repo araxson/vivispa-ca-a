@@ -117,9 +117,10 @@ export default function ServicesPage() {
           description="Book your appointment today and experience our premium beauty services."
           primaryCTA={{
             text: "Book Your Appointment",
-            href: "/booking",
+            href: "https://book.vivispa.ca",
             variant: "default",
-            icon: "calendar"
+            icon: "calendar",
+            external: true
           }}
           secondaryCTA={{
             text: "View Offers",

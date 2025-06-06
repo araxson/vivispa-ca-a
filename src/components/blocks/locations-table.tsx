@@ -60,13 +60,15 @@ export function LocationsTable({ className }: LocationsTableProps) {
                         <MapPin className="w-3 h-3" />
                         Directions
                       </Link>
-                      <Link 
-                        href={`/booking?location=${location.id}`}
+                      <a 
+                        href={location.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium"
                       >
                         <ExternalLink className="w-3 h-3" />
                         Book
-                      </Link>
+                      </a>
                     </div>
                   </td>
                 </tr>

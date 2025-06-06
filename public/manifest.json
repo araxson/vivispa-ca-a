@@ -35,7 +35,7 @@
       "name": "Book Appointment",
       "short_name": "Book",
       "description": "Book an appointment at Vivi Spa",
-      "url": "/booking",
+      "url": "/pricing",
       "icons": [{ "src": "/images/favicon/android-chrome-192x192.png", "sizes": "192x192" }]
     },
     {

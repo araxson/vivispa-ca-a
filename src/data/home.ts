@@ -3,11 +3,8 @@ import type { LucideIcon } from 'lucide-react';
 export interface TestimonialData {
   id: string;
   name: string;
-  role?: string;
-  image: string;
   rating: number;
   content: string;
-  date?: string;
 }
 
 export interface ServiceHighlight {
@@ -16,8 +13,6 @@ export interface ServiceHighlight {
   description: string;
   image: string;
   href: string;
-  price?: string;
-  duration?: string;
 }
 
 export interface StatData {
@@ -46,8 +41,15 @@ export interface HeroData {
     text: string;
     href: string;
   };
-  heroImage: string;
-  backgroundImage?: string;
+  heroImage?: string;
+  backgroundImage?: {
+    src: string;
+    alt: string;
+  };
+  backgroundVideo?: {
+    src: string;
+    poster?: string;
+  };
 }
 
 export interface HomePageData {
@@ -76,15 +78,17 @@ export const homePageData: HomePageData = {
     subheadline: "Premier Aesthetic Treatments in Calgary",
     description: "Experience personalized beauty and wellness treatments designed to help you look and feel your absolute best. Our expert team combines cutting-edge technology with proven techniques.",
     primaryCTA: {
-      text: "Book Consultation",
+      text: "Book Appointment",
       href: "/contact"
     },
     secondaryCTA: {
       text: "View Services",
       href: "/services"
     },
-    heroImage: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp",
-    backgroundImage: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-001.webp"
+    backgroundImage: {
+      src: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp",
+      alt: "Transform Your Beauty Journey"
+    }
   },
   
   stats: [
@@ -120,36 +124,70 @@ export const homePageData: HomePageData = {
       title: "HydraFacial",
       description: "Deep cleansing, exfoliation, and hydration in one revolutionary treatment.",
       image: "/images/services/hydrofacial/hydrofacial-in-calgary-002.webp",
-      href: "/services/hydrofacial",
-      price: "From $149",
-      duration: "45 min"
+      href: "/services/hydrofacial"
     },
     {
       id: "laser-hair-removal",
       title: "Laser Hair Removal",
       description: "Permanent hair reduction with our advanced laser technology.",
       image: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-001.webp",
-      href: "/services/laser-hair-removal",
-      price: "From $99",
-      duration: "30-60 min"
+      href: "/services/laser-hair-removal"
     },
     {
       id: "microneedling",
       title: "Microneedling",
       description: "Stimulate collagen production for smoother, younger-looking skin.",
       image: "/images/services/microneedling/microneedling-in-calgary-001.webp",
-      href: "/services/microneedling",
-      price: "From $199",
-      duration: "60 min"
+      href: "/services/microneedling"
     },
     {
       id: "ipl-photofacial",
       title: "IPL PhotoFacial",
       description: "Target sun damage, age spots, and improve overall skin tone.",
       image: "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-001.webp",
-      href: "/services/ipl-photofacial",
-      price: "From $179",
-      duration: "45 min"
+      href: "/services/ipl-photofacial"
+    },
+    {
+      id: "eyelash-extensions",
+      title: "Eyelash Extensions",
+      description: "Enhance your natural lashes with beautiful, custom extensions.",
+      image: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-001.webp",
+      href: "/services/eyelash-extensions"
+    },
+    {
+      id: "japanese-head-spa",
+      title: "Japanese Head Spa",
+      description: "Relaxing scalp therapy to promote hair health and reduce stress.",
+      image: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-001.webp",
+      href: "/services/japanese-head-spa"
+    },
+    {
+      id: "laser-pigmentation-removal",
+      title: "Laser Pigmentation Removal",
+      description: "Advanced treatment to remove unwanted pigmentation and dark spots.",
+      image: "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-001.webp",
+      href: "/services/laser-pigmentation-removal"
+    },
+    {
+      id: "laser-skin-tightening",
+      title: "Laser Skin Tightening",
+      description: "Non-surgical solution to improve skin elasticity and reduce sagging.",
+      image: "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-001.webp",
+      href: "/services/laser-skin-tightening"
+    },
+    {
+      id: "skin-tag-removal",
+      title: "Skin Tag Removal",
+      description: "Quick and effective removal of unwanted skin tags.",
+      image: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-001.webp",
+      href: "/services/skin-tag-removal"
+    },
+    {
+      id: "vascular-vein-removal",
+      title: "Vascular Vein Removal",
+      description: "Treatment for spider veins and vascular lesions.",
+      image: "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-001.webp",
+      href: "/services/vascular-vein-removal"
     }
   ],
 
@@ -159,12 +197,6 @@ export const homePageData: HomePageData = {
       title: "Expert Team",
       description: "Licensed aestheticians with specialized training in advanced treatments",
       icon: "Users"
-    },
-    {
-      id: "cutting-edge",
-      title: "Latest Technology",
-      description: "State-of-the-art equipment and proven treatment methods",
-      icon: "Zap"
     },
     {
       id: "personalized",
@@ -196,38 +228,26 @@ export const homePageData: HomePageData = {
     {
       id: "sarah-m",
       name: "Sarah K.",
-      role: "Marketing Executive",
-      image: "/images/testimonials/sarah-k.jpg",
       rating: 5,
-      content: "I've been coming to Vivi for over two years now, and the results speak for themselves. The HydraFacial has completely transformed my skin, and the staff always makes me feel comfortable and well-cared for.",
-      date: "2024-01-15"
+      content: "I've been coming to Vivi for over two years now, and the results speak for themselves. The HydraFacial has completely transformed my skin, and the staff always makes me feel comfortable and well-cared for."
     },
     {
       id: "jessica-l",
       name: "Jennifer L.",
-      role: "Teacher",
-      image: "/images/testimonials/jennifer-l.jpg",
       rating: 5,
-      content: "The laser hair removal treatment exceeded my expectations. Professional, clean, and the results are amazing. I wish I had started this journey sooner!",
-      date: "2024-01-10"
+      content: "The laser hair removal treatment exceeded my expectations. Professional, clean, and the results are amazing. I wish I had started this journey sooner!"
     },
     {
       id: "amanda-k",
       name: "Aisha M.",
-      role: "Nurse",
-      image: "/images/testimonials/aisha-m.jpg",
       rating: 5,
-      content: "Vivi Aesthetics has the most knowledgeable and caring team. They took the time to understand my skin concerns and created a treatment plan that really works.",
-      date: "2024-01-08"
+      content: "Vivi Aesthetics has the most knowledgeable and caring team. They took the time to understand my skin concerns and created a treatment plan that really works."
     },
     {
       id: "michelle-r",
       name: "Priya K.",
-      role: "Business Owner",
-      image: "/images/testimonials/priya-k.jpg",
       rating: 5,
-      content: "The microneedling treatment has been a game-changer for my skin texture and fine lines. The team at Vivi is professional and the facility is top-notch.",
-      date: "2024-01-05"
+      content: "The microneedling treatment has been a game-changer for my skin texture and fine lines. The team at Vivi is professional and the facility is top-notch."
     }
   ],
 

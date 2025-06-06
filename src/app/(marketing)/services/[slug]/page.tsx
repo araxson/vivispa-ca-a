@@ -121,6 +121,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <Hero
           title={service.title}
           description={service.fullDescription}
+          backgroundImage={service.image ? {
+            src: service.image,
+            alt: service.title
+          } : undefined}
         />
         
         <Suspense fallback={<div className="h-96 bg-muted" />}>
@@ -201,9 +205,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
           description="Book your appointment today and experience our premium beauty services."
           primaryCTA={{
             text: "Book Your Appointment",
-            href: "/booking",
+            href: "https://book.vivispa.ca",
             variant: "default",
-            icon: "calendar"
+            icon: "calendar",
+            external: true
           }}
           secondaryCTA={{
             text: "View Offers",

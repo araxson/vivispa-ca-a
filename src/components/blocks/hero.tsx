@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button, Container, Section } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
@@ -15,6 +16,14 @@ interface HeroProps {
     href: string;
     variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
   };
+  backgroundImage?: {
+    src: string;
+    alt: string;
+  };
+  backgroundVideo?: {
+    src: string;
+    poster?: string;
+  };
   className?: string;
 }
 
@@ -23,10 +32,42 @@ export function Hero({
   description,
   primaryCTA,
   secondaryCTA,
+  backgroundImage,
+  backgroundVideo,
   className
 }: HeroProps) {
   return (
-    <Section spacing="xl" className={className}>
+    <Section spacing="xl" className={cn("relative overflow-hidden", className)}>
+      {/* Background Media */}
+      {backgroundVideo && (
+        <div className="absolute inset-0 w-full h-full -z-10">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={backgroundVideo.poster}
+            className="object-cover w-full h-full"
+          >
+            <source src={backgroundVideo.src} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
+        </div>
+      )}
+      
+      {!backgroundVideo && backgroundImage && (
+        <div className="absolute inset-0 w-full h-full -z-10">
+          <Image
+            src={backgroundImage.src}
+            alt={backgroundImage.alt}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
+        </div>
+      )}
+
       <Container>
         <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
@@ -76,4 +117,4 @@ export function Hero({
       </Container>
     </Section>
   );
-} 
+}

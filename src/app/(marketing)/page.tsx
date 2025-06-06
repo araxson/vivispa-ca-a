@@ -5,10 +5,12 @@ import { ServiceCard } from '@/components/blocks/service-card';
 import { FAQSection } from '@/components/blocks/faq-section';
 import { Testimonials } from '@/components/blocks/testimonials';
 import { CTASection } from '@/components/blocks/cta-section';
+import { StatsSection } from '@/components/blocks/stats-section';
 import { Section } from '@/components/ui';
 import { generatePageMetadata, generateOrganizationSchema, generateJsonLdScript } from '@/app/metadata';
-import { getAllServices, getFeaturedTestimonials } from '@/lib/data-fetcher';
 import { generalFAQs } from '@/data/faqs';
+import { homePageData } from '@/data/home';
+import { BenefitsSection } from '@/components/blocks/benefits-section';
 
 // Enhanced metadata for home page with performance optimization
 export const metadata: Metadata = generatePageMetadata({
@@ -32,11 +34,24 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function HomePage() {
-  // Get all services sorted by popularity
-  const allServices = getAllServices();
-  const displayServices = allServices.slice(0, 6); // Show top 6 services
-  const featuredTestimonials = getFeaturedTestimonials(4); // Get 4 featured testimonials
   const organizationSchema = generateOrganizationSchema();
+  
+  // Format the services data to match the ServiceCard component's expected structure
+  const formattedServices = homePageData.featuredServices.map(service => ({
+    id: service.id,
+    title: service.title,
+    slug: service.id,
+    previewDescription: service.description,
+    image: service.image,
+    availableLocations: ['calgary']
+  }));
+
+  // Format the testimonials to match the Testimonials component's expected structure
+  const formattedTestimonials = homePageData.testimonials.map(testimonial => ({
+    ...testimonial,
+    content: testimonial.content,
+    verified: true
+  }));
 
   return (
     <>
@@ -51,32 +66,44 @@ export default function HomePage() {
       <main className="min-h-screen">
         {/* Hero Section */}
         <Hero
-          title="Transform Your Beauty at Calgary's Premier Spa"
-          description="Experience premium aesthetics and wellness treatments at Vivi Aesthetics & Spa. Our expert team delivers exceptional results using the latest technology and proven techniques."
+          title={homePageData.hero.headline}
+          description={homePageData.hero.description}
           primaryCTA={{
-            text: "Book Appointment",
-            href: "/pricing"
+            text: homePageData.hero.primaryCTA.text,
+            href: homePageData.hero.primaryCTA.href
           }}
           secondaryCTA={{
-            text: "Book from Offers",
-            href: "/offers"
+            text: homePageData.hero.secondaryCTA.text,
+            href: homePageData.hero.secondaryCTA.href
           }}
+          backgroundImage={homePageData.hero.backgroundImage}
+          backgroundVideo={homePageData.hero.backgroundVideo}
         />
+
+        {/* Stats Section */}
+        <Suspense fallback={<div className="h-48 bg-muted" />}>
+          <StatsSection 
+            stats={homePageData.stats}
+            title="Why Clients Choose Us"
+            subtitle="We're committed to excellence in every aspect of our service"
+            variant="highlighted"
+          />
+        </Suspense>
 
         {/* Our Services */}
         <Suspense fallback={<div className="h-96 bg-muted" />}>
           <Section spacing="lg">
             <div className="text-center mb-8 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
-                Our Popular Services
+                Our Featured Services
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Discover our most sought-after beauty and wellness treatments
+                Discover our comprehensive range of beauty and wellness treatments
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {displayServices.map(service => (
+              {formattedServices.map(service => (
                 <ServiceCard
                   key={service.id}
                   service={service}
@@ -87,10 +114,19 @@ export default function HomePage() {
           </Section>
         </Suspense>
 
+        {/* Benefits Section */}
+        <Suspense fallback={<div className="h-72 bg-muted" />}>
+          <BenefitsSection 
+            benefits={homePageData.benefits}
+            title="The Vivi Aesthetics Advantage"
+            subtitle="Experience premium care with our unique approach to aesthetics"
+          />
+        </Suspense>
+
         {/* Testimonials */}
         <Suspense fallback={<div className="h-96 bg-muted" />}>
           <Testimonials 
-            testimonials={featuredTestimonials} 
+            testimonials={formattedTestimonials} 
             title="What Our Clients Say"
             subtitle="Don't just take our word for it. Here's what our satisfied clients have to say about their experience with us."
             showStats={true}
@@ -110,20 +146,20 @@ export default function HomePage() {
 
         {/* Call to Action */}
         <CTASection
-          variant="minimal"
-          title="Ready to Transform Your Look?"
-          description="Book your appointment today and experience our premium beauty services."
+          title={homePageData.ctaSection.headline}
+          description={homePageData.ctaSection.description}
           primaryCTA={{
-            text: "Book Your Appointment",
-            href: "/pricing",
+            text: homePageData.ctaSection.primaryCTA.text,
+            href: homePageData.ctaSection.primaryCTA.href,
             variant: "default",
             icon: "calendar"
           }}
-          secondaryCTA={{
-            text: "View Offers",
-            href: "/offers",
-            variant: "outline"
-          }}
+          secondaryCTA={homePageData.ctaSection.secondaryCTA ? {
+            text: homePageData.ctaSection.secondaryCTA.text,
+            href: homePageData.ctaSection.secondaryCTA.href,
+            variant: "outline",
+            icon: "phone"
+          } : undefined}
         />
       </main>
     </>
