@@ -20,6 +20,8 @@ export const laserPigmentationRemovalService: Service = {
     "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-002.webp"
   ],
   
+  heroType: 'none',
+  
   // Available at both locations
   availableLocations: ['downtown', 'edmonton-trail'],
 

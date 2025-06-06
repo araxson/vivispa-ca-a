@@ -27,6 +27,13 @@ export const laserHairRemovalService: Service = {
     "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-007.webp"
   ],
 
+  // Add these properties after the galleryImages array
+  heroType: 'video',
+  heroVideo: {
+    src: '/videos/laser-hair-removal.mp4',
+    poster: '/images/services/laser-hair-removal/laser-hair-removal-in-calgary-001.webp'
+  },
+
   openGraph: {
     title: 'Laser Hair Removal Services in Calgary | Vivi Aesthetics & Spa',
     description: 'Advanced laser hair removal treatments at Vivi Aesthetics & Spa in Calgary. Safe, effective, and long-lasting results for all skin types.',

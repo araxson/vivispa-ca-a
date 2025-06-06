@@ -27,6 +27,8 @@ export const japaneseHeadSpaService: Service = {
     "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-009.webp"
   ],
   
+  heroType: 'none',
+  
   // Available only at Edmonton Trail location
   availableLocations: ['edmonton-trail'],
 

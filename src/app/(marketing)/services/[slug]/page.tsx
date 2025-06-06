@@ -121,10 +121,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <Hero
           title={service.title}
           description={service.fullDescription}
+          heroType={service.heroType || 'image'}
           backgroundImage={service.image ? {
             src: service.image,
             alt: service.title
           } : undefined}
+          backgroundVideo={service.heroVideo}
         />
         
         <Suspense fallback={<div className="h-96 bg-muted" />}>

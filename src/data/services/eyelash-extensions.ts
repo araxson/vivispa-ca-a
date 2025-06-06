@@ -170,5 +170,7 @@ export const eyelashExtensionsService: Service = {
   },
 
   relatedServiceIds: ["japanese-head-spa", "skin-tag-removal"],
-  popularityRank: 6
+  popularityRank: 6,
+
+  heroType: 'none',
 }; 

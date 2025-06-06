@@ -22,6 +22,8 @@ export const skinTagRemovalService: Service = {
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-005.webp"
   ],
   
+  heroType: 'none',
+  
   availableLocations: ['downtown', 'edmonton-trail'],
 
   openGraph: {

@@ -23,7 +23,9 @@ export const microneedlingService: Service = {
     "/images/services/microneedling/microneedling-in-calgary-005.webp",
     "/images/services/microneedling/microneedling-in-calgary-006.webp"
   ],
-
+  
+  heroType: 'none',
+  
   // Available at both locations
   availableLocations: ['downtown', 'edmonton-trail'],
 

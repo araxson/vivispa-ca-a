@@ -75,6 +75,11 @@ export interface Service {
   // Media
   image: string;
   galleryImages: string[];
+  heroType?: 'image' | 'video' | 'none';
+  heroVideo?: {
+    src: string;
+    poster?: string;
+  };
   
   // Locations
   availableLocations: LocationType[];

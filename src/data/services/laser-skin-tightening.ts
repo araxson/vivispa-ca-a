@@ -20,6 +20,8 @@ export const laserSkinTighteningService: Service = {
     "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-002.webp"
   ],
   
+  heroType: 'none',
+  
   // Available at both locations
   availableLocations: ['downtown', 'edmonton-trail'],
 

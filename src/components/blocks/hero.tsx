@@ -24,6 +24,7 @@ interface HeroProps {
     src: string;
     poster?: string;
   };
+  heroType?: 'image' | 'video' | 'none';
   className?: string;
 }
 
@@ -34,12 +35,13 @@ export function Hero({
   secondaryCTA,
   backgroundImage,
   backgroundVideo,
+  heroType = 'image',
   className
 }: HeroProps) {
   return (
     <Section spacing="xl" className={cn("relative overflow-hidden", className)}>
       {/* Background Media */}
-      {backgroundVideo && (
+      {heroType === 'video' && backgroundVideo && (
         <div className="absolute inset-0 w-full h-full -z-10">
           <video
             autoPlay
@@ -55,7 +57,7 @@ export function Hero({
         </div>
       )}
       
-      {!backgroundVideo && backgroundImage && (
+      {heroType === 'image' && backgroundImage && (
         <div className="absolute inset-0 w-full h-full -z-10">
           <Image
             src={backgroundImage.src}

@@ -76,6 +76,7 @@ export default function HomePage() {
             text: homePageData.hero.secondaryCTA.text,
             href: homePageData.hero.secondaryCTA.href
           }}
+          heroType={homePageData.hero.heroType}
           backgroundImage={homePageData.hero.backgroundImage}
           backgroundVideo={homePageData.hero.backgroundVideo}
         />

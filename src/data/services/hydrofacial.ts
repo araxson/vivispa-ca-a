@@ -25,6 +25,8 @@ export const hydrofacialService: Service = {
     '/images/services/hydrofacial/hydrofacial-in-calgary-011.webp'
   ],
 
+  heroType: 'none',
+
   // Available at both locations
   availableLocations: ['downtown', 'edmonton-trail'],
 

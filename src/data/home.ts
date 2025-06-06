@@ -41,6 +41,7 @@ export interface HeroData {
     text: string;
     href: string;
   };
+  heroType?: 'image' | 'video' | 'none';
   heroImage?: string;
   backgroundImage?: {
     src: string;
@@ -85,6 +86,7 @@ export const homePageData: HomePageData = {
       text: "View Services",
       href: "/services"
     },
+    heroType: 'image',
     backgroundImage: {
       src: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp",
       alt: "Transform Your Beauty Journey"

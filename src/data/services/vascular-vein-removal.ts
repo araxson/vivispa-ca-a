@@ -21,6 +21,8 @@ export const vascularVeinRemovalService: Service = {
     "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-003.webp"
   ],
   
+  heroType: 'none',
+  
   // Available at both locations
   availableLocations: ['downtown', 'edmonton-trail'],
 

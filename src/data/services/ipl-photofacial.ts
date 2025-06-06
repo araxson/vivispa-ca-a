@@ -20,7 +20,9 @@ export const iplPhotofacial: Service = {
     "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-003.webp"
   ],
   
-  // Available only at Downtown location
+  heroType: 'none',
+  
+  // Available at both locations
   availableLocations: ['downtown'],
 
   openGraph: {
