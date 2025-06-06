@@ -64,23 +64,23 @@ export default function OffersPage() {
           </Suspense>
         </ErrorBoundary>
         
-                  <CTASection
-            variant="minimal"
-            title="Ready to Transform Your Look?"
-            description="Book your appointment today and experience our premium beauty services."
-            primaryCTA={{
-              text: "Book Your Appointment",
-              href: "/pricing",
-              variant: "default",
-              icon: "calendar"
-            }}
-            secondaryCTA={{
-              text: "Contact Us",
-              href: "/contact",
-              variant: "outline",
-              icon: "phone"
-            }}
-          />
+        <CTASection
+          variant="minimal"
+          title="Ready to Transform Your Look?"
+          description="Book your appointment today and experience our premium beauty services."
+          primaryCTA={{
+            text: "Book Your Appointment",
+            href: "/pricing",
+            variant: "default",
+            icon: "calendar"
+          }}
+          secondaryCTA={{
+            text: "Contact Us",
+            href: "/contact",
+            variant: "outline",
+            icon: "phone"
+          }}
+        />
       </Container>
     </div>
   );

@@ -3,12 +3,25 @@
 import { Card, Badge, Button } from '@/components/ui';
 import { Calendar, MapPin, TrendingDown, Tags } from 'lucide-react';
 import type { OfferItem, OfferLocationData } from '@/data/pricing/offers';
-import { locations } from '@/data/constant';
+import { locations } from '@/data/contact';
 import Image from 'next/image';
 import { useState } from 'react';
 
 // Extended offer interface to include dynamic location data
 interface SmartOfferServiceItem extends OfferItem {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  shortDescription: string;
+  featuredImage: string;
+  url: string;
+  badges?: string[];
+  pricing: {
+    display: string;
+    isSpecialOffer: boolean;
+    originalPrice?: string;
+  };
   location?: string;
   locationDetails?: typeof locations[0];
   dynamicUrl?: string;
@@ -130,25 +143,64 @@ export function OfferCard({ offer }: OfferCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
-        {/* Badges overlay - ultra compact */}
-        <div className="absolute top-2 left-2 flex flex-wrap gap-1 max-w-[75%]">
-          {/* Discount Badge - minimal size */}
-          {discountPercentage > 0 && (
-            <Badge className="bg-destructive backdrop-blur-md text-destructive-foreground text-xs font-bold px-1.5 py-0.5 border border-background/80 shadow-sm">
-              <Tags className="h-2 w-2 mr-0.5" />
-              {discountPercentage}% OFF
-            </Badge>
-          )}
+        {/* Category badge - top left */}
+        <div className="absolute top-2 left-2 z-20">
           <Badge 
             variant="secondary" 
-            className="bg-primary/95 backdrop-blur-md text-primary-foreground text-xs font-medium px-1.5 py-0.5 border border-background/80 shadow-sm"
+            className="bg-primary shadow-md text-primary-foreground text-xs font-small px-3 py-1.5 border border-border/20"
           >
             {getServiceCategoryName(offer)}
           </Badge>
         </div>
         
-        {/* Location overlay - ultra compact */}
-        <div className="absolute bottom-2 left-2 bg-background/75 backdrop-blur-md rounded px-2 py-1 max-w-[85%] border border-foreground/10">
+        {/* Discount Badge - top right */}
+        {discountPercentage > 0 && (
+          <div className="absolute top-2 right-2 z-20">
+            <Badge className="bg-destructive shadow-md text-destructive-foreground text-xs font-bold px-3 py-1.5 border border-border/20">
+              <Tags className="h-3 w-3 mr-1.5" />
+              {discountPercentage}% OFF
+            </Badge>
+          </div>
+        )}
+        
+        {/* Offer badges - bottom right */}
+        {offer.badges && offer.badges.length > 0 && (
+          <div className="absolute bottom-2 right-2 flex flex-wrap gap-1.5 max-w-[60%] justify-end z-20">
+            {offer.badges.map((badge, index) => {
+              // Determine badge color based on type
+              let badgeStyle = "";
+              
+              if (badge.includes("New Client")) {
+                badgeStyle = "bg-blue-600 text-white border-blue-400";
+              } else if (badge.includes("Limited Time")) {
+                badgeStyle = "bg-purple-600 text-white border-purple-400";
+              } else if (badge.includes("Seasonal")) {
+                badgeStyle = "bg-amber-500 text-white border-amber-400";
+              } else if (badge.includes("Holiday")) {
+                badgeStyle = "bg-red-600 text-white border-red-400";
+              } else if (badge.includes("Best Seller")) {
+                badgeStyle = "bg-emerald-600 text-white border-emerald-400";
+              } else if (badge.includes("Customer Favorite")) {
+                badgeStyle = "bg-pink-600 text-white border-pink-400";
+              } else {
+                // Default style - using theme colors for dark/light mode compatibility
+                badgeStyle = "bg-secondary text-secondary-foreground border-border";
+              }
+              
+              return (
+                <span 
+                  key={index}
+                  className={`inline-flex shadow-md rounded-md text-xs px-3 py-1 leading-none border ${badgeStyle}`}
+                >
+                  {badge}
+                </span>
+              );
+            })}
+          </div>
+        )}
+        
+        {/* Location overlay - bottom left */}
+        <div className="absolute bottom-2 left-2 bg-background/75 backdrop-blur-md rounded px-2 py-1 max-w-[60%] border border-foreground/10">
           <div className="flex items-center gap-1 text-xs text-foreground">
             <MapPin className="h-2 w-2 text-foreground flex-shrink-0" />
             <span className="font-medium truncate">
@@ -175,7 +227,7 @@ export function OfferCard({ offer }: OfferCardProps) {
 
         {/* Ultra Compact Pricing Section */}
         <div className="bg-muted/30 border border-border rounded p-2 sm:p-2.5 mb-2 sm:mb-3 flex-shrink-0">
-                      <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-1 sm:gap-1.5">
               <span className="text-base sm:text-lg font-bold text-primary">
                 {offer.pricing.display}
@@ -200,15 +252,15 @@ export function OfferCard({ offer }: OfferCardProps) {
           </div>
         </div>
         
-                {/* Ultra Compact Location Selection */}
+        {/* Ultra Compact Location Selection */}
         {!offer.location && (
           <div className="bg-muted border border-border rounded overflow-hidden mb-3 flex-shrink-0">
             {locationOptions.map((location, index) => (
               <div key={index} className={index !== 0 ? "border-t border-border" : ""}>
                 <label 
                   className={`flex items-center gap-2 cursor-pointer p-2.5 hover:bg-accent transition-colors ${
-            !location.isAvailable ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+                    !location.isAvailable ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
                   <input
                     type="radio"
@@ -267,7 +319,7 @@ export function OfferCard({ offer }: OfferCardProps) {
         {/* Ultra Compact Booking Button */}
         <Button 
           size="sm" 
-                          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2.5 rounded shadow-sm transition-all duration-200"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2.5 rounded shadow-sm transition-all duration-200"
           asChild
         >
           <a 

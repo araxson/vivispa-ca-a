@@ -14,7 +14,6 @@ export interface OfferItem {
   slug: string;
   name: string;
   title: string;
-  category: string;
   shortDescription: string;
   featuredImage: string;
   url: string; // Default/primary URL
@@ -63,37 +62,20 @@ const SERVICE_IMAGES = {
 // ===============================================
 // BADGE TYPES
 // ===============================================
+// Simple badge definitions - just string values
 export const BADGES = {
   // Sale Types
   NEW_CLIENT: "New Client Special",
-  FLASH_SALE: "Flash Sale",
-  WEEKEND_DEAL: "Weekend Deal",
   LIMITED_TIME: "Limited Time",
   
-  // Seasonal
-  SPRING_SPECIAL: "Spring Special",
-  SUMMER_SPECIAL: "Summer Special",
-  FALL_SPECIAL: "Fall Special",
-  WINTER_SPECIAL: "Winter Special",
-  
-  // Holiday
-  MOTHERS_DAY: "Mother's Day Special",
-  FATHERS_DAY: "Father's Day Special",
-  VALENTINES: "Valentine's Special",
-  BLACK_FRIDAY: "Black Friday",
-  CHRISTMAS: "Christmas Special",
-  NEW_YEAR: "New Year Special",
-  
-  // Events
-  STAMPEDE: "Stampede Special",
-  GRAND_OPENING: "Grand Opening",
-  ANNIVERSARY: "Anniversary Special",
+  // Seasonal/Holiday (combined)
+  SEASONAL: "Seasonal Special",
+  HOLIDAY: "Holiday Special",
   
   // Value Propositions
   BEST_SELLER: "Best Seller",
-  STAFF_PICK: "Staff Pick",
   CUSTOMER_FAVORITE: "Customer Favorite"
-};
+} as const;
 
 // ===============================================
 // LOCATION IDs
@@ -117,7 +99,6 @@ export const consolidatedOffers: OfferItem[] = [
     slug: "hydrofacial-express",
     name: "Hydrofacial - Express",
     title: "Hydrofacial - Express", 
-    category: "facial-treatments",
     shortDescription: "Quick and effective hydrafacial treatment for instant glow and skin rejuvenation",
     featuredImage: SERVICE_IMAGES.HYDROFACIAL_EXPRESS,
     url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=GQGICNA2YM2Z7IWU3NKBHNUB&direct=true", // Default to Downtown
@@ -133,13 +114,13 @@ export const consolidatedOffers: OfferItem[] = [
         location: "Downtown",
         url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=GQGICNA2YM2Z7IWU3NKBHNUB&direct=true",
         squareId: "LSX0A4Z6HJE2E",
-        badges: [BADGES.SPRING_SPECIAL]
+        badges: [BADGES.SEASONAL]
       },
       {
         location: "Edmonton Trail",
         url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=GQGICNA2YM2Z7IWU3NKBHNUB&direct=true",
         squareId: "LR77SHRSPMK0X",
-        badges: [BADGES.WEEKEND_DEAL]
+        badges: [BADGES.HOLIDAY]
       }
     ]
   },
@@ -150,7 +131,6 @@ export const consolidatedOffers: OfferItem[] = [
     slug: "hydrofacial-deluxe",
     name: "Hydrofacial - Deluxe",
     title: "Hydrofacial - Deluxe", 
-    category: "facial-treatments",
     shortDescription: "Enhanced hydrafacial with additional benefits, extractions, and nourishing serums",
     featuredImage: SERVICE_IMAGES.HYDROFACIAL_DELUXE,
     url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=NOAGL2PZTYX6A5BIYYCPH3W4&direct=true", // Default to Downtown
@@ -159,7 +139,7 @@ export const consolidatedOffers: OfferItem[] = [
       isSpecialOffer: true,
       originalPrice: "$235.00"
     },
-    badges: [BADGES.CUSTOMER_FAVORITE, BADGES.STAFF_PICK],
+    badges: [BADGES.CUSTOMER_FAVORITE],
     isMultiLocation: true,
     availableLocations: [
       {
@@ -172,7 +152,7 @@ export const consolidatedOffers: OfferItem[] = [
         location: "Edmonton Trail",
         url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=NOAGL2PZTYX6A5BIYYCPH3W4&direct=true",
         squareId: "LR77SHRSPMK0X",
-        badges: [BADGES.WEEKEND_DEAL]
+        badges: [BADGES.HOLIDAY]
       }
     ]
   },
@@ -183,7 +163,6 @@ export const consolidatedOffers: OfferItem[] = [
     slug: "hydrofacial-platinum-anti-ageing",
     name: "Hydrofacial - Platinum Anti-Ageing",
     title: "Hydrofacial - Platinum Anti-Ageing", 
-    category: "facial-treatments",
     shortDescription: "Premium anti-aging hydrafacial with specialized peptides and growth factors",
     featuredImage: SERVICE_IMAGES.HYDROFACIAL_ANTI_AGING,
     url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=5FUJ7D2JQILUWW464XVJRFT6&direct=true", // Default to Downtown
@@ -192,20 +171,20 @@ export const consolidatedOffers: OfferItem[] = [
       isSpecialOffer: true,
       originalPrice: "$319.00"
     },
-    badges: [BADGES.BEST_SELLER, BADGES.STAFF_PICK, BADGES.CUSTOMER_FAVORITE],
+    badges: [BADGES.BEST_SELLER, BADGES.CUSTOMER_FAVORITE],
     isMultiLocation: true,
     availableLocations: [
       {
         location: "Downtown",
         url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=5FUJ7D2JQILUWW464XVJRFT6&direct=true",
         squareId: "LSX0A4Z6HJE2E",
-        badges: [BADGES.SPRING_SPECIAL]
+        badges: [BADGES.SEASONAL]
       },
       {
         location: "Edmonton Trail",
         url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=5FUJ7D2JQILUWW464XVJRFT6&direct=true",
         squareId: "LR77SHRSPMK0X",
-        badges: [BADGES.NEW_YEAR]
+        badges: [BADGES.HOLIDAY]
       }
     ]
   },
@@ -216,7 +195,6 @@ export const consolidatedOffers: OfferItem[] = [
     slug: "hydrofacial-platinum-anti-acne",
     name: "Hydrofacial - Platinum Anti-Acne",
     title: "Hydrofacial - Platinum Anti-Acne", 
-    category: "facial-treatments",
     shortDescription: "Specialized hydrafacial targeting acne, blemishes, and congested pores",
     featuredImage: SERVICE_IMAGES.HYDROFACIAL_ANTI_ACNE,
     url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=HDTWXOST7HVR3HUWZGOICXHW&direct=true", // Default to Downtown
@@ -225,14 +203,14 @@ export const consolidatedOffers: OfferItem[] = [
       isSpecialOffer: true,
       originalPrice: "$319.00"
     },
-    badges: [BADGES.STAFF_PICK, BADGES.CUSTOMER_FAVORITE, BADGES.LIMITED_TIME],
+    badges: [BADGES.CUSTOMER_FAVORITE, BADGES.LIMITED_TIME],
     isMultiLocation: true,
     availableLocations: [
       {
         location: "Downtown",
         url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=HDTWXOST7HVR3HUWZGOICXHW&direct=true",
         squareId: "LSX0A4Z6HJE2E",
-        badges: [BADGES.FLASH_SALE]
+        badges: [BADGES.SEASONAL]
       },
       {
         location: "Edmonton Trail",
@@ -249,7 +227,6 @@ export const consolidatedOffers: OfferItem[] = [
     slug: "relax-head-spa",
     name: "Relax Head Spa",
     title: "Relax Head Spa", 
-    category: "wellness-services",
     shortDescription: "Relaxing Japanese-style head spa treatment for stress relief and scalp wellness",
     featuredImage: SERVICE_IMAGES.HEAD_SPA_RELAX,
     url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=HY2USLLLQCTBKEBQB4F5Q2AN&direct=true", 
@@ -258,14 +235,14 @@ export const consolidatedOffers: OfferItem[] = [
       isSpecialOffer: true,
       originalPrice: "$119.00"
     },
-    badges: [BADGES.CUSTOMER_FAVORITE, BADGES.NEW_CLIENT],
+    badges: [BADGES.CUSTOMER_FAVORITE],
     isMultiLocation: false,
     availableLocations: [
       {
         location: "Edmonton Trail",
         url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=HY2USLLLQCTBKEBQB4F5Q2AN&direct=true",
         squareId: "LR77SHRSPMK0X",
-        badges: [BADGES.SPRING_SPECIAL]
+        badges: [BADGES.SEASONAL]
       }
     ]
   },
@@ -274,25 +251,24 @@ export const consolidatedOffers: OfferItem[] = [
   { 
     id: "hydrating-scalp-therapy-edmonton",
     slug: "hydrating-scalp-therapy",
-    name: "Hydrating Scalp Therapy (Buy 1 Get 2nd Half Price)",
-    title: "Hydrating Scalp Therapy (Buy 1 Get 2nd Half Price)", 
-    category: "wellness-services",
+    name: "Hydrating Scalp Therapy",
+    title: "Hydrating Scalp Therapy", 
     shortDescription: "Deep hydrating scalp treatment with special BOGO offer for ultimate scalp nourishment",
     featuredImage: SERVICE_IMAGES.HEAD_SPA_BOGO,
     url: "https://book.squareup.com/appointments/0lipxbpg6zumdr/location/LR77SHRSPMK0X/services/AUZRTA6C4FNVQRTW6D7BSZKP", 
     pricing: { 
-      display: "$193.00", 
+      display: "$99.00", 
       isSpecialOffer: true,
-      originalPrice: "$258.00"
+      originalPrice: "$129.00"
     },
-    badges: [BADGES.FLASH_SALE, BADGES.BEST_SELLER, BADGES.LIMITED_TIME],
+    badges: [BADGES.BEST_SELLER, BADGES.LIMITED_TIME],
     isMultiLocation: false,
     availableLocations: [
       {
         location: "Edmonton Trail",
         url: "https://book.squareup.com/appointments/0lipxbpg6zumdr/location/LR77SHRSPMK0X/services/AUZRTA6C4FNVQRTW6D7BSZKP",
         squareId: "LR77SHRSPMK0X",
-        badges: [BADGES.VALENTINES]
+        badges: [BADGES.HOLIDAY]
       }
     ]
   }

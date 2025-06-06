@@ -86,10 +86,10 @@ export const homePageData: HomePageData = {
       text: "View Services",
       href: "/services"
     },
-    heroType: 'image',
-    backgroundImage: {
-      src: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp",
-      alt: "Transform Your Beauty Journey"
+    heroType: 'video',
+    backgroundVideo: {
+      src: "/videos/Vivi_Aesthetics_Spa_hero_video.mp4",
+      poster: "/images/services/hydrofacial/hydrofacial-in-calgary-002.webp"
     }
   },
   
