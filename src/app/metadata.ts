@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from 'next';
-import { siteConfig } from '@/data/constant';
+import type { Metadata, Viewport } from "next";
+import { siteConfig } from "@/data/constant";
 
 // Base URL for all metadata
 const baseUrl = siteConfig.url;
@@ -9,44 +9,44 @@ const baseUrl = siteConfig.url;
  * Separated from metadata for better performance
  */
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'oklch(1 0 0)' },
-    { media: '(prefers-color-scheme: dark)', color: 'oklch(0.145 0 0)' },
+    { media: "(prefers-color-scheme: light)", color: "oklch(1 0 0)" },
+    { media: "(prefers-color-scheme: dark)", color: "oklch(0.145 0 0)" },
   ],
-  colorScheme: 'light dark',
-  viewportFit: 'cover',
+  colorScheme: "light dark",
+  viewportFit: "cover",
 };
 
 /**
  * Enhanced keywords for better SEO targeting
  */
 const defaultKeywords: string[] = [
-  'aesthetics spa Calgary',
-  'beauty treatments Calgary',
-  'laser hair removal Calgary',
-  'hydrofacial Calgary',
-  'microneedling Calgary',
-  'IPL photofacial Calgary',
-  'eyelash extensions Calgary',
-  'skin tightening Calgary',
-  'Japanese head spa Calgary',
-  'pigmentation removal Calgary',
-  'vascular vein removal Calgary',
-  'skin tag removal Calgary',
-  'medical aesthetics',
-  'premium spa treatments',
-  'anti-aging treatments',
-  'skincare Calgary',
-  'beauty clinic Calgary',
-  'professional aesthetics',
-  'cosmetic treatments Calgary',
-  'skin rejuvenation Calgary',
-  'non-invasive treatments',
-  'wellness spa Calgary',
+  "aesthetics spa Calgary",
+  "beauty treatments Calgary",
+  "laser hair removal Calgary",
+  "hydrofacial Calgary",
+  "microneedling Calgary",
+  "IPL photofacial Calgary",
+  "eyelash extensions Calgary",
+  "skin tightening Calgary",
+  "Japanese head spa Calgary",
+  "pigmentation removal Calgary",
+  "vascular vein removal Calgary",
+  "skin tag removal Calgary",
+  "medical aesthetics",
+  "premium spa treatments",
+  "anti-aging treatments",
+  "skincare Calgary",
+  "beauty clinic Calgary",
+  "professional aesthetics",
+  "cosmetic treatments Calgary",
+  "skin rejuvenation Calgary",
+  "non-invasive treatments",
+  "wellness spa Calgary",
 ];
 
 /**
@@ -61,26 +61,26 @@ export const defaultMetadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: defaultKeywords,
-  
+
   // Authors and creators
   authors: [{ name: siteConfig.name, url: baseUrl }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  
+
   // Language and locale
   alternates: {
     canonical: baseUrl,
     languages: {
-      'en-CA': baseUrl,
-      'en-US': baseUrl,
-      'en': baseUrl,
+      "en-CA": baseUrl,
+      "en-US": baseUrl,
+      en: baseUrl,
     },
   },
-  
+
   // Enhanced OpenGraph with performance optimizations
   openGraph: {
-    type: 'website',
-    locale: 'en_CA',
+    type: "website",
+    locale: "en_CA",
     url: baseUrl,
     siteName: siteConfig.name,
     title: siteConfig.title,
@@ -91,23 +91,23 @@ export const defaultMetadata: Metadata = {
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} - Premium Beauty & Wellness Treatments`,
-        type: 'image/webp',
+        type: "image/webp",
       },
       {
         url: `${baseUrl}/images/og-image-square.webp`,
         width: 1080,
         height: 1080,
         alt: `${siteConfig.name} - Premium Beauty & Wellness Treatments`,
-        type: 'image/webp',
+        type: "image/webp",
       },
     ],
   },
-  
+
   // Enhanced Twitter Cards
   twitter: {
-    card: 'summary_large_image',
-    site: '@vivispa_ca',
-    creator: '@vivispa_ca',
+    card: "summary_large_image",
+    site: "@vivispa_ca",
+    creator: "@vivispa_ca",
     title: siteConfig.title,
     description: siteConfig.description,
     images: [
@@ -119,7 +119,7 @@ export const defaultMetadata: Metadata = {
       },
     ],
   },
-  
+
   // Enhanced robots configuration
   robots: {
     index: true,
@@ -129,41 +129,41 @@ export const defaultMetadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  
+
   // App icons and manifest are handled automatically by Next.js
   // when placed in the /app directory (favicon.ico, icon.png, apple-icon.png, site.webmanifest)
-  
+
   // Additional metadata for better SEO
-  category: 'Health & Beauty',
-  classification: 'Business',
-  
+  category: "Health & Beauty",
+  classification: "Business",
+
   // Verification tags (add these when you get them)
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
+    google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
+    yahoo: "your-yahoo-verification-code",
     other: {
-      bing: ['your-bing-verification-code'],
+      bing: ["your-bing-verification-code"],
     },
   },
-  
+
   // Additional metadata
   other: {
-    'application-name': siteConfig.name,
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'default',
-    'apple-mobile-web-app-title': siteConfig.name,
-    'format-detection': 'telephone=no',
-    'mobile-web-app-capable': 'yes',
-    'msapplication-config': '/browserconfig.xml',
-    'msapplication-TileColor': 'oklch(1 0 0)',
-    'msapplication-tap-highlight': 'no',
-    'theme-color': 'oklch(1 0 0)',
+    "application-name": siteConfig.name,
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": siteConfig.name,
+    "format-detection": "telephone=no",
+    "mobile-web-app-capable": "yes",
+    "msapplication-config": "/browserconfig.xml",
+    "msapplication-TileColor": "oklch(1 0 0)",
+    "msapplication-tap-highlight": "no",
+    "theme-color": "oklch(1 0 0)",
   },
 };
 
@@ -194,7 +194,7 @@ export function generatePageMetadata({
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
   const pageDescription = description || siteConfig.description;
   const fullCanonicalUrl = canonicalUrl ? `${baseUrl}${canonicalUrl}` : baseUrl;
-  
+
   return {
     ...defaultMetadata,
     title: pageTitle,
@@ -203,9 +203,9 @@ export function generatePageMetadata({
     alternates: {
       canonical: fullCanonicalUrl,
       languages: {
-        'en-CA': fullCanonicalUrl,
-        'en-US': fullCanonicalUrl,
-        'en': fullCanonicalUrl,
+        "en-CA": fullCanonicalUrl,
+        "en-US": fullCanonicalUrl,
+        en: fullCanonicalUrl,
       },
     },
     openGraph: {
@@ -213,14 +213,16 @@ export function generatePageMetadata({
       title: pageTitle,
       description: pageDescription,
       url: fullCanonicalUrl,
-      images: ogImage ? [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: pageTitle,
-        }
-      ] : defaultMetadata.openGraph?.images,
+      images: ogImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: pageTitle,
+            },
+          ]
+        : defaultMetadata.openGraph?.images,
     },
     twitter: {
       ...defaultMetadata.twitter,
@@ -228,10 +230,12 @@ export function generatePageMetadata({
       description: pageDescription,
       images: ogImage ? [ogImage] : defaultMetadata.twitter?.images,
     },
-    robots: noindex ? {
-      index: false,
-      follow: false,
-    } : defaultMetadata.robots,
+    robots: noindex
+      ? {
+          index: false,
+          follow: false,
+        }
+      : defaultMetadata.robots,
   };
 }
 
@@ -261,16 +265,16 @@ export function generateServicePageMetadata({
   benefits = [],
   locationSpecific = true,
 }: ServicePageMetadataProps): Metadata {
-  const locationSuffix = locationSpecific ? ' in Calgary' : '';
+  const locationSuffix = locationSpecific ? " in Calgary" : "";
   const title = `${serviceName}${locationSuffix}`;
   const description = `${serviceDescription} Book your ${serviceName.toLowerCase()} treatment at Vivi Aesthetics & Spa Calgary. Professional, safe, and effective results.`;
-  
+
   const enhancedKeywords = [
     ...serviceKeywords,
     `${serviceName.toLowerCase()} Calgary`,
     `${serviceName.toLowerCase()} treatment`,
     `${serviceName.toLowerCase()} spa`,
-    ...benefits.map(benefit => `${benefit.toLowerCase()} Calgary`),
+    ...benefits.map((benefit) => `${benefit.toLowerCase()} Calgary`),
   ];
 
   const fullCanonicalUrl = `${baseUrl}/services/${slug}`;
@@ -284,14 +288,14 @@ export function generateServicePageMetadata({
     alternates: {
       canonical: fullCanonicalUrl,
       languages: {
-        'en-CA': fullCanonicalUrl,
-        'en-US': fullCanonicalUrl,
-        'en': fullCanonicalUrl,
+        "en-CA": fullCanonicalUrl,
+        "en-US": fullCanonicalUrl,
+        en: fullCanonicalUrl,
       },
     },
     openGraph: {
       ...defaultMetadata.openGraph,
-      type: 'article',
+      type: "article",
       title,
       description,
       url: fullCanonicalUrl,
@@ -301,7 +305,7 @@ export function generateServicePageMetadata({
           width: 1200,
           height: 630,
           alt: `${serviceName} at ${siteConfig.name}`,
-          type: 'image/webp',
+          type: "image/webp",
         },
       ],
     },
@@ -319,100 +323,100 @@ export function generateServicePageMetadata({
  */
 export function generateOrganizationSchema() {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'MedicalSpa',
-    '@id': `${baseUrl}/#organization`,
+    "@context": "https://schema.org",
+    "@type": "MedicalSpa",
+    "@id": `${baseUrl}/#organization`,
     name: siteConfig.name,
-    alternateName: 'Vivi Spa',
+    alternateName: "Vivi Spa",
     description: siteConfig.description,
     url: baseUrl,
     logo: {
-      '@type': 'ImageObject',
+      "@type": "ImageObject",
       url: `${baseUrl}/images/logos/vivi-logo.webp`,
       width: 500,
       height: 500,
     },
     image: {
-      '@type': 'ImageObject',
+      "@type": "ImageObject",
       url: `${baseUrl}/images/spa-interior.webp`,
       width: 1200,
       height: 630,
     },
-    telephone: '+1-587-200-7772',
-    email: 'info@vivispa.ca',
+    telephone: "+1-587-200-7772",
+    email: "info@vivispa.ca",
     address: {
-      '@type': 'PostalAddress',
-      streetAddress: '1240 Kensington Rd NW #512',
-      addressLocality: 'Calgary',
-      addressRegion: 'AB',
-      postalCode: 'T2N 3P7',
-      addressCountry: 'CA',
+      "@type": "PostalAddress",
+      streetAddress: "1240 Kensington Rd NW #512",
+      addressLocality: "Calgary",
+      addressRegion: "AB",
+      postalCode: "T2N 3P7",
+      addressCountry: "CA",
     },
     geo: {
-      '@type': 'GeoCoordinates',
+      "@type": "GeoCoordinates",
       latitude: 51.0547,
       longitude: -114.0794,
     },
     openingHoursSpecification: [
       {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '18:00',
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
       },
       {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '09:00',
-        closes: '16:00',
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "09:00",
+        closes: "16:00",
       },
     ],
     sameAs: [
-      'https://www.facebook.com/vivispa.ca',
-      'https://www.instagram.com/vivi_aesthetics_spa',
-      'https://www.google.com/maps/place/Vivi+Aesthetics+%26+Spa',
+      "https://www.facebook.com/vivispa.ca",
+      "https://www.instagram.com/vivi_aesthetics_spa",
+      "https://www.google.com/maps/place/Vivi+Aesthetics+%26+Spa",
     ],
     areaServed: {
-      '@type': 'City',
-      name: 'Calgary',
+      "@type": "City",
+      name: "Calgary",
       containedInPlace: {
-        '@type': 'AdministrativeArea',
-        name: 'Alberta',
+        "@type": "AdministrativeArea",
+        name: "Alberta",
         containedInPlace: {
-          '@type': 'Country',
-          name: 'Canada',
+          "@type": "Country",
+          name: "Canada",
         },
       },
     },
-    priceRange: '$$-$$$',
-    paymentAccepted: ['Cash', 'Credit Card', 'Debit Card', 'E-transfer'],
-    currenciesAccepted: 'CAD',
+    priceRange: "$$-$$$",
+    paymentAccepted: ["Cash", "Credit Card", "Debit Card", "E-transfer"],
+    currenciesAccepted: "CAD",
     hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Medical Aesthetics Services',
+      "@type": "OfferCatalog",
+      name: "Medical Aesthetics Services",
       itemListElement: [
         {
-          '@type': 'Offer',
+          "@type": "Offer",
           itemOffered: {
-            '@type': 'Service',
-            name: 'Laser Hair Removal',
-            description: 'Professional laser hair removal treatments',
+            "@type": "Service",
+            name: "Laser Hair Removal",
+            description: "Professional laser hair removal treatments",
           },
         },
         {
-          '@type': 'Offer',
+          "@type": "Offer",
           itemOffered: {
-            '@type': 'Service',
-            name: 'HydraFacial',
-            description: 'Deep cleansing and hydrating facial treatments',
+            "@type": "Service",
+            name: "HydraFacial",
+            description: "Deep cleansing and hydrating facial treatments",
           },
         },
         {
-          '@type': 'Offer',
+          "@type": "Offer",
           itemOffered: {
-            '@type': 'Service',
-            name: 'Microneedling',
-            description: 'Skin rejuvenation through controlled micro-injuries',
+            "@type": "Service",
+            name: "Microneedling",
+            description: "Skin rejuvenation through controlled micro-injuries",
           },
         },
       ],
@@ -434,34 +438,34 @@ export function generateServiceSchema(service: {
   preparationAndAftercare: string;
 }) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'MedicalProcedure',
-    '@id': `${baseUrl}/services/${service.slug}#service`,
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    "@id": `${baseUrl}/services/${service.slug}#service`,
     name: service.title,
     description: service.previewDescription,
     procedureType: service.title,
-    bodyLocation: 'Face, Body',
+    bodyLocation: "Face, Body",
     image: {
-      '@type': 'ImageObject',
+      "@type": "ImageObject",
       url: service.image,
       width: 1200,
       height: 630,
     },
     url: `${baseUrl}/services/${service.slug}`,
     provider: {
-      '@id': `${baseUrl}/#organization`,
+      "@id": `${baseUrl}/#organization`,
     },
     areaServed: {
-      '@type': 'City',
-      name: 'Calgary',
+      "@type": "City",
+      name: "Calgary",
     },
     howPerformed: service.procedure,
     preparation: service.preparationAndAftercare,
     expectedOutcome: service.expectedResults,
     benefits: service.benefits,
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${baseUrl}/services/${service.slug}`,
+      "@type": "WebPage",
+      "@id": `${baseUrl}/services/${service.slug}`,
     },
   };
 }
@@ -469,17 +473,19 @@ export function generateServiceSchema(service: {
 /**
  * Enhanced breadcrumb schema
  */
-export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: string }>) {
+export function generateBreadcrumbSchema(
+  breadcrumbs: Array<{ name: string; url: string }>,
+) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: breadcrumbs.map((crumb, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: crumb.name,
       item: {
-        '@type': 'WebPage',
-        '@id': crumb.url,
+        "@type": "WebPage",
+        "@id": crumb.url,
       },
     })),
   };
@@ -488,15 +494,17 @@ export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url:
 /**
  * FAQ Schema generation
  */
-export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+export function generateFAQSchema(
+  faqs: Array<{ question: string; answer: string }>,
+) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        "@type": "Answer",
         text: faq.answer,
       },
     })),
@@ -506,16 +514,18 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
 /**
  * Review schema generation
  */
-export function generateReviewSchema(testimonials: Array<{ name: string; rating: number; content: string }>) {
-  return testimonials.map(testimonial => ({
-    '@context': 'https://schema.org',
-    '@type': 'Review',
+export function generateReviewSchema(
+  testimonials: Array<{ name: string; rating: number; content: string }>,
+) {
+  return testimonials.map((testimonial) => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
     author: {
-      '@type': 'Person',
+      "@type": "Person",
       name: testimonial.name,
     },
     reviewRating: {
-      '@type': 'Rating',
+      "@type": "Rating",
       ratingValue: testimonial.rating,
       bestRating: 5,
     },

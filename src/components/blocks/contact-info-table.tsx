@@ -1,7 +1,7 @@
-import { Phone, Mail, MapPin } from 'lucide-react';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { contactInfo } from '@/data/contact/contact';
+import { Phone, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
+import { contactInfo } from "@/data/contact/contact";
 
 interface ContactInfoTableProps {
   className?: string;
@@ -28,7 +28,7 @@ export function ContactInfoTable({ className }: ContactInfoTableProps) {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  <Link 
+                  <Link
                     href={`tel:${contactInfo.phone.formatted}`}
                     className="text-sm hover:text-primary transition-colors font-medium"
                   >
@@ -44,7 +44,7 @@ export function ContactInfoTable({ className }: ContactInfoTableProps) {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  <Link 
+                  <Link
                     href={`mailto:${contactInfo.email.main}`}
                     className="text-sm hover:text-primary transition-colors font-medium"
                   >
@@ -61,8 +61,14 @@ export function ContactInfoTable({ className }: ContactInfoTableProps) {
                 </td>
                 <td className="py-4 px-4">
                   <div className="text-sm">
-                    <div className="font-medium">{contactInfo.addresses.main.street}</div>
-                    <div className="text-muted-foreground">{contactInfo.addresses.main.city}, {contactInfo.addresses.main.province} {contactInfo.addresses.main.postalCode}</div>
+                    <div className="font-medium">
+                      {contactInfo.addresses.main.street}
+                    </div>
+                    <div className="text-muted-foreground">
+                      {contactInfo.addresses.main.city},{" "}
+                      {contactInfo.addresses.main.province}{" "}
+                      {contactInfo.addresses.main.postalCode}
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -72,4 +78,4 @@ export function ContactInfoTable({ className }: ContactInfoTableProps) {
       </CardContent>
     </Card>
   );
-} 
+}

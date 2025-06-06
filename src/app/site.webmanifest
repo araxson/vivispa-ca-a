@@ -1,1 +1,24 @@
-{"name":"Vivi Aesthetics & Spa","short_name":"Vivi Spa","description":"Calgary's premier aesthetics & spa services","start_url":"/","display":"standalone","background_color":"hsl(var(--background))","theme_color":"hsl(var(--primary))","orientation":"portrait-primary","icons":[{"src":"/icon","sizes":"512x512","type":"image/png","purpose":"any"},{"src":"/apple-icon","sizes":"180x180","type":"image/png","purpose":"any"}]}
+{
+  "name": "Vivi Aesthetics & Spa",
+  "short_name": "Vivi Spa",
+  "description": "Calgary's premier aesthetics & spa services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "hsl(var(--background))",
+  "theme_color": "hsl(var(--primary))",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-icon",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

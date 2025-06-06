@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@/components/ui';
-import { AlertTriangle } from 'lucide-react';
+import React from "react";
+import { Button } from "@/components/ui";
+import { AlertTriangle } from "lucide-react";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -14,7 +14,10 @@ interface ErrorBoundaryProps {
   fallback?: React.ComponentType<{ error?: Error; resetError: () => void }>;
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -25,14 +28,14 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+    console.error("Error caught by boundary:", error, errorInfo);
   }
 
   override render() {
     if (this.state.hasError) {
       const FallbackComponent = this.props.fallback || DefaultErrorFallback;
       return (
-        <FallbackComponent 
+        <FallbackComponent
           {...(this.state.error && { error: this.state.error })}
           resetError={() => this.setState({ hasError: false })}
         />
@@ -43,23 +46,30 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 }
 
-function DefaultErrorFallback({ error, resetError }: { error?: Error; resetError: () => void }) {
+function DefaultErrorFallback({
+  error,
+  resetError,
+}: {
+  error?: Error;
+  resetError: () => void;
+}) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center bg-card border border-border rounded-lg p-8">
       <AlertTriangle className="h-12 w-12 text-destructive mb-4" />
-      <h2 className="text-xl font-bold text-foreground mb-3">Something went wrong</h2>
+      <h2 className="text-xl font-bold text-foreground mb-3">
+        Something went wrong
+      </h2>
       <p className="text-muted-foreground mb-6 max-w-md">
-        We encountered an error while loading this content. Please try refreshing the page or contact support if the problem persists.
+        We encountered an error while loading this content. Please try
+        refreshing the page or contact support if the problem persists.
       </p>
       <div className="flex gap-3">
         <Button onClick={resetError} variant="outline">
           Try Again
         </Button>
-        <Button onClick={() => window.location.reload()}>
-          Refresh Page
-        </Button>
+        <Button onClick={() => window.location.reload()}>Refresh Page</Button>
       </div>
-      {process.env.NODE_ENV === 'development' && error && (
+      {process.env.NODE_ENV === "development" && error && (
         <details className="mt-6 text-left">
           <summary className="cursor-pointer text-sm text-muted-foreground">
             Error Details (Development)
@@ -71,4 +81,4 @@ function DefaultErrorFallback({ error, resetError }: { error?: Error; resetError
       )}
     </div>
   );
-} 
+}

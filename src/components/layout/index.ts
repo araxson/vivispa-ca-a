@@ -1,3 +1,3 @@
-export * from './footer';
-export * from './navigation';
-export { Breadcrumbs, CompactBreadcrumbs } from './breadcrumbs'; 
+export * from "./footer";
+export * from "./navigation";
+export { Breadcrumbs } from "./breadcrumbs";

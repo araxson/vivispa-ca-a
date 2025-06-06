@@ -3,22 +3,22 @@
  * Tracks Core Web Vitals and provides optimization insights
  */
 
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 export interface PerformanceMetric {
   name: string;
   value: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
+  rating: "good" | "needs-improvement" | "poor";
   timestamp: number;
   url?: string;
 }
 
 export interface WebVital {
-  name: 'FCP' | 'LCP' | 'CLS' | 'FID' | 'TTFB' | 'INP';
+  name: "FCP" | "LCP" | "CLS" | "FID" | "TTFB" | "INP";
   value: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
+  rating: "good" | "needs-improvement" | "poor";
   delta: number;
   id: string;
 }
@@ -49,13 +49,16 @@ export const WEB_VITALS_THRESHOLDS: Record<string, WebVitalsThresholds> = {
 /**
  * Rate performance metric based on thresholds
  */
-export function rateMetric(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+export function rateMetric(
+  name: string,
+  value: number,
+): "good" | "needs-improvement" | "poor" {
   const thresholds = WEB_VITALS_THRESHOLDS[name];
-  if (!thresholds) return 'good';
-  
-  if (value <= thresholds.good) return 'good';
-  if (value <= thresholds.needsImprovement) return 'needs-improvement';
-  return 'poor';
+  if (!thresholds) return "good";
+
+  if (value <= thresholds.good) return "good";
+  if (value <= thresholds.needsImprovement) return "needs-improvement";
+  return "poor";
 }
 
 function generateId(): string {
@@ -82,7 +85,7 @@ export class PerformanceMonitor {
    * Initialize performance monitoring
    */
   init(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // Setup all monitoring
     this.setupCoreWebVitals();
@@ -96,50 +99,55 @@ export class PerformanceMonitor {
 
   private setupCoreWebVitals(): void {
     // Largest Contentful Paint (LCP)
-    this.createObserver('largest-contentful-paint', (entries) => {
+    this.createObserver("largest-contentful-paint", (entries) => {
       const lastEntry = entries[entries.length - 1] as any;
-      this.recordMetric('LCP', lastEntry.startTime);
+      this.recordMetric("LCP", lastEntry.startTime);
     });
 
     // First Input Delay (FID)
-    this.createObserver('first-input', (entries) => {
+    this.createObserver("first-input", (entries) => {
       const firstEntry = entries[0] as any;
       const fid = firstEntry.processingStart - firstEntry.startTime;
-      this.recordMetric('FID', fid);
+      this.recordMetric("FID", fid);
     });
 
     // First Contentful Paint (FCP)
-    this.createObserver('paint', (entries) => {
-      const fcpEntry = entries.find(entry => entry.name === 'first-contentful-paint');
+    this.createObserver("paint", (entries) => {
+      const fcpEntry = entries.find(
+        (entry) => entry.name === "first-contentful-paint",
+      );
       if (fcpEntry) {
-        this.recordMetric('FCP', fcpEntry.startTime);
+        this.recordMetric("FCP", fcpEntry.startTime);
       }
     });
 
     // Interaction to Next Paint (INP)
-    this.createObserver('event', (entries) => {
+    this.createObserver("event", (entries) => {
       for (const entry of entries as any[]) {
         if (entry.interactionId) {
           const inp = entry.processingEnd - entry.startTime;
-          this.recordMetric('INP', inp);
+          this.recordMetric("INP", inp);
         }
       }
     });
   }
 
   private setupLongTaskMonitoring(): void {
-    this.createObserver('longtask', (entries) => {
+    this.createObserver("longtask", (entries) => {
       for (const entry of entries) {
-        this.recordMetric('Long Task', entry.duration);
-        if (process.env.NODE_ENV === 'development') {
+        this.recordMetric("Long Task", entry.duration);
+        if (process.env.NODE_ENV === "development") {
           console.warn(`Long task detected: ${entry.duration}ms`);
         }
       }
     });
   }
 
-  private createObserver(entryType: string, callback: (entries: PerformanceEntry[]) => void): void {
-    if (!('PerformanceObserver' in window)) return;
+  private createObserver(
+    entryType: string,
+    callback: (entries: PerformanceEntry[]) => void,
+  ): void {
+    if (!("PerformanceObserver" in window)) return;
 
     try {
       const observer = new PerformanceObserver((list) => {
@@ -155,21 +163,25 @@ export class PerformanceMonitor {
   /**
    * Record a custom metric
    */
-  recordMetric(name: string, value: number, customRating?: 'good' | 'needs-improvement' | 'poor'): void {
+  recordMetric(
+    name: string,
+    value: number,
+    customRating?: "good" | "needs-improvement" | "poor",
+  ): void {
     const metric: PerformanceMetric = {
       name,
       value,
       rating: customRating || rateMetric(name, value),
       timestamp: Date.now(),
-      url: typeof window !== 'undefined' ? window.location.pathname : undefined,
+      url: typeof window !== "undefined" ? window.location.pathname : undefined,
     };
 
     if (!this.metrics.has(name)) {
       this.metrics.set(name, []);
     }
-    
+
     this.metrics.get(name)!.push(metric);
-    
+
     // Keep only last 100 metrics per type
     const metrics = this.metrics.get(name)!;
     if (metrics.length > 100) {
@@ -181,8 +193,8 @@ export class PerformanceMonitor {
 
   private reportMetric(metric: PerformanceMetric): void {
     // Send to analytics if available
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'performance_metric', {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "performance_metric", {
         metric_name: metric.name,
         metric_value: metric.value,
         metric_rating: metric.rating,
@@ -191,8 +203,10 @@ export class PerformanceMonitor {
     }
 
     // Log for development
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Performance Metric - ${metric.name}: ${metric.value.toFixed(2)}ms (${metric.rating})`);
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `Performance Metric - ${metric.name}: ${metric.value.toFixed(2)}ms (${metric.rating})`,
+      );
     }
   }
 
@@ -217,7 +231,7 @@ export class PerformanceMonitor {
   getAverageMetric(name: string): number {
     const metrics = this.getMetrics(name);
     if (metrics.length === 0) return 0;
-    
+
     const sum = metrics.reduce((acc, metric) => acc + metric.value, 0);
     return sum / metrics.length;
   }
@@ -227,21 +241,21 @@ export class PerformanceMonitor {
    */
   getSummary(): Record<string, any> {
     const summary: Record<string, any> = {};
-    
-          for (const [name, metrics] of this.metrics) {
-        if (metrics.length > 0) {
-          const latest = metrics[metrics.length - 1];
-          if (latest) {
-            summary[name] = {
-              current: latest.value,
-              average: this.getAverageMetric(name),
-              rating: latest.rating,
-              count: metrics.length,
-            };
-          }
+
+    for (const [name, metrics] of this.metrics) {
+      if (metrics.length > 0) {
+        const latest = metrics[metrics.length - 1];
+        if (latest) {
+          summary[name] = {
+            current: latest.value,
+            average: this.getAverageMetric(name),
+            rating: latest.rating,
+            count: metrics.length,
+          };
         }
       }
-    
+    }
+
     return summary;
   }
 
@@ -263,25 +277,25 @@ export class PerformanceMonitor {
    * Analyze bundle size (for build analysis)
    */
   analyzeBundleSize(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const navEntries = performance.getEntriesByType('navigation') as any[];
-    const resourceEntries = performance.getEntriesByType('resource') as any[];
-    
+    const navEntries = performance.getEntriesByType("navigation") as any[];
+    const resourceEntries = performance.getEntriesByType("resource") as any[];
+
     let totalSize = 0;
     let jsSize = 0;
     let cssSize = 0;
     let imageSize = 0;
     let chunkCount = 0;
 
-    resourceEntries.forEach(entry => {
+    resourceEntries.forEach((entry) => {
       if (entry.transferSize) {
         totalSize += entry.transferSize;
-        
-        if (entry.name.includes('.js')) {
+
+        if (entry.name.includes(".js")) {
           jsSize += entry.transferSize;
           chunkCount++;
-        } else if (entry.name.includes('.css')) {
+        } else if (entry.name.includes(".css")) {
           cssSize += entry.transferSize;
         } else if (entry.name.match(/\.(png|jpg|jpeg|gif|webp|svg)$/)) {
           imageSize += entry.transferSize;
@@ -308,33 +322,35 @@ export class PerformanceMonitor {
   }
 
   private observeNavigationTiming(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const navEntries = performance.getEntriesByType('navigation') as any[];
+    const navEntries = performance.getEntriesByType("navigation") as any[];
     if (navEntries.length > 0) {
       const entry = navEntries[0];
-      
+
       // TTFB
       const ttfb = entry.responseStart - entry.requestStart;
-      this.recordMetric('TTFB', ttfb);
-      
+      this.recordMetric("TTFB", ttfb);
+
       // DOM Content Loaded
-      const dcl = entry.domContentLoadedEventEnd - entry.domContentLoadedEventStart;
-      this.recordMetric('DOM Content Loaded', dcl);
-      
+      const dcl =
+        entry.domContentLoadedEventEnd - entry.domContentLoadedEventStart;
+      this.recordMetric("DOM Content Loaded", dcl);
+
       // Load Event
       const loadTime = entry.loadEventEnd - entry.loadEventStart;
-      this.recordMetric('Load Event', loadTime);
+      this.recordMetric("Load Event", loadTime);
     }
   }
 
   private observeResourceTiming(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const resourceEntries = performance.getEntriesByType('resource') as any[];
-    
-    resourceEntries.forEach(entry => {
-      if (entry.duration > 1000) { // Resources taking longer than 1s
+    const resourceEntries = performance.getEntriesByType("resource") as any[];
+
+    resourceEntries.forEach((entry) => {
+      if (entry.duration > 1000) {
+        // Resources taking longer than 1s
         this.recordMetric(`Slow Resource: ${entry.name}`, entry.duration);
       }
     });
@@ -342,32 +358,32 @@ export class PerformanceMonitor {
 
   private observeLayoutShifts(): void {
     let clsValue = 0;
-    
-    this.createObserver('layout-shift', (entries) => {
+
+    this.createObserver("layout-shift", (entries) => {
       for (const entry of entries as any[]) {
         if (!entry.hadRecentInput) {
           clsValue += entry.value;
         }
       }
-      this.recordMetric('CLS', clsValue);
+      this.recordMetric("CLS", clsValue);
     });
   }
 
   private observeFirstInputDelay(): void {
-    this.createObserver('first-input', (entries) => {
+    this.createObserver("first-input", (entries) => {
       const firstEntry = entries[0] as any;
       if (firstEntry) {
         const fid = firstEntry.processingStart - firstEntry.startTime;
-        this.recordMetric('FID', fid);
+        this.recordMetric("FID", fid);
       }
     });
   }
 
   private observeLargestContentfulPaint(): void {
-    this.createObserver('largest-contentful-paint', (entries) => {
+    this.createObserver("largest-contentful-paint", (entries) => {
       const lastEntry = entries[entries.length - 1] as any;
       if (lastEntry) {
-        this.recordMetric('LCP', lastEntry.startTime);
+        this.recordMetric("LCP", lastEntry.startTime);
       }
     });
   }
@@ -376,7 +392,7 @@ export class PerformanceMonitor {
    * Cleanup observers
    */
   cleanup(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers = [];
   }
 }
@@ -386,8 +402,8 @@ export class PerformanceMonitor {
  */
 export function reportWebVitals(metric: WebVital | PerformanceMetric): void {
   const monitor = PerformanceMonitor.getInstance();
-  
-  if ('delta' in metric) {
+
+  if ("delta" in metric) {
     // WebVital format
     monitor.recordMetric(metric.name, metric.value, metric.rating);
   } else {
@@ -411,10 +427,10 @@ export class ResourceLoadTracker {
     if (startTime) {
       const loadTime = performance.now() - startTime;
       this.loadTimes.delete(resourceUrl);
-      
+
       const monitor = PerformanceMonitor.getInstance();
       monitor.recordMetric(`Resource Load: ${resourceUrl}`, loadTime);
-      
+
       return loadTime;
     }
     return 0;
@@ -426,11 +442,11 @@ export class ResourceLoadTracker {
  */
 export function trackComponentRender<T extends React.ComponentType<any>>(
   Component: T,
-  componentName: string
+  componentName: string,
 ): T {
   const TrackedComponent = (props: any) => {
     const startTime = performance.now();
-    
+
     React.useEffect(() => {
       const renderTime = performance.now() - startTime;
       const monitor = PerformanceMonitor.getInstance();
@@ -448,13 +464,13 @@ export function trackComponentRender<T extends React.ComponentType<any>>(
  * Initialize performance monitoring
  */
 export function initPerformanceMonitoring(): void {
-  if (typeof window === 'undefined') return;
-  
+  if (typeof window === "undefined") return;
+
   const monitor = PerformanceMonitor.getInstance();
   monitor.init();
-  
+
   // Cleanup on page unload
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener("beforeunload", () => {
     monitor.cleanup();
   });
 }
@@ -473,18 +489,24 @@ export function getPerformanceInsights(): {
 
   // Analyze metrics and provide insights
   Object.entries(summary).forEach(([metricName, data]: [string, any]) => {
-    if (data.rating === 'poor') {
-      insights.push(`${metricName} needs improvement: ${data.current.toFixed(2)}ms`);
-      
+    if (data.rating === "poor") {
+      insights.push(
+        `${metricName} needs improvement: ${data.current.toFixed(2)}ms`,
+      );
+
       switch (metricName) {
-        case 'LCP':
-          recommendations.push('Optimize image loading, reduce render-blocking resources');
+        case "LCP":
+          recommendations.push(
+            "Optimize image loading, reduce render-blocking resources",
+          );
           break;
-        case 'FID':
-          recommendations.push('Reduce JavaScript execution time, split large tasks');
+        case "FID":
+          recommendations.push(
+            "Reduce JavaScript execution time, split large tasks",
+          );
           break;
-        case 'CLS':
-          recommendations.push('Set explicit dimensions for images and ads');
+        case "CLS":
+          recommendations.push("Set explicit dimensions for images and ads");
           break;
       }
     }
@@ -494,4 +516,4 @@ export function getPerformanceInsights(): {
 }
 
 // Export singleton instance
-export const performanceMonitor = PerformanceMonitor.getInstance(); 
+export const performanceMonitor = PerformanceMonitor.getInstance();

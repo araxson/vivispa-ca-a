@@ -28,67 +28,67 @@ export interface LocationFilterableItem extends FilterableItem {
 export function searchItems<T extends FilterableItem>(
   items: T[],
   searchTerm: string,
-  searchFields: (keyof T)[] = ['name', 'category']
+  searchFields: (keyof T)[] = ["name", "category"],
 ): T[] {
   if (!searchTerm.trim()) return items;
-  
+
   const term = searchTerm.toLowerCase();
-  return items.filter(item =>
-    searchFields.some(field => {
+  return items.filter((item) =>
+    searchFields.some((field) => {
       const value = item[field];
-      return typeof value === 'string' && value.toLowerCase().includes(term);
-    })
+      return typeof value === "string" && value.toLowerCase().includes(term);
+    }),
   );
 }
 
 // Category filtering
 export function filterByCategory<T extends FilterableItem>(
   items: T[],
-  category: string
+  category: string,
 ): T[] {
-  if (!category || category === 'all') return items;
-  return items.filter(item => item.category === category);
+  if (!category || category === "all") return items;
+  return items.filter((item) => item.category === category);
 }
 
 // Location filtering (for items with location data)
 export function filterByLocation<T extends LocationFilterableItem>(
   items: T[],
-  location: string
+  location: string,
 ): T[] {
-  if (!location || location === 'all') return items;
-  return items.filter(item => 
-    item.availableLocations?.some(loc => loc.location === location)
+  if (!location || location === "all") return items;
+  return items.filter((item) =>
+    item.availableLocations?.some((loc) => loc.location === location),
   );
 }
 
 // Price range filtering
 export function filterByPriceRange<T extends PriceFilterableItem>(
   items: T[],
-  priceRange: string
+  priceRange: string,
 ): T[] {
-  if (!priceRange || priceRange === 'all') return items;
-  
-  return items.filter(item => {
-    const price = parseFloat(item.price.replace(/[^0-9.]/g, ''));
-    
+  if (!priceRange || priceRange === "all") return items;
+
+  return items.filter((item) => {
+    const price = parseFloat(item.price.replace(/[^0-9.]/g, ""));
+
     switch (priceRange) {
-      case '0-50':
+      case "0-50":
         return price >= 0 && price <= 50;
-      case '51-100':
+      case "51-100":
         return price >= 51 && price <= 100;
-      case '101-200':
+      case "101-200":
         return price >= 101 && price <= 200;
-      case '201-300':
+      case "201-300":
         return price >= 201 && price <= 300;
-      case '301+':
+      case "301+":
         return price >= 301;
-      case 'under-100':
+      case "under-100":
         return price < 100;
-      case '100-200':
+      case "100-200":
         return price >= 100 && price <= 200;
-      case '200-500':
+      case "200-500":
         return price >= 200 && price <= 500;
-      case 'over-500':
+      case "over-500":
         return price > 500;
       default:
         return true;
@@ -100,29 +100,33 @@ export function filterByPriceRange<T extends PriceFilterableItem>(
 export function sortItems<T extends FilterableItem>(
   items: T[],
   sortBy: string,
-  priceExtractor?: (item: T) => number
+  priceExtractor?: (item: T) => number,
 ): T[] {
   const sortedItems = [...items];
-  
+
   switch (sortBy) {
-    case 'name-az':
+    case "name-az":
       return sortedItems.sort((a, b) => a.name.localeCompare(b.name));
-    case 'name-za':
+    case "name-za":
       return sortedItems.sort((a, b) => b.name.localeCompare(a.name));
-    case 'price-low-high':
+    case "price-low-high":
       if (priceExtractor) {
-        return sortedItems.sort((a, b) => priceExtractor(a) - priceExtractor(b));
+        return sortedItems.sort(
+          (a, b) => priceExtractor(a) - priceExtractor(b),
+        );
       }
       break;
-    case 'price-high-low':
+    case "price-high-low":
       if (priceExtractor) {
-        return sortedItems.sort((a, b) => priceExtractor(b) - priceExtractor(a));
+        return sortedItems.sort(
+          (a, b) => priceExtractor(b) - priceExtractor(a),
+        );
       }
       break;
     default:
       return sortedItems;
   }
-  
+
   return sortedItems;
 }
 
@@ -135,7 +139,7 @@ export function searchAndFilter<T extends FilterableItem>(
     priceExtractor?: (item: T) => number;
     supportsLocation?: boolean;
     supportsPrice?: boolean;
-  } = {}
+  } = {},
 ): T[] {
   let result = items;
 
@@ -151,12 +155,18 @@ export function searchAndFilter<T extends FilterableItem>(
 
   // Apply location filter if supported
   if (options.supportsLocation && params.location) {
-    result = filterByLocation(result as unknown as LocationFilterableItem[], params.location) as unknown as T[];
+    result = filterByLocation(
+      result as unknown as LocationFilterableItem[],
+      params.location,
+    ) as unknown as T[];
   }
 
   // Apply price filter if supported
   if (options.supportsPrice && params.priceRange) {
-    result = filterByPriceRange(result as unknown as PriceFilterableItem[], params.priceRange) as unknown as T[];
+    result = filterByPriceRange(
+      result as unknown as PriceFilterableItem[],
+      params.priceRange,
+    ) as unknown as T[];
   }
 
   // Apply sorting
@@ -170,35 +180,35 @@ export function searchAndFilter<T extends FilterableItem>(
 // Utility to extract unique values for filter options
 export function extractUniqueValues<T extends Record<string, any>>(
   items: T[],
-  key: keyof T
+  key: keyof T,
 ): string[] {
   const values = items
-    .map(item => item[key])
-    .filter((value: any): value is string => typeof value === 'string')
+    .map((item) => item[key])
+    .filter((value: any): value is string => typeof value === "string")
     .filter(Boolean);
-  
+
   return [...new Set(values)].sort();
 }
 
 // URL params utilities for Next.js 15 search params
 export function parseSearchParams(searchParams: URLSearchParams): SearchParams {
   return {
-    search: searchParams.get('search') || '',
-    category: searchParams.get('category') || 'all',
-    location: searchParams.get('location') || 'all',
-    priceRange: searchParams.get('priceRange') || 'all',
-    sortBy: searchParams.get('sortBy') || 'name-az'
+    search: searchParams.get("search") || "",
+    category: searchParams.get("category") || "all",
+    location: searchParams.get("location") || "all",
+    priceRange: searchParams.get("priceRange") || "all",
+    sortBy: searchParams.get("sortBy") || "name-az",
   };
 }
 
 export function createSearchParamsString(params: SearchParams): string {
   const urlParams = new URLSearchParams();
-  
+
   Object.entries(params).forEach(([key, value]) => {
-    if (value && value !== 'all' && value !== '') {
+    if (value && value !== "all" && value !== "") {
       urlParams.set(key, value);
     }
   });
-  
+
   return urlParams.toString();
-} 
+}

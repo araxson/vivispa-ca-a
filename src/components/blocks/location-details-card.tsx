@@ -1,14 +1,17 @@
-import Link from 'next/link';
-import { MapPin, ExternalLink, Clock } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { type Location } from '@/data/contact/contact';
+import Link from "next/link";
+import { MapPin, ExternalLink, Clock } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
+import { type Location } from "@/data/contact/contact";
 
 interface LocationDetailsCardProps {
   location: Location;
   className?: string;
 }
 
-export function LocationDetailsCard({ location, className }: LocationDetailsCardProps) {
+export function LocationDetailsCard({
+  location,
+  className,
+}: LocationDetailsCardProps) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -27,7 +30,9 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
             <table className="w-full border-collapse">
               <tbody>
                 <tr className="border-b border-border hover:bg-muted/50 transition-colors">
-                  <td className="py-2 sm:py-3 px-3 sm:px-4 font-medium text-xs sm:text-sm w-16 sm:w-20 border-r border-border bg-muted/30">Address</td>
+                  <td className="py-2 sm:py-3 px-3 sm:px-4 font-medium text-xs sm:text-sm w-16 sm:w-20 border-r border-border bg-muted/30">
+                    Address
+                  </td>
                   <td className="py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm">
                     <div className="font-medium">{location.address}</div>
                     <div className="text-muted-foreground text-xs">
@@ -36,10 +41,12 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
                   </td>
                 </tr>
                 <tr className="hover:bg-muted/50 transition-colors">
-                  <td className="py-2 sm:py-3 px-3 sm:px-4 font-medium text-xs sm:text-sm border-r border-border bg-muted/30">Phone</td>
+                  <td className="py-2 sm:py-3 px-3 sm:px-4 font-medium text-xs sm:text-sm border-r border-border bg-muted/30">
+                    Phone
+                  </td>
                   <td className="py-2 sm:py-3 px-3 sm:px-4">
-                    <Link 
-                      href={`tel:${location.phone}`} 
+                    <Link
+                      href={`tel:${location.phone}`}
                       className="text-xs sm:text-sm font-medium hover:text-primary transition-colors"
                     >
                       {location.phone}
@@ -61,16 +68,23 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
             <table className="w-full border-collapse">
               <tbody>
                 {location.hours.map((hour, index) => (
-                  <tr key={hour.day} className={`hover:bg-muted/50 transition-colors ${index !== location.hours.length - 1 ? 'border-b border-border' : ''}`}>
-                    <td className="py-2 px-4 font-medium text-sm w-20 border-r border-border bg-muted/30">{hour.day}</td>
-                    <td className="py-2 px-4 text-sm font-medium">{hour.hours}</td>
+                  <tr
+                    key={hour.day}
+                    className={`hover:bg-muted/50 transition-colors ${index !== location.hours.length - 1 ? "border-b border-border" : ""}`}
+                  >
+                    <td className="py-2 px-4 font-medium text-sm w-20 border-r border-border bg-muted/30">
+                      {hour.day}
+                    </td>
+                    <td className="py-2 px-4 text-sm font-medium">
+                      {hour.hours}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
-        
+
         {/* Embedded Map */}
         {location.embedMapUrl && (
           <div>
@@ -92,20 +106,20 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
             </div>
           </div>
         )}
-        
+
         {/* Action Buttons */}
         <div className="border-t pt-4">
           <div className="flex gap-3">
-            <a 
-              href={location.mapUrl} 
-              target="_blank" 
+            <a
+              href={location.mapUrl}
+              target="_blank"
               rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center px-4 py-3 text-sm font-medium border-2 border-primary/30 rounded-lg hover:bg-primary/5 hover:text-primary hover:border-primary/50 transition-all duration-200"
             >
               <MapPin className="w-4 h-4 mr-2" />
               Get Directions
             </a>
-            <a 
+            <a
               href={location.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -119,4 +133,4 @@ export function LocationDetailsCard({ location, className }: LocationDetailsCard
       </CardContent>
     </Card>
   );
-} 
+}

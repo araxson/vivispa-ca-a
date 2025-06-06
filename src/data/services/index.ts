@@ -1,14 +1,14 @@
-import { hydrofacialService } from './hydrofacial';
-import { eyelashExtensionsService } from './eyelash-extensions';
-import { iplPhotofacial } from './ipl-photofacial';
-import { japaneseHeadSpaService } from './japanese-head-spa';
-import { laserHairRemovalService } from './laser-hair-removal';
-import { laserPigmentationRemovalService } from './laser-pigmentation-removal';
-import { laserSkinTighteningService } from './laser-skin-tightening';
-import { microneedlingService } from './microneedling';
-import { skinTagRemovalService } from './skin-tag-removal';
-import { vascularVeinRemovalService } from './vascular-vein-removal';
-import { Service } from '@/types/service';
+import { hydrofacialService } from "./hydrofacial";
+import { eyelashExtensionsService } from "./eyelash-extensions";
+import { iplPhotofacial } from "./ipl-photofacial";
+import { japaneseHeadSpaService } from "./japanese-head-spa";
+import { laserHairRemovalService } from "./laser-hair-removal";
+import { laserPigmentationRemovalService } from "./laser-pigmentation-removal";
+import { laserSkinTighteningService } from "./laser-skin-tightening";
+import { microneedlingService } from "./microneedling";
+import { skinTagRemovalService } from "./skin-tag-removal";
+import { vascularVeinRemovalService } from "./vascular-vein-removal";
+import { Service } from "@/types/service";
 
 export const services: Service[] = [
   hydrofacialService,
@@ -24,7 +24,7 @@ export const services: Service[] = [
 ];
 
 export const getServiceBySlug = (slug: string): Service | undefined => {
-  return services.find(service => service.slug === slug);
+  return services.find((service) => service.slug === slug);
 };
 
 export const getServicesByPopularity = (): Service[] => {
@@ -32,13 +32,13 @@ export const getServicesByPopularity = (): Service[] => {
 };
 
 export const getRelatedServices = (serviceId: string): Service[] => {
-  const currentService = services.find(service => service.id === serviceId);
+  const currentService = services.find((service) => service.id === serviceId);
   if (!currentService || !currentService.relatedServiceIds) {
     return [];
   }
-  
-  return services.filter(service => 
-    currentService.relatedServiceIds.includes(service.id)
+
+  return services.filter((service) =>
+    currentService.relatedServiceIds.includes(service.id),
   );
 };
 
@@ -53,4 +53,4 @@ export {
   microneedlingService,
   skinTagRemovalService,
   vascularVeinRemovalService,
-}; 
+};

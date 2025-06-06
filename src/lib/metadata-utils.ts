@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from 'next';
-import { siteConfig } from '@/data/constant';
+import type { Metadata, Viewport } from "next";
+import { siteConfig } from "@/data/constant";
 
 /**
  * Base URL for all metadata
@@ -10,44 +10,44 @@ const baseUrl = siteConfig.url;
  * Common keywords for SEO
  */
 export const defaultKeywords = [
-  'aesthetics spa Calgary',
-  'beauty treatments Calgary', 
-  'laser hair removal Calgary',
-  'hydrofacial Calgary',
-  'microneedling Calgary',
-  'IPL photofacial Calgary',
-  'eyelash extensions Calgary',
-  'skin tightening Calgary',
-  'Japanese head spa Calgary',
-  'pigmentation removal Calgary',
-  'vascular vein removal Calgary',
-  'skin tag removal Calgary',
-  'medical aesthetics',
-  'premium spa treatments',
-  'anti-aging treatments',
-  'skincare Calgary',
-  'beauty clinic Calgary',
-  'professional aesthetics',
-  'cosmetic treatments Calgary',
-  'skin rejuvenation Calgary',
-  'non-invasive treatments',
-  'wellness spa Calgary'
+  "aesthetics spa Calgary",
+  "beauty treatments Calgary",
+  "laser hair removal Calgary",
+  "hydrofacial Calgary",
+  "microneedling Calgary",
+  "IPL photofacial Calgary",
+  "eyelash extensions Calgary",
+  "skin tightening Calgary",
+  "Japanese head spa Calgary",
+  "pigmentation removal Calgary",
+  "vascular vein removal Calgary",
+  "skin tag removal Calgary",
+  "medical aesthetics",
+  "premium spa treatments",
+  "anti-aging treatments",
+  "skincare Calgary",
+  "beauty clinic Calgary",
+  "professional aesthetics",
+  "cosmetic treatments Calgary",
+  "skin rejuvenation Calgary",
+  "non-invasive treatments",
+  "wellness spa Calgary",
 ];
 
 /**
  * Modern viewport configuration
  */
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'hsl(var(--background))' },
-    { media: '(prefers-color-scheme: dark)', color: 'hsl(var(--background))' }
+    { media: "(prefers-color-scheme: light)", color: "hsl(var(--background))" },
+    { media: "(prefers-color-scheme: dark)", color: "hsl(var(--background))" },
   ],
-  colorScheme: 'light dark',
-  viewportFit: 'cover'
+  colorScheme: "light dark",
+  viewportFit: "cover",
 };
 
 /**
@@ -60,15 +60,15 @@ export function generateOGImages(title: string) {
       width: 1200,
       height: 630,
       alt: title,
-      type: 'image/webp'
+      type: "image/webp",
     },
     {
-      url: `${baseUrl}/images/og-image-square.webp`, 
+      url: `${baseUrl}/images/og-image-square.webp`,
       width: 1080,
       height: 1080,
       alt: title,
-      type: 'image/webp'
-    }
+      type: "image/webp",
+    },
   ];
 }
 
@@ -81,8 +81,8 @@ export function generateTwitterImages(title: string) {
       url: `${baseUrl}/images/twitter-image-1200x630.webp`,
       width: 1200,
       height: 630,
-      alt: title
-    }
+      alt: title,
+    },
   ];
 }
 
@@ -93,7 +93,7 @@ export const baseMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.name}`
+    template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: defaultKeywords,
@@ -103,10 +103,10 @@ export const baseMetadata: Metadata = {
   alternates: {
     canonical: baseUrl,
     languages: {
-      'en-CA': baseUrl,
-      'en-US': baseUrl,
-      'en': baseUrl
-    }
+      "en-CA": baseUrl,
+      "en-US": baseUrl,
+      en: baseUrl,
+    },
   },
   robots: {
     index: true,
@@ -116,13 +116,13 @@ export const baseMetadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
-  category: 'Health & Beauty',
-  classification: 'Business'
+  category: "Health & Beauty",
+  classification: "Business",
 };
 
 /**
@@ -137,14 +137,16 @@ export interface PageMetadataOptions {
   ogImage?: string;
 }
 
-export function generatePageMetadata(options: PageMetadataOptions = {}): Metadata {
+export function generatePageMetadata(
+  options: PageMetadataOptions = {},
+): Metadata {
   const {
     title,
     description,
     keywords = [],
     canonicalUrl,
     noindex = false,
-    ogImage
+    ogImage,
   } = options;
 
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
@@ -159,26 +161,26 @@ export function generatePageMetadata(options: PageMetadataOptions = {}): Metadat
     keywords: allKeywords,
     alternates: {
       ...baseMetadata.alternates,
-      canonical: fullCanonicalUrl
+      canonical: fullCanonicalUrl,
     },
     openGraph: {
-      type: 'website',
-      locale: 'en_CA',
+      type: "website",
+      locale: "en_CA",
       url: fullCanonicalUrl,
       siteName: siteConfig.name,
       title: pageTitle,
       description: pageDescription,
-      images: generateOGImages(pageTitle)
+      images: generateOGImages(pageTitle),
     },
     twitter: {
-      card: 'summary_large_image',
-      site: '@vivispa_ca',
-      creator: '@vivispa_ca',
+      card: "summary_large_image",
+      site: "@vivispa_ca",
+      creator: "@vivispa_ca",
       title: pageTitle,
       description: pageDescription,
-      images: generateTwitterImages(pageTitle)
+      images: generateTwitterImages(pageTitle),
     },
-    robots: noindex ? { index: false, follow: false } : baseMetadata.robots
+    robots: noindex ? { index: false, follow: false } : baseMetadata.robots,
   };
 }
 
@@ -194,33 +196,37 @@ export interface ServiceMetadataOptions {
   locationSpecific?: boolean;
 }
 
-export function generateServiceMetadata(options: ServiceMetadataOptions): Metadata {
+export function generateServiceMetadata(
+  options: ServiceMetadataOptions,
+): Metadata {
   const {
     serviceName,
     serviceDescription,
     serviceKeywords = [],
     slug,
     benefits = [],
-    locationSpecific = true
+    locationSpecific = true,
   } = options;
 
-  const locationKeywords = locationSpecific ? ['Calgary', 'Alberta', 'Canada'] : [];
-  const benefitKeywords = benefits.map(benefit => benefit.toLowerCase());
-  
+  const locationKeywords = locationSpecific
+    ? ["Calgary", "Alberta", "Canada"]
+    : [];
+  const benefitKeywords = benefits.map((benefit) => benefit.toLowerCase());
+
   const allKeywords = [
     ...serviceKeywords,
     ...locationKeywords,
     ...benefitKeywords,
     `${serviceName.toLowerCase()} Calgary`,
     `professional ${serviceName.toLowerCase()}`,
-    `${serviceName.toLowerCase()} treatment`
+    `${serviceName.toLowerCase()} treatment`,
   ];
 
   return generatePageMetadata({
     title: `${serviceName} in Calgary | Professional ${serviceName} Treatment`,
     description: serviceDescription,
     keywords: allKeywords,
-    canonicalUrl: `/services/${slug}`
+    canonicalUrl: `/services/${slug}`,
   });
 }
 
@@ -229,31 +235,30 @@ export function generateServiceMetadata(options: ServiceMetadataOptions): Metada
  */
 export function generateOrganizationSchema() {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'MedSpa',
+    "@context": "https://schema.org",
+    "@type": "MedSpa",
     name: siteConfig.name,
     description: siteConfig.description,
     url: baseUrl,
     logo: `${baseUrl}/images/logo.webp`,
-    image: generateOGImages(siteConfig.title)[0]?.url || `${baseUrl}/images/og-image-1200x630.webp`,
+    image:
+      generateOGImages(siteConfig.title)[0]?.url ||
+      `${baseUrl}/images/og-image-1200x630.webp`,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
     address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CA',
-      addressRegion: 'AB',
-      addressLocality: 'Calgary'
+      "@type": "PostalAddress",
+      addressCountry: "CA",
+      addressRegion: "AB",
+      addressLocality: "Calgary",
     },
-    sameAs: [
-      siteConfig.links.instagram,
-      siteConfig.links.facebook
-    ],
-    priceRange: '$$',
+    sameAs: [siteConfig.links.instagram, siteConfig.links.facebook],
+    priceRange: "$$",
     aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '150'
-    }
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "150",
+    },
   };
 }
 
@@ -264,36 +269,38 @@ export function generateServiceSchema(service: {
   benefits: string[];
 }) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
+    "@context": "https://schema.org",
+    "@type": "Service",
     name: service.title,
     description: service.previewDescription,
     provider: {
-      '@type': 'MedSpa',
+      "@type": "MedSpa",
       name: siteConfig.name,
-      url: baseUrl
+      url: baseUrl,
     },
     url: `${baseUrl}/services/${service.slug}`,
-    serviceType: 'Beauty Treatment',
+    serviceType: "Beauty Treatment",
     areaServed: {
-      '@type': 'City',
-      name: 'Calgary',
-      addressRegion: 'AB',
-      addressCountry: 'CA'
-    }
+      "@type": "City",
+      name: "Calgary",
+      addressRegion: "AB",
+      addressCountry: "CA",
+    },
   };
 }
 
-export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: string }>) {
+export function generateBreadcrumbSchema(
+  breadcrumbs: Array<{ name: string; url: string }>,
+) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: breadcrumbs.map((crumb, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: crumb.name,
-      item: `${baseUrl}${crumb.url}`
-    }))
+      item: `${baseUrl}${crumb.url}`,
+    })),
   };
 }
 
@@ -302,4 +309,4 @@ export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url:
  */
 export function generateJsonLdScript(data: Record<string, any>): string {
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
-} 
+}

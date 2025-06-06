@@ -14,4 +14,4 @@ export interface ServiceCategory {
 export interface LocationServices {
   location: string;
   categories: ServiceCategory[];
-} 
+}

@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import Image from 'next/image';
-import type { ImageProps } from 'next/image';
-import { cn } from '@/lib/utils';
-import { 
-  getOptimizedImageProps, 
-  imageSizeConfigs, 
+import React, { useState, useCallback } from "react";
+import Image from "next/image";
+import type { ImageProps } from "next/image";
+import { cn } from "@/lib/utils";
+import {
+  getOptimizedImageProps,
+  imageSizeConfigs,
   ImagePerformanceMonitor,
   generateImageAlt,
-  getOptimalQuality
-} from '@/lib/image-optimization';
+  getOptimalQuality,
+} from "@/lib/image-optimization";
 
-interface OptimizedImageProps extends Omit<ImageProps, 'onLoad' | 'onError' | 'quality' | 'sizes'> {
+interface OptimizedImageProps
+  extends Omit<ImageProps, "onLoad" | "onError" | "quality" | "sizes"> {
   fallbackSrc?: string;
-  aspectRatio?: 'square' | 'video' | 'portrait' | 'landscape' | string;
+  aspectRatio?: "square" | "video" | "portrait" | "landscape" | string;
   containerClassName?: string;
   showSkeleton?: boolean;
-  imageType?: 'hero' | 'content' | 'thumbnail' | 'avatar';
+  imageType?: "hero" | "content" | "thumbnail" | "avatar";
   context?: string;
   onLoadComplete?: () => void;
   onError?: () => void;
@@ -29,12 +30,12 @@ interface OptimizedImageProps extends Omit<ImageProps, 'onLoad' | 'onError' | 'q
 export function OptimizedImage({
   src,
   alt,
-  fallbackSrc = '/images/placeholder.webp',
-  aspectRatio = 'video',
+  fallbackSrc = "/images/placeholder.webp",
+  aspectRatio = "video",
   containerClassName,
   className,
   showSkeleton = true,
-  imageType = 'content',
+  imageType = "content",
   context,
   onLoadComplete,
   onError,
@@ -47,22 +48,27 @@ export function OptimizedImage({
   const [loadStartTime] = useState(Date.now());
 
   // Extract string src for optimization utilities
-  const srcString = typeof imageSrc === 'string' ? imageSrc : 
-                   typeof imageSrc === 'object' && 'src' in imageSrc ? imageSrc.src : 
-                   String(imageSrc);
+  const srcString =
+    typeof imageSrc === "string"
+      ? imageSrc
+      : typeof imageSrc === "object" && "src" in imageSrc
+        ? imageSrc.src
+        : String(imageSrc);
 
   // Generate quality for the image type
   const quality = getOptimalQuality(imageType);
-  const sizes = imageSizeConfigs[imageType as keyof typeof imageSizeConfigs] || imageSizeConfigs.card;
+  const sizes =
+    imageSizeConfigs[imageType as keyof typeof imageSizeConfigs] ||
+    imageSizeConfigs.card;
   const optimizedAlt = context ? generateImageAlt(context, alt) : alt;
 
   const handleLoad = useCallback(() => {
     setIsLoading(false);
-    
+
     // Record performance metrics
     const loadTime = Date.now() - loadStartTime;
     ImagePerformanceMonitor.getInstance().recordLoadTime(srcString, loadTime);
-    
+
     onLoadComplete?.();
   }, [onLoadComplete, srcString, loadStartTime]);
 
@@ -78,30 +84,30 @@ export function OptimizedImage({
 
   const getAspectRatioClass = (ratio: string) => {
     switch (ratio) {
-      case 'square':
-        return 'aspect-square';
-      case 'video':
-        return 'aspect-video';
-      case 'portrait':
-        return 'aspect-[3/4]';
-      case 'landscape':
-        return 'aspect-[4/3]';
+      case "square":
+        return "aspect-square";
+      case "video":
+        return "aspect-video";
+      case "portrait":
+        return "aspect-[3/4]";
+      case "landscape":
+        return "aspect-[4/3]";
       default:
-        return ratio.startsWith('aspect-') ? ratio : `aspect-[${ratio}]`;
+        return ratio.startsWith("aspect-") ? ratio : `aspect-[${ratio}]`;
     }
   };
 
   return (
-    <div 
+    <div
       className={cn(
-        'relative overflow-hidden',
+        "relative overflow-hidden",
         getAspectRatioClass(aspectRatio),
-        containerClassName
+        containerClassName,
       )}
     >
       {/* Loading skeleton */}
       {isLoading && showSkeleton && (
-        <div 
+        <div
           className="absolute inset-0 bg-muted animate-pulse rounded-md"
           aria-hidden="true"
         />
@@ -116,9 +122,9 @@ export function OptimizedImage({
         priority={priority}
         fill
         className={cn(
-          'object-cover transition-opacity duration-200',
-          isLoading ? 'opacity-0' : 'opacity-100',
-          className
+          "object-cover transition-opacity duration-200",
+          isLoading ? "opacity-0" : "opacity-100",
+          className,
         )}
         onLoad={handleLoad}
         onError={handleError}
@@ -129,7 +135,9 @@ export function OptimizedImage({
       {hasError && imageSrc === fallbackSrc && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted">
           <div className="text-center text-muted-foreground">
-            <div className="text-2xl mb-2" aria-hidden="true">📷</div>
+            <div className="text-2xl mb-2" aria-hidden="true">
+              📷
+            </div>
             <p className="text-sm">Image unavailable</p>
           </div>
         </div>
@@ -159,18 +167,12 @@ export function HeroImage({
       <OptimizedImage
         priority
         imageType="hero"
-        className={cn(
-          blur && 'blur-sm',
-          className
-        )}
+        className={cn(blur && "blur-sm", className)}
         {...props}
       />
       {overlay && (
-        <div 
-          className={cn(
-            'absolute inset-0 bg-foreground/20',
-            overlayClassName
-          )}
+        <div
+          className={cn("absolute inset-0 bg-foreground/20", overlayClassName)}
           aria-hidden="true"
         />
       )}
@@ -182,26 +184,20 @@ export function HeroImage({
  * Lazy loading image for content sections
  */
 export function LazyImage(props: OptimizedImageProps) {
-  return (
-    <OptimizedImage
-      loading="lazy"
-      imageType="content"
-      {...props}
-    />
-  );
+  return <OptimizedImage loading="lazy" imageType="content" {...props} />;
 }
 
 /**
  * Avatar image with optimized sizes
  */
 interface AvatarImageProps extends OptimizedImageProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
-export function AvatarImage({ 
-  size = 'md', 
-  aspectRatio = 'square',
-  ...props 
+export function AvatarImage({
+  size = "md",
+  aspectRatio = "square",
+  ...props
 }: AvatarImageProps) {
   return (
     <OptimizedImage
@@ -236,16 +232,16 @@ interface ServiceImageProps extends OptimizedImageProps {
   serviceName: string;
 }
 
-export function ServiceImage({ 
-  serviceName, 
-  alt, 
+export function ServiceImage({
+  serviceName,
+  alt,
   context,
-  ...props 
+  ...props
 }: ServiceImageProps) {
   const optimizedAlt = generateImageAlt(
-    context || 'Service',
+    context || "Service",
     alt || serviceName,
-    'Vivi Aesthetics & Spa'
+    "Vivi Aesthetics & Spa",
   );
 
   return (
@@ -256,4 +252,4 @@ export function ServiceImage({
       {...props}
     />
   );
-} 
+}

@@ -1,59 +1,65 @@
-import type { Metadata } from 'next';
-import { services } from '@/data/services';
-import { Section } from '@/components/ui';
-import { ServiceCard } from '@/components/blocks/service-card';
-import { generatePageMetadata, generateOrganizationSchema, generateJsonLdScript } from '@/app/metadata';
-import { siteConfig } from '@/data/constant';
-import { CTASection } from '@/components/blocks/cta-section';
+import type { Metadata } from "next";
+import { services } from "@/data/services";
+import { Section } from "@/components/ui";
+import { ServiceCard } from "@/components/blocks/service-card";
+import {
+  generatePageMetadata,
+  generateOrganizationSchema,
+  generateJsonLdScript,
+} from "@/app/metadata";
+import { siteConfig } from "@/data/constant";
+import { CTASection } from "@/components/blocks/cta-section";
 
 export const metadata: Metadata = generatePageMetadata({
-  title: 'Our Services - Professional Beauty & Wellness Treatments',
-  description: 'Discover our comprehensive range of aesthetic treatments including HydroFacial, laser hair removal, microneedling, IPL photofacial, and more at Vivi Aesthetics & Spa in Calgary.',
+  title: "Our Services - Professional Beauty & Wellness Treatments",
+  description:
+    "Discover our comprehensive range of aesthetic treatments including HydroFacial, laser hair removal, microneedling, IPL photofacial, and more at Vivi Aesthetics & Spa in Calgary.",
   keywords: [
-    'aesthetic services calgary',
-    'spa treatments calgary',
-    'beauty services',
-    'skin treatments',
-    'laser treatments',
-    'hydrofacial calgary',
-    'microneedling calgary',
-    'laser hair removal calgary',
-    'professional aesthetics',
-    'medical spa calgary',
+    "aesthetic services calgary",
+    "spa treatments calgary",
+    "beauty services",
+    "skin treatments",
+    "laser treatments",
+    "hydrofacial calgary",
+    "microneedling calgary",
+    "laser hair removal calgary",
+    "professional aesthetics",
+    "medical spa calgary",
   ],
-  ogImage: '/images/services/services-overview.webp',
-  canonicalUrl: '/services',
+  ogImage: "/images/services/services-overview.webp",
+  canonicalUrl: "/services",
 });
 
 export default function ServicesPage() {
   // Generate structured data for services page
   const servicesPageJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    '@id': `${siteConfig.url}/services#servicelist`,
-    name: 'Aesthetic & Spa Services',
-    description: 'Professional beauty and wellness treatments at Vivi Aesthetics & Spa',
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${siteConfig.url}/services#servicelist`,
+    name: "Aesthetic & Spa Services",
+    description:
+      "Professional beauty and wellness treatments at Vivi Aesthetics & Spa",
     numberOfItems: services.length,
     itemListElement: services.map((service, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       item: {
-        '@type': 'Service',
-        '@id': `${siteConfig.url}/services/${service.slug}#service`,
+        "@type": "Service",
+        "@id": `${siteConfig.url}/services/${service.slug}#service`,
         name: service.title,
         description: service.previewDescription,
         image: service.image,
         url: `${siteConfig.url}/services/${service.slug}`,
         provider: {
-          '@type': 'MedicalBusiness',
-          '@id': `${siteConfig.url}#organization`,
-          name: 'Vivi Aesthetics & Spa',
+          "@type": "MedicalBusiness",
+          "@id": `${siteConfig.url}#organization`,
+          name: "Vivi Aesthetics & Spa",
         },
         areaServed: {
-          '@type': 'City',
-          name: 'Calgary',
+          "@type": "City",
+          name: "Calgary",
         },
-        category: 'Beauty & Wellness',
+        category: "Beauty & Wellness",
       },
     })),
   };
@@ -84,7 +90,8 @@ export default function ServicesPage() {
               Our Services
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Discover our comprehensive range of advanced aesthetic treatments designed to enhance your natural beauty and boost your confidence.
+              Discover our comprehensive range of advanced aesthetic treatments
+              designed to enhance your natural beauty and boost your confidence.
             </p>
           </div>
         </Section>
@@ -99,7 +106,7 @@ export default function ServicesPage() {
               Browse our complete selection of aesthetic treatments
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
               <ServiceCard
@@ -110,7 +117,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </Section>
-        
+
         <CTASection
           variant="minimal"
           title="Ready to Transform Your Look?"
@@ -120,15 +127,15 @@ export default function ServicesPage() {
             href: "https://book.vivispa.ca",
             variant: "default",
             icon: "calendar",
-            external: true
+            external: true,
           }}
           secondaryCTA={{
             text: "View Offers",
             href: "/offers",
-            variant: "outline"
+            variant: "outline",
           }}
         />
       </main>
     </>
   );
-} 
+}

@@ -1,67 +1,62 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
-interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'circular' | 'text' | 'image';
-  animation?: 'pulse' | 'wave' | 'none';
-  speed?: 'slow' | 'normal' | 'fast';
-}
+const skeletonVariants = cva("bg-muted", {
+  variants: {
+    variant: {
+      default: "rounded-md",
+      circular: "rounded-full",
+      text: "rounded-sm h-4",
+      image: "rounded-lg",
+    },
+    animation: {
+      pulse: "animate-pulse",
+      wave: "animate-shimmer",
+      none: "",
+    },
+    speed: {
+      slow: "[animation-duration:2s]",
+      normal: "",
+      fast: "[animation-duration:0.5s]",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    animation: "pulse",
+    speed: "normal",
+  },
+});
 
-function Skeleton({ 
-  className, 
-  variant = 'default',
-  animation = 'pulse',
-  speed = 'normal',
-  ...props 
+export interface SkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof skeletonVariants> {}
+
+function Skeleton({
+  className,
+  variant,
+  animation,
+  speed,
+  ...props
 }: SkeletonProps) {
-  const animationClasses = {
-    pulse: {
-      slow: 'animate-pulse [animation-duration:2s]',
-      normal: 'animate-pulse',
-      fast: 'animate-pulse [animation-duration:0.5s]',
-    },
-    wave: {
-      slow: 'animate-shimmer [animation-duration:2s]',
-      normal: 'animate-shimmer',
-      fast: 'animate-shimmer [animation-duration:0.5s]',
-    },
-    none: {
-      slow: '',
-      normal: '',
-      fast: '',
-    },
-  };
-
-  const variantClasses = {
-    default: 'rounded-md',
-    circular: 'rounded-full',
-    text: 'rounded-sm h-4',
-    image: 'rounded-lg',
-  };
-
   return (
     <div
-      className={cn(
-        "bg-muted",
-        variantClasses[variant],
-        animationClasses[animation][speed],
-        className
-      )}
+      className={cn(skeletonVariants({ variant, animation, speed }), className)}
       role="status"
       aria-label="Loading content"
       {...props}
     />
-  )
+  );
 }
 
 // Predefined skeleton components for common use cases
-function SkeletonText({ 
-  lines = 1, 
+function SkeletonText({
+  lines = 1,
   className,
-  ...props 
-}: { 
+  ...props
+}: {
   lines?: number;
   className?: string;
-} & Omit<SkeletonProps, 'variant'>) {
+} & Omit<SkeletonProps, "variant">) {
   return (
     <div className={cn("space-y-2", className)}>
       {Array.from({ length: lines }).map((_, index) => (
@@ -70,7 +65,7 @@ function SkeletonText({
           variant="text"
           className={cn(
             "w-full",
-            index === lines - 1 && lines > 1 && "w-3/4" // Last line shorter
+            index === lines - 1 && lines > 1 && "w-3/4", // Last line shorter
           )}
           {...props}
         />
@@ -79,94 +74,80 @@ function SkeletonText({
   );
 }
 
-function SkeletonCard({ 
+function SkeletonCard({
   showImage = true,
   showTitle = true,
   showDescription = true,
   className,
-  ...props 
+  ...props
 }: {
   showImage?: boolean;
   showTitle?: boolean;
   showDescription?: boolean;
   className?: string;
-} & Omit<SkeletonProps, 'variant'>) {
+} & Omit<SkeletonProps, "variant">) {
   return (
     <div className={cn("space-y-4", className)}>
       {showImage && (
-        <Skeleton 
-          variant="image" 
-          className="w-full h-48"
-          {...props}
-        />
+        <Skeleton variant="image" className="w-full h-48" {...props} />
       )}
       {showTitle && (
-        <Skeleton 
-          variant="text" 
-          className="w-3/4 h-6"
-          {...props}
-        />
+        <Skeleton variant="text" className="w-3/4 h-6" {...props} />
       )}
-      {showDescription && (
-        <SkeletonText 
-          lines={2}
-          {...props}
-        />
-      )}
+      {showDescription && <SkeletonText lines={2} {...props} />}
     </div>
   );
 }
 
-function SkeletonAvatar({ 
-  size = 'md',
-  className,
-  ...props 
-}: {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  className?: string;
-} & Omit<SkeletonProps, 'variant'>) {
-  const sizeClasses = {
-    sm: 'w-8 h-8',
-    md: 'w-12 h-12',
-    lg: 'w-16 h-16',
-    xl: 'w-24 h-24',
-  };
+const avatarVariants = cva("", {
+  variants: {
+    size: {
+      sm: "w-8 h-8",
+      md: "w-12 h-12",
+      lg: "w-16 h-16",
+      xl: "w-24 h-24",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
+export interface SkeletonAvatarProps
+  extends Omit<SkeletonProps, "variant">,
+    VariantProps<typeof avatarVariants> {}
+
+function SkeletonAvatar({ size, className, ...props }: SkeletonAvatarProps) {
   return (
     <Skeleton
       variant="circular"
-      className={cn(sizeClasses[size], className)}
+      className={cn(avatarVariants({ size }), className)}
       {...props}
     />
   );
 }
 
-function SkeletonButton({ 
-  size = 'md',
-  className,
-  ...props 
-}: {
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-} & Omit<SkeletonProps, 'variant'>) {
-  const sizeClasses = {
-    sm: 'h-8 w-20',
-    md: 'h-10 w-24',
-    lg: 'h-12 w-32',
-  };
+const buttonVariants = cva("", {
+  variants: {
+    size: {
+      sm: "h-8 w-20",
+      md: "h-10 w-24",
+      lg: "h-12 w-32",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
+export interface SkeletonButtonProps
+  extends Omit<SkeletonProps, "variant">,
+    VariantProps<typeof buttonVariants> {}
+
+function SkeletonButton({ size, className, ...props }: SkeletonButtonProps) {
   return (
-    <Skeleton
-      className={cn(sizeClasses[size], className)}
-      {...props}
-    />
+    <Skeleton className={cn(buttonVariants({ size }), className)} {...props} />
   );
 }
 
-export { 
-  Skeleton, 
-  SkeletonText, 
-  SkeletonCard, 
-  SkeletonAvatar, 
-  SkeletonButton 
-}
+export { Skeleton, SkeletonText, SkeletonCard, SkeletonAvatar, SkeletonButton };

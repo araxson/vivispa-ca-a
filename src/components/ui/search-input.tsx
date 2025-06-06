@@ -1,17 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Input } from './input';
-import { Search } from 'lucide-react';
-import { cn } from "@/lib/utils"
+import React from "react";
+import { Input } from "./input";
+import { Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (value: string) => void;
-  initialValue?: string;
 }
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ className, onSearch, onChange, initialValue, ...props }, ref) => {
+  ({ className, onSearch, onChange, ...props }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(e);
       onSearch?.(e.target.value);
@@ -24,12 +23,11 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           ref={ref}
           className={cn("pl-9", className)}
           onChange={handleChange}
-          defaultValue={initialValue}
           {...props}
         />
       </div>
     );
-  }
+  },
 );
 
-SearchInput.displayName = "SearchInput"; 
+SearchInput.displayName = "SearchInput";

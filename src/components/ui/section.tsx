@@ -1,41 +1,43 @@
-import { cn, sectionVariants, type SectionVariants, type ContainerVariants } from "@/lib/utils"
-import { type ReactNode } from "react"
-import { Container } from "./container"
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { getSectionClasses, type SpacingSize } from "@/lib/spacing";
+import { Container, type ContainerProps } from "./container";
 
-interface SectionProps extends SectionVariants {
-  children: ReactNode
-  className?: string | undefined
-  containerClassName?: string
-  containerSize?: ContainerVariants['size']
-  containerPadding?: ContainerVariants['padding']
-  id?: string
+export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+  className?: string;
+  containerClassName?: string;
+  maxWidth?: ContainerProps["maxWidth"];
+  paddingSize?: ContainerProps["paddingSize"];
+  spacing?: SpacingSize;
+  background?: "default" | "muted" | "card" | "primary" | "transparent";
+  id?: string;
 }
 
-export function Section({ 
-  children, 
+export function Section({
+  children,
   className,
   containerClassName,
-  containerSize = 'xl',
-  containerPadding = 'md',
-  spacing = 'md',
-  background = 'transparent',
-  id
+  maxWidth = "7xl",
+  paddingSize = "md",
+  spacing = "lg",
+  background = "transparent",
+  id,
+  ...props
 }: SectionProps) {
   return (
-    <section 
+    <section
       id={id}
-      className={cn(
-        sectionVariants({ spacing, background }),
-        className
-      )}
+      className={cn(getSectionClasses(spacing, background), className)}
+      {...props}
     >
-      <Container 
-        size={containerSize} 
-        padding={containerPadding}
+      <Container
+        maxWidth={maxWidth}
+        paddingSize={paddingSize}
         className={containerClassName}
       >
         {children}
       </Container>
     </section>
-  )
-} 
+  );
+}

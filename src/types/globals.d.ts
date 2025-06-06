@@ -1,98 +1,98 @@
 // Global type declarations for CSS imports and other assets
 
-declare module '*.css' {
+declare module "*.css" {
   const content: any;
   export default content;
 }
 
-declare module '*.scss' {
+declare module "*.scss" {
   const content: any;
   export default content;
 }
 
-declare module '*.sass' {
+declare module "*.sass" {
   const content: any;
   export default content;
 }
 
-declare module '*.less' {
+declare module "*.less" {
   const content: any;
   export default content;
 }
 
-declare module '*.styl' {
+declare module "*.styl" {
   const content: any;
   export default content;
 }
 
 // Image imports
-declare module '*.png' {
+declare module "*.png" {
   const src: string;
   export default src;
 }
 
-declare module '*.jpg' {
+declare module "*.jpg" {
   const src: string;
   export default src;
 }
 
-declare module '*.jpeg' {
+declare module "*.jpeg" {
   const src: string;
   export default src;
 }
 
-declare module '*.gif' {
+declare module "*.gif" {
   const src: string;
   export default src;
 }
 
-declare module '*.webp' {
+declare module "*.webp" {
   const src: string;
   export default src;
 }
 
-declare module '*.avif' {
+declare module "*.avif" {
   const src: string;
   export default src;
 }
 
-declare module '*.ico' {
+declare module "*.ico" {
   const src: string;
   export default src;
 }
 
-declare module '*.bmp' {
+declare module "*.bmp" {
   const src: string;
   export default src;
 }
 
-declare module '*.svg' {
+declare module "*.svg" {
   const src: string;
   export default src;
 }
 
 // Font imports
-declare module '*.woff' {
+declare module "*.woff" {
   const src: string;
   export default src;
 }
 
-declare module '*.woff2' {
+declare module "*.woff2" {
   const src: string;
   export default src;
 }
 
-declare module '*.eot' {
+declare module "*.eot" {
   const src: string;
   export default src;
 }
 
-declare module '*.ttf' {
+declare module "*.ttf" {
   const src: string;
   export default src;
 }
 
-declare module '*.otf' {
+declare module "*.otf" {
   const src: string;
   export default src;
-} 
+}

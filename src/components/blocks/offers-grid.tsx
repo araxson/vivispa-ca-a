@@ -1,11 +1,24 @@
-'use client';
+"use client";
 
-import type { OfferItem } from '@/data/pricing/offers';
-import { OfferCard } from './offer-card';
-import { AlertCircle } from 'lucide-react';
+import type { OfferItem } from "@/data/pricing/offers";
+import { OfferCard } from "./offer-card";
+import { AlertCircle } from "lucide-react";
 
 // Extended offer type to match the one used in the offers page
 interface ExtendedOfferItem extends OfferItem {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  shortDescription: string;
+  featuredImage: string;
+  url: string;
+  badges?: string[];
+  pricing: {
+    display: string;
+    isSpecialOffer: boolean;
+    originalPrice?: string;
+  };
   location?: string;
   locationDetails?: any;
   dynamicUrl?: string;
@@ -29,27 +42,30 @@ export function OffersGrid({ offers, searchTerm }: OffersGridProps) {
           No offers found
         </h3>
         <p className="text-muted-foreground max-w-md leading-relaxed">
-          {searchTerm 
+          {searchTerm
             ? `No offers match "${searchTerm}". Try adjusting your search or filters.`
-            : "No offers match your current filters. Try adjusting your selection to see more results."
-          }
+            : "No offers match your current filters. Try adjusting your selection to see more results."}
         </p>
       </div>
     );
   }
 
   return (
-    <section className="offers-grid" aria-label={`${offers.length} treatment offers`}>
+    <section
+      className="offers-grid"
+      aria-label={`${offers.length} treatment offers`}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
         {offers.map((offer) => (
           <OfferCard key={offer.id} offer={offer} />
         ))}
       </div>
-      
+
       {/* Results count for screen readers */}
       <div className="sr-only" aria-live="polite">
-        Found {offers.length} treatment {offers.length === 1 ? 'offer' : 'offers'}
+        Found {offers.length} treatment{" "}
+        {offers.length === 1 ? "offer" : "offers"}
       </div>
     </section>
   );
-} 
+}

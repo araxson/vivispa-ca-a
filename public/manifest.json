@@ -36,14 +36,24 @@
       "short_name": "Book",
       "description": "Book an appointment at Vivi Spa",
       "url": "/pricing",
-      "icons": [{ "src": "/images/favicon/android-chrome-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/images/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Services",
       "short_name": "Services",
       "description": "View our services",
       "url": "/services",
-      "icons": [{ "src": "/images/favicon/android-chrome-192x192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/images/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

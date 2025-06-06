@@ -1,4 +1,4 @@
-import { contactInfo, locations, type Location } from './contact';
+import { contactInfo, locations, type Location } from "./contact";
 
 /**
  * Site configuration data for Vivi Aesthetics & Spa website
@@ -6,7 +6,8 @@ import { contactInfo, locations, type Location } from './contact';
 export const siteConfig = {
   name: contactInfo.businessName,
   title: "Vivi Aesthetics & Spa | Premium Beauty & Wellness Treatments",
-  description: "Vivi Aesthetics & Spa offers premium beauty and wellness treatments to help you look and feel your best.",
+  description:
+    "Vivi Aesthetics & Spa offers premium beauty and wellness treatments to help you look and feel your best.",
   url: "https://vivispa.ca",
   ogImage: "/images/og-image.jpg",
   links: {

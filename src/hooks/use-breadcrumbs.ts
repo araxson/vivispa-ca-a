@@ -1,6 +1,6 @@
-import { usePathname, useParams } from 'next/navigation';
-import { useMemo } from 'react';
-import { getServiceBySlug } from '@/data/services';
+import { usePathname, useParams } from "next/navigation";
+import { useMemo } from "react";
+import { getServiceBySlug } from "@/data/services";
 
 export interface BreadcrumbItem {
   label: string;
@@ -15,16 +15,16 @@ export function useBreadcrumbs(): BreadcrumbItem[] {
   return useMemo(() => {
     const breadcrumbs: BreadcrumbItem[] = [
       {
-        label: 'Home',
-        href: '/',
+        label: "Home",
+        href: "/",
       },
     ];
 
     // Split pathname and filter out empty segments
-    const segments = pathname.split('/').filter(Boolean);
+    const segments = pathname.split("/").filter(Boolean);
 
     // Build breadcrumbs based on the current route
-    let currentPath = '';
+    let currentPath = "";
 
     segments.forEach((segment, index) => {
       currentPath += `/${segment}`;
@@ -45,40 +45,46 @@ export function useBreadcrumbs(): BreadcrumbItem[] {
         }
       };
 
-            // Handle different route patterns
+      // Handle different route patterns
       switch (segment) {
-        case 'contact':
-          breadcrumbs.push(createBreadcrumbItem('Contact'));
+        case "contact":
+          breadcrumbs.push(createBreadcrumbItem("Contact"));
           break;
 
-        case 'services':
-          breadcrumbs.push(createBreadcrumbItem('Services'));
+        case "services":
+          breadcrumbs.push(createBreadcrumbItem("Services"));
           break;
 
-        case 'pricing':
-          breadcrumbs.push(createBreadcrumbItem('Pricing'));
+        case "pricing":
+          breadcrumbs.push(createBreadcrumbItem("Pricing"));
           break;
 
-        case 'offers':
-          breadcrumbs.push(createBreadcrumbItem('Special Offers'));
+        case "offers":
+          breadcrumbs.push(createBreadcrumbItem("Special Offers"));
           break;
 
         default:
           // Handle dynamic segments like service slugs
-          if (segments[index - 1] === 'services' && params?.['slug']) {
+          if (segments[index - 1] === "services" && params?.["slug"]) {
             const service = getServiceBySlug(segment);
             if (service) {
               breadcrumbs.push(createBreadcrumbItem(service.title));
             } else {
-              breadcrumbs.push(createBreadcrumbItem(
-                segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
-              ));
+              breadcrumbs.push(
+                createBreadcrumbItem(
+                  segment.charAt(0).toUpperCase() +
+                    segment.slice(1).replace(/-/g, " "),
+                ),
+              );
             }
           } else {
             // Default handling for other segments
-            breadcrumbs.push(createBreadcrumbItem(
-              segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
-            ));
+            breadcrumbs.push(
+              createBreadcrumbItem(
+                segment.charAt(0).toUpperCase() +
+                  segment.slice(1).replace(/-/g, " "),
+              ),
+            );
           }
           break;
       }
@@ -86,4 +92,4 @@ export function useBreadcrumbs(): BreadcrumbItem[] {
 
     return breadcrumbs;
   }, [pathname, params]);
-} 
+}

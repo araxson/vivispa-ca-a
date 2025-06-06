@@ -1,4 +1,5 @@
 import { Skeleton, SkeletonCard, Container } from "@/components/ui";
+import { cn, gridVariants, GridVariants } from "@/lib/utils";
 
 interface PageLoadingProps {
   title?: string;
@@ -7,7 +8,7 @@ interface PageLoadingProps {
   sections?: Array<{
     name: string;
     items: number;
-    columns?: number;
+    columns?: GridVariants["cols"];
   }>;
 }
 
@@ -48,30 +49,30 @@ export function HeroSkeleton() {
   );
 }
 
-export function SectionSkeleton({ 
-  title = true, 
-  description = true, 
-  items = 3, 
-  columns = 3 
+export function SectionSkeleton({
+  title = true,
+  description = true,
+  items = 3,
+  columns = 3,
+  gap = "md",
+  className,
 }: {
   title?: boolean;
   description?: boolean;
   items?: number;
-  columns?: number;
+  columns?: GridVariants["cols"];
+  gap?: GridVariants["gap"];
+  className?: string;
 }) {
   return (
-    <section className="space-y-8">
+    <section className={cn("space-y-8", className)}>
       {title && (
         <div className="text-center space-y-4">
           <Skeleton className="h-8 w-48 mx-auto" />
           {description && <Skeleton className="h-6 w-80 mx-auto" />}
         </div>
       )}
-      <div className={`grid gap-8 ${
-        columns === 1 ? 'grid-cols-1' :
-        columns === 2 ? 'grid-cols-1 md:grid-cols-2' :
-        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-      }`}>
+      <div className={cn(gridVariants({ cols: columns, gap: gap }))}>
         {Array.from({ length: items }).map((_, i) => (
           <ServiceCardSkeleton key={i} />
         ))}
@@ -84,27 +85,34 @@ export function ServicesPageLoading({ gridItems = 6 }: PageLoadingProps) {
   return (
     <Container className="py-8">
       <PageHeaderSkeleton />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.from({ length: gridItems }).map((_, i) => (
-          <ServiceCardSkeleton key={i} />
-        ))}
-      </div>
+      <SectionSkeleton items={gridItems} columns={3} gap="sm" />
     </Container>
   );
 }
+
+const detailPageSections: Array<{
+  title: boolean;
+  description: boolean;
+  items: number;
+  columns: GridVariants["cols"];
+}> = [
+  { title: true, description: true, items: 1, columns: 2 },
+  { title: true, description: true, items: 6, columns: 3 },
+  { title: true, description: true, items: 1, columns: 2 },
+  { title: true, description: true, items: 8, columns: 4 },
+  { title: true, description: true, items: 1, columns: 2 },
+  { title: true, description: true, items: 5, columns: 1 },
+  { title: true, description: true, items: 3, columns: 3 },
+];
 
 export function ServiceDetailPageLoading() {
   return (
     <div className="min-h-screen">
       <HeroSkeleton />
       <Container className="py-16 space-y-16">
-        <SectionSkeleton title={true} description={true} items={1} columns={2} />
-        <SectionSkeleton title={true} description={true} items={6} columns={3} />
-        <SectionSkeleton title={true} description={true} items={1} columns={2} />
-        <SectionSkeleton title={true} description={true} items={8} columns={4} />
-        <SectionSkeleton title={true} description={true} items={1} columns={2} />
-        <SectionSkeleton title={true} description={true} items={5} columns={1} />
-        <SectionSkeleton title={true} description={true} items={3} columns={3} />
+        {detailPageSections.map((section, index) => (
+          <SectionSkeleton key={index} {...section} />
+        ))}
         <section className="text-center space-y-8 py-16 bg-muted/50 rounded-2xl">
           <div className="space-y-4">
             <Skeleton className="h-10 w-96 mx-auto" />
@@ -118,4 +126,4 @@ export function ServiceDetailPageLoading() {
       </Container>
     </div>
   );
-} 
+}

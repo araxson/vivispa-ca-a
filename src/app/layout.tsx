@@ -8,7 +8,7 @@ import { baseMetadata, viewport } from "@/lib/metadata-utils";
  * Configure fonts with next/font
  * See: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
  */
-const playfairDisplay = Playfair_Display({ 
+const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-playfair-display",
@@ -36,29 +36,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}
+    >
       <head>
         {/* DNS prefetch for performance */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        
+
         {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin=""
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
       </head>
       <body className="min-h-screen antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          
-        >
-          <div className="relative flex min-h-screen flex-col">
-            {children}
-          </div>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="relative flex min-h-screen flex-col">{children}</div>
         </ThemeProvider>
-        
-
       </body>
     </html>
   );

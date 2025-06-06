@@ -1,14 +1,14 @@
-import React from 'react';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
+import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
   SelectValue,
   FilterBadges,
-  SearchInput
-} from '@/components/ui';
-import type { FilterItem } from '@/components/ui/filter-badges';
+  SearchInput,
+} from "@/components/ui";
+import type { FilterItem } from "@/components/ui/filter-badges";
 
 interface PricingFiltersProps {
   searchTerm: string;
@@ -39,40 +39,43 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
   onCategoryChange,
   onPriceRangeChange,
   onClearFilter,
-  onClearAllFilters
+  onClearAllFilters,
 }) => {
   return (
-    <section 
+    <section
       className="bg-card border border-border rounded-2xl p-4 mb-6 sm:mb-8"
       aria-label="Filter services"
     >
       {/* Filter Controls */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
         {/* Location Filter */}
-        <Select 
-          value={selectedLocation || 'all'} 
-          onValueChange={(value) => onLocationChange(value === 'all' ? 'all' : value)}
+        <Select
+          value={selectedLocation || "all"}
+          onValueChange={(value) =>
+            onLocationChange(value === "all" ? "all" : value)
+          }
         >
-          <SelectTrigger 
-            className="w-full"
-            aria-label="Select location"
-          >
+          <SelectTrigger className="w-full" aria-label="Select location">
             <SelectValue placeholder="All Locations" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Locations</SelectItem>
             {locations.map((location) => (
-              <SelectItem key={location} value={location}>{location}</SelectItem>
+              <SelectItem key={location} value={location}>
+                {location}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         {/* Category Filter */}
-        <Select 
-          value={selectedCategory || 'all'} 
-          onValueChange={(value) => onCategoryChange(value === 'all' ? 'all' : value)}
+        <Select
+          value={selectedCategory || "all"}
+          onValueChange={(value) =>
+            onCategoryChange(value === "all" ? "all" : value)
+          }
         >
-          <SelectTrigger 
+          <SelectTrigger
             className="w-full"
             aria-label="Select service category"
           >
@@ -89,14 +92,13 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
         </Select>
 
         {/* Price Range Filter */}
-        <Select 
-          value={selectedPriceRange || 'all'} 
-          onValueChange={(value) => onPriceRangeChange(value === 'all' ? 'all' : value)}
+        <Select
+          value={selectedPriceRange || "all"}
+          onValueChange={(value) =>
+            onPriceRangeChange(value === "all" ? "all" : value)
+          }
         >
-          <SelectTrigger 
-            className="w-full"
-            aria-label="Select price range"
-          >
+          <SelectTrigger className="w-full" aria-label="Select price range">
             <SelectValue placeholder="All Prices" />
           </SelectTrigger>
           <SelectContent>
@@ -109,11 +111,13 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
         </Select>
 
         {/* Search */}
-        <SearchInput 
-          onSearch={onSearchChange}
-          initialValue={searchTerm}
-          placeholder="Search services..."
-        />
+        <div className="w-full sm:w-auto sm:min-w-[250px] lg:max-w-xs">
+          <SearchInput
+            onSearch={onSearchChange}
+            value={searchTerm}
+            placeholder="Search services..."
+          />
+        </div>
       </div>
 
       {/* Active Filters & Clear All */}
@@ -126,4 +130,4 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
   );
 };
 
-export { PricingFilters }; 
+export { PricingFilters };

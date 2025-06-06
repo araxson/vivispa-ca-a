@@ -1,6 +1,14 @@
-import { Container, Section, Card, CardContent, Badge, Separator } from '@/components/ui';
-import { cn } from '@/lib/utils';
-import type { LucideIcon } from 'lucide-react';
+import {
+  Container,
+  Section,
+  Card,
+  CardContent,
+  Badge,
+  Separator,
+} from "@/components/ui";
+import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
+import { SectionHeader } from "./section-header";
 
 interface Stat {
   id?: string;
@@ -8,7 +16,7 @@ interface Stat {
   label: string;
   description?: string;
   icon?: LucideIcon;
-  trend?: 'up' | 'down' | 'neutral';
+  trend?: "up" | "down" | "neutral";
   trendValue?: string;
 }
 
@@ -16,74 +24,63 @@ interface StatsSectionProps {
   stats: Stat[];
   title?: string;
   subtitle?: string;
-  variant?: 'default' | 'cards' | 'minimal' | 'highlighted';
+  variant?: "default" | "cards" | "minimal" | "highlighted";
   className?: string;
 }
 
-export function StatsSection({ 
-  stats, 
+export function StatsSection({
+  stats,
   title,
   subtitle,
-  variant = 'default',
-  className 
+  variant = "default",
+  className,
 }: StatsSectionProps) {
   if (!stats || stats.length === 0) {
     return null;
   }
 
   return (
-    <Section 
-      spacing="lg" 
-      background={variant === 'highlighted' ? 'card' : 'muted'} 
-      className={cn(variant === 'highlighted' && 'bg-primary/5', className)}
+    <Section
+      spacing="lg"
+      background={variant === "highlighted" ? "card" : "muted"}
+      className={cn(variant === "highlighted" && "bg-primary/5", className)}
     >
-      <Container>
-        {(title || subtitle) && (
-          <div className="text-center mb-8 sm:mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6">
-                {title}
-              </h2>
-            )}
-            {subtitle && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {subtitle}
-              </p>
-            )}
-          </div>
-        )}
-        
-        <div className={cn(
+      {(title || subtitle) && (
+        <SectionHeader title={title!} subtitle={subtitle} />
+      )}
+
+      <div
+        className={cn(
           "grid gap-6",
           stats.length === 2 && "grid-cols-1 md:grid-cols-2",
           stats.length === 3 && "grid-cols-1 md:grid-cols-3",
           stats.length === 4 && "grid-cols-2 lg:grid-cols-4",
-          stats.length > 4 && "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        )}>
-          {stats.map((stat, index) => (
-            <StatCard 
-              key={stat.id || index} 
-              stat={stat} 
-              variant={variant}
-              showSeparator={index < stats.length - 1 && variant === 'minimal'}
-            />
-          ))}
-        </div>
-      </Container>
+          stats.length > 4 && "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+        )}
+      >
+        {stats.map((stat, index) => (
+          <StatCard
+            key={stat.id || index}
+            stat={stat}
+            variant={variant}
+            showSeparator={index < stats.length - 1 && variant === "minimal"}
+          />
+        ))}
+      </div>
     </Section>
   );
 }
 
 interface StatCardProps {
   stat: Stat;
-  variant: 'default' | 'cards' | 'minimal' | 'highlighted';
+  variant: "default" | "cards" | "minimal" | "highlighted";
   showSeparator?: boolean;
 }
 
 function StatCard({ stat, variant, showSeparator }: StatCardProps) {
   const Icon = stat.icon;
 
-  if (variant === 'minimal') {
+  if (variant === "minimal") {
     return (
       <div className="text-center space-y-2 relative">
         {Icon && (
@@ -91,38 +88,46 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
             <Icon className="w-6 h-6 text-primary" />
           </div>
         )}
-        
+
         <div className="text-3xl md:text-4xl font-bold text-foreground">
           {stat.value}
         </div>
-        
-        <div className="text-sm font-medium text-foreground">
-          {stat.label}
-        </div>
-        
+
+        <div className="text-sm font-medium text-foreground">{stat.label}</div>
+
         {stat.description && (
           <p className="text-xs text-muted-foreground leading-relaxed">
             {stat.description}
           </p>
         )}
-        
+
         {stat.trend && stat.trendValue && (
-          <Badge 
-            variant={stat.trend === 'up' ? 'default' : stat.trend === 'down' ? 'destructive' : 'secondary'}
+          <Badge
+            variant={
+              stat.trend === "up"
+                ? "default"
+                : stat.trend === "down"
+                  ? "destructive"
+                  : "secondary"
+            }
             className="mt-2"
           >
-            {stat.trend === 'up' ? '↗' : stat.trend === 'down' ? '↘' : '→'} {stat.trendValue}
+            {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+            {stat.trendValue}
           </Badge>
         )}
-        
+
         {showSeparator && (
-          <Separator orientation="vertical" className="absolute right-0 top-1/2 -translate-y-1/2 h-16 hidden lg:block" />
+          <Separator
+            orientation="vertical"
+            className="absolute right-0 top-1/2 -translate-y-1/2 h-16 hidden lg:block"
+          />
         )}
       </div>
     );
   }
 
-  if (variant === 'cards') {
+  if (variant === "cards") {
     return (
       <Card className="text-center">
         <CardContent className="p-4 sm:p-6">
@@ -132,27 +137,38 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
                 <Icon className="w-6 h-6 text-primary" />
               </div>
             )}
-            
+
             <div className="text-3xl md:text-4xl font-bold text-foreground">
               {stat.value}
             </div>
-            
+
             <div className="text-sm font-medium text-foreground">
               {stat.label}
             </div>
-            
+
             {stat.description && (
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {stat.description}
               </p>
             )}
-            
+
             {stat.trend && stat.trendValue && (
-              <Badge 
-                variant={stat.trend === 'up' ? 'default' : stat.trend === 'down' ? 'destructive' : 'secondary'}
+              <Badge
+                variant={
+                  stat.trend === "up"
+                    ? "default"
+                    : stat.trend === "down"
+                      ? "destructive"
+                      : "secondary"
+                }
                 className="mt-2"
               >
-                {stat.trend === 'up' ? '↗' : stat.trend === 'down' ? '↘' : '→'} {stat.trendValue}
+                {stat.trend === "up"
+                  ? "↗"
+                  : stat.trend === "down"
+                    ? "↘"
+                    : "→"}{" "}
+                {stat.trendValue}
               </Badge>
             )}
           </div>
@@ -169,29 +185,34 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
           <Icon className="w-6 h-6 text-primary" />
         </div>
       )}
-      
+
       <div className="text-3xl md:text-4xl font-bold text-foreground">
         {stat.value}
       </div>
-      
-      <div className="text-sm font-medium text-foreground">
-        {stat.label}
-      </div>
-      
+
+      <div className="text-sm font-medium text-foreground">{stat.label}</div>
+
       {stat.description && (
         <p className="text-xs text-muted-foreground leading-relaxed">
           {stat.description}
         </p>
       )}
-      
+
       {stat.trend && stat.trendValue && (
-        <Badge 
-          variant={stat.trend === 'up' ? 'default' : stat.trend === 'down' ? 'destructive' : 'secondary'}
+        <Badge
+          variant={
+            stat.trend === "up"
+              ? "default"
+              : stat.trend === "down"
+                ? "destructive"
+                : "secondary"
+          }
           className="mt-2"
         >
-          {stat.trend === 'up' ? '↗' : stat.trend === 'down' ? '↘' : '→'} {stat.trendValue}
+          {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+          {stat.trendValue}
         </Badge>
       )}
     </div>
   );
-} 
+}

@@ -1,27 +1,27 @@
-import React from 'react';
-import { 
+import React from "react";
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  Button
-} from '@/components/ui';
-import type { ServiceItem } from '@/types/pricing';
-import { ExternalLink } from 'lucide-react';
+  Button,
+} from "@/components/ui";
+import type { ServiceItem } from "@/types/pricing";
+import { ExternalLink } from "lucide-react";
 
 interface PricingServiceTableProps {
   services: ServiceItem[];
-  variant?: 'nested' | 'main';
+  variant?: "nested" | "main";
 }
 
 const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
   services,
-  variant = 'main'
+  variant = "main",
 }) => {
-  const isNested = variant === 'nested';
-  
+  const isNested = variant === "nested";
+
   if (!services || services.length === 0) {
     return (
       <div className="p-6 text-center text-muted-foreground">
@@ -32,12 +32,12 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
 
   const handleRowClick = (service: ServiceItem) => {
     if (service.url) {
-      window.open(service.url, '_blank', 'noopener noreferrer');
+      window.open(service.url, "_blank", "noopener noreferrer");
     } else {
-      window.open('#booking', '_blank', 'noopener noreferrer');
+      window.open("#booking", "_blank", "noopener noreferrer");
     }
   };
-  
+
   return (
     <div className="overflow-x-auto">
       <Table className="w-full">
@@ -54,17 +54,17 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
             </TableHead>
           </TableRow>
         </TableHeader>
-        
+
         <TableBody>
           {services.map((service, index) => (
-            <TableRow 
-              key={`${service.name}-${index}`} 
+            <TableRow
+              key={`${service.name}-${index}`}
               className="border-border hover:bg-muted/30 transition-colors cursor-pointer"
               onClick={() => handleRowClick(service)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   handleRowClick(service);
                 }
@@ -78,16 +78,16 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
                   </span>
                 </div>
               </TableCell>
-              
+
               <TableCell className="text-right py-4 px-4">
                 <span className="text-sm md:text-base lg:text-lg font-semibold text-primary whitespace-nowrap">
                   {service.price}
                 </span>
               </TableCell>
-              
+
               <TableCell className="text-center py-4 pr-4 md:pr-6">
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   className="bg-primary hover:bg-primary/90 text-xs h-8 px-3 font-medium transition-colors pointer-events-none"
                   asChild
                 >
@@ -105,4 +105,4 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
   );
 };
 
-export { PricingServiceTable }; 
+export { PricingServiceTable };

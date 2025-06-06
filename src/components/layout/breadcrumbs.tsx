@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Home } from 'lucide-react';
+import Link from "next/link";
+import { Home } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -9,9 +9,14 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { useBreadcrumbs, type BreadcrumbItem as BreadcrumbItemType } from '@/hooks/use-breadcrumbs';
-import { cn } from '@/lib/utils';
+  BreadcrumbEllipsis,
+} from "@/components/ui/breadcrumb";
+import {
+  useBreadcrumbs,
+  type BreadcrumbItem as BreadcrumbItemType,
+} from "@/hooks/use-breadcrumbs";
+import { cn } from "@/lib/utils";
+import React from "react";
 
 interface BreadcrumbsProps {
   className?: string;
@@ -20,130 +25,87 @@ interface BreadcrumbsProps {
   maxItems?: number;
 }
 
-type EllipsisItem = {
-  label: string;
-  isEllipsis: true;
-};
+const HomeIcon = () => <Home className="h-4 w-4" />;
 
-type DisplayBreadcrumbItem = BreadcrumbItemType | EllipsisItem;
-
-export function Breadcrumbs({ 
-  className, 
-  showHomeIcon = true,
-  hideOnHome = true,
-  maxItems = 6
-}: BreadcrumbsProps) {
-  const breadcrumbs = useBreadcrumbs();
-
-  // Hide breadcrumbs on home page if hideOnHome is true
-  if (hideOnHome && breadcrumbs.length === 1) {
-    return null;
-  }
-
-  // Truncate breadcrumbs if they exceed maxItems
-  const displayedBreadcrumbs: DisplayBreadcrumbItem[] = breadcrumbs.length > maxItems 
-    ? [
-        breadcrumbs[0]!, // Always show Home (we know it exists)
-        { label: '...', isEllipsis: true },
-        ...breadcrumbs.slice(-2).filter(Boolean) // Show last 2 items, filter out any undefined
-      ]
-    : breadcrumbs;
+function renderItem(
+  item: BreadcrumbItemType,
+  isLast: boolean,
+  showHomeIcon: boolean,
+) {
+  const isHome = item.href === "/";
+  const content = (
+    <>
+      {isHome && showHomeIcon ? (
+        <span className="flex items-center gap-2">
+          <HomeIcon />
+          <span
+            className={
+              item.isCurrentPage
+                ? "sr-only"
+                : "sr-only sm:not-sr-only sm:inline"
+            }
+          >
+            {item.label}
+          </span>
+        </span>
+      ) : (
+        item.label
+      )}
+    </>
+  );
 
   return (
-    <nav className={cn('mb-6', className)} aria-label="Breadcrumb navigation">
-      <Breadcrumb>
-        <BreadcrumbList>
-          {displayedBreadcrumbs.map((item, index) => {
-            const isLast = index === displayedBreadcrumbs.length - 1;
-            
-            // Handle ellipsis
-            if ('isEllipsis' in item && item.isEllipsis) {
-              return (
-                <BreadcrumbItem key={`ellipsis-${index}`}>
-                  <span className="text-muted-foreground">...</span>
-                  {!isLast && <BreadcrumbSeparator />}
-                </BreadcrumbItem>
-              );
-            }
-
-            // TypeScript now knows this is a BreadcrumbItemType
-            const breadcrumbItem = item as BreadcrumbItemType;
-
-            return (
-              <BreadcrumbItem key={breadcrumbItem.href || breadcrumbItem.label}>
-                {breadcrumbItem.isCurrentPage ? (
-                  <BreadcrumbPage>
-                    {index === 0 && showHomeIcon ? (
-                      <span className="flex items-center gap-2">
-                        <Home className="h-4 w-4" />
-                        <span className="sr-only">{breadcrumbItem.label}</span>
-                      </span>
-                    ) : (
-                      breadcrumbItem.label
-                    )}
-                  </BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink asChild>
-                    <Link href={breadcrumbItem.href!}>
-                      {index === 0 && showHomeIcon ? (
-                        <span className="flex items-center gap-2">
-                          <Home className="h-4 w-4" />
-                          <span className="sr-only sm:not-sr-only sm:inline">
-                            {breadcrumbItem.label}
-                          </span>
-                        </span>
-                      ) : (
-                        breadcrumbItem.label
-                      )}
-                    </Link>
-                  </BreadcrumbLink>
-                )}
-                {!isLast && <BreadcrumbSeparator />}
-              </BreadcrumbItem>
-            );
-          })}
-        </BreadcrumbList>
-      </Breadcrumb>
-    </nav>
+    <BreadcrumbItem key={item.href || item.label}>
+      {isLast ? (
+        <BreadcrumbPage>{content}</BreadcrumbPage>
+      ) : (
+        <BreadcrumbLink asChild>
+          <Link href={item.href!}>{content}</Link>
+        </BreadcrumbLink>
+      )}
+    </BreadcrumbItem>
   );
 }
 
-// Alternative compact version for mobile or constrained spaces
-export function CompactBreadcrumbs({ className }: { className?: string }) {
-  const breadcrumbs = useBreadcrumbs();
+export function Breadcrumbs({
+  className,
+  showHomeIcon = true,
+  hideOnHome = true,
+  maxItems = 4,
+}: BreadcrumbsProps) {
+  const allBreadcrumbs = useBreadcrumbs();
 
-  if (breadcrumbs.length <= 1) {
+  if (hideOnHome && allBreadcrumbs.length <= 1) {
     return null;
   }
 
-  const currentPage = breadcrumbs[breadcrumbs.length - 1];
-  const parentPage = breadcrumbs.length > 2 ? breadcrumbs[breadcrumbs.length - 2] : breadcrumbs[0];
+  const breadcrumbs =
+    allBreadcrumbs.length > maxItems
+      ? [
+          allBreadcrumbs[0]!,
+          null, // Represents the ellipsis
+          ...allBreadcrumbs.slice(allBreadcrumbs.length - (maxItems - 2)),
+        ]
+      : allBreadcrumbs;
 
-  // Guard against undefined parentPage
-  if (!parentPage || !currentPage) {
-    return null;
-  }
+  const lastIndex = breadcrumbs.length - 1;
 
   return (
-    <nav className={cn('mb-4', className)} aria-label="Compact breadcrumb navigation">
+    <nav className={cn("mb-6", className)} aria-label="Breadcrumb navigation">
       <Breadcrumb>
         <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={parentPage.href || '/'} className="flex items-center gap-1">
-                <Home className="h-3 w-3" />
-                <span className="sr-only sm:not-sr-only sm:inline text-sm">
-                  {breadcrumbs.length > 2 ? parentPage.label : 'Home'}
-                </span>
-              </Link>
-            </BreadcrumbLink>
-            <BreadcrumbSeparator />
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <BreadcrumbPage className="text-sm font-medium">
-              {currentPage.label}
-            </BreadcrumbPage>
-          </BreadcrumbItem>
+          {breadcrumbs.map((item, index) => (
+            <React.Fragment key={item?.href || index}>
+              {item ? (
+                renderItem(item, index === lastIndex, showHomeIcon)
+              ) : (
+                <BreadcrumbItem>
+                  <BreadcrumbEllipsis />
+                </BreadcrumbItem>
+              )}
+              {index < lastIndex && <BreadcrumbSeparator />}
+            </React.Fragment>
+          ))}
         </BreadcrumbList>
       </Breadcrumb>
     </nav>

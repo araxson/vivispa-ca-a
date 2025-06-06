@@ -56,7 +56,16 @@ export interface StructuredData {
   };
 }
 
-export type LocationType = 'downtown' | 'edmonton-trail';
+export type LocationType = "downtown" | "edmonton-trail";
+
+export interface ServiceCardData {
+  id: string;
+  title: string;
+  slug: string;
+  previewDescription: string;
+  image: string;
+  availableLocations?: LocationType[];
+}
 
 export interface Service {
   // Basic Information
@@ -65,29 +74,29 @@ export interface Service {
   slug: string;
   previewDescription: string;
   fullDescription: string;
-  
+
   // SEO Metadata
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
   canonicalUrl: string;
-  
+
   // Media
   image: string;
   galleryImages: string[];
-  heroType?: 'image' | 'video' | 'none';
+  heroType?: "image" | "video" | "none";
   heroVideo?: {
     src: string;
     poster?: string;
   };
-  
+
   // Locations
   availableLocations: LocationType[];
-  
+
   // Social Media
   openGraph: OpenGraphData;
   twitter: TwitterData;
-  
+
   // Content Sections
   scientificInfo: string;
   overview: string;
@@ -99,15 +108,15 @@ export interface Service {
   expectedResults: string;
   safetyConsiderations: string;
   historyAndDevelopment: string;
-  
+
   // Interactive Content
   faqs: FAQ[];
   testimonials: Testimonial[];
-  
+
   // Structured Data
   structuredData: StructuredData;
-  
+
   // Relationships
   relatedServiceIds: string[];
   popularityRank: number;
-} 
+}

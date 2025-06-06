@@ -31,4 +31,4 @@ export interface LocationOffers {
   [locationName: string]: {
     general: OfferServiceItem[];
   };
-} 
+}

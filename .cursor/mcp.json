@@ -24,12 +24,7 @@
     },
     "square": {
       "command": "cmd",
-      "args": [
-        "/c",
-        "npx",
-        "-y",
-        "@agentdeskai/square-mcp@latest"
-      ]
+      "args": ["/c", "npx", "-y", "@agentdeskai/square-mcp@latest"]
     }
   }
-} 
+}

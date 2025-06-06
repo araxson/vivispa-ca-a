@@ -1,1 +1,1 @@
-export { usePricingFilters } from './use-pricing-filters'; 
+export { usePricingFilters } from "./use-pricing-filters";

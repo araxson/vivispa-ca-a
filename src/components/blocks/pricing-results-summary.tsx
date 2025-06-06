@@ -1,7 +1,7 @@
-import React from 'react';
-import type { FilterItem } from '@/components/ui/filter-badges';
-import { Badge } from '@/components/ui';
-import { cn } from '@/lib/utils';
+import React from "react";
+import type { FilterItem } from "@/components/ui/filter-badges";
+import { Badge } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
 interface PricingResultsSummaryProps {
   totalResults: number;
@@ -19,15 +19,19 @@ export function PricingResultsSummary({
   searchQuery,
   location,
   priceRange,
-  className
+  className,
 }: PricingResultsSummaryProps) {
   return (
-    <section className={cn("text-center mb-6 sm:mb-8", className)} aria-label="Search results summary">
+    <section
+      className={cn("text-center mb-6 sm:mb-8", className)}
+      aria-label="Search results summary"
+    >
       <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-lg text-muted-foreground">
         <span>
-          Found <strong className="text-foreground">{totalResults}</strong> service{totalResults !== 1 ? 's' : ''}
+          Found <strong className="text-foreground">{totalResults}</strong>{" "}
+          service{totalResults !== 1 ? "s" : ""}
         </span>
-        
+
         {(searchQuery || location || priceRange) && (
           <div className="flex flex-wrap items-center gap-2">
             {searchQuery && (
@@ -50,4 +54,4 @@ export function PricingResultsSummary({
       </div>
     </section>
   );
-} 
+}
