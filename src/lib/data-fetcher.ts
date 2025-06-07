@@ -14,7 +14,10 @@ import { skinTagRemovalService } from "@/data/services/skin-tag-removal";
 import { vascularVeinRemovalService } from "@/data/services/vascular-vein-removal";
 
 // Import all the data modules
-import { consolidatedOffers } from "@/data/pricing/offers";
+import {
+  consolidatedOffers,
+  AVAILABLE_LOCATIONS,
+} from "@/data/pricing/offers";
 import { testimonials, getTestimonialsByService } from "@/data/testimonials";
 
 const services: Service[] = [
@@ -68,6 +71,10 @@ export const getAllOffers = cache((): OfferItem[] => {
 
 export const getOfferBySlug = cache((slug: string): OfferItem | undefined => {
   return consolidatedOffers.find((offer) => offer.slug === slug);
+});
+
+export const getAvailableOfferLocations = cache((): string[] => {
+  return AVAILABLE_LOCATIONS;
 });
 
 export const getFeaturedOffers = cache((limit?: number): OfferItem[] => {

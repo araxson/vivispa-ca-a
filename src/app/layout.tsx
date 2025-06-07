@@ -49,6 +49,8 @@ export default function RootLayout({
       className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}
     >
       <head>
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#252525" />
         {/* DNS prefetch for performance */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />

@@ -73,7 +73,7 @@ export function FilterBadges({
               badgePadding,
               textSize,
               "font-medium bg-primary/10 text-primary border-primary/20",
-              "hover:bg-primary/15 cursor-pointer",
+              "hover:bg-primary/15",
               filterTransitionClasses,
               animationDelay,
               "animate-in fade-in-0 slide-in-from-bottom-2",

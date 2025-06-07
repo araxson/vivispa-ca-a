@@ -23,7 +23,7 @@ export function PricingResultsSummary({
 }: PricingResultsSummaryProps) {
   return (
     <section
-      className={cn("text-center mb-6 sm:mb-8", className)}
+      className={cn("text-center", className)}
       aria-label="Search results summary"
     >
       <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-lg text-muted-foreground">

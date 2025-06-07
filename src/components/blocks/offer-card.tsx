@@ -328,7 +328,7 @@ export function OfferCard({ offer }: OfferCardProps) {
                   className={index !== 0 ? "border-t border-border" : ""}
                 >
                   <label
-                    className={`flex items-center gap-2 cursor-pointer p-2.5 hover:bg-accent transition-colors ${
+                    className={`flex items-center gap-2 p-2.5 hover:bg-accent transition-colors ${
                       !location.isAvailable ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >

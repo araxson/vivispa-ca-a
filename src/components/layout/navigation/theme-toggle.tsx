@@ -34,7 +34,7 @@ export function ThemeToggle() {
       checked={theme === "dark"}
       onCheckedChange={toggleTheme}
       className={cn(
-        "group relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full",
+        "group relative inline-flex h-6 w-11 shrink-0 rounded-full",
         "border-2 border-transparent focus-visible:outline-none",
         "transition-colors duration-300",
         "focus-visible:ring-2 focus-visible:ring-primary/50",

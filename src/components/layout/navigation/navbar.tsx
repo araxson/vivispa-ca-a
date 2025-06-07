@@ -146,7 +146,7 @@ const MobileNav = ({
             <DropdownMenuItem
               key={item.href}
               asChild
-              className="p-0 cursor-pointer"
+              className="p-0"
             >
               <Link
                 href={item.href}
@@ -164,7 +164,7 @@ const MobileNav = ({
           <DropdownMenuSeparator className="bg-border/50" />
           <DropdownMenuItem
             asChild
-            className="p-0 cursor-pointer"
+            className="p-0"
           >
             <Link
               href="/offers"
@@ -176,7 +176,7 @@ const MobileNav = ({
           </DropdownMenuItem>
           <DropdownMenuItem
             asChild
-            className="p-0 cursor-pointer"
+            className="p-0"
           >
             <a
               href="/pricing"

@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import { default as dynamicImport } from "next/dynamic";
 import { SharedCTA } from "@/components/blocks/shared-cta";
 
@@ -52,10 +52,11 @@ const ServiceShowcase = dynamicImport(
 );
 
 interface ServicePageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
+export default function ServicePage(props: ServicePageProps) {
+  const params = use(props.params);
   const { slug } = params;
   const { service, relatedServices, serviceTestimonials, schemas } =
     getServiceWithEnhancedData(slug);

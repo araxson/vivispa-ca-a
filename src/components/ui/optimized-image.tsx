@@ -218,7 +218,7 @@ export function GalleryImage(props: OptimizedImageProps) {
     <OptimizedImage
       loading="lazy"
       imageType="thumbnail"
-      containerClassName="group cursor-pointer"
+      containerClassName="group"
       className="transition-transform duration-150"
       {...props}
     />

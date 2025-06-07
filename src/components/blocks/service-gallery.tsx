@@ -47,7 +47,7 @@ export function ServiceGallery({
         {images.map((image) => (
           <Dialog key={image.id}>
             <DialogTrigger asChild>
-              <Card className="cursor-pointer group overflow-hidden border-0 shadow-md hover:shadow-lg transition-all duration-300">
+              <Card className="group overflow-hidden border-0 shadow-md hover:shadow-lg transition-all duration-300">
                 <div className="p-0 relative">
                   <div className="relative overflow-hidden aspect-[3/2]">
                     <Image

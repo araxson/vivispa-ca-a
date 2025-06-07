@@ -43,7 +43,7 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
 }) => {
   return (
     <section
-      className="bg-card border border-border rounded-2xl p-4 sm:mb-8"
+      className="bg-card border border-border rounded-2xl p-4"
       aria-label="Filter services"
     >
       <div className="flex flex-col gap-4">

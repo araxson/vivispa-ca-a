@@ -71,7 +71,7 @@ function DefaultErrorFallback({
       </div>
       {process.env.NODE_ENV === "development" && error && (
         <details className="mt-6 text-left">
-          <summary className="cursor-pointer text-sm text-muted-foreground">
+          <summary className="text-sm text-muted-foreground">
             Error Details (Development)
           </summary>
           <pre className="mt-2 p-4 bg-muted rounded text-xs overflow-auto max-w-full">

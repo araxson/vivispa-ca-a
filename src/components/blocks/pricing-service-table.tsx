@@ -59,7 +59,7 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
           {services.map((service, index) => (
             <TableRow
               key={`${service.name}-${index}`}
-              className="border-border hover:bg-muted/30 transition-colors cursor-pointer"
+              className="border-border hover:bg-muted/30 transition-colors"
               onClick={() => handleRowClick(service)}
               role="button"
               tabIndex={0}

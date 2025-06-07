@@ -38,42 +38,46 @@ export default function PricingPage() {
   return (
     <>
       <Section spacing="sm">
-        {/* Header */}
-        <SectionHeader
-          as="h1"
-          title="Services & Pricing"
-          subtitle="Discover our comprehensive range of aesthetic treatments with transparent pricing. Professional services designed to help you look and feel your best."
-        />
-
-        {/* Filters Section */}
-        <PricingFilters
-          searchTerm={searchTerm}
-          selectedLocation={selectedLocation}
-          selectedCategory={selectedCategory}
-          selectedPriceRange={selectedPriceRange}
-          locations={locations}
-          categories={categories}
-          activeFilters={activeFilters}
-          onSearchChange={setSearchTerm}
-          onLocationChange={setSelectedLocation}
-          onCategoryChange={setSelectedCategory}
-          onPriceRangeChange={setSelectedPriceRange}
-          onClearFilter={handleClearFilter}
-          onClearAllFilters={handleClearAllFilters}
-        />
-
-        {/* Results Summary */}
-        <PricingResultsSummary totalResults={filteredServices.length} />
-
-        {/* Services Display */}
-        {hasResults ? (
-          <PricingAccordion
-            key={filtersKey}
-            servicesByCategory={servicesByCategory}
+        <div className="space-y-12">
+          {/* Header */}
+          <SectionHeader
+            as="h1"
+            title="Services & Pricing"
+            subtitle="Discover our comprehensive range of aesthetic treatments with transparent pricing. Professional services designed to help you look and feel your best."
           />
-        ) : (
-          <PricingEmptyState />
-        )}
+
+          {/* Filters Section */}
+          <div className="space-y-6">
+            <PricingFilters
+              searchTerm={searchTerm}
+              selectedLocation={selectedLocation}
+              selectedCategory={selectedCategory}
+              selectedPriceRange={selectedPriceRange}
+              locations={locations}
+              categories={categories}
+              activeFilters={activeFilters}
+              onSearchChange={setSearchTerm}
+              onLocationChange={setSelectedLocation}
+              onCategoryChange={setSelectedCategory}
+              onPriceRangeChange={setSelectedPriceRange}
+              onClearFilter={handleClearFilter}
+              onClearAllFilters={handleClearAllFilters}
+            />
+
+            {/* Results Summary */}
+            <PricingResultsSummary totalResults={filteredServices.length} />
+          </div>
+
+          {/* Services Display */}
+          {hasResults ? (
+            <PricingAccordion
+              key={filtersKey}
+              servicesByCategory={servicesByCategory}
+            />
+          ) : (
+            <PricingEmptyState />
+          )}
+        </div>
       </Section>
 
       {/* CTA Section */}
