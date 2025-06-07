@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button, Container, Section } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import type { SpacingSize } from "@/lib/spacing";
 
 interface HeroProps {
   title: string;
@@ -38,6 +39,7 @@ interface HeroProps {
   };
   heroType?: "image" | "video" | "none";
   className?: string;
+  spacing?: SpacingSize;
 }
 
 export function Hero({
@@ -49,10 +51,11 @@ export function Hero({
   backgroundVideo,
   heroType = "image",
   className,
+  spacing = "lg",
 }: HeroProps) {
   return (
     <Section
-      spacing="lg"
+      spacing={spacing}
       className={cn("relative overflow-hidden", className)}
       maxWidth="4xl"
     >
@@ -66,8 +69,9 @@ export function Hero({
             playsInline
             poster={backgroundVideo.poster}
             className="object-cover w-full h-full"
+            title={title}
           >
-            <source src={backgroundVideo.src} type="video/mp4" />
+            <source src={`${backgroundVideo.src}.mp4`} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
         </div>
@@ -81,6 +85,7 @@ export function Hero({
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
         </div>

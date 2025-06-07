@@ -36,7 +36,7 @@ export const contactInfo = {
     thursday: "10:00 AM - 7:00 PM",
     friday: "10:00 AM - 7:00 PM",
     saturday: "10:00 AM - 5:00 PM",
-    sunday: "12:00 PM - 5:00 PM",
+    sunday: "10:00 AM - 5:00 PM",
   },
 
   // Social Media
@@ -102,7 +102,7 @@ export const locations: Location[] = [
       { day: "Thursday", hours: "10:00 AM - 7:00 PM" },
       { day: "Friday", hours: "10:00 AM - 7:00 PM" },
       { day: "Saturday", hours: "10:00 AM - 5:00 PM" },
-      { day: "Sunday", hours: "10:00 PM - 5:00 PM" },
+      { day: "Sunday", hours: "10:00 AM - 5:00 PM" },
     ],
     mapUrl: "https://maps.app.goo.gl/t1RiWKVgCV2njuKP8",
     bookingUrl: "/pricing",
@@ -130,7 +130,7 @@ export const locations: Location[] = [
       { day: "Thursday", hours: "10:00 AM - 7:00 PM" },
       { day: "Friday", hours: "10:00 AM - 7:00 PM" },
       { day: "Saturday", hours: "10:00 AM - 5:00 PM" },
-      { day: "Sunday", hours: "10:00 PM - 5:00 PM" },
+      { day: "Sunday", hours: "10:00 AM - 5:00 PM" },
     ],
     mapUrl: "https://maps.app.goo.gl/Dss3vhTanPnDGE6t7",
     bookingUrl: "/pricing",

@@ -5,10 +5,12 @@ import {
   CardContent,
   Badge,
   Separator,
+  FadeIn,
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import { SectionHeader } from "./section-header";
+import type { SpacingSize } from "@/lib/spacing";
 
 interface Stat {
   id?: string;
@@ -26,6 +28,7 @@ interface StatsSectionProps {
   subtitle?: string;
   variant?: "default" | "cards" | "minimal" | "highlighted";
   className?: string;
+  spacing?: SpacingSize;
 }
 
 export function StatsSection({
@@ -34,6 +37,7 @@ export function StatsSection({
   subtitle,
   variant = "default",
   className,
+  spacing = "lg",
 }: StatsSectionProps) {
   if (!stats || stats.length === 0) {
     return null;
@@ -41,7 +45,7 @@ export function StatsSection({
 
   return (
     <Section
-      spacing="lg"
+      spacing={spacing}
       background={variant === "highlighted" ? "card" : "muted"}
       className={cn(variant === "highlighted" && "bg-primary/5", className)}
     >
@@ -59,12 +63,13 @@ export function StatsSection({
         )}
       >
         {stats.map((stat, index) => (
-          <StatCard
-            key={stat.id || index}
-            stat={stat}
-            variant={variant}
-            showSeparator={index < stats.length - 1 && variant === "minimal"}
-          />
+          <FadeIn key={stat.id || index}>
+            <StatCard
+              stat={stat}
+              variant={variant}
+              showSeparator={index < stats.length - 1 && variant === "minimal"}
+            />
+          </FadeIn>
         ))}
       </div>
     </Section>
@@ -85,7 +90,7 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
       <div className="text-center space-y-2 relative">
         {Icon && (
           <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-            <Icon className="w-6 h-6 text-primary" />
+            <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
           </div>
         )}
 
@@ -112,7 +117,16 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
             }
             className="mt-2"
           >
-            {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+            <span aria-hidden="true">
+              {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+            </span>
+            <span className="sr-only">
+              {stat.trend === "up"
+                ? "Trending up"
+                : stat.trend === "down"
+                  ? "Trending down"
+                  : "Trending neutral"}
+            </span>
             {stat.trendValue}
           </Badge>
         )}
@@ -134,7 +148,7 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
           <div className="space-y-2 sm:space-y-3">
             {Icon && (
               <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                <Icon className="w-6 h-6 text-primary" />
+                <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
               </div>
             )}
 
@@ -163,11 +177,20 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
                 }
                 className="mt-2"
               >
-                {stat.trend === "up"
-                  ? "↗"
-                  : stat.trend === "down"
-                    ? "↘"
-                    : "→"}{" "}
+                <span aria-hidden="true">
+                  {stat.trend === "up"
+                    ? "↗"
+                    : stat.trend === "down"
+                      ? "↘"
+                      : "→"}{" "}
+                </span>
+                <span className="sr-only">
+                  {stat.trend === "up"
+                    ? "Trending up"
+                    : stat.trend === "down"
+                      ? "Trending down"
+                      : "Trending neutral"}
+                </span>
                 {stat.trendValue}
               </Badge>
             )}
@@ -182,7 +205,7 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
     <div className="text-center space-y-2 sm:space-y-3">
       {Icon && (
         <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-          <Icon className="w-6 h-6 text-primary" />
+          <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
         </div>
       )}
 
@@ -209,7 +232,16 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
           }
           className="mt-2"
         >
-          {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+          <span aria-hidden="true">
+            {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+          </span>
+          <span className="sr-only">
+            {stat.trend === "up"
+              ? "Trending up"
+              : stat.trend === "down"
+                ? "Trending down"
+                : "Trending neutral"}
+          </span>
           {stat.trendValue}
         </Badge>
       )}

@@ -4,7 +4,7 @@ import { ContactInfoTable } from "@/components/blocks/contact-info-table";
 import { HoursTable } from "@/components/blocks/hours-table";
 import { LocationDetailsCard } from "@/components/blocks/location-details-card";
 import { CTASection } from "@/components/blocks/cta-section";
-import { Section } from "@/components/ui";
+import { AnimatedSection, Animated } from "@/components/ui";
 import { SectionHeader } from "@/components/blocks";
 
 export const metadata: Metadata = {
@@ -16,37 +16,41 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Section spacing="sm">
+      <AnimatedSection spacing="sm" variant="fade">
         <SectionHeader
           title="Contact Us"
           subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
         />
-      </Section>
+      </AnimatedSection>
 
-      <Section spacing="sm">
+      <AnimatedSection spacing="sm" variant="slideUp">
         <div className="grid md:grid-cols-2 gap-8">
           <ContactInfoTable />
           <HoursTable />
         </div>
-      </Section>
+      </AnimatedSection>
 
-      <Section spacing="sm">
+      <AnimatedSection spacing="sm" variant="slideUp">
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-center">Location Details</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <Animated
+            as="div"
+            staggerChildren
+            className="grid md:grid-cols-2 gap-8"
+          >
             {locations.map((location) => (
               <LocationDetailsCard key={location.id} location={location} />
             ))}
-          </div>
+          </Animated>
         </div>
-      </Section>
+      </AnimatedSection>
 
       <CTASection
         title="Ready to Book Your Appointment?"
         description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
         primaryCTA={{
           text: "Book Now",
-          href: "https://book.vivispa.ca",
+          href: "/pricing",
           icon: "calendar",
           external: true,
         }}

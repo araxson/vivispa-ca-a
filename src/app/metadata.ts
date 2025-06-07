@@ -532,10 +532,3 @@ export function generateReviewSchema(
     reviewBody: testimonial.content,
   }));
 }
-
-/**
- * Performance-optimized JSON-LD script generation
- */
-export function generateJsonLdScript(data: Record<string, any>): string {
-  return JSON.stringify(data, null, 0);
-}

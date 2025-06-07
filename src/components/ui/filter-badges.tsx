@@ -2,6 +2,7 @@ import React from "react";
 import { Badge, Button } from "@/components/ui";
 import { X, MapPin, Filter, Search, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { filterTransitionClasses } from "@/lib/animation";
 
 export interface FilterItem {
   type: string;
@@ -46,7 +47,8 @@ export function FilterBadges({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center gap-2 pt-3 border-t border-border",
+        "flex flex-wrap items-center gap-2",
+        filterTransitionClasses,
         className,
       )}
     >
@@ -57,8 +59,10 @@ export function FilterBadges({
       )}
 
       {/* Active Filter Badges */}
-      {activeFilters.map((filter) => {
+      {activeFilters.map((filter, index) => {
         const IconComponent = filter.icon ? iconMap[filter.icon] : null;
+        // Add animation delay based on index for staggered appearance
+        const animationDelay = `delay-[${index * 50}ms]`;
 
         return (
           <Badge
@@ -69,8 +73,11 @@ export function FilterBadges({
               badgePadding,
               textSize,
               "font-medium bg-primary/10 text-primary border-primary/20",
-              "hover:bg-primary/15 transition-colors cursor-pointer",
-              "flex items-center gap-1.5",
+              "hover:bg-primary/15 cursor-pointer",
+              filterTransitionClasses,
+              animationDelay,
+              "animate-in fade-in-0 slide-in-from-bottom-2",
+              className,
             )}
             onClick={() => onClearFilter(filter.type)}
             role="button"
@@ -107,7 +114,9 @@ export function FilterBadges({
           "font-medium",
           variant === "compact" ? "" : "ml-2",
           "hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20",
-          "transition-colors flex items-center gap-1.5",
+          filterTransitionClasses,
+          "animate-in fade-in-0 slide-in-from-bottom-2",
+          `delay-[${activeFilters.length * 50}ms]`,
         )}
         aria-label={`Clear all ${activeFilters.length} active filters`}
         type="button"

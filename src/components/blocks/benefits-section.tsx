@@ -1,7 +1,13 @@
-import { Container, Section, Card, CardContent } from "@/components/ui";
+import {
+  Container,
+  Section,
+  Card,
+  CardContent,
+} from "@/components/ui";
 import { cn } from "@/lib/utils";
 import * as icons from "lucide-react";
 import { SectionHeader } from "./section-header";
+import type { SpacingSize } from "@/lib/spacing";
 
 interface BenefitItem {
   id: string;
@@ -16,6 +22,7 @@ interface BenefitsSectionProps {
   subtitle?: string;
   variant?: "default" | "cards" | "minimal";
   className?: string;
+  spacing?: SpacingSize;
 }
 
 const getIconComponent = (name?: string): icons.LucideIcon => {
@@ -29,13 +36,18 @@ export function BenefitsSection({
   subtitle = "Experience the difference",
   variant = "default",
   className,
+  spacing = "lg",
 }: BenefitsSectionProps) {
   if (!benefits || benefits.length === 0) {
     return null;
   }
 
   return (
-    <Section spacing="lg" background="muted" className={className}>
+    <Section
+      spacing={spacing}
+      background="muted"
+      className={className}
+    >
       <SectionHeader title={title} subtitle={subtitle} />
       <div
         className={cn(
@@ -72,7 +84,10 @@ function BenefitCard({ benefit, variant }: BenefitCardProps) {
           <CardContent className="p-6">
             <div className="flex flex-col items-center text-center space-y-4">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-2">
-                <IconComponent className="w-8 h-8 text-primary" />
+                <IconComponent
+                  className="w-8 h-8 text-primary"
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="text-lg font-semibold text-foreground">
                 {benefit.title}
@@ -88,7 +103,10 @@ function BenefitCard({ benefit, variant }: BenefitCardProps) {
       return (
         <div className="flex items-start gap-4">
           <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-            <IconComponent className="w-5 h-5 text-primary" />
+            <IconComponent
+              className="w-5 h-5 text-primary"
+              aria-hidden="true"
+            />
           </div>
           <div>
             <h3 className="text-base font-semibold text-foreground mb-2">
@@ -107,7 +125,10 @@ function BenefitCard({ benefit, variant }: BenefitCardProps) {
         <div className="bg-card border rounded-xl p-6 h-full">
           <div className="flex flex-col space-y-4">
             <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-              <IconComponent className="w-6 h-6 text-primary" />
+              <IconComponent
+                className="w-6 h-6 text-primary"
+                aria-hidden="true"
+              />
             </div>
             <h3 className="text-lg font-semibold text-foreground">
               {benefit.title}

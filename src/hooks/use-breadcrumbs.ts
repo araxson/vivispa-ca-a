@@ -1,6 +1,6 @@
 import { usePathname, useParams } from "next/navigation";
 import { useMemo } from "react";
-import { getServiceBySlug } from "@/data/services";
+import { getServiceBySlug } from "@/lib/data-fetcher";
 
 export interface BreadcrumbItem {
   label: string;

@@ -33,6 +33,7 @@ export default function PricingPage() {
   } = usePricingFilters();
 
   const hasResults = Object.keys(servicesByCategory).length > 0;
+  const filtersKey = JSON.stringify(activeFilters);
 
   return (
     <>
@@ -66,7 +67,10 @@ export default function PricingPage() {
 
         {/* Services Display */}
         {hasResults ? (
-          <PricingAccordion servicesByCategory={servicesByCategory} />
+          <PricingAccordion
+            key={filtersKey}
+            servicesByCategory={servicesByCategory}
+          />
         ) : (
           <PricingEmptyState />
         )}

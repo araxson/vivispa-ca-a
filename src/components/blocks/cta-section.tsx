@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button, Section } from "@/components/ui";
 import { ArrowRight, Phone, Calendar, Mail, ExternalLink } from "lucide-react";
 import { SectionHeader } from "./section-header";
+import type { SpacingSize } from "@/lib/spacing";
 
 interface CTAButton {
   text: string;
@@ -24,6 +25,7 @@ interface CTASectionProps {
   secondaryCTA?: CTAButton;
   className?: string;
   variant?: string;
+  spacing?: SpacingSize;
 }
 
 const iconMap = {
@@ -40,6 +42,7 @@ export function CTASection({
   primaryCTA,
   secondaryCTA,
   className,
+  spacing = "lg",
 }: CTASectionProps) {
   const PrimaryIcon = primaryCTA.icon
     ? iconMap[primaryCTA.icon]
@@ -65,7 +68,7 @@ export function CTASection({
     (secondaryCTA ? isExternalUrl(secondaryCTA.href) : false);
 
   return (
-    <Section spacing="lg" className={className}>
+    <Section spacing={spacing} className={className}>
       <div className="text-center">
         <SectionHeader title={title} subtitle={description} />
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -83,12 +86,16 @@ export function CTASection({
                 className="flex items-center gap-2"
               >
                 {primaryCTA.text}
-                {PrimaryIcon && <PrimaryIcon className="w-5 h-5" />}
+                {PrimaryIcon && (
+                  <PrimaryIcon className="w-5 h-5" aria-hidden="true" />
+                )}
               </a>
             ) : (
               <Link href={primaryCTA.href} className="flex items-center gap-2">
                 {primaryCTA.text}
-                {PrimaryIcon && <PrimaryIcon className="w-5 h-5" />}
+                {PrimaryIcon && (
+                  <PrimaryIcon className="w-5 h-5" aria-hidden="true" />
+                )}
               </Link>
             )}
           </Button>
@@ -108,7 +115,9 @@ export function CTASection({
                   className="flex items-center gap-2"
                 >
                   {secondaryCTA.text}
-                  {SecondaryIcon && <SecondaryIcon className="w-5 h-5" />}
+                  {SecondaryIcon && (
+                    <SecondaryIcon className="w-5 h-5" aria-hidden="true" />
+                  )}
                 </a>
               ) : (
                 <Link
@@ -116,7 +125,9 @@ export function CTASection({
                   className="flex items-center gap-2"
                 >
                   {secondaryCTA.text}
-                  {SecondaryIcon && <SecondaryIcon className="w-5 h-5" />}
+                  {SecondaryIcon && (
+                    <SecondaryIcon className="w-5 h-5" aria-hidden="true" />
+                  )}
                 </Link>
               )}
             </Button>

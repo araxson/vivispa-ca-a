@@ -23,7 +23,7 @@ import { cva } from "class-variance-authority";
 // --- Subcomponents ---
 
 const navLinkVariants = cva(
-  "relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 hover:bg-muted/60 hover:text-foreground before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:bg-primary before:rounded-full before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100",
+  "relative px-4 py-2 text-sm font-medium rounded-t-lg transition-all duration-300 hover:bg-muted/60 hover:text-foreground before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:bg-primary before:rounded-full before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100",
   {
     variants: {
       isActive: {
@@ -71,7 +71,7 @@ const DesktopNav = ({
         Offers
       </Link>
       <a
-        href="https://book.vivispa.ca"
+        href="/pricing"
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
@@ -80,6 +80,7 @@ const DesktopNav = ({
         )}
       >
         Book Now
+        <span className="sr-only">(opens in a new tab)</span>
       </a>
       <div className="ml-4 pl-4 border-l border-border/30">
         <ThemeToggle />
@@ -132,18 +133,24 @@ const MobileNav = ({
                 )}
               />
             </div>
+            <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
           </Button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent
           align="end"
-          className="w-64 max-h-[calc(100vh-5rem)] p-1 overflow-y-auto bg-background/95 backdrop-blur-lg border-border/50 rounded-lg shadow-lg"
+          className="w-64 bg-background/95 backdrop-blur-lg border-border/50 rounded-lg shadow-lg p-2 flex flex-col gap-1"
           sideOffset={12}
         >
           {NAV_ITEMS.map((item) => (
-            <DropdownMenuItem key={item.href} asChild onClick={handleItemClick}>
+            <DropdownMenuItem
+              key={item.href}
+              asChild
+              className="p-0 cursor-pointer"
+            >
               <Link
                 href={item.href}
+                onClick={handleItemClick}
                 className={cn(
                   "block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:bg-muted/70 focus:bg-muted/70 focus:outline-none",
                   isActiveLink(item.href) &&
@@ -154,23 +161,32 @@ const MobileNav = ({
               </Link>
             </DropdownMenuItem>
           ))}
-          <DropdownMenuSeparator className="my-1 bg-border/50" />
-          <DropdownMenuItem asChild onClick={handleItemClick}>
+          <DropdownMenuSeparator className="bg-border/50" />
+          <DropdownMenuItem
+            asChild
+            className="p-0 cursor-pointer"
+          >
             <Link
               href="/offers"
+              onClick={handleItemClick}
               className="block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 bg-destructive/10 text-destructive hover:bg-destructive/20 focus:bg-destructive/20 focus:outline-none"
             >
               Offers
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild onClick={handleItemClick}>
+          <DropdownMenuItem
+            asChild
+            className="p-0 cursor-pointer"
+          >
             <a
-              href="https://book.vivispa.ca"
+              href="/pricing"
+              onClick={handleItemClick}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 bg-primary/10 text-primary hover:bg-primary/20 focus:bg-primary/20 focus:outline-none"
             >
               Book Now
+              <span className="sr-only">(opens in a new tab)</span>
             </a>
           </DropdownMenuItem>
         </DropdownMenuContent>

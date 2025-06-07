@@ -5,7 +5,7 @@ import type { FilterItem } from "@/components/ui/filter-badges";
 
 const usePricingFilters = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState<string>("all");
+  const [selectedLocation, setSelectedLocation] = useState<string>("Downtown");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>("all");
 
@@ -14,9 +14,6 @@ const usePricingFilters = () => {
     switch (filterType) {
       case "search":
         setSearchTerm("");
-        break;
-      case "location":
-        setSelectedLocation("all");
         break;
       case "category":
         setSelectedCategory("all");
@@ -30,16 +27,14 @@ const usePricingFilters = () => {
   // Clear all filters
   const handleClearAllFilters = () => {
     setSearchTerm("");
-    setSelectedLocation("all");
+    setSelectedLocation("Downtown");
     setSelectedCategory("all");
     setSelectedPriceRange("all");
   };
 
   // Get unique locations and categories
   const locations = useMemo(() => {
-    return [
-      ...new Set(allLocations.map((location) => location.location)),
-    ].sort();
+    return ["Downtown", "Edmonton Trail"];
   }, []);
 
   const categories = useMemo(() => {
@@ -57,14 +52,12 @@ const usePricingFilters = () => {
         icon: "search",
       });
     }
-    if (selectedLocation !== "all") {
-      filters.push({
-        type: "location",
-        label: selectedLocation,
-        value: selectedLocation,
-        icon: "location",
-      });
-    }
+    filters.push({
+      type: "location",
+      label: selectedLocation,
+      value: selectedLocation,
+      icon: "location",
+    });
     if (selectedCategory !== "all") {
       filters.push({
         type: "category",
@@ -99,17 +92,13 @@ const usePricingFilters = () => {
     let services: ServiceItem[] = [];
 
     // Filter by location first
-    if (selectedLocation === "all") {
-      services = [...allServices];
-    } else {
-      const locationData = allLocations.find(
-        (loc) => loc.location === selectedLocation,
+    const locationData = allLocations.find(
+      (loc) => loc.location === selectedLocation,
+    );
+    if (locationData) {
+      services = locationData.categories.flatMap(
+        (category) => category.services,
       );
-      if (locationData) {
-        services = locationData.categories.flatMap(
-          (category) => category.services,
-        );
-      }
     }
 
     // Filter by search term

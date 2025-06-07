@@ -3,6 +3,7 @@
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { FadeIn } from "@/components/ui";
 import {
   Carousel,
   CarouselContent,
@@ -10,10 +11,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Section } from "@/components/ui/section";
+import { Section } from "@/components/ui";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "./section-header";
 import { cn } from "@/lib/utils";
+import type { SpacingSize } from "@/lib/spacing";
 
 interface Testimonial {
   id: string;
@@ -32,6 +34,7 @@ interface TestimonialsProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  spacing?: SpacingSize;
 }
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
@@ -39,7 +42,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <Card className="h-full border border-border bg-card">
       <CardContent className="p-4 sm:p-6 flex flex-col h-full">
-        <div className="flex items-center gap-1 mb-3 sm:mb-4">
+        <div
+          className="flex items-center gap-1 mb-3 sm:mb-4"
+          role="img"
+          aria-label={`Rating: ${testimonial.rating} out of 5 stars`}
+        >
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
@@ -49,6 +56,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                   ? "text-yellow-400 fill-yellow-400"
                   : "text-gray-300",
               )}
+              aria-hidden="true"
             />
           ))}
         </div>
@@ -85,13 +93,18 @@ export function Testimonials({
   title = "What Our Clients Say",
   subtitle = "Real experiences from our valued clients",
   className,
+  spacing = "lg",
 }: TestimonialsProps) {
   if (!testimonials || testimonials.length === 0) {
     return null;
   }
 
   return (
-    <Section spacing="lg" background="muted" className={className}>
+    <Section
+      spacing={spacing}
+      background="muted"
+      className={className}
+    >
       <SectionHeader title={title} subtitle={subtitle} />
       <Carousel
         opts={{
@@ -106,9 +119,9 @@ export function Testimonials({
               key={testimonial.id}
               className="pl-2 sm:pl-4 basis-full md:basis-1/2 lg:basis-1/3"
             >
-              <div className="p-1">
+              <FadeIn className="p-1 h-full">
                 <TestimonialCard testimonial={testimonial} />
-              </div>
+              </FadeIn>
             </CarouselItem>
           ))}
         </CarouselContent>

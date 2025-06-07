@@ -3,6 +3,7 @@ import { Playfair_Display, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { baseMetadata, viewport } from "@/lib/metadata-utils";
+import { WhatsAppWidget } from '@/components/ui/whatsapp-widget';
 
 /**
  * Configure fonts with next/font
@@ -35,6 +36,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const predefinedMessages = [
+    'I have a question about a service.',
+    "I'd like to book an appointment.",
+    'What are your opening hours?',
+  ];
+
   return (
     <html
       lang="en"
@@ -61,6 +68,12 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">{children}</div>
+          <WhatsAppWidget
+            phoneNumber="+15551234567"
+            brandName="Vivi Aesthetics Spa"
+            welcomeMessage="Hello! How can we help you today?"
+            predefinedMessages={predefinedMessages}
+          />
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,6 @@
 // Existing exports
 export { CTASection } from "./cta-section";
 export { FAQSection } from "./faq-section";
-export { FeaturesSection } from "./features-section";
 export { SectionHeader } from "./section-header";
 export { OfferCard } from "./offer-card";
 export { ServiceOverview } from "./service-overview";

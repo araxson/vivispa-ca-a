@@ -43,89 +43,88 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
 }) => {
   return (
     <section
-      className="bg-card border border-border rounded-2xl p-4 mb-6 sm:mb-8"
+      className="bg-card border border-border rounded-2xl p-4 sm:mb-8"
       aria-label="Filter services"
     >
-      {/* Filter Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-        {/* Location Filter */}
-        <Select
-          value={selectedLocation || "all"}
-          onValueChange={(value) =>
-            onLocationChange(value === "all" ? "all" : value)
-          }
-        >
-          <SelectTrigger className="w-full" aria-label="Select location">
-            <SelectValue placeholder="All Locations" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Locations</SelectItem>
-            {locations.map((location) => (
-              <SelectItem key={location} value={location}>
-                {location}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        {/* Category Filter */}
-        <Select
-          value={selectedCategory || "all"}
-          onValueChange={(value) =>
-            onCategoryChange(value === "all" ? "all" : value)
-          }
-        >
-          <SelectTrigger
-            className="w-full"
-            aria-label="Select service category"
+      <div className="flex flex-col gap-4">
+        {/* Filter Controls */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* Location Filter */}
+          <Select
+            value={selectedLocation}
+            onValueChange={onLocationChange}
           >
-            <SelectValue placeholder="All Categories" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            {categories.map((category) => (
-              <SelectItem key={category} value={category}>
-                {category}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+            <SelectTrigger className="w-full" aria-label="Select location">
+              <SelectValue placeholder="Select a Location" />
+            </SelectTrigger>
+            <SelectContent>
+              {locations.map((location) => (
+                <SelectItem key={location} value={location}>
+                  {location}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-        {/* Price Range Filter */}
-        <Select
-          value={selectedPriceRange || "all"}
-          onValueChange={(value) =>
-            onPriceRangeChange(value === "all" ? "all" : value)
-          }
-        >
-          <SelectTrigger className="w-full" aria-label="Select price range">
-            <SelectValue placeholder="All Prices" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Prices</SelectItem>
-            <SelectItem value="under-100">Under $100</SelectItem>
-            <SelectItem value="100-200">$100 - $200</SelectItem>
-            <SelectItem value="200-500">$200 - $500</SelectItem>
-            <SelectItem value="over-500">Over $500</SelectItem>
-          </SelectContent>
-        </Select>
+          {/* Category Filter */}
+          <Select
+            value={selectedCategory || "all"}
+            onValueChange={(value) =>
+              onCategoryChange(value === "all" ? "all" : value)
+            }
+          >
+            <SelectTrigger
+              className="w-full"
+              aria-label="Select service category"
+            >
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              {categories.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-        {/* Search */}
-        <div className="w-full sm:w-auto sm:min-w-[250px] lg:max-w-xs">
-          <SearchInput
-            onSearch={onSearchChange}
-            value={searchTerm}
-            placeholder="Search services..."
-          />
+          {/* Price Range Filter */}
+          <Select
+            value={selectedPriceRange || "all"}
+            onValueChange={(value) =>
+              onPriceRangeChange(value === "all" ? "all" : value)
+            }
+          >
+            <SelectTrigger className="w-full" aria-label="Select price range">
+              <SelectValue placeholder="All Prices" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Prices</SelectItem>
+              <SelectItem value="under-100">Under $100</SelectItem>
+              <SelectItem value="100-200">$100 - $200</SelectItem>
+              <SelectItem value="200-500">$200 - $500</SelectItem>
+              <SelectItem value="over-500">Over $500</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Search */}
+          <div className="w-full sm:w-auto sm:min-w-[250px] lg:max-w-xs">
+            <SearchInput
+              onSearch={onSearchChange}
+              value={searchTerm}
+              placeholder="Search services..."
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Active Filters & Clear All */}
-      <FilterBadges
-        activeFilters={activeFilters}
-        onClearFilter={onClearFilter}
-        onClearAll={onClearAllFilters}
-      />
+        {/* Active Filters & Clear All */}
+        <FilterBadges
+          activeFilters={activeFilters}
+          onClearFilter={onClearFilter}
+          onClearAll={onClearAllFilters}
+        />
+      </div>
     </section>
   );
 };

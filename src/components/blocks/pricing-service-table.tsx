@@ -43,13 +43,13 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
       <Table className="w-full">
         <TableHeader>
           <TableRow className="border-border hover:bg-muted/50">
-            <TableHead className="text-left py-4 pl-4 md:pl-6 text-sm md:text-base font-semibold">
+            <TableHead className="text-left text-sm md:text-base font-semibold">
               Service
             </TableHead>
-            <TableHead className="text-right py-4 px-4 text-sm md:text-base font-semibold">
+            <TableHead className="text-right text-sm md:text-base font-semibold">
               Price
             </TableHead>
-            <TableHead className="text-center py-4 pr-4 md:pr-6 text-sm md:text-base font-semibold w-24 sm:w-28">
+            <TableHead className="text-center text-sm md:text-base font-semibold w-24 sm:w-28">
               Book
             </TableHead>
           </TableRow>
@@ -71,7 +71,7 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
               }}
               aria-label={`Book ${service.name} - ${service.price}`}
             >
-              <TableCell className="py-4 pl-4 md:pl-6">
+              <TableCell>
                 <div className="space-y-1">
                   <span className="text-sm md:text-base lg:text-lg font-normal text-foreground leading-tight">
                     {service.name}
@@ -79,13 +79,13 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
                 </div>
               </TableCell>
 
-              <TableCell className="text-right py-4 px-4">
+              <TableCell className="text-right">
                 <span className="text-sm md:text-base lg:text-lg font-semibold text-primary whitespace-nowrap">
                   {service.price}
                 </span>
               </TableCell>
 
-              <TableCell className="text-center py-4 pr-4 md:pr-6">
+              <TableCell className="text-center">
                 <Button
                   size="sm"
                   className="bg-primary hover:bg-primary/90 text-xs h-8 px-3 font-medium transition-colors pointer-events-none"

@@ -13,7 +13,6 @@ import { Section } from "@/components/ui";
 import {
   generatePageMetadata,
   generateOrganizationSchema,
-  generateJsonLdScript,
 } from "@/app/metadata";
 import { generalFAQs } from "@/data/faqs";
 import { homePageData } from "@/data/home";
@@ -64,7 +63,7 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(organizationSchema),
+          __html: JSON.stringify(organizationSchema),
         }}
       />
 
@@ -83,6 +82,7 @@ export default function HomePage() {
         heroType={homePageData.hero.heroType}
         backgroundImage={homePageData.hero.backgroundImage}
         backgroundVideo={homePageData.hero.backgroundVideo}
+        spacing="xl"
       />
 
       {/* Stats Section */}
@@ -92,6 +92,7 @@ export default function HomePage() {
           title="Why Clients Choose Us"
           subtitle="We're committed to excellence in every aspect of our service"
           variant="highlighted"
+          spacing="xl"
         />
       </Suspense>
 
@@ -102,7 +103,7 @@ export default function HomePage() {
           subtitle="Discover our comprehensive range of beauty and wellness treatments"
           services={formattedServices}
           showLocations={false}
-          spacing="lg"
+          spacing="xl"
         />
       </Suspense>
 
@@ -112,6 +113,7 @@ export default function HomePage() {
           benefits={homePageData.benefits}
           title="The Vivi Aesthetics Advantage"
           subtitle="Experience premium care with our unique approach to aesthetics"
+          spacing="xl"
         />
       </Suspense>
 
@@ -121,6 +123,7 @@ export default function HomePage() {
           testimonials={formattedTestimonials}
           title="What Our Clients Say"
           subtitle="Don't just take our word for it. Here's what our satisfied clients have to say about their experience with us."
+          spacing="xl"
         />
       </Suspense>
 
@@ -132,6 +135,7 @@ export default function HomePage() {
           subtitle="Get answers to common questions about our services and treatments"
           variant="default"
           maxItems={6}
+          spacing="xl"
         />
       </Suspense>
 
@@ -155,6 +159,7 @@ export default function HomePage() {
               }
             : undefined
         }
+        spacing="xl"
       />
     </>
   );

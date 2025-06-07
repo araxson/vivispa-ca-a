@@ -2,10 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { OffersPageClient } from "@/components/blocks/offers-page-client";
 import { consolidatedOffers, AVAILABLE_LOCATIONS } from "@/data/pricing/offers";
-import { Badge, Container } from "@/components/ui";
+import { Badge, Container, AnimatedSection } from "@/components/ui";
 import { Star } from "lucide-react";
 import { CTASection, SectionHeader, ErrorBoundary } from "@/components/blocks";
-import { Section } from "@/components/ui";
 import { generatePageMetadata } from "@/app/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
@@ -36,10 +35,10 @@ export default function OffersPage() {
 
   return (
     <>
-      <Section spacing="sm">
+      <AnimatedSection spacing="sm" variant="fade">
         <SectionHeader
-          title="Exclusive Spa Offers"
-          subtitle="Discover our premium spa and wellness treatments at unbeatable prices. Limited-time offers designed to enhance your beauty and wellness journey."
+          title="Exclusive Offers"
+          subtitle="Discover our premium treatments at unbeatable prices. Limited-time offers designed to enhance your beauty and wellness journey."
         />
         <div className="text-center">
           <Badge
@@ -51,9 +50,9 @@ export default function OffersPage() {
             {totalOffers} Active Offers
           </Badge>
         </div>
-      </Section>
+      </AnimatedSection>
 
-      <Section spacing="sm">
+      <AnimatedSection spacing="sm" variant="fade">
         <ErrorBoundary>
           <Suspense fallback={<OffersPageSkeleton />}>
             <OffersPageClient
@@ -62,7 +61,7 @@ export default function OffersPage() {
             />
           </Suspense>
         </ErrorBoundary>
-      </Section>
+      </AnimatedSection>
 
       <CTASection
         variant="minimal"

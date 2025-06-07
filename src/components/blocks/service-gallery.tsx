@@ -36,9 +36,14 @@ export function ServiceGallery({
   if (!images || images.length === 0) return null;
 
   return (
-    <Section spacing="lg" className={className}>
+    <Section
+      spacing="lg"
+      className={className}
+    >
       <SectionHeader title={title} subtitle={subtitle} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+      >
         {images.map((image) => (
           <Dialog key={image.id}>
             <DialogTrigger asChild>
@@ -55,7 +60,10 @@ export function ServiceGallery({
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="bg-white/90 backdrop-blur-sm p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300">
-                        <ZoomIn className="h-5 w-5 sm:h-6 sm:w-6 text-gray-800" />
+                        <ZoomIn
+                          className="h-5 w-5 sm:h-6 sm:w-6 text-gray-800"
+                          aria-hidden="true"
+                        />
                       </div>
                     </div>
 

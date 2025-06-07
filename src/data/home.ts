@@ -92,7 +92,7 @@ export const homePageData: HomePageData = {
       alt: "Vivi Aesthetics Spa Hero Image",
     },
     backgroundVideo: {
-      src: "/videos/Vivi_Aesthetics_Spa_hero_video.mp4",
+      src: "/videos/Vivi_Aesthetics_Spa_hero_video",
       poster: "/images/services/hydrofacial/hydrofacial-in-calgary-002.webp",
     },
   },
@@ -105,10 +105,10 @@ export const homePageData: HomePageData = {
       description: "Satisfied customers across Calgary",
     },
     {
-      id: "experience",
-      value: "9+",
-      label: "Years Experience",
-      description: "Leading the industry since 2015",
+      id: "top-rated",
+      value: "4.9★",
+      label: "Google Reviews",
+      description: "Consistently rated as a top Calgary spa",
     },
     {
       id: "treatments",

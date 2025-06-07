@@ -16,91 +16,98 @@ interface PricingAccordionProps {
 const PricingAccordion: React.FC<PricingAccordionProps> = ({
   servicesByCategory,
 }) => {
+  if (!servicesByCategory) return null;
+
   return (
-    <div className="space-y-4">
-      <Accordion type="single" collapsible className="w-full space-y-4">
-        {Object.entries(servicesByCategory).map(([category, subcategories]) => {
-          const totalServices = Object.values(subcategories).flat().length;
-          // Check if category has actual subcategories (more than just 'main')
-          const hasSubcategories =
-            Object.keys(subcategories).length > 1 ||
-            (Object.keys(subcategories).length === 1 && !subcategories["main"]);
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full space-y-4"
+    >
+      {Object.entries(servicesByCategory).map(([category, subcategories]) => {
+        const totalServices = Object.values(subcategories).flat().length;
+        const hasSubcategories =
+          Object.keys(subcategories).length > 1 ||
+          !subcategories.hasOwnProperty("main");
 
-          return (
-            <AccordionItem
-              key={category}
-              value={category}
-              className="border border-border rounded-lg overflow-hidden border-b"
-            >
-              <AccordionTrigger className="px-4 md:px-6 py-4 hover:no-underline group">
-                <div className="flex items-center justify-between w-full mr-4">
-                  <div className="flex items-center gap-3">
-                    <h2 className="text-base md:text-lg lg:text-xl font-semibold capitalize text-left group-hover:text-primary transition-colors">
-                      {category}
-                    </h2>
-                    <Badge
-                      variant="secondary"
-                      className="text-xs font-normal shrink-0"
-                    >
-                      {totalServices} service{totalServices !== 1 ? "s" : ""}
-                    </Badge>
-                  </div>
+        if (totalServices === 0) return null;
+
+        return (
+          <AccordionItem
+            key={category}
+            value={category}
+            className="overflow-hidden rounded-lg border"
+          >
+            <AccordionTrigger className="group hover:no-underline px-4 md:px-6">
+              <div className="flex w-full items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-left text-base font-semibold capitalize transition-colors group-hover:text-primary md:text-lg lg:text-xl">
+                    {category}
+                  </h2>
+                  <Badge
+                    variant="secondary"
+                    className="shrink-0 text-xs font-normal"
+                  >
+                    {totalServices} service{totalServices !== 1 ? "s" : ""}
+                  </Badge>
                 </div>
-              </AccordionTrigger>
+              </div>
+            </AccordionTrigger>
 
-              <AccordionContent className="p-0">
-                <div className="border-t border-border bg-muted/20">
-                  {hasSubcategories ? (
-                    // Nested accordion for categories with subcategories
-                    <Accordion type="single" collapsible className="w-full">
-                      {Object.entries(subcategories).map(
-                        ([subcategory, services]) => (
-                          <AccordionItem
-                            key={subcategory}
-                            value={subcategory}
-                            className="border-b border-border"
-                          >
-                            <AccordionTrigger className="px-4 md:px-6 py-3 hover:no-underline group bg-background/50">
-                              <div className="flex items-center justify-between w-full mr-4">
-                                <div className="flex items-center gap-2">
-                                  <h3 className="text-sm md:text-base lg:text-lg font-medium text-left group-hover:text-primary transition-colors">
-                                    {subcategory}
-                                  </h3>
-                                  <Badge
-                                    variant="outline"
-                                    className="text-xs font-normal shrink-0"
-                                  >
-                                    {services.length}
-                                  </Badge>
-                                </div>
+            <AccordionContent className="p-0">
+              <div className="border-t bg-muted/20">
+                {hasSubcategories ? (
+                  <Accordion
+                    type="single"
+                    collapsible
+                    className="w-full bg-background"
+                  >
+                    {Object.entries(subcategories).map(
+                      ([subcategory, services]) => (
+                        <AccordionItem
+                          key={subcategory}
+                          value={subcategory}
+                          className="border-b last:border-b-0 md:px-6"
+                        >
+                          <AccordionTrigger className="group py-3 hover:no-underline">
+                            <div className="flex w-full items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <h3 className="text-left text-sm font-medium transition-colors group-hover:text-primary md:text-base lg:text-lg">
+                                  {subcategory}
+                                </h3>
+                                <Badge
+                                  variant="outline"
+                                  className="shrink-0 text-xs font-normal"
+                                >
+                                  {services.length}
+                                </Badge>
                               </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="p-0 bg-background">
-                              <PricingServiceTable
-                                services={services}
-                                variant="nested"
-                              />
-                            </AccordionContent>
-                          </AccordionItem>
-                        ),
-                      )}
-                    </Accordion>
-                  ) : (
-                    // Regular table for categories without subcategories
-                    <div className="bg-background">
-                      <PricingServiceTable
-                        services={subcategories["main"] || []}
-                        variant="main"
-                      />
-                    </div>
-                  )}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          );
-        })}
-      </Accordion>
-    </div>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent className="">
+                            <PricingServiceTable
+                              services={services}
+                              variant="nested"
+                            />
+                          </AccordionContent>
+                        </AccordionItem>
+                      ),
+                    )}
+                  </Accordion>
+                ) : (
+                  <div className="bg-background p-4 md:p-6">
+                    <PricingServiceTable
+                      services={subcategories.main ?? []}
+                      variant="main"
+                    />
+                  </div>
+                )}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
   );
 };
 

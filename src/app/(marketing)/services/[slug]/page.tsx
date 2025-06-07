@@ -1,21 +1,18 @@
+"use client";
 import type { Metadata } from "next";
-import { cache } from "react";
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
+import { default as dynamicImport } from "next/dynamic";
 import { SharedCTA } from "@/components/blocks/shared-cta";
 
 // Component imports
 import {
   Hero,
   ServiceOverview,
-  FeaturesSection,
+  BenefitsSection,
   ServiceProcedure,
-  ServiceGallery,
   ServiceResults,
-  FAQSection,
-  Testimonials,
-  ServiceShowcase,
 } from "@/components/blocks";
-import { Section } from "@/components/ui";
+import { Section, Skeleton } from "@/components/ui";
 
 // Data and utilities
 import {
@@ -30,11 +27,47 @@ import {
   generateServiceSchema,
   generateBreadcrumbSchema,
   generateFAQSchema,
-  generateJsonLdScript,
 } from "@/app/metadata";
 
+const ServiceGallery = dynamicImport(
+  () =>
+    import("@/components/blocks/service-gallery").then(
+      (mod) => mod.ServiceGallery,
+    ),
+  {
+    loading: () => <Skeleton className="h-96 w-full" />,
+  },
+);
+
+const Testimonials = dynamicImport(
+  () =>
+    import("@/components/blocks/testimonials").then((mod) => mod.Testimonials),
+  {
+    loading: () => <Skeleton className="h-96 w-full" />,
+  },
+);
+
+const FAQSection = dynamicImport(
+  () => import("@/components/blocks/faq-section").then((mod) => mod.FAQSection),
+  {
+    loading: () => <Skeleton className="h-96 w-full" />,
+  },
+);
+
+const ServiceShowcase = dynamicImport(
+  () =>
+    import("@/components/blocks/service-showcase").then(
+      (mod) => mod.ServiceShowcase,
+    ),
+  {
+    loading: () => <Skeleton className="h-96 w-full" />,
+  },
+);
+
+export const dynamic = "force-static";
+
 interface ServicePageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 // Performance optimized static params generation for SSG
@@ -46,7 +79,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const service = getServiceOrNotFound(slug);
 
   return generateServicePageMetadata({
@@ -89,8 +122,8 @@ const getServiceWithEnhancedData = cache((slug: string) => {
   };
 });
 
-export default async function ServicePage({ params }: ServicePageProps) {
-  const { slug } = await params;
+export default function ServicePage({ params }: ServicePageProps) {
+  const { slug } = params;
   const { service, relatedServices, serviceTestimonials, schemas } =
     getServiceWithEnhancedData(slug);
 
@@ -100,25 +133,25 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(schemas.organization),
+          __html: JSON.stringify(schemas.organization),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(schemas.service),
+          __html: JSON.stringify(schemas.service),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(schemas.breadcrumb),
+          __html: JSON.stringify(schemas.breadcrumb),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(schemas.faq),
+          __html: JSON.stringify(schemas.faq),
         }}
       />
 
@@ -148,35 +181,33 @@ export default async function ServicePage({ params }: ServicePageProps) {
         />
       </Suspense>
 
-      <FeaturesSection
-        variant="benefits"
+      <BenefitsSection
+        variant="default"
         title="Treatment Benefits"
         subtitle="Experience the comprehensive benefits of this advanced treatment"
-        features={service.benefits.map((benefit: string) => ({
+        benefits={service.benefits.map((benefit: string) => ({
+          id: benefit,
           title: benefit,
-          description: `${benefit} with our advanced treatment technology.`,
+          description: `Enjoy the benefit of ${benefit.toLowerCase()} with our advanced treatment technology.`,
+          icon: "Zap",
         }))}
       />
 
-      <Suspense fallback={<div className="h-64 bg-muted" />}>
-        <ServiceGallery
-          images={service.galleryImages.map((img: string, index: number) => ({
-            id: `gallery-${index}`,
-            src: img,
-            alt: `${service.title} - Result ${index + 1}`,
-          }))}
-          title={`${service.title} Gallery`}
-        />
-      </Suspense>
+      <ServiceGallery
+        images={service.galleryImages.map((img: string) => ({
+          id: img,
+          src: img,
+          alt: `${service.title} - Result`,
+        }))}
+        title={`${service.title} Gallery`}
+      />
 
       {serviceTestimonials.length > 0 && (
-        <Suspense fallback={<div className="h-64 bg-muted" />}>
-          <Testimonials
-            testimonials={serviceTestimonials}
-            title={`What Our Clients Say About ${service.title}`}
-            subtitle="Real experiences from our valued clients"
-          />
-        </Suspense>
+        <Testimonials
+          testimonials={serviceTestimonials}
+          title={`What Our Clients Say About ${service.title}`}
+          subtitle="Real experiences from our valued clients"
+        />
       )}
 
       <FAQSection
@@ -187,16 +218,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       {/* Related Services Section */}
       {relatedServices.length > 0 && (
-        <Suspense fallback={<div className="h-64 bg-muted" />}>
-          <ServiceShowcase
-            title="Related Services"
-            subtitle={`Explore other treatments that complement ${service.title}`}
-            services={relatedServices}
-            showLocations={true}
-            spacing="lg"
-            background="muted"
-          />
-        </Suspense>
+        <ServiceShowcase
+          title="Related Services"
+          subtitle={`Explore other treatments that complement ${service.title}`}
+          services={relatedServices}
+          showLocations={true}
+          spacing="lg"
+          background="muted"
+        />
       )}
 
       <SharedCTA />

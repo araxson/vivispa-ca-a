@@ -2,11 +2,33 @@ import { cache } from "react";
 import { notFound } from "next/navigation";
 import { Service } from "@/types/service";
 import { OfferItem } from "@/data/pricing/offers";
+import { hydrofacialService } from "@/data/services/hydrofacial";
+import { eyelashExtensionsService } from "@/data/services/eyelash-extensions";
+import { iplPhotofacial } from "@/data/services/ipl-photofacial";
+import { japaneseHeadSpaService } from "@/data/services/japanese-head-spa";
+import { laserHairRemovalService } from "@/data/services/laser-hair-removal";
+import { laserPigmentationRemovalService } from "@/data/services/laser-pigmentation-removal";
+import { laserSkinTighteningService } from "@/data/services/laser-skin-tightening";
+import { microneedlingService } from "@/data/services/microneedling";
+import { skinTagRemovalService } from "@/data/services/skin-tag-removal";
+import { vascularVeinRemovalService } from "@/data/services/vascular-vein-removal";
 
 // Import all the data modules
-import { services } from "@/data/services";
 import { consolidatedOffers } from "@/data/pricing/offers";
 import { testimonials, getTestimonialsByService } from "@/data/testimonials";
+
+const services: Service[] = [
+  hydrofacialService,
+  eyelashExtensionsService,
+  iplPhotofacial,
+  japaneseHeadSpaService,
+  laserHairRemovalService,
+  laserPigmentationRemovalService,
+  laserSkinTighteningService,
+  microneedlingService,
+  skinTagRemovalService,
+  vascularVeinRemovalService,
+];
 
 /**
  * Performance-optimized data fetcher with Next.js 15 cache function

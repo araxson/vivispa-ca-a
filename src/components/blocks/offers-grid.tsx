@@ -1,28 +1,16 @@
 "use client";
 
-import type { OfferItem } from "@/data/pricing/offers";
+import type { OfferItem, OfferLocationData } from "@/data/pricing/offers";
 import { OfferCard } from "./offer-card";
 import { AlertCircle } from "lucide-react";
+import type { Location } from "@/data/contact";
 
 // Extended offer type to match the one used in the offers page
 interface ExtendedOfferItem extends OfferItem {
-  id: string;
-  name: string;
-  slug: string;
-  category: string;
-  shortDescription: string;
-  featuredImage: string;
-  url: string;
-  badges?: string[];
-  pricing: {
-    display: string;
-    isSpecialOffer: boolean;
-    originalPrice?: string;
-  };
   location?: string;
-  locationDetails?: any;
+  locationDetails?: Location;
   dynamicUrl?: string;
-  allAvailableLocations?: any[];
+  allAvailableLocations?: OfferLocationData[];
   isAvailableAtSelectedLocation?: boolean;
 }
 
@@ -55,7 +43,9 @@ export function OffersGrid({ offers, searchTerm }: OffersGridProps) {
       className="offers-grid"
       aria-label={`${offers.length} treatment offers`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr"
+      >
         {offers.map((offer) => (
           <OfferCard key={offer.id} offer={offer} />
         ))}

@@ -22,3 +22,4 @@ export * from "./theme-provider";
 
 // Custom UI Components
 export * from "./optimized-image";
+export * from "./fade-in";

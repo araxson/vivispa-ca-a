@@ -13,7 +13,7 @@ export interface FilterableItem {
   name: string;
   category: string;
   slug?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface PriceFilterableItem extends FilterableItem {
@@ -21,7 +21,7 @@ export interface PriceFilterableItem extends FilterableItem {
 }
 
 export interface LocationFilterableItem extends FilterableItem {
-  availableLocations?: Array<{ location: string; [key: string]: any }>;
+  availableLocations?: Array<{ location: string; [key: string]: unknown }>;
 }
 
 // Generic search function
@@ -178,13 +178,13 @@ export function searchAndFilter<T extends FilterableItem>(
 }
 
 // Utility to extract unique values for filter options
-export function extractUniqueValues<T extends Record<string, any>>(
+export function extractUniqueValues<T extends Record<string, unknown>>(
   items: T[],
   key: keyof T,
 ): string[] {
   const values = items
-    .map((item) => item[key])
-    .filter((value: any): value is string => typeof value === "string")
+    .map((item) => item[key] as unknown)
+    .filter((value): value is string => typeof value === "string")
     .filter(Boolean);
 
   return [...new Set(values)].sort();
