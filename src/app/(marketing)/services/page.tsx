@@ -5,7 +5,6 @@ import { ServiceCard } from "@/components/blocks/service-card";
 import {
   generatePageMetadata,
   generateOrganizationSchema,
-  generateJsonLdScript,
 } from "@/app/metadata";
 import { siteConfig } from "@/data/constant";
 import { CTASection } from "@/components/blocks/cta-section";
@@ -72,13 +71,13 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(servicesPageJsonLd),
+          __html: JSON.stringify(servicesPageJsonLd),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: generateJsonLdScript(organizationSchema),
+          __html: JSON.stringify(organizationSchema),
         }}
       />
 

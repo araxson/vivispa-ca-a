@@ -9,7 +9,6 @@ interface FadeInProps {
   className?: string;
   noVertical?: boolean;
   delay?: number;
-  viewTriggerOffset?: string;
 }
 
 export function FadeIn({
@@ -17,12 +16,11 @@ export function FadeIn({
   className,
   noVertical,
   delay,
-  viewTriggerOffset,
 }: FadeInProps) {
   const ref = useRef(null);
   const inView = useInView(ref, {
     once: true,
-    margin: viewTriggerOffset ?? "-100px",
+    margin: "-100px",
   });
 
   const variants = {

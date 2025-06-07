@@ -4,7 +4,7 @@ import { ContactInfoTable } from "@/components/blocks/contact-info-table";
 import { HoursTable } from "@/components/blocks/hours-table";
 import { LocationDetailsCard } from "@/components/blocks/location-details-card";
 import { CTASection } from "@/components/blocks/cta-section";
-import { AnimatedSection, Animated } from "@/components/ui";
+import { FadeIn } from "@/components/ui/fade-in";
 import { SectionHeader } from "@/components/blocks";
 
 export const metadata: Metadata = {
@@ -16,52 +16,52 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <AnimatedSection spacing="sm" variant="fade">
+      <FadeIn>
         <SectionHeader
           title="Contact Us"
           subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
         />
-      </AnimatedSection>
+      </FadeIn>
 
-      <AnimatedSection spacing="sm" variant="slideUp">
+      <FadeIn>
         <div className="grid md:grid-cols-2 gap-8">
           <ContactInfoTable />
           <HoursTable />
         </div>
-      </AnimatedSection>
+      </FadeIn>
 
-      <AnimatedSection spacing="sm" variant="slideUp">
+      <FadeIn>
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-center">Location Details</h2>
-          <Animated
-            as="div"
-            staggerChildren
-            className="grid md:grid-cols-2 gap-8"
-          >
+          <div className="grid md:grid-cols-2 gap-8">
             {locations.map((location) => (
-              <LocationDetailsCard key={location.id} location={location} />
+              <FadeIn key={location.id}>
+                <LocationDetailsCard location={location} />
+              </FadeIn>
             ))}
-          </Animated>
+          </div>
         </div>
-      </AnimatedSection>
+      </FadeIn>
 
-      <CTASection
-        title="Ready to Book Your Appointment?"
-        description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
-        primaryCTA={{
-          text: "Book Now",
-          href: "/pricing",
-          icon: "calendar",
-          external: true,
-        }}
-        secondaryCTA={{
-          text: "Call Us",
-          href: "tel:+14037087654",
-          variant: "outline",
-          icon: "phone",
-        }}
-        variant="gradient"
-      />
+      <FadeIn>
+        <CTASection
+          title="Ready to Book Your Appointment?"
+          description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
+          primaryCTA={{
+            text: "Book Now",
+            href: "/pricing",
+            icon: "calendar",
+            external: true,
+          }}
+          secondaryCTA={{
+            text: "Call Us",
+            href: "tel:+14037087654",
+            variant: "outline",
+            icon: "phone",
+          }}
+          variant="gradient"
+        />
+      </FadeIn>
     </>
   );
 }

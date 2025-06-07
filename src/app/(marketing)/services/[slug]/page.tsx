@@ -1,6 +1,5 @@
 "use client";
-import type { Metadata } from "next";
-import { cache, Suspense } from "react";
+import { Suspense } from "react";
 import { default as dynamicImport } from "next/dynamic";
 import { SharedCTA } from "@/components/blocks/shared-cta";
 
@@ -15,28 +14,16 @@ import {
 import { Section, Skeleton } from "@/components/ui";
 
 // Data and utilities
-import {
-  getServiceOrNotFound,
-  generateServiceStaticParams,
-  getRelatedServices,
-  getServiceTestimonials,
-} from "@/lib/data-fetcher";
-import {
-  generateServicePageMetadata,
-  generateOrganizationSchema,
-  generateServiceSchema,
-  generateBreadcrumbSchema,
-  generateFAQSchema,
-} from "@/app/metadata";
+import { getServiceWithEnhancedData } from "./page.server";
 
 const ServiceGallery = dynamicImport(
   () =>
     import("@/components/blocks/service-gallery").then(
-      (mod) => mod.ServiceGallery,
+      (mod) => mod.ServiceGallery
     ),
   {
     loading: () => <Skeleton className="h-96 w-full" />,
-  },
+  }
 );
 
 const Testimonials = dynamicImport(
@@ -44,83 +31,29 @@ const Testimonials = dynamicImport(
     import("@/components/blocks/testimonials").then((mod) => mod.Testimonials),
   {
     loading: () => <Skeleton className="h-96 w-full" />,
-  },
+  }
 );
 
 const FAQSection = dynamicImport(
   () => import("@/components/blocks/faq-section").then((mod) => mod.FAQSection),
   {
     loading: () => <Skeleton className="h-96 w-full" />,
-  },
+  }
 );
 
 const ServiceShowcase = dynamicImport(
   () =>
     import("@/components/blocks/service-showcase").then(
-      (mod) => mod.ServiceShowcase,
+      (mod) => mod.ServiceShowcase
     ),
   {
     loading: () => <Skeleton className="h-96 w-full" />,
-  },
+  }
 );
-
-export const dynamic = "force-static";
 
 interface ServicePageProps {
   params: { slug: string };
 }
-
-// Performance optimized static params generation for SSG
-export async function generateStaticParams() {
-  return generateServiceStaticParams();
-}
-
-// Enhanced metadata generation with comprehensive SEO
-export async function generateMetadata({
-  params,
-}: ServicePageProps): Promise<Metadata> {
-  const { slug } = params;
-  const service = getServiceOrNotFound(slug);
-
-  return generateServicePageMetadata({
-    serviceName: service.title,
-    serviceDescription: service.metaDescription,
-    serviceKeywords: service.keywords,
-    imageUrl: service.image,
-    slug: slug,
-    benefits: service.benefits,
-    locationSpecific: true,
-  });
-}
-
-// Enhanced cached service data with comprehensive schema
-const getServiceWithEnhancedData = cache((slug: string) => {
-  const service = getServiceOrNotFound(slug);
-  const relatedServices = getRelatedServices(slug, 3);
-  const serviceTestimonials = getServiceTestimonials(slug);
-
-  // Generate comprehensive structured data
-  const organizationSchema = generateOrganizationSchema();
-  const serviceSchema = generateServiceSchema(service);
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "https://vivispa.ca" },
-    { name: "Services", url: "https://vivispa.ca/services" },
-    { name: service.title, url: `https://vivispa.ca/services/${service.slug}` },
-  ]);
-  const faqSchema = generateFAQSchema(service.faqs);
-
-  return {
-    service,
-    relatedServices,
-    serviceTestimonials,
-    schemas: {
-      organization: organizationSchema,
-      service: serviceSchema,
-      breadcrumb: breadcrumbSchema,
-      faq: faqSchema,
-    },
-  };
-});
 
 export default function ServicePage({ params }: ServicePageProps) {
   const { slug } = params;
