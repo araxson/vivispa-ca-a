@@ -16,7 +16,8 @@ import {
 } from "@/app/metadata";
 import { generalFAQs } from "@/data/faqs";
 import { homePageData } from "@/data/home";
-import type { ServiceCardData } from "@/types/service";
+// import type { ServiceCardData } from "@/types/service"; // Type will be inferred
+import { getHomePageFeaturedServiceCards } from "@/lib/data-fetcher";
 
 // Enhanced metadata for home page with performance optimization
 export const metadata: Metadata = generatePageMetadata({
@@ -43,16 +44,8 @@ export const metadata: Metadata = generatePageMetadata({
 export default function HomePage() {
   const organizationSchema = generateOrganizationSchema();
 
-  // Format the services data to match the ServiceCard component's expected structure
-  const formattedServices: ServiceCardData[] =
-    homePageData.featuredServices.map((service) => ({
-      id: service.id,
-      title: service.title,
-      slug: service.id,
-      previewDescription: service.description,
-      image: service.image,
-      availableLocations: ["downtown", "edmonton-trail"],
-    }));
+  // Get pre-formatted service cards from data-fetcher
+  const formattedServices = getHomePageFeaturedServiceCards();
 
   // Format the testimonials to match the Testimonials component's expected structure
   const formattedTestimonials = homePageData.testimonials;

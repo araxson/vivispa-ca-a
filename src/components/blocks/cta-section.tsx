@@ -20,9 +20,9 @@ interface CTAButton {
 
 interface CTASectionProps {
   title: string;
-  description?: string;
+  description?: string | undefined;
   primaryCTA: CTAButton;
-  secondaryCTA?: CTAButton;
+  secondaryCTA?: CTAButton | undefined;
   className?: string;
   variant?: string;
   spacing?: SpacingSize;

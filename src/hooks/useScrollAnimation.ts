@@ -61,10 +61,15 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
           setState(AnimationState.HIDDEN);
         }
       },
-      {
-        threshold: mergedOptions.threshold,
-        rootMargin: mergedOptions.rootMargin,
-      }
+      // Construct options carefully for exactOptionalPropertyTypes
+      // Even though mergedOptions should have defined values due to defaults,
+      // this ensures that if a property were undefined, it would be omitted.
+      Object.fromEntries(
+        Object.entries({
+          threshold: mergedOptions.threshold,
+          rootMargin: mergedOptions.rootMargin,
+        }).filter(([, value]) => value !== undefined)
+      ) as IntersectionObserverInit
     );
 
     observer.observe(element);

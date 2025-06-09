@@ -12,7 +12,7 @@ export interface PerformanceMetric {
   value: number;
   rating: "good" | "needs-improvement" | "poor";
   timestamp: number;
-  url?: string;
+  url?: string | undefined;
 }
 
 export interface WebVital {

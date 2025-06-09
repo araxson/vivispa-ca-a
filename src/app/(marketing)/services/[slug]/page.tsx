@@ -52,13 +52,22 @@ const ServiceShowcase = dynamicImport(
 );
 
 interface ServicePageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
+  // searchParams?: { [key: string]: string | string[] | undefined }; // Example if searchParams were needed
 }
 
-export default function ServicePage(props: ServicePageProps) {
-  const params = use(props.params);
+export default function ServicePage({ params }: ServicePageProps) {
+  // const paramsFromHook = use(params); // This would be incorrect now if params is not a promise
+  // The line `const params = use(props.params)` was specific to props.params being a Promise.
+  // If params is directly { slug: string }, then slug can be destructured.
   const { slug } = params;
-  const { service, relatedServices, serviceTestimonials, schemas } =
+
+  // NOTE: Calling getServiceWithEnhancedData (a server function) directly in a Client Component
+  // is problematic. This would typically be done in a Server Component,
+  // and the data passed as props to this Client Component.
+  // For the purpose of this type update, we are addressing the page props.
+  // The data fetching architecture is a separate concern.
+  const { service, relatedServices, serviceTestimonials, schemas, formattedBenefits } =
     getServiceWithEnhancedData(slug);
 
   return (
@@ -119,12 +128,7 @@ export default function ServicePage(props: ServicePageProps) {
         variant="default"
         title="Treatment Benefits"
         subtitle="Experience the comprehensive benefits of this advanced treatment"
-        benefits={service.benefits.map((benefit: string) => ({
-          id: benefit,
-          title: benefit,
-          description: `Enjoy the benefit of ${benefit.toLowerCase()} with our advanced treatment technology.`,
-          icon: "Zap",
-        }))}
+        benefits={formattedBenefits}
       />
 
       <ServiceGallery

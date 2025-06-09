@@ -21,9 +21,9 @@ import { X } from "lucide-react";
 // Extended offer type to include dynamic location info and booking URLs
 type SmartOfferItem = OfferItem & {
   location?: string;
-  locationDetails?: (typeof locations)[0];
+  locationDetails?: (typeof locations)[0] | undefined;
   dynamicUrl?: string;
-  allAvailableLocations?: OfferLocationData[];
+  allAvailableLocations?: OfferLocationData[] | undefined;
   isAvailableAtSelectedLocation?: boolean;
 };
 

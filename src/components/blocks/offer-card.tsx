@@ -23,9 +23,9 @@ interface SmartOfferServiceItem extends OfferItem {
     originalPrice?: string;
   };
   location?: string;
-  locationDetails?: (typeof locations)[0];
+  locationDetails?: (typeof locations)[0] | undefined;
   dynamicUrl?: string;
-  allAvailableLocations?: OfferLocationData[];
+  allAvailableLocations?: OfferLocationData[] | undefined;
   isAvailableAtSelectedLocation?: boolean;
 }
 

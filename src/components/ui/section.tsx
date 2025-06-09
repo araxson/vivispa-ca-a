@@ -5,8 +5,8 @@ import { Container, type ContainerProps } from "./container";
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
+  className?: string | undefined;
+  containerClassName?: string | undefined;
   maxWidth?: ContainerProps["maxWidth"];
   paddingSize?: ContainerProps["paddingSize"];
   spacing?: SpacingSize;
