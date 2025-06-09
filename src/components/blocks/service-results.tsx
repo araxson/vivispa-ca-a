@@ -24,7 +24,7 @@ export function ServiceResults({
   if (!results || results.length === 0) return null;
 
   return (
-    <Section spacing="lg" background="muted" className={className}>
+    <Section background="muted" className={className}>
       <SectionHeader title={title} subtitle={subtitle} />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

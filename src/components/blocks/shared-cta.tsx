@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function SharedCTA() {
   return (
-    <Section background="muted" spacing="md">
+    <Section background="muted">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Start Your Journey with Vivi's

@@ -27,7 +27,6 @@ export function ServiceOverview({
 }: ServiceOverviewProps) {
   return (
     <Section
-      spacing="lg"
       className={className}
       maxWidth="6xl"
     >

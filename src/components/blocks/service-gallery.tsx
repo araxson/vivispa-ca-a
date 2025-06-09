@@ -37,7 +37,6 @@ export function ServiceGallery({
 
   return (
     <Section
-      spacing="lg"
       className={className}
     >
       <SectionHeader title={title} subtitle={subtitle} />
