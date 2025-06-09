@@ -54,9 +54,6 @@ const footerNav = [
     title: "Help",
     items: [
       { title: "Contact Us", href: "/contact" },
-      { title: "FAQs", href: "/faq" },
-      { title: "Privacy Policy", href: "/privacy" },
-      { title: "Terms of Service", href: "/terms" },
     ],
   },
 ];
@@ -98,7 +95,7 @@ export function Footer() {
 
             {/* Quick Links */}
             {footerNav.map((section) => (
-              <div key={section.title} className="lg:col-span-2">
+              <div key={section.title} className={section.title === 'Help' ? 'lg:col-span-1' : 'lg:col-span-2'}>
                 <h3 className="text-lg font-semibold text-foreground mb-4">
                   {section.title}
                 </h3>
