@@ -57,18 +57,22 @@ export function WhatsAppWidget({
 
   return (
     <>
+      {/* Main Chat Button */}
       <Button
-        className="fixed bottom-4 right-4 z-50 flex items-center rounded-full bg-[#25D366] px-4 py-3 shadow-lg transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-[#128C7E] dark:hover:bg-[#128C7E]"
+        className="fixed bottom-2 right-2 z-50 flex items-center rounded-full bg-[#25D366] px-3 py-2 shadow-lg transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-[#128C7E] dark:hover:bg-[#128C7E] sm:bottom-4 sm:right-4 sm:px-4 sm:py-3 lg:hidden"
         onClick={handleToggle}
         aria-label="Open WhatsApp chat"
       >
-        <WhatsAppIcon className="mr-2 h-7 w-7 text-white" />
-        <span className="text-base font-medium text-white">Chat with us</span>
+        <WhatsAppIcon className="mr-1 h-6 w-6 text-white sm:mr-2 sm:h-7 sm:w-7" />
+        <span className="text-sm font-medium text-white sm:text-base">
+          Chat with us
+        </span>
       </Button>
 
+      {/* Chat Window */}
       <div
         className={cn(
-          'fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out',
+          'fixed bottom-20 right-2 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out overflow-hidden sm:bottom-24 sm:right-4 lg:hidden',
           {
             'translate-x-0 translate-y-0 scale-100': isOpen,
             'pointer-events-none -translate-x-8 translate-y-12 scale-0':
@@ -76,7 +80,8 @@ export function WhatsAppWidget({
           },
         )}
       >
-        <header className="flex items-center gap-4 rounded-t-lg bg-[#008069] p-3 text-white dark:bg-[#1F2C34]">
+        {/* Chat Header */}
+        <header className="flex items-center gap-3 rounded-t-lg bg-[#008069] p-2 text-white dark:bg-[#1F2C34] sm:gap-4 sm:p-3">
           <Image
             src="/images/logo.svg"
             alt={brandName}
@@ -85,7 +90,7 @@ export function WhatsAppWidget({
             className="rounded-full"
           />
           <div className="flex flex-col">
-            <h3 className="font-semibold">{brandName}</h3>
+            <h3 className="text-sm font-semibold sm:text-base">{brandName}</h3>
             <p className="text-xs text-white/90">Online now</p>
           </div>
           <Button
@@ -98,23 +103,26 @@ export function WhatsAppWidget({
             <X className="h-5 w-5" />
           </Button>
         </header>
+        {/* Message Area */}
         <div
-          className="h-96 bg-cover bg-center p-4 bg-[url('/images/whatsapp-bg.png')] dark:bg-[url('/images/whatsapp-bg-dark.png')]"
+          className="h-96 overflow-y-auto bg-cover bg-center p-2 bg-[url('/images/whatsapp-bg.png')] dark:bg-[url('/images/whatsapp-bg-dark.png')] sm:p-4"
         >
           <div className="flex h-full flex-col justify-end">
             <div className="flex flex-col gap-3">
-              <div className="max-w-[85%] self-start rounded-lg rounded-tl-none bg-white p-3 shadow-md dark:bg-[#202C33]">
+              {/* Welcome Message Bubble */}
+              <div className="max-w-[85%] self-start rounded-lg rounded-tl-none bg-white p-3 shadow-md dark:bg-[#202C33] sm:p-4">
                 <p className="text-sm text-gray-800 dark:text-gray-50">
                   {welcomeMessage}
                 </p>
               </div>
-              <div className="flex flex-wrap justify-end gap-2 py-2">
+              {/* Predefined Message Bubbles */}
+              <div className="flex flex-col items-end gap-2 py-2">
                 {predefinedMessages.map((text, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
-                    className="rounded-full border-transparent bg-background/60 text-foreground backdrop-blur-sm hover:bg-accent/80"
+                    className="rounded-lg border-transparent bg-[#DCF8C6]/90 px-3 py-2 text-sm text-gray-800 shadow-sm backdrop-blur-sm hover:bg-[#c8e6b7]/90 dark:bg-[#056162]/90 dark:text-gray-50 dark:hover:bg-[#045253]/90"
                     onClick={() => handlePredefinedMessageClick(text)}
                   >
                     {text}
@@ -124,7 +132,8 @@ export function WhatsAppWidget({
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 border-t bg-background p-3">
+        {/* Input Area */}
+        <div className="flex items-center gap-2 border-t-2 border-gray-300 bg-background p-2 dark:border-gray-700 sm:p-3">
           <Input
             placeholder="Type a message"
             value={message}
