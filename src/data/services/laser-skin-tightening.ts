@@ -43,14 +43,13 @@ export const laserSkinTighteningService: Service = {
     title: "Laser Skin Tightening Calgary | Vivi Aesthetics & Spa",
     description:
       "Non-surgical skin tightening with advanced laser technology. Achieve firmer, lifted skin without surgery or downtime.",
-    image:
-      "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-001.webp",
-    url: "https://vivispa.ca/services/laser-skin-tightening",
-    type: "website",
+    // image field removed (same as service.image)
+    // url field removed (same as service.canonicalUrl)
+    // type field removed (will default to "article")
   },
 
   twitter: {
-    card: "summary_large_image",
+    // card field removed (defaults to "summary_large_image")
     title: "Laser Skin Tightening Calgary | Vivi Aesthetics & Spa",
     description:
       "Turn back time with non-invasive skin tightening. Lift and firm without surgery.",

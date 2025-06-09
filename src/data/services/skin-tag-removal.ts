@@ -44,14 +44,13 @@ export const skinTagRemovalService: Service = {
     title: "Skin Tag Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Safe, professional removal of skin tags, moles, and benign lesions. Achieve smooth, flawless skin with minimal discomfort.",
-    image:
-      "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-001.webp",
-    url: "https://vivispa.ca/services/skin-tag-removal",
-    type: "website",
+    // image field removed (same as service.image)
+    // url field removed (same as service.canonicalUrl)
+    // type field removed (will default to "article")
   },
 
   twitter: {
-    card: "summary_large_image",
+    // card field removed (defaults to "summary_large_image")
     title: "Skin Tag Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Remove unwanted skin tags and moles safely and effectively. Professional care for smooth, confident skin.",

@@ -43,14 +43,13 @@ export const laserPigmentationRemovalService: Service = {
     title: "Laser Pigmentation Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Clear unwanted pigmentation with advanced laser treatments. Effective removal of age spots, melasma, and sun damage.",
-    image:
-      "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-002.webp",
-    url: "https://vivispa.ca/services/laser-pigmentation-removal",
-    type: "website",
+    // image field removed (same as service.image)
+    // url field removed (same as service.canonicalUrl)
+    // type field removed (will default to "article")
   },
 
   twitter: {
-    card: "summary_large_image",
+    // card field removed (defaults to "summary_large_image")
     title: "Laser Pigmentation Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Say goodbye to age spots and uneven skin tone. Advanced laser treatments for clear, radiant skin.",
