@@ -6,10 +6,7 @@ import { services } from "@/data/services";
 import { homePageData } from "@/data/home";
 
 // Import all the data modules
-import {
-  consolidatedOffers,
-  AVAILABLE_LOCATIONS,
-} from "@/data/pricing/offers";
+import { consolidatedOffers, AVAILABLE_LOCATIONS } from "@/data/pricing/offers";
 import { testimonials, getTestimonialsByService } from "@/data/testimonials";
 
 /**
@@ -205,28 +202,32 @@ export const getDataMetrics = cache(() => {
 
 // Cached function to get featured service cards for the home page
 export const getHomePageFeaturedServiceCards = cache((): ServiceCardData[] => {
-  const mappedServices: (ServiceCardData | null)[] = homePageData.featuredServices
-    .map((serviceHighlight): ServiceCardData | null => {
-      // Assuming serviceHighlight.id is the slug.
-      const service = getServiceBySlug(serviceHighlight.id);
+  const mappedServices: (ServiceCardData | null)[] =
+    homePageData.featuredServices.map(
+      (serviceHighlight): ServiceCardData | null => {
+        // Assuming serviceHighlight.id is the slug.
+        const service = getServiceBySlug(serviceHighlight.id);
 
-      if (service) {
-        // The Service type has availableLocations as required (LocationType[])
-        // ServiceCardData has availableLocations as optional (LocationType[] | undefined)
-        // This assignment is valid.
-        return {
-          id: service.id,
-          title: service.title,
-          slug: service.slug,
-          previewDescription: service.previewDescription,
-          image: service.image,
-          availableLocations: service.availableLocations,
-        };
-      }
-      return null; // Service not found
-    });
+        if (service) {
+          // The Service type has availableLocations as required (LocationType[])
+          // ServiceCardData has availableLocations as optional (LocationType[] | undefined)
+          // This assignment is valid.
+          return {
+            id: service.id,
+            title: service.title,
+            slug: service.slug,
+            previewDescription: service.previewDescription,
+            image: service.image,
+            availableLocations: service.availableLocations,
+          };
+        }
+        return null; // Service not found
+      },
+    );
 
-  return mappedServices.filter((cardData): cardData is ServiceCardData => cardData !== null);
+  return mappedServices.filter(
+    (cardData): cardData is ServiceCardData => cardData !== null,
+  );
 });
 
 /**

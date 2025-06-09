@@ -43,9 +43,7 @@ export function OffersGrid({ offers, searchTerm }: OffersGridProps) {
       className="offers-grid"
       aria-label={`${offers.length} treatment offers`}
     >
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr"
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
         {offers.map((offer) => (
           <OfferCard key={offer.id} offer={offer} />
         ))}

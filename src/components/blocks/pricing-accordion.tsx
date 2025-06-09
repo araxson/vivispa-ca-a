@@ -19,11 +19,7 @@ const PricingAccordion: React.FC<PricingAccordionProps> = ({
   if (!servicesByCategory) return null;
 
   return (
-    <Accordion
-      type="single"
-      collapsible
-      className="w-full space-y-4"
-    >
+    <Accordion type="single" collapsible className="w-full space-y-4">
       {Object.entries(servicesByCategory).map(([category, subcategories]) => {
         const totalServices = Object.values(subcategories).flat().length;
         const hasSubcategories =

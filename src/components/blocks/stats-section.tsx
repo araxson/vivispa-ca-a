@@ -118,7 +118,11 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
             className="mt-2"
           >
             <span aria-hidden="true">
-              {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+              {stat.trend === "up"
+                ? "↗"
+                : stat.trend === "down"
+                  ? "↘"
+                  : "→"}{" "}
             </span>
             <span className="sr-only">
               {stat.trend === "up"
@@ -233,7 +237,11 @@ function StatCard({ stat, variant, showSeparator }: StatCardProps) {
           className="mt-2"
         >
           <span aria-hidden="true">
-            {stat.trend === "up" ? "↗" : stat.trend === "down" ? "↘" : "→"}{" "}
+            {stat.trend === "up"
+              ? "↗"
+              : stat.trend === "down"
+                ? "↘"
+                : "→"}{" "}
           </span>
           <span className="sr-only">
             {stat.trend === "up"

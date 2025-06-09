@@ -50,4 +50,4 @@ export function CtaCard({
       </div>
     </Card>
   );
-} 
+}

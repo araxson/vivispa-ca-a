@@ -1,172 +1,94 @@
-"use client";
-import { Suspense, use } from "react";
-import { default as dynamicImport } from "next/dynamic";
-import { SharedCTA } from "@/components/blocks/shared-cta";
+// This file is now the Server Component for the route
+// "use client"; // Removed: This is a Server Component
 
-// Component imports
+// This file is now the Server Component for the route
+import { cache } from "react"; // For getServiceWithEnhancedData
+import type { Metadata } from "next"; // For generateMetadata
 import {
-  Hero,
-  ServiceOverview,
-  BenefitsSection,
-  ServiceProcedure,
-  ServiceResults,
-} from "@/components/blocks";
-import { Section, Skeleton } from "@/components/ui";
+  getServiceOrNotFound,
+  generateServiceStaticParams as originalGenerateStaticParams, // Renaming to avoid conflict if any local one defined
+  getRelatedServices,
+  getServiceTestimonials,
+} from "@/lib/data-fetcher";
+import {
+  generateOrganizationSchema,
+  generateServiceSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateServicePageMetadata,
+} from "@/app/metadata";
 
-// Data and utilities
-import { getServiceWithEnhancedData } from "./page.server";
+import ServicePageClient from "./service-page-client"; // Import the refactored client component
 
-const ServiceGallery = dynamicImport(
-  () =>
-    import("@/components/blocks/service-gallery").then(
-      (mod) => mod.ServiceGallery
-    ),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
+// Re-export generateStaticParams if it's directly from data-fetcher or define locally
+export const generateStaticParams = originalGenerateStaticParams;
 
-const Testimonials = dynamicImport(
-  () =>
-    import("@/components/blocks/testimonials").then((mod) => mod.Testimonials),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-const FAQSection = dynamicImport(
-  () => import("@/components/blocks/faq-section").then((mod) => mod.FAQSection),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-const ServiceShowcase = dynamicImport(
-  () =>
-    import("@/components/blocks/service-showcase").then(
-      (mod) => mod.ServiceShowcase
-    ),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-interface ServicePageProps {
+interface PageProps {
   params: { slug: string };
-  // searchParams?: { [key: string]: string | string[] | undefined }; // Example if searchParams were needed
+  // searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  // const paramsFromHook = use(params); // This would be incorrect now if params is not a promise
-  // The line `const params = use(props.params)` was specific to props.params being a Promise.
-  // If params is directly { slug: string }, then slug can be destructured.
+// Moved from page.server.tsx
+export const getServiceWithEnhancedData = cache((slug: string) => {
+  const service = getServiceOrNotFound(slug);
+  const relatedServices = getRelatedServices(slug, 3);
+  const serviceTestimonials = getServiceTestimonials(slug);
+
+  const organizationSchema = generateOrganizationSchema();
+  const serviceSchema = generateServiceSchema(service);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://vivispa.ca" },
+    { name: "Services", url: "https://vivispa.ca/services" },
+    { name: service.title, url: `https://vivispa.ca/services/${service.slug}` },
+  ]);
+  const faqSchema = generateFAQSchema(service.faqs);
+
+  const formattedBenefits = service.benefits.map((benefit: string) => ({
+    id: benefit,
+    title: benefit,
+    description: `Enjoy the benefit of ${benefit.toLowerCase()} with our advanced treatment technology.`,
+    icon: "Zap",
+  }));
+
+  return {
+    service,
+    relatedServices,
+    serviceTestimonials,
+    formattedBenefits,
+    schemas: {
+      organization: organizationSchema,
+      service: serviceSchema,
+      breadcrumb: breadcrumbSchema,
+      faq: faqSchema,
+    },
+  };
+});
+
+// Moved from page.server.tsx
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  // Ensure PageProps is used here if it matches
+  const { slug } = params;
+  const service = getServiceOrNotFound(slug); // Or use getServiceWithEnhancedData(slug).service
+
+  return generateServicePageMetadata({
+    serviceName: service.title,
+    serviceDescription: service.metaDescription,
+    serviceKeywords: service.keywords,
+    imageUrl: service.image,
+    slug: slug,
+    benefits: service.benefits,
+    locationSpecific: true,
+  });
+}
+
+export default async function Page({ params }: PageProps) {
   const { slug } = params;
 
-  // NOTE: Calling getServiceWithEnhancedData (a server function) directly in a Client Component
-  // is problematic. This would typically be done in a Server Component,
-  // and the data passed as props to this Client Component.
-  // For the purpose of this type update, we are addressing the page props.
-  // The data fetching architecture is a separate concern.
-  const { service, relatedServices, serviceTestimonials, schemas, formattedBenefits } =
-    getServiceWithEnhancedData(slug);
+  // Fetch data on the server
+  const serviceData = getServiceWithEnhancedData(slug);
 
-  return (
-    <>
-      {/* Comprehensive structured data for enhanced SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.organization),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.service),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.breadcrumb),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.faq),
-        }}
-      />
-
-      <Hero
-        title={service.title}
-        description={service.fullDescription}
-        heroType={service.heroType || "image"}
-        backgroundImage={
-          service.image
-            ? {
-                src: service.image,
-                alt: service.title,
-              }
-            : undefined
-        }
-        backgroundVideo={service.heroVideo}
-      />
-
-      <Suspense fallback={<div className="h-96 bg-muted" />}>
-        <ServiceOverview
-          overview={service.overview}
-          benefits={service.benefits}
-          sessionInfo={{
-            recommended: 3,
-            interval: "4-6 weeks",
-          }}
-        />
-      </Suspense>
-
-      <BenefitsSection
-        variant="default"
-        title="Treatment Benefits"
-        subtitle="Experience the comprehensive benefits of this advanced treatment"
-        benefits={formattedBenefits}
-      />
-
-      <ServiceGallery
-        images={service.galleryImages.map((img: string) => ({
-          id: img,
-          src: img,
-          alt: `${service.title} - Result`,
-        }))}
-        title={`${service.title} Gallery`}
-      />
-
-      {serviceTestimonials.length > 0 && (
-        <Testimonials
-          testimonials={serviceTestimonials}
-          title={`What Our Clients Say About ${service.title}`}
-          subtitle="Real experiences from our valued clients"
-        />
-      )}
-
-      <FAQSection
-        faqs={service.faqs}
-        title="Frequently Asked Questions"
-        subtitle={`Common questions about ${service.title}`}
-      />
-
-      {/* Related Services Section */}
-      {relatedServices.length > 0 && (
-        <ServiceShowcase
-          title="Related Services"
-          subtitle={`Explore other treatments that complement ${service.title}`}
-          services={relatedServices}
-          showLocations={true}
-          spacing="lg"
-          background="muted"
-        />
-      )}
-
-      <SharedCTA />
-    </>
-  );
+  // Pass the fetched data to the Client Component
+  return <ServicePageClient params={params} serviceData={serviceData} />;
 }

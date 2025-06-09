@@ -36,14 +36,9 @@ export function ServiceGallery({
   if (!images || images.length === 0) return null;
 
   return (
-    <Section
-      spacing="lg"
-      className={className}
-    >
+    <Section spacing="lg" className={className}>
       <SectionHeader title={title} subtitle={subtitle} />
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         {images.map((image) => (
           <Dialog key={image.id}>
             <DialogTrigger asChild>

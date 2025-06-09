@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Send, X } from 'lucide-react';
-import Image from 'next/image';
-import { type SVGProps, useState } from 'react';
+import { Send, X } from "lucide-react";
+import Image from "next/image";
+import { type SVGProps, useState } from "react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -35,15 +35,15 @@ export function WhatsAppWidget({
   predefinedMessages,
 }: WhatsAppWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
-  const handleToggle = () => setIsOpen(prev => !prev);
+  const handleToggle = () => setIsOpen((prev) => !prev);
 
   const handleSendMessage = (text: string) => {
     if (!text.trim()) return;
     const encodedMessage = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
   };
 
   const handlePredefinedMessageClick = (text: string) => {
@@ -52,7 +52,7 @@ export function WhatsAppWidget({
 
   const handleCustomMessageSend = () => {
     handleSendMessage(message);
-    setMessage('');
+    setMessage("");
   };
 
   return (
@@ -68,10 +68,10 @@ export function WhatsAppWidget({
 
       <div
         className={cn(
-          'fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out',
+          "fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out",
           {
-            'translate-x-0 translate-y-0 scale-100': isOpen,
-            'pointer-events-none -translate-x-8 translate-y-12 scale-0':
+            "translate-x-0 translate-y-0 scale-100": isOpen,
+            "pointer-events-none -translate-x-8 translate-y-12 scale-0":
               !isOpen,
           },
         )}
@@ -98,9 +98,7 @@ export function WhatsAppWidget({
             <X className="h-5 w-5" />
           </Button>
         </header>
-        <div
-          className="h-96 bg-cover bg-center p-4 bg-[url('/images/whatsapp-bg.png')] dark:bg-[url('/images/whatsapp-bg-dark.png')]"
-        >
+        <div className="h-96 bg-cover bg-center p-4 bg-[url('/images/whatsapp-bg.png')] dark:bg-[url('/images/whatsapp-bg-dark.png')]">
           <div className="flex h-full flex-col justify-end">
             <div className="flex flex-col gap-3">
               <div className="max-w-[85%] self-start rounded-lg rounded-tl-none bg-white p-3 shadow-md dark:bg-[#202C33]">
@@ -128,8 +126,8 @@ export function WhatsAppWidget({
           <Input
             placeholder="Type a message"
             value={message}
-            onChange={e => setMessage(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleCustomMessageSend()}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleCustomMessageSend()}
             aria-label="Your message"
             className="h-10 flex-grow rounded-full border-border bg-muted px-4"
           />
@@ -146,4 +144,4 @@ export function WhatsAppWidget({
       </div>
     </>
   );
-} 
+}

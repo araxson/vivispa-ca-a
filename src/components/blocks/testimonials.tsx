@@ -100,11 +100,7 @@ export function Testimonials({
   }
 
   return (
-    <Section
-      spacing={spacing}
-      background="muted"
-      className={className}
-    >
+    <Section spacing={spacing} background="muted" className={className}>
       <SectionHeader title={title} subtitle={subtitle} />
       <Carousel
         opts={{

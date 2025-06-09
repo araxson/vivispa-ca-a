@@ -31,10 +31,7 @@ export function ServiceCard({
 
   return (
     <FadeIn>
-      <Card
-        variant="service"
-        className={cn("h-full", className)}
-      >
+      <Card variant="service" className={cn("h-full", className)}>
         <div
           className={cn(
             "relative overflow-hidden",

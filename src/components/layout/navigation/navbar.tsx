@@ -133,7 +133,9 @@ const MobileNav = ({
                 )}
               />
             </div>
-            <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
+            <span className="sr-only">
+              {isOpen ? "Close menu" : "Open menu"}
+            </span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -143,11 +145,7 @@ const MobileNav = ({
           sideOffset={12}
         >
           {NAV_ITEMS.map((item) => (
-            <DropdownMenuItem
-              key={item.href}
-              asChild
-              className="p-0"
-            >
+            <DropdownMenuItem key={item.href} asChild className="p-0">
               <Link
                 href={item.href}
                 onClick={handleItemClick}
@@ -162,10 +160,7 @@ const MobileNav = ({
             </DropdownMenuItem>
           ))}
           <DropdownMenuSeparator className="bg-border/50" />
-          <DropdownMenuItem
-            asChild
-            className="p-0"
-          >
+          <DropdownMenuItem asChild className="p-0">
             <Link
               href="/offers"
               onClick={handleItemClick}
@@ -174,10 +169,7 @@ const MobileNav = ({
               Offers
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            asChild
-            className="p-0"
-          >
+          <DropdownMenuItem asChild className="p-0">
             <a
               href="/pricing"
               onClick={handleItemClick}

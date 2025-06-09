@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Container,
-  Section,
-} from "@/components/ui";
+import { Card, CardContent, Container, Section } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { CheckCircle, Clock, Calendar } from "lucide-react";
 
@@ -26,11 +21,7 @@ export function ServiceOverview({
   className,
 }: ServiceOverviewProps) {
   return (
-    <Section
-      spacing="lg"
-      className={className}
-      maxWidth="6xl"
-    >
+    <Section spacing="lg" className={className} maxWidth="6xl">
       <div className="grid lg:grid-cols-3 gap-8 sm:gap-12">
         <div className="lg:col-span-2">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6">
@@ -43,7 +34,10 @@ export function ServiceOverview({
           {benefits.length > 0 && (
             <div>
               <h3 className="text-2xl font-semibold text-foreground mb-4 sm:mb-6 flex items-center gap-2">
-                <CheckCircle className="h-6 w-6 text-primary" aria-hidden="true" />
+                <CheckCircle
+                  className="h-6 w-6 text-primary"
+                  aria-hidden="true"
+                />
                 Key Benefits
               </h3>
               <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
@@ -85,7 +79,10 @@ export function ServiceOverview({
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
-                  <Calendar className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <Calendar
+                    className="h-5 w-5 text-primary"
+                    aria-hidden="true"
+                  />
                   Sessions
                 </h3>
                 <p className="text-muted-foreground">
