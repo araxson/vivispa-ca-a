@@ -14,7 +14,6 @@ import {
   generatePageMetadata,
   generateOrganizationSchema,
 } from "@/app/metadata";
-import { generalFAQs } from "@/data/faqs";
 import { homePageData } from "@/data/home";
 // import type { ServiceCardData } from "@/types/service"; // Type will be inferred
 import { getHomePageFeaturedServiceCards } from "@/lib/data-fetcher";
@@ -123,7 +122,7 @@ export default function HomePage() {
       {/* FAQs */}
       <Suspense fallback={<div className="h-96 bg-muted" />}>
         <FAQSection
-          faqs={generalFAQs}
+          faqs={homePageData.faqs}
           title="Frequently Asked Questions"
           subtitle="Get answers to common questions about our services and treatments"
           variant="default"

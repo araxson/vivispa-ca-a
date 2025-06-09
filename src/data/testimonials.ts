@@ -67,8 +67,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-export const featuredTestimonials = testimonials.filter((t) => t.featured);
-
+// featuredTestimonials has been removed as this logic is now in home.ts
 export const getTestimonialById = (id: string): Testimonial | undefined => {
   return testimonials.find((t) => t.id === id);
 };

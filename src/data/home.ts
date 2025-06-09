@@ -1,11 +1,13 @@
 import type { LucideIcon } from "lucide-react";
+import { FAQ } from "../data/faqs";
+import { Testimonial, testimonials as allTestimonials } from "../data/testimonials";
 
-export interface TestimonialData {
-  id: string;
-  name: string;
-  rating: number;
-  content: string;
-}
+// export interface TestimonialData {
+//   id: string;
+//   name: string;
+//   rating: number;
+//   content: string;
+// }
 
 export interface ServiceHighlight {
   id: string;
@@ -57,7 +59,8 @@ export interface HomePageData {
   stats: StatData[];
   featuredServices: ServiceHighlight[];
   benefits: BenefitData[];
-  testimonials: TestimonialData[];
+  testimonials: Testimonial[];
+  faqs: FAQ[];
   ctaSection: {
     headline: string;
     description: string;
@@ -71,6 +74,55 @@ export interface HomePageData {
     };
   };
 }
+
+const homePageFAQs: FAQ[] = [
+  {
+    question: "What should I expect during my first visit?",
+    answer:
+      "Your first visit includes a comprehensive consultation where we discuss your goals, assess your skin, and create a personalized treatment plan. We'll explain the recommended procedures, expected results, and aftercare instructions to ensure you're comfortable and informed.",
+    category: "General",
+    featured: true,
+  },
+  {
+    question: "How far in advance should I book my appointment?",
+    answer:
+      "We recommend booking 1-2 weeks in advance, especially for popular treatments like HydroFacial and laser services. For special events, book 2-4 weeks ahead to allow for optimal results and any necessary follow-up treatments.",
+    category: "Booking",
+    featured: true,
+  },
+  {
+    question: "Are your treatments safe for all skin types?",
+    answer:
+      "Yes, our treatments are suitable for all skin types. We use advanced technology and customize each treatment based on your unique skin needs. Our trained professionals will assess your skin during consultation to ensure the safest and most effective approach.",
+    category: "Safety",
+    featured: true,
+  },
+  {
+    question: "What is your cancellation and rescheduling policy?",
+    answer:
+      "We require 24 hours notice for cancellations or rescheduling. Appointments cancelled with less than 24 hours notice may be subject to a cancellation fee. We understand emergencies happen and will work with you on a case-by-case basis.",
+    category: "Policies",
+    featured: true,
+  },
+  {
+    question: "Do you offer package deals or payment plans?",
+    answer:
+      "Yes, we offer various package deals for multiple treatments and series packages for optimal results. We also provide flexible payment options and financing plans to make your aesthetic goals more affordable. Ask about our current promotions during your consultation.",
+    category: "Pricing",
+    featured: true,
+  },
+  {
+    question: "How do I prepare for my treatment?",
+    answer:
+      "Preparation varies by treatment type. Generally, arrive with clean skin free of makeup, avoid sun exposure and retinoids before laser treatments, and stay hydrated. We'll provide specific pre-treatment instructions when you book your appointment.",
+    category: "Preparation",
+    featured: true,
+  },
+];
+
+const homePageFeaturedTestimonials: Testimonial[] = allTestimonials.filter(
+  (t) => t.featured
+);
 
 export const homePageData: HomePageData = {
   hero: {
@@ -249,36 +301,8 @@ export const homePageData: HomePageData = {
     },
   ],
 
-  testimonials: [
-    {
-      id: "sarah-m",
-      name: "Sarah K.",
-      rating: 5,
-      content:
-        "I've been coming to Vivi for over two years now, and the results speak for themselves. The HydraFacial has completely transformed my skin, and the staff always makes me feel comfortable and well-cared for.",
-    },
-    {
-      id: "jessica-l",
-      name: "Jennifer L.",
-      rating: 5,
-      content:
-        "The laser hair removal treatment exceeded my expectations. Professional, clean, and the results are amazing. I wish I had started this journey sooner!",
-    },
-    {
-      id: "amanda-k",
-      name: "Aisha M.",
-      rating: 5,
-      content:
-        "Vivi Aesthetics has the most knowledgeable and caring team. They took the time to understand my skin concerns and created a treatment plan that really works.",
-    },
-    {
-      id: "michelle-r",
-      name: "Priya K.",
-      rating: 5,
-      content:
-        "The microneedling treatment has been a game-changer for my skin texture and fine lines. The team at Vivi is professional and the facility is top-notch.",
-    },
-  ],
+  testimonials: homePageFeaturedTestimonials,
+  faqs: homePageFAQs,
 
   ctaSection: {
     headline: "Ready to Begin Your Transformation?",
