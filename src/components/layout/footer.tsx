@@ -63,7 +63,7 @@ export function Footer() {
   const primaryLocation = locations[0];
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border pb-32">
       <Section className="py-12 sm:py-16 lg:py-20">
         <Container>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12">
