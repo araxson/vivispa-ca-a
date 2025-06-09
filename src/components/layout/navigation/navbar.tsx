@@ -56,10 +56,12 @@ const DesktopNav = ({
 }: {
   isActiveLink: (href: string) => boolean;
 }) => (
-  <nav className="hidden md:flex items-center gap-2">
-    {NAV_ITEMS.map((item) => (
-      <NavLink key={item.href} item={item} isActive={isActiveLink(item.href)} />
-    ))}
+  <nav className="hidden md:flex items-center">
+    <div className="flex items-center gap-2">
+      {NAV_ITEMS.map((item) => (
+        <NavLink key={item.href} item={item} isActive={isActiveLink(item.href)} />
+      ))}
+    </div>
     <div className="ml-6 pl-6 border-l border-border/30 flex items-center gap-2">
       <Link
         href="/offers"
@@ -82,9 +84,9 @@ const DesktopNav = ({
         Book Now
         <span className="sr-only">(opens in a new tab)</span>
       </a>
-      <div className="ml-4 pl-4 border-l border-border/30">
-        <ThemeToggle />
-      </div>
+    </div>
+    <div className="ml-4 flex items-center pl-4 border-l border-border/30">
+      <ThemeToggle />
     </div>
   </nav>
 );
