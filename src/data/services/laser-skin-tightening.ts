@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const laserSkinTighteningService: Service = {
   id: "laser-skin-tightening",
-  title: "Laser Skin Tightening",
+  title: "Laser Skin Tightening in Calgary",
   slug: "laser-skin-tightening",
   previewDescription:
-    "Firm and tighten loose skin with advanced non-surgical laser treatments.",
+    "Firm and tighten loose skin with our advanced laser skin tightening in Calgary, a premier skin tightening treatment in Calgary offering non-surgical lifting.",
   fullDescription:
-    "Achieve firmer, more youthful-looking skin with advanced laser skin tightening at Vivi Aesthetics & Spa in Calgary. Our non-invasive treatment uses cutting-edge laser technology to stimulate collagen production and tighten loose, sagging skin on the face and body. Through controlled thermal energy delivery, we promote natural skin tightening and rejuvenation without surgery, providing visible lifting and firming results. Whether addressing facial laxity, jowls, loose neck skin, or body areas affected by aging or weight changes, our customized laser protocols deliver safe, effective skin tightening with minimal downtime and progressive, natural-looking improvements.",
+    "Achieve firmer, more youthful-looking skin with advanced laser skin tightening at Vivi Aesthetics & Spa in Calgary. Our non-invasive skin tightening treatment in Calgary uses cutting-edge laser technology to stimulate collagen production and tighten loose, sagging skin on the face and body. This non-surgical skin lifting in Calgary is achieved through controlled thermal energy delivery, promoting natural skin tightening and rejuvenation without surgery, providing visible lifting and firming results. Whether addressing facial laxity, jowls, loose neck skin, or body areas affected by aging or weight changes, our customized laser protocols deliver safe, effective skin tightening with minimal downtime and progressive, natural-looking improvements.",
 
   metaTitle:
     "Laser Skin Tightening Calgary | Non-Surgical Lifting | Vivi Aesthetics & Spa",
@@ -15,6 +15,9 @@ export const laserSkinTighteningService: Service = {
     "Experience non-surgical skin tightening in Calgary. Advanced laser treatments for firmer, lifted skin without surgery at Vivi Aesthetics & Spa.",
   keywords: [
     "laser skin tightening calgary",
+    "laser skin tightening in calgary",
+    "skin tightening treatment calgary",
+    "non-surgical skin lifting in calgary",
     "non surgical skin tightening",
     "face lift alternative calgary",
     "skin firming treatment",
@@ -27,11 +30,16 @@ export const laserSkinTighteningService: Service = {
 
   image:
     "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-001.webp",
+  imageAlt: "Client undergoing laser skin tightening in Calgary for a firmer jawline at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
     "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-001.webp",
     "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-002.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-001.webp", alt: "Non-surgical skin lifting in Calgary using advanced laser technology." },
+    { src: "/images/services/laser-skin-tightening/laser-skin-tightening-in-calgary-002.webp", alt: "Demonstration of a skin tightening treatment in Calgary on the neck area." },
   ],
 
   heroType: "none",
@@ -62,7 +70,7 @@ export const laserSkinTighteningService: Service = {
     "Laser skin tightening operates through controlled thermal injury to dermal tissues, primarily targeting water molecules and causing immediate collagen fiber contraction while stimulating long-term neocollagenesis. Technologies include monopolar radiofrequency systems (1-6MHz) that deliver volumetric heating to deep dermal and subdermal layers, fractional laser systems using CO2 (10,600nm) or erbium wavelengths (2,940nm) that create controlled thermal zones, and infrared lasers (1440-1540nm) that specifically target water absorption. The thermal injury cascade activates heat shock proteins (HSP47, HSP70), which promote fibroblast proliferation and enhanced collagen synthesis. Immediate tightening occurs through denaturation of existing collagen fibers at temperatures of 60-70°C, while long-term improvement results from new type I and III collagen formation over 3-6 months. Modern systems incorporate real-time temperature monitoring, impedance feedback, and cooling mechanisms to maintain therapeutic temperatures (55-65°C) while protecting the epidermis. Treatment depth and intensity are controlled through energy settings, pulse duration, and cooling parameters to optimize safety and efficacy across different anatomical areas and skin types.",
 
   overview:
-    "Laser skin tightening represents a revolutionary advancement in non-surgical aesthetic treatments, offering patients the ability to achieve significant lifting and firming results without the risks, expense, and recovery time associated with surgical procedures. This innovative technology harnesses the power of controlled thermal energy to stimulate the body's natural collagen production processes, resulting in progressive skin tightening that appears natural and enhances individual beauty. The treatment's versatility allows for customized protocols addressing various areas of concern while maintaining the highest safety standards.",
+    "Laser skin tightening in Calgary represents a revolutionary advancement in non-surgical aesthetic treatments, offering patients the ability to achieve significant lifting and firming results without the risks, expense, and recovery time associated with surgical procedures. This innovative skin tightening treatment in Calgary harnesses the power of controlled thermal energy to stimulate the body's natural collagen production processes, resulting in progressive skin tightening that appears natural and enhances individual beauty. Our non-surgical skin lifting in Calgary offers versatility, allowing for customized protocols addressing various areas of concern while maintaining the highest safety standards.",
 
   benefits: [
     "Non-surgical lifting and firming without the risks and recovery of surgical procedures",

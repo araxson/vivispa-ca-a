@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const skinTagRemovalService: Service = {
   id: "skin-tag-removal",
-  title: "Skin Tag Removal",
+  title: "Skin Tag Removal in Calgary",
   slug: "skin-tag-removal",
   previewDescription:
-    "Safe and effective skin tag and mole removal treatments using advanced medical techniques.",
+    "Safe and effective skin tag removal in Calgary, including mole removal in Calgary, using advanced medical techniques for smooth, clear skin.",
   fullDescription:
-    "Skin tag removal is a common dermatological procedure that safely eliminates benign skin growths known as acrochordons, along with other benign lesions such as seborrheic keratoses, dermatosis papulosa nigra, and small benign moles. These harmless skin growths can appear anywhere on the body but are most commonly found in areas where skin experiences friction, such as the neck, underarms, eyelids, and groin areas. Professional removal ensures optimal cosmetic outcomes while maintaining the highest safety standards through various proven medical techniques.",
+    "Skin tag removal in Calgary is a common dermatological procedure that safely eliminates benign skin growths known as acrochordons. Our services extend to mole removal in Calgary and general skin lesion removal in Calgary, covering other benign lesions such as seborrheic keratoses and dermatosis papulosa nigra. These harmless skin growths can appear anywhere on the body but are most commonly found in areas where skin experiences friction, such as the neck, underarms, eyelids, and groin areas. Professional removal ensures optimal cosmetic outcomes while maintaining the highest safety standards through various proven medical techniques.",
 
   metaTitle:
     "Skin Tag Removal Calgary | Safe Mole Removal | Vivi Aesthetics & Spa",
@@ -15,6 +15,7 @@ export const skinTagRemovalService: Service = {
     "Professional skin tag and mole removal in Calgary. Safe, effective treatment for unwanted skin growths using advanced techniques at Vivi Aesthetics & Spa.",
   keywords: [
     "skin tag removal calgary",
+    "skin tag removal in calgary",
     "mole removal calgary",
     "skin lesion removal calgary",
     "acrochordon removal",
@@ -27,6 +28,7 @@ export const skinTagRemovalService: Service = {
 
   image:
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-001.webp",
+  imageAlt: "Professional skin tag removal in Calgary at Vivi Aesthetics & Spa, showcasing clear skin results.",
 
   galleryImages: [
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-001.webp",
@@ -34,6 +36,13 @@ export const skinTagRemovalService: Service = {
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-003.webp",
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-004.webp",
     "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-005.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-001.webp", alt: "Before and after skin tag removal in Calgary on the neck area." },
+    { src: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-002.webp", alt: "Close-up of a successful mole removal Calgary procedure." },
+    { src: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-003.webp", alt: "Safe skin lesion removal in Calgary using sterile medical equipment." },
+    { src: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-004.webp", alt: "Esthetician consulting with a client about skin tag removal in Calgary." },
+    { src: "/images/services/skin-tag-removal/skin-tag-removal-in-calgary-005.webp", alt: "A client's smooth skin after a mole removal Calgary treatment." },
   ],
 
   heroType: "none",
@@ -63,7 +72,7 @@ export const skinTagRemovalService: Service = {
     "Skin tags, medically known as acrochordons, are benign fibrovascular proliferations that consist of loose collagen fibers, blood vessels, and fat cells covered by hyperkeratotic epithelium. These soft, flesh-colored growths typically range from one to five millimeters in diameter and are composed of a fibrovascular core surrounded by normal epidermis. The development of skin tags is influenced by multiple factors including mechanical friction, genetic predisposition, hormonal changes, insulin resistance, and age-related skin changes. Histologically, these lesions show a characteristic fibrovascular stalk with overlying acanthotic epidermis and mild hyperkeratosis. Unlike other skin lesions, acrochordons contain no melanocytes and have virtually no malignant potential, making them ideal candidates for simple removal procedures.",
 
   overview:
-    "Skin tag removal encompasses various medical procedures designed to eliminate benign skin growths safely and effectively. The field of dermatological lesion removal has evolved significantly, incorporating advanced techniques that minimize discomfort while maximizing cosmetic outcomes. Professional removal methods ensure complete elimination of unwanted growths while preserving surrounding healthy tissue and preventing complications such as infection or scarring.",
+    "Skin tag removal in Calgary at our clinic encompasses various medical procedures designed to eliminate benign skin growths safely and effectively. This includes mole removal Calgary and broader skin lesion removal Calgary services. The field of dermatological lesion removal has evolved significantly, incorporating advanced techniques that minimize discomfort while maximizing cosmetic outcomes. Professional removal methods ensure complete elimination of unwanted growths while preserving surrounding healthy tissue and preventing complications such as infection or scarring.",
 
   benefits: [
     "Complete elimination of unwanted skin growths and associated discomfort",

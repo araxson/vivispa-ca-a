@@ -3,11 +3,11 @@ import { Service } from "@/types/service";
 export const laserHairRemovalService: Service = {
   id: "laser-hair-removal",
   slug: "laser-hair-removal",
-  title: "Laser Hair Removal Treatment",
+  title: "Laser Hair Removal in Calgary",
   previewDescription:
-    "Advanced laser technology for permanent hair reduction on all skin types.",
+    "Searching for the best laser hair removal in Calgary? Our advanced laser technology offers permanent hair reduction for all skin types, providing a long-lasting solution to unwanted hair.",
   fullDescription:
-    "Laser hair removal is a medical procedure that uses concentrated light energy to permanently reduce unwanted hair growth. The treatment works by targeting the melanin in hair follicles with specific wavelengths of light, causing controlled thermal damage that prevents future hair growth. This non-invasive procedure can be performed on virtually any area of the body and is suitable for all skin types when appropriate laser systems are used. Laser hair removal offers a long-term solution to unwanted hair, eliminating the need for regular shaving, waxing, or other temporary hair removal methods.",
+    "Our laser hair removal in Calgary is a medical procedure that uses concentrated light energy to permanently reduce unwanted hair growth. The treatment works by targeting the melanin in hair follicles with specific wavelengths of light, causing controlled thermal damage that prevents future hair growth. This non-invasive procedure can be performed on virtually any area of the body and is suitable for all skin types when appropriate laser systems are used. For those looking for 'laser hair removal near me in Calgary', our clinic provides a leading solution, offering a long-term alternative to regular shaving, waxing, or other temporary hair removal methods.",
 
   metaTitle:
     "Laser Hair Removal Calgary | Permanent Hair Reduction | Vivi Aesthetics & Spa",
@@ -22,6 +22,9 @@ export const laserHairRemovalService: Service = {
     "diode laser hair removal",
     "ipl hair removal calgary",
     "laser hair removal downtown",
+    "laser hair removal in calgary",
+    "best laser hair removal in calgary",
+    "laser hair removal near me in calgary",
   ],
   canonicalUrl: "https://vivispa.ca/services/laser-hair-removal",
 
@@ -30,6 +33,7 @@ export const laserHairRemovalService: Service = {
 
   image:
     "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-001.webp",
+  imageAlt: "Client receiving laser hair removal in Calgary for smooth, hair-free skin at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
@@ -39,6 +43,14 @@ export const laserHairRemovalService: Service = {
     "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-005.webp",
     "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-006.webp",
     "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-007.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-001.webp", alt: "Advanced laser hair removal treatment being performed on a client's leg in Calgary." },
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-003.webp", alt: "Close-up of the laser device used for the best laser hair removal in Calgary." },
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-004.webp", alt: "Esthetician explaining the laser hair removal process to a client searching for 'laser hair removal near me in Calgary'." },
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-005.webp", alt: "Comfortable and modern treatment room for laser hair removal in Calgary." },
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-006.webp", alt: "Before and after results showcasing the effectiveness of laser hair removal in Calgary." },
+    { src: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-007.webp", alt: "Client experiencing pain-free laser hair removal in Calgary thanks to advanced cooling technology." },
   ],
 
   // Add these properties after the galleryImages array
@@ -72,7 +84,7 @@ export const laserHairRemovalService: Service = {
     "Laser hair removal operates on the principle of selective photothermolysis, utilizing specific wavelengths of coherent light to target melanin within hair follicles while preserving surrounding tissues. The primary chromophore is eumelanin, the dark pigment found in hair shafts and follicles. Common laser systems include alexandrite lasers, diode lasers, and Nd:YAG lasers, each optimized for different skin phototypes. The laser energy is absorbed by melanin and converted to thermal energy, causing controlled thermal injury to follicular structures including the dermal papilla and bulge region containing stem cells.",
 
   overview:
-    "Laser hair removal has revolutionized the approach to unwanted hair management, offering a permanent solution that surpasses traditional methods in both effectiveness and convenience. The technology has evolved significantly since its introduction, with modern systems providing safe and effective treatment for all skin types and hair colors. The procedure represents a significant advancement in cosmetic dermatology, combining medical-grade technology with proven scientific principles to deliver lasting results.",
+    "Laser hair removal in Calgary has revolutionized the approach to unwanted hair management, offering a permanent solution that surpasses traditional methods in both effectiveness and convenience. Many clients consider our services the best laser hair removal in Calgary due to the technology's evolution, with modern systems providing safe and effective treatment for all skin types and hair colors. The procedure represents a significant advancement in cosmetic dermatology, combining medical-grade technology with proven scientific principles to deliver lasting results for anyone searching for 'laser hair removal near me in Calgary'.",
 
   benefits: [
     "Permanent reduction of unwanted hair growth with excellent long-term results",

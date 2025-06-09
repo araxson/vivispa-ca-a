@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const japaneseHeadSpaService: Service = {
   id: "japanese-head-spa",
-  title: "Japanese Head Spa",
+  title: "Japanese Head Spa in Calgary",
   slug: "japanese-head-spa",
   previewDescription:
-    "Relax and rejuvenate with a traditional Japanese head spa in Calgary.",
+    "Relax and rejuvenate with a traditional Japanese head spa in Calgary, a unique head spa Calgary experience for ultimate scalp health and relaxation.",
   fullDescription:
-    "Immerse yourself in the ancient art of Japanese Head Spa therapy at Vivi Aesthetics & Spa in Calgary. This authentic wellness treatment combines traditional Japanese scalp massage techniques, meridian therapy, and botanical aromatherapy to promote optimal scalp health, stimulate hair growth, and induce profound relaxation. Our expert practitioners use time-honored methods passed down through generations, incorporating specialized cleansing rituals, therapeutic pressure point massage, and nourishing botanical treatments tailored to your individual scalp and hair needs. Experience the harmonious balance of mind, body, and spirit while addressing scalp concerns and enhancing overall well-being.",
+    "Immerse yourself in the ancient art of Japanese Head Spa therapy at Vivi Aesthetics & Spa, your premier destination for a head spa in Calgary. This authentic wellness treatment combines traditional Japanese scalp massage techniques, meridian therapy, and botanical aromatherapy to promote optimal scalp health, stimulate hair growth, and induce profound relaxation. Our expert practitioners providing this scalp massage in Calgary use time-honored methods passed down through generations, incorporating specialized cleansing rituals, therapeutic pressure point massage, and nourishing botanical treatments tailored to your individual scalp and hair needs. Experience the harmonious balance of mind, body, and spirit with our Japanese head spa in Calgary, while addressing scalp concerns and enhancing overall well-being.",
 
   metaTitle:
     "Japanese Head Spa Calgary | Traditional Scalp Treatment | Vivi Aesthetics & Spa",
@@ -15,8 +15,10 @@ export const japaneseHeadSpaService: Service = {
     "Experience authentic Japanese head spa treatment in Calgary. Traditional scalp massage, meridian therapy, and aromatherapy for ultimate relaxation and hair health at Vivi Aesthetics & Spa.",
   keywords: [
     "japanese head spa calgary",
+    "japanese head spa in calgary",
     "head spa calgary",
     "scalp massage calgary",
+    "scalp massage in calgary",
     "head meridian therapy",
     "japanese scalp treatment",
     "hair rejuvenation",
@@ -28,6 +30,7 @@ export const japaneseHeadSpaService: Service = {
 
   image:
     "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-003.webp",
+  imageAlt: "Client enjoying a relaxing Japanese head spa in Calgary at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
@@ -40,6 +43,17 @@ export const japaneseHeadSpaService: Service = {
     "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-007.webp",
     "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-008.webp",
     "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-009.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-001.webp", alt: "Scalp massage in progress during a Japanese head spa in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-002.webp", alt: "Close-up of botanical products used in a head spa Calgary treatment." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-003.webp", alt: "Client deeply relaxed during a scalp massage in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-004.webp", alt: "The serene ambiance of the Japanese head spa room in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-005.webp", alt: "Specialized tools for scalp analysis at a head spa in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-006.webp", alt: "Steam treatment enhancing a Japanese head spa session in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-007.webp", alt: "Application of nourishing hair mask during a scalp massage in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-008.webp", alt: "Before and after hair condition from a series of Japanese head spa treatments in Calgary." },
+    { src: "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-009.webp", alt: "Aesthetic display of traditional tools for a head spa Calgary experience." },
   ],
 
   heroType: "none",
@@ -70,7 +84,7 @@ export const japaneseHeadSpaService: Service = {
     "Japanese Head Spa therapy integrates traditional Eastern medicine principles with contemporary trichological science and neuromuscular therapy. The treatment modulates scalp microcirculation through mechanoreceptor stimulation, activating vasodilation and enhancing nutrient delivery to hair follicles via increased blood flow. Pressure point manipulation along meridian pathways stimulates the parasympathetic nervous system, reducing cortisol levels and promoting relaxation responses. The scalp contains numerous nerve endings connected to the trigeminal and occipital nerves, making targeted massage effective for tension relief and stress reduction. Scientific research demonstrates that regular scalp massage increases hair shaft diameter through the stretching of dermal papilla cells within hair follicles, potentially activating genes associated with hair growth factors including VEGF (vascular endothelial growth factor) and PDGF (platelet-derived growth factor). The technique also influences sebaceous gland function, helping to regulate sebum production and maintain optimal scalp pH levels between 4.5-5.5. Aromatherapy components work through olfactory pathways to modulate limbic system activity, enhancing the overall therapeutic effects on mood and stress responses.",
 
   overview:
-    "Japanese Head Spa represents the pinnacle of traditional wellness practices, combining centuries-old Japanese healing techniques with modern understanding of scalp health and stress physiology. This holistic treatment approach transcends simple relaxation, offering therapeutic benefits for both physical and mental well-being. The authentic Japanese methodology emphasizes harmony between mind, body, and spirit, creating a transformative experience that promotes scalp health while providing profound stress relief and emotional balance.",
+    "Our Japanese head spa in Calgary represents the pinnacle of traditional wellness practices, combining centuries-old Japanese healing techniques with modern understanding of scalp health and stress physiology. This holistic treatment approach, a renowned head spa Calgary service, transcends simple relaxation, offering therapeutic benefits for both physical and mental well-being. The authentic Japanese methodology, including detailed scalp massage in Calgary, emphasizes harmony between mind, body, and spirit, creating a transformative experience that promotes scalp health while providing profound stress relief and emotional balance.",
 
   benefits: [
     "Enhanced blood circulation to hair follicles promoting nutrient delivery and oxygenation",

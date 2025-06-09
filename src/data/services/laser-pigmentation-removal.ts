@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const laserPigmentationRemovalService: Service = {
   id: "laser-pigmentation-removal",
-  title: "Laser Pigmentation Removal",
+  title: "Laser Pigmentation Removal in Calgary",
   slug: "laser-pigmentation-removal",
   previewDescription:
-    "Eliminate age spots, melasma, and hyperpigmentation with advanced laser treatments.",
+    "Seeking effective laser pigmentation removal in Calgary? Eliminate age spots, melasma, and hyperpigmentation, including laser for dark spots in Calgary, with our advanced treatments.",
   fullDescription:
-    "Achieve clearer, more even-toned skin with professional laser pigmentation removal at Vivi Aesthetics & Spa in Calgary. Our advanced laser systems target and eliminate various types of hyperpigmentation including age spots, sun damage, melasma, and post-inflammatory pigmentation. Using cutting-edge Q-switched and IPL technologies, we precisely target melanin deposits while protecting surrounding healthy skin tissue. Whether you're dealing with facial discoloration, age spots on hands, or body pigmentation concerns, our experienced practitioners create customized treatment protocols to restore your natural skin clarity and radiance with minimal downtime.",
+    "Achieve clearer, more even-toned skin with professional laser pigmentation removal in Calgary at Vivi Aesthetics & Spa. Our pigmentation treatment in Calgary is designed to be effective, using advanced laser systems to target and eliminate various types of hyperpigmentation including age spots, sun damage, melasma, and post-inflammatory pigmentation. Using cutting-edge Q-switched and IPL technologies, we precisely target melanin deposits while protecting surrounding healthy skin tissue. Whether you're dealing with facial discoloration, age spots on hands, or body pigmentation concerns, our experienced practitioners create customized treatment protocols to restore your natural skin clarity and radiance with minimal downtime.",
 
   metaTitle:
     "Laser Pigmentation Removal Calgary | Age Spot Treatment | Vivi Aesthetics & Spa",
@@ -22,16 +22,24 @@ export const laserPigmentationRemovalService: Service = {
     "brown spot removal",
     "IPL pigmentation calgary",
     "q-switched laser calgary",
+    "laser pigmentation removal in calgary",
+    "pigmentation treatment calgary",
+    "laser for dark spots in calgary",
   ],
   canonicalUrl: "https://vivispa.ca/services/laser-pigmentation-removal",
 
   image:
     "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-002.webp",
+  imageAlt: "Client undergoing laser pigmentation removal in Calgary for clearer skin at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
     "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-001.webp",
     "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-002.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-001.webp", alt: "Before and after laser for dark spots in Calgary, showing reduced pigmentation." },
+    { src: "/images/services/laser-pigmentation-removal/laser-pigmentation-removal-in-calgary-002.webp", alt: "Close-up of pigmentation treatment Calgary using advanced laser technology." },
   ],
 
   heroType: "none",
@@ -62,7 +70,7 @@ export const laserPigmentationRemovalService: Service = {
     "Laser pigmentation removal operates through selective photothermolysis, utilizing specific wavelengths that are preferentially absorbed by melanin while minimizing thermal damage to surrounding tissues. Q-switched lasers including Nd:YAG (1064nm and 532nm), alexandrite (755nm), and ruby (694nm) deliver ultra-short pulses (nanoseconds to picoseconds) that create photomechanical disruption of melanin granules within melanosomes. This rapid energy delivery exceeds the thermal relaxation time of melanin, causing fragmentation rather than thermal injury. IPL systems (500-1200nm) use broad-spectrum light with cutoff filters to target multiple chromophores simultaneously. The fragmented melanin particles are eliminated through lymphatic drainage and transepidermal elimination over 2-8 weeks. Different pigmentation types require specific approaches: epidermal melanin (solar lentigines, café-au-lait macules) responds well to shorter wavelengths, while dermal melanin (melasma, post-inflammatory hyperpigmentation) may require longer wavelengths and fractional approaches. Modern picosecond lasers offer enhanced efficacy with reduced thermal damage, enabling treatment of previously challenging pigmentation disorders across all skin phototypes.",
 
   overview:
-    "Laser pigmentation removal represents the gold standard in addressing unwanted hyperpigmentation, offering precision targeting of melanin deposits while preserving surrounding healthy tissue. This advanced technology provides patients with safe, effective solutions for various pigmentation concerns that were previously difficult to treat. The sophisticated approach allows for customized treatment protocols based on pigmentation type, depth, and individual skin characteristics, ensuring optimal results with minimal risk.",
+    "Laser pigmentation removal in Calgary represents the gold standard in addressing unwanted hyperpigmentation, offering precision targeting of melanin deposits while preserving surrounding healthy tissue. This advanced technology provides patients with safe, effective solutions for various pigmentation concerns, including those searching for laser for dark spots in Calgary, that were previously difficult to treat. Our pigmentation treatment in Calgary involves a sophisticated approach that allows for customized treatment protocols based on pigmentation type, depth, and individual skin characteristics, ensuring optimal results with minimal risk.",
 
   benefits: [
     "Complete elimination of unwanted pigmentation including age spots and melasma",

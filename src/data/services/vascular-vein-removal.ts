@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const vascularVeinRemovalService: Service = {
   id: "vascular-vein-removal",
-  title: "Vascular Vein Removal",
+  title: "Vascular Lesion & Vein Removal in Calgary",
   slug: "vascular-vein-removal",
   previewDescription:
-    "Eliminate spider veins and broken capillaries with advanced vascular removal treatments.",
+    "Seeking spider vein removal in Calgary or vascular lesion removal in Calgary? Eliminate spider veins and broken capillaries with our advanced vascular removal treatments.",
   fullDescription:
-    "Restore clear, beautiful skin with professional vascular vein removal at Vivi Aesthetics & Spa in Calgary. Our advanced laser and IPL treatments effectively eliminate spider veins, broken capillaries, and vascular lesions on the face and body. Using cutting-edge technology with precise wavelengths, we target hemoglobin in unwanted blood vessels while protecting surrounding tissue. Whether you're dealing with facial redness, leg spider veins, or cherry angiomas, our experienced practitioners deliver safe, effective results with minimal discomfort and no downtime. Achieve smoother, clearer skin and renewed confidence with our customized vascular treatment protocols.",
+    "Restore clear, beautiful skin with professional vascular lesion removal in Calgary, including spider vein removal and general vein removal in Calgary, at Vivi Aesthetics & Spa. Our advanced laser and IPL treatments effectively eliminate spider veins, broken capillaries, and vascular lesions on the face and body. Using cutting-edge technology with precise wavelengths, we target hemoglobin in unwanted blood vessels while protecting surrounding tissue. Whether you're dealing with facial redness, leg spider veins, or cherry angiomas, our experienced practitioners deliver safe, effective results with minimal discomfort and no downtime. Achieve smoother, clearer skin and renewed confidence with our customized vascular treatment protocols.",
 
   metaTitle:
     "Vascular Vein Removal Calgary | Spider Vein Treatment | Vivi Aesthetics & Spa",
@@ -16,6 +16,8 @@ export const vascularVeinRemovalService: Service = {
   keywords: [
     "vascular vein removal calgary",
     "spider vein removal calgary",
+    "vascular lesion removal in calgary",
+    "vein removal in calgary",
     "broken capillaries treatment",
     "facial vein removal",
     "telangiectasia treatment",
@@ -27,12 +29,18 @@ export const vascularVeinRemovalService: Service = {
 
   image:
     "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-001.webp",
+  imageAlt: "Client receiving vascular lesion removal in Calgary for spider veins at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
     "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-001.webp",
     "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-002.webp",
     "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-003.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-001.webp", alt: "Laser device used for spider vein removal Calgary on a client's leg." },
+    { src: "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-002.webp", alt: "Before and after results of vein removal in Calgary, showing clearer skin." },
+    { src: "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-003.webp", alt: "Close-up of a vascular lesion removal in Calgary procedure on facial capillaries." },
   ],
 
   heroType: "none",
@@ -63,7 +71,7 @@ export const vascularVeinRemovalService: Service = {
     "Vascular lesion removal operates on the principle of selective photothermolysis, utilizing specific wavelengths of light that are preferentially absorbed by oxyhemoglobin and deoxyhemoglobin within blood vessels. Common treatment modalities include pulsed dye lasers (585-595nm), KTP lasers (532nm), Nd:YAG lasers (1064nm), and intense pulsed light (IPL) systems (500-1200nm). The absorbed light energy converts to thermal energy, causing coagulation of blood within the targeted vessel, leading to vessel closure and eventual reabsorption by the body's natural processes. Different wavelengths penetrate to varying depths: 532nm KTP lasers are optimal for superficial facial telangiectasias, 595nm pulsed dye lasers effectively treat both facial and leg spider veins up to 1.5mm diameter, while 1064nm Nd:YAG lasers can target deeper reticular veins and larger vascular lesions. The treatment success depends on vessel diameter, depth, hemoglobin concentration, and skin phototype. Melanin absorption can compete with hemoglobin for light energy, making longer wavelengths safer for darker skin types. Advanced cooling systems protect the epidermis and reduce discomfort during treatment.",
 
   overview:
-    "Vascular vein removal represents one of the most effective and sophisticated approaches to eliminating unwanted blood vessels and vascular lesions. This advanced technology offers patients safe, precise treatment options for various vascular concerns that can significantly impact confidence and comfort. The versatility of modern vascular treatment systems allows for customized protocols addressing everything from delicate facial capillaries to larger leg veins, providing comprehensive solutions for vascular imperfections.",
+    "Vascular lesion removal in Calgary, which includes spider vein removal Calgary and other vein removal in Calgary, represents one of the most effective and sophisticated approaches to eliminating unwanted blood vessels and vascular lesions. This advanced technology offers patients safe, precise treatment options for various vascular concerns that can significantly impact confidence and comfort. The versatility of modern vascular treatment systems allows for customized protocols addressing everything from delicate facial capillaries to larger leg veins, providing comprehensive solutions for vascular imperfections.",
 
   benefits: [
     "Complete elimination of unsightly spider veins and broken capillaries",

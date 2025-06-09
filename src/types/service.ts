@@ -83,7 +83,9 @@ export interface Service {
 
   // Media
   image: string;
+  imageAlt?: string;
   galleryImages: string[];
+  galleryImageAlts?: Array<{ src: string; alt: string }>;
   heroType?: "image" | "video" | "none";
   heroVideo?: {
     src: string;

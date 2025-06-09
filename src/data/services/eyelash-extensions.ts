@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const eyelashExtensionsService: Service = {
   id: "eyelash-extensions",
-  title: "Eyelash Extensions",
+  title: "Eyelash Extensions in Calgary",
   slug: "eyelash-extensions",
   previewDescription:
-    "Semi-permanent individual eyelash enhancement for natural-looking volume and length.",
+    "Achieve stunning, natural looking eyelash extensions in Calgary with our semi-permanent individual eyelash enhancements for lasting volume and length.",
   fullDescription:
-    "Eyelash extensions are semi-permanent synthetic or natural fibers that are individually bonded to natural eyelashes to create enhanced length, thickness, and curl. This cosmetic procedure involves the precise application of individual extensions using medical-grade adhesive, resulting in fuller, longer lashes that eliminate the need for daily mascara application. The treatment offers customizable results from subtle natural enhancement to dramatic volume, with options including classic, volume, and hybrid application techniques to suit individual preferences and eye shapes.",
+    "Our eyelash extensions in Calgary are semi-permanent synthetic or natural fibers that are individually bonded to natural eyelashes to create enhanced length, thickness, and curl. This cosmetic procedure involves the precise application of individual extensions using medical-grade adhesive, resulting in fuller, longer lashes that eliminate the need for daily mascara application. Many consider ours the best eyelash extensions in Calgary due to our customizable results, offering options from subtle natural enhancement to dramatic volume, with techniques including classic, volume, and hybrid applications to suit individual preferences and eye shapes.",
 
   metaTitle:
     "Eyelash Extensions Calgary | Natural-Looking Lashes | Vivi Aesthetics & Spa",
@@ -15,8 +15,10 @@ export const eyelashExtensionsService: Service = {
     "Get beautiful, natural-looking eyelash extensions in Calgary. Expert application by certified technicians at Vivi Aesthetics & Spa for stunning, low-maintenance lashes.",
   keywords: [
     "eyelash extensions calgary",
+    "eyelash extensions in calgary",
     "best eyelash extensions in calgary",
     "natural looking eyelash extensions calgary",
+    "natural looking eyelash extensions in calgary",
     "semi-permanent lashes",
     "volume lashes",
     "classic lash extensions",
@@ -28,6 +30,7 @@ export const eyelashExtensionsService: Service = {
 
   image:
     "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-001.webp",
+  imageAlt: "Client with beautiful, natural looking eyelash extensions in Calgary from Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
@@ -38,6 +41,15 @@ export const eyelashExtensionsService: Service = {
     "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-005.webp",
     "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-006.webp",
     "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-007.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-001.webp", alt: "Close-up of perfectly applied eyelash extensions in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-002.webp", alt: "Technician applying some of the best eyelash extensions in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-003.webp", alt: "Comparing eyes with and without natural looking eyelash extensions in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-004.webp", alt: "Various types of eyelash extensions available for clients in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-005.webp", alt: "A happy client showcasing her new eyelash extensions in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-006.webp", alt: "The comfortable and sterile environment for getting the best eyelash extensions in Calgary." },
+    { src: "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-007.webp", alt: "Tools used for precise application of natural looking eyelash extensions in Calgary." },
   ],
 
   // Available at both locations
@@ -66,7 +78,7 @@ export const eyelashExtensionsService: Service = {
     "Eyelash extensions are semi-permanent synthetic fibers manufactured from polyester or silk-like materials, individually bonded to natural eyelashes using medical-grade cyanoacrylate adhesive. The extensions typically range from 0.03mm to 0.25mm in diameter and 6mm to 18mm in length, with various curl patterns designed to mimic natural lash configurations. Natural eyelashes follow a growth cycle consisting of anagen, catagen, and telogen phases, with extensions applied only to lashes in the active growth phase to maximize retention and minimize stress on the follicle.",
 
   overview:
-    "Eyelash extensions have become one of the most popular semi-permanent beauty treatments, offering a solution for enhanced eye definition without daily makeup application. The technique originated in Asia and has evolved significantly with improvements in adhesive technology, fiber materials, and application methods. Modern eyelash extension procedures provide natural-looking results that complement individual eye shapes and personal style preferences while maintaining the health of natural lashes.",
+    "Eyelash extensions in Calgary have become one of the most popular semi-permanent beauty treatments, offering a solution for enhanced eye definition without daily makeup application. The technique originated in Asia and has evolved significantly with improvements in adhesive technology, fiber materials, and application methods. Modern eyelash extension procedures provide beautiful, natural looking eyelash extensions in Calgary that complement individual eye shapes and personal style preferences while maintaining the health of natural lashes. Many clients agree that we offer the best eyelash extensions in Calgary for a consistently stunning look.",
 
   benefits: [
     "Eliminates daily mascara application and makeup removal routines",

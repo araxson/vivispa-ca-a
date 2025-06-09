@@ -2,12 +2,12 @@ import { Service } from "@/types/service";
 
 export const iplPhotofacial: Service = {
   id: "ipl-photofacial",
-  title: "IPL Photofacial",
+  title: "IPL Photofacial in Calgary",
   slug: "ipl-photofacial",
   previewDescription:
-    "Rejuvenate your skin with IPL Photofacial treatments in Calgary.",
+    "Rejuvenate your skin with our IPL Photofacial treatments in Calgary, a leading photofacial treatment in Calgary for a clearer, more radiant complexion.",
   fullDescription:
-    "Discover the transformative power of IPL Photofacial in Calgary at Vivi Aesthetics & Spa. Our advanced photorejuvenation technique targets sun damage, age spots, and rosacea for a clearer, more radiant complexion with minimal downtime.",
+    "Discover the transformative power of IPL Photofacial in Calgary at Vivi Aesthetics & Spa. As a form of intense pulsed light therapy in Calgary, our advanced photorejuvenation technique targets sun damage, age spots, and rosacea for a clearer, more radiant complexion with minimal downtime.",
 
   metaTitle:
     "IPL Photofacial Calgary | Photorejuvenation Treatment | Vivi Aesthetics & Spa",
@@ -17,6 +17,8 @@ export const iplPhotofacial: Service = {
     "ipl photofacial calgary",
     "photofacial treatment calgary",
     "intense pulsed light therapy calgary",
+    "ipl photofacial in calgary",
+    "intense pulsed light therapy in calgary",
     "photorejuvenation",
     "rosacea treatment",
     "sun damage repair",
@@ -25,11 +27,16 @@ export const iplPhotofacial: Service = {
   canonicalUrl: "https://vivispa.ca/services/ipl-photofacial",
 
   image: "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-001.webp",
+  imageAlt: "Client receiving an IPL photofacial in Calgary for skin rejuvenation and sun damage repair at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
     "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-001.webp",
     "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-003.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-001.webp", alt: "IPL photofacial treatment device in use for a photofacial treatment in Calgary." },
+    { src: "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-003.webp", alt: "Clear and radiant skin after an intense pulsed light therapy in Calgary." },
   ],
 
   heroType: "none",
@@ -60,7 +67,7 @@ export const iplPhotofacial: Service = {
     "IPL (Intense Pulsed Light) Photofacial is a non-laser light-based technology that employs broad-spectrum visible light in wavelengths ranging from 400 to 1200 nanometers. Unlike lasers that emit a single wavelength, IPL delivers multiple wavelengths simultaneously, allowing it to target various chromophores (color-absorbing molecules) in the skin. The technology works through selective photothermolysis, where the light energy is converted to heat when absorbed by specific targets like melanin (in pigmentation) and hemoglobin (in blood vessels). This thermal energy destroys the targeted structures while leaving surrounding tissue intact. Additionally, controlled thermal damage stimulates fibroblast activity, promoting collagen and elastin production for improved skin texture and elasticity.",
 
   overview:
-    "IPL Photofacial represents a breakthrough in photorejuvenation technology, offering comprehensive skin rejuvenation through broad-spectrum light therapy. This non-invasive treatment simultaneously addresses multiple skin concerns including pigmentation irregularities, vascular lesions, and signs of photoaging. The versatility of IPL technology makes it an ideal choice for patients seeking overall skin improvement with minimal downtime and progressive, natural-looking results.",
+    "Our IPL Photofacial in Calgary represents a breakthrough in photorejuvenation technology, offering comprehensive skin rejuvenation through broad-spectrum light therapy. This intense pulsed light therapy in Calgary is a non-invasive treatment that simultaneously addresses multiple skin concerns including pigmentation irregularities, vascular lesions, and signs of photoaging. The versatility of IPL technology makes it an ideal choice for patients seeking a photofacial treatment in Calgary for overall skin improvement with minimal downtime and progressive, natural-looking results.",
 
   benefits: [
     "Simultaneous treatment of multiple skin concerns including pigmentation, vascular lesions, and texture issues",

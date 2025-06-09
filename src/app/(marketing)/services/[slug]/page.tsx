@@ -106,7 +106,7 @@ export default function ServicePage({ params }: ServicePageProps) {
           service.image
             ? {
                 src: service.image,
-                alt: service.title,
+                alt: service.imageAlt || service.title,
               }
             : undefined
         }
@@ -132,11 +132,7 @@ export default function ServicePage({ params }: ServicePageProps) {
       />
 
       <ServiceGallery
-        images={service.galleryImages.map((img: string) => ({
-          id: img,
-          src: img,
-          alt: `${service.title} - Result`,
-        }))}
+        images={(service.galleryImageAlts && service.galleryImageAlts.length > 0) ? service.galleryImageAlts.map(item => ({ id: item.src, src: item.src, alt: item.alt })) : service.galleryImages.map((img: string) => ({ id: img, src: img, alt: `${service.title} - Result` }))}
         title={`${service.title} Gallery`}
       />
 

@@ -3,11 +3,11 @@ import { Service } from "@/types/service";
 export const microneedlingService: Service = {
   id: "microneedling",
   slug: "microneedling",
-  title: "Microneedling Treatment",
+  title: "Microneedling in Calgary",
   previewDescription:
-    "Advanced collagen induction therapy using controlled micro-injuries to stimulate natural skin regeneration and rejuvenation.",
+    "Experience advanced microneedling in Calgary, a form of collagen induction therapy using controlled micro-injuries to stimulate natural skin regeneration and rejuvenation.",
   fullDescription:
-    "Microneedling, also known as collagen induction therapy or percutaneous collagen induction, is a revolutionary minimally invasive cosmetic procedure that utilizes fine, sterile needles to create thousands of controlled micro-injuries in the skin's surface. This innovative treatment harnesses the body's natural wound healing response to stimulate the production of collagen and elastin fibers, resulting in dramatic improvements in skin texture, tone, and overall appearance. The procedure is highly effective for addressing a comprehensive range of skin concerns including acne scarring, fine lines and wrinkles, enlarged pores, stretch marks, hyperpigmentation, melasma, and signs of photoaging. Unlike more aggressive treatments, microneedling promotes natural skin regeneration while maintaining the integrity of the epidermis, making it suitable for all skin types and colors without the risk of post-inflammatory hyperpigmentation commonly associated with laser treatments.",
+    "Microneedling in Calgary, also known as collagen induction therapy Calgary or skin needling Calgary, is a revolutionary minimally invasive cosmetic procedure that utilizes fine, sterile needles to create thousands of controlled micro-injuries in the skin's surface. This innovative treatment harnesses the body's natural wound healing response to stimulate the production of collagen and elastin fibers, resulting in dramatic improvements in skin texture, tone, and overall appearance. The procedure is highly effective for addressing a comprehensive range of skin concerns including acne scarring, fine lines and wrinkles, enlarged pores, stretch marks, hyperpigmentation, melasma, and signs of photoaging. Unlike more aggressive treatments, microneedling promotes natural skin regeneration while maintaining the integrity of the epidermis, making it suitable for all skin types and colors without the risk of post-inflammatory hyperpigmentation commonly associated with laser treatments.",
 
   metaTitle:
     "Microneedling Calgary | Collagen Induction Therapy | Vivi Aesthetics & Spa",
@@ -15,6 +15,7 @@ export const microneedlingService: Service = {
     "Experience professional microneedling in Calgary at Vivi Aesthetics & Spa. Advanced collagen induction therapy for smoother skin, reduced scars, and improved texture with minimal downtime.",
   keywords: [
     "microneedling calgary",
+    "microneedling in calgary",
     "collagen induction therapy calgary",
     "acne scar treatment calgary",
     "skin rejuvenation calgary",
@@ -30,6 +31,7 @@ export const microneedlingService: Service = {
   canonicalUrl: "https://vivispa.ca/services/microneedling",
 
   image: "/images/services/microneedling/microneedling-in-calgary-004.webp",
+  imageAlt: "Client receiving microneedling in Calgary for skin rejuvenation and collagen induction therapy at Vivi Aesthetics & Spa.",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
@@ -39,6 +41,14 @@ export const microneedlingService: Service = {
     "/images/services/microneedling/microneedling-in-calgary-004.webp",
     "/images/services/microneedling/microneedling-in-calgary-005.webp",
     "/images/services/microneedling/microneedling-in-calgary-006.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/microneedling/microneedling-in-calgary-001.webp", alt: "Close-up of microneedling device performing skin needling in Calgary." },
+    { src: "/images/services/microneedling/microneedling-in-calgary-002.webp", alt: "Esthetician applying serum during a collagen induction therapy session in Calgary." },
+    { src: "/images/services/microneedling/microneedling-in-calgary-003.webp", alt: "Microneedling treatment in progress for acne scars, a popular microneedling in Calgary service." },
+    { src: "/images/services/microneedling/microneedling-in-calgary-004.webp", alt: "Soothing mask application after a skin needling Calgary treatment." },
+    { src: "/images/services/microneedling/microneedling-in-calgary-005.webp", alt: "Results of collagen induction therapy in Calgary showing improved skin texture." },
+    { src: "/images/services/microneedling/microneedling-in-calgary-006.webp", alt: "Professional setup for a microneedling in Calgary session at Vivi Aesthetics & Spa." },
   ],
 
   heroType: "none",
@@ -67,7 +77,7 @@ export const microneedlingService: Service = {
     "Microneedling operates through the fundamental principle of controlled dermal injury, utilizing sterile, medical-grade needles ranging from 0.5mm to 3.0mm in depth to create precise micro-channels that penetrate the stratum corneum, epidermis, and papillary dermis. This mechanical stimulation triggers a complex cascade of biological responses beginning with immediate platelet activation and degranulation, releasing essential growth factors including platelet-derived growth factor (PDGF), transforming growth factor-beta (TGF-β), vascular endothelial growth factor (VEGF), and epidermal growth factor (EGF). The inflammatory phase initiates within hours, characterized by neutrophil infiltration followed by macrophage activation, which releases additional cytokines and growth factors essential for tissue repair. Fibroblast proliferation and migration occur during the proliferative phase, leading to significantly increased synthesis of type I and type III collagen, elastin fibers, and hyaluronic acid. The remodeling phase extends for several months, during which newly formed collagen undergoes cross-linking and organization, resulting in improved skin strength, elasticity, and texture. The micro-channels created also temporarily disrupt the stratum corneum barrier function, enhancing transdermal drug delivery by up to 1000-fold compared to intact skin, allowing for superior penetration of topical growth factors, peptides, vitamins, and other active ingredients. Modern microneedling devices utilize advanced needle configurations including linear, circular, and helical patterns to optimize treatment uniformity and minimize discomfort while maximizing therapeutic outcomes.",
 
   overview:
-    "Microneedling represents one of the most significant advances in minimally invasive dermatological treatments, offering a unique combination of proven efficacy, safety, and versatility that has revolutionized the approach to skin rejuvenation and scar revision. The treatment principle is based on the skin's remarkable ability to heal and regenerate itself when subjected to controlled injury, a concept that has been refined and perfected through decades of clinical research and technological advancement. Unlike ablative procedures that remove layers of skin or non-ablative treatments that may require multiple sessions for modest results, microneedling stimulates natural healing processes while preserving the skin's protective barrier, resulting in progressive improvement with minimal downtime. The procedure has gained widespread acceptance among dermatologists and aesthetic practitioners worldwide due to its exceptional safety profile, predictable outcomes, and ability to address multiple skin concerns simultaneously. Clinical studies have consistently demonstrated significant improvements in skin texture, firmness, pore size reduction, and overall skin quality following microneedling treatments, with results that continue to improve for months after the procedure as new collagen formation reaches its peak.",
+    "Microneedling in Calgary represents one of the most significant advances in minimally invasive dermatological treatments, offering a unique combination of proven efficacy, safety, and versatility that has revolutionized the approach to skin rejuvenation and scar revision. This skin needling Calgary technique is based on the skin's remarkable ability to heal and regenerate itself when subjected to controlled injury, a concept refined through decades of research. Unlike ablative procedures, our collagen induction therapy in Calgary stimulates natural healing while preserving the skin's protective barrier, resulting in progressive improvement with minimal downtime. The procedure has gained widespread acceptance for its safety, predictable outcomes, and ability to address multiple skin concerns. Clinical studies consistently show significant improvements in skin texture, firmness, and overall quality following microneedling treatments, with results that continue to improve for months.",
 
   benefits: [
     "Dramatic stimulation of natural collagen and elastin production leading to firmer, more youthful-looking skin structure",

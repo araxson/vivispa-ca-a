@@ -3,11 +3,11 @@ import { Service } from "@/types/service";
 export const hydrofacialService: Service = {
   id: "hydrofacial",
   slug: "hydrofacial",
-  title: "HydroFacial Treatment",
+  title: "HydroFacial in Calgary",
   previewDescription:
-    "Advanced multi-step facial treatment that cleanses, exfoliates, extracts, and hydrates skin simultaneously.",
+    "Experience the best HydroFacial in Calgary with our advanced multi-step facial treatment that cleanses, exfoliates, extracts, and hydrates skin simultaneously, delivering immediate results.",
   fullDescription:
-    "HydroFacial is a patented, non-invasive facial treatment that combines cleansing, exfoliation, extraction, hydration, and antioxidant protection in a single session. This revolutionary treatment uses a unique spiral design handpiece and patented Vortex-Fusion delivery system to remove dead skin cells and impurities while simultaneously delivering moisturizing serums into the skin. The multi-step process addresses various skin concerns including fine lines, wrinkles, enlarged pores, oily or acne-prone skin, hyperpigmentation, and dehydration, making it suitable for all skin types and conditions.",
+    "HydroFacial is a patented, non-invasive facial treatment that combines cleansing, exfoliation, extraction, hydration, and antioxidant protection in a single session. If you're looking for a transformative hydrofacial treatment in Calgary, this is an excellent choice. This revolutionary treatment uses a unique spiral design handpiece and patented Vortex-Fusion delivery system to remove dead skin cells and impurities while simultaneously delivering moisturizing serums into the skin. The multi-step process addresses various skin concerns including fine lines, wrinkles, enlarged pores, oily or acne-prone skin, hyperpigmentation, and dehydration, making it suitable for all skin types and conditions.",
 
   metaTitle:
     "HydroFacial Calgary | Deep Cleansing & Hydration | Vivi Aesthetics & Spa",
@@ -26,6 +26,7 @@ export const hydrofacialService: Service = {
   canonicalUrl: "https://vivispa.ca/services/hydrofacial",
 
   image: "/images/services/hydrofacial/hydrofacial-in-calgary-005.webp",
+  imageAlt: "Client relaxing during a HydroFacial in Calgary at Vivi Aesthetics & Spa for clear, hydrated skin",
 
   // Gallery images with SEO-friendly filenames
   galleryImages: [
@@ -36,6 +37,15 @@ export const hydrofacialService: Service = {
     "/images/services/hydrofacial/hydrofacial-in-calgary-005.webp",
     "/images/services/hydrofacial/hydrofacial-in-calgary-007.webp",
     "/images/services/hydrofacial/hydrofacial-in-calgary-011.webp",
+  ],
+  galleryImageAlts: [
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp", alt: "Detailed view of the HydroFacial treatment process in Calgary focusing on skin cleansing." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-002.webp", alt: "Close-up of HydroFacial wand used for exfoliation during a hydrofacial treatment in Calgary." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-003.webp", alt: "Vivi Aesthetics & Spa client receiving hydrating serum infusion as part of the best hydrofacial in Calgary." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-004.webp", alt: "Before and after results of a hydrofacial treatment in Calgary showing improved skin clarity." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-005.webp", alt: "Peaceful spa environment for a relaxing HydroFacial in Calgary." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-007.webp", alt: "Application of a soothing face mask during a hydrofacial treatment session in Calgary." },
+    { src: "/images/services/hydrofacial/hydrofacial-in-calgary-011.webp", alt: "Esthetician consulting with a client before their best hydrofacial in Calgary." },
   ],
 
   heroType: "none",
@@ -65,7 +75,7 @@ export const hydrofacialService: Service = {
     "HydroFacial technology utilizes a patented Vortex-Fusion delivery system that creates a vortex effect to simultaneously perform multiple skin treatment modalities. The system employs a spiral-tip handpiece design that generates controlled suction and fluid dynamics to dislodge and remove impurities from pores while delivering nourishing serums deep into the skin. The treatment combines the benefits of hydradermabrasion, chemical peels, automated extractions, and serum infusion in a single, non-irritating procedure. The multi-step process involves gentle acid peels using glycolic and salicylic acids, vacuum-powered extraction of blackheads and debris, and infusion of antioxidants, peptides, and hyaluronic acid through the patented delivery system.",
 
   overview:
-    "HydroFacial represents a breakthrough in facial treatment technology, offering a comprehensive approach to skin health through its patented multi-step process. Unlike traditional facials that may cause irritation or require downtime, HydroFacial treatments are designed to be gentle yet effective, making them suitable for all skin types including sensitive skin. The treatment addresses multiple skin concerns simultaneously, providing immediate visible results with long-term benefits for skin health and appearance.",
+    "As a leading option for hydrofacial in Calgary, this treatment represents a breakthrough in facial treatment technology, offering a comprehensive approach to skin health through its patented multi-step process. Unlike traditional facials that may cause irritation or require downtime, HydroFacial treatments are designed to be gentle yet effective, making them suitable for all skin types including sensitive skin. Many consider this the best hydrofacial in Calgary because it addresses multiple skin concerns simultaneously, providing immediate visible results with long-term benefits for skin health and appearance.",
 
   benefits: [
     "Immediate improvement in skin texture, tone, and overall radiance",
