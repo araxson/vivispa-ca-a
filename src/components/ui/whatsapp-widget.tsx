@@ -68,7 +68,7 @@ export function WhatsAppWidget({
 
       <div
         className={cn(
-          'fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out',
+          'fixed bottom-24 right-4 z-50 w-[60vw] sm:w-full sm:max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out',
           {
             'translate-x-0 translate-y-0 scale-100': isOpen,
             'pointer-events-none -translate-x-8 translate-y-12 scale-0':
