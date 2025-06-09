@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/data/constant";
+import { Service } from "@/types/service"; // Import Service type
+import {
+  generateOpenGraphData,
+  generateTwitterData,
+} from "@/lib/service-utils"; // Import new utils
 
 // Base URL for all metadata
 const baseUrl = siteConfig.url;
@@ -245,43 +250,40 @@ export function generatePageMetadata({
 export interface ServicePageMetadataProps {
   serviceName: string;
   serviceDescription: string;
-  serviceKeywords?: string[];
-  imageUrl?: string;
-  slug: string;
-  fullDescription?: string;
-  benefits?: string[];
-  locationSpecific?: boolean;
 }
 
 /**
  * Enhanced service page metadata with local SEO optimization
  */
-export function generateServicePageMetadata({
-  serviceName,
-  serviceDescription,
-  serviceKeywords = [],
-  imageUrl,
-  slug,
-  benefits = [],
-  locationSpecific = true,
-}: ServicePageMetadataProps): Metadata {
+export function generateServicePageMetadata(
+  service: Service,
+  locationSpecific: boolean = true,
+): Metadata {
   const locationSuffix = locationSpecific ? " in Calgary" : "";
-  const title = `${serviceName}${locationSuffix}`;
-  const description = `${serviceDescription} Book your ${serviceName.toLowerCase()} treatment at Vivi Aesthetics & Spa Calgary. Professional, safe, and effective results.`;
+  // Use service.metaTitle or service.title for the main title component
+  const baseTitle = service.metaTitle || service.title;
+  const title = `${baseTitle}${locationSuffix}`;
+  // Use service.metaDescription or service.previewDescription for the main description
+  const description = `${
+    service.metaDescription || service.previewDescription || ""
+  } Book your ${baseTitle.toLowerCase()} treatment at Vivi Aesthetics & Spa Calgary. Professional, safe, and effective results.`;
 
   const enhancedKeywords = [
-    ...serviceKeywords,
-    `${serviceName.toLowerCase()} Calgary`,
-    `${serviceName.toLowerCase()} treatment`,
-    `${serviceName.toLowerCase()} spa`,
-    ...benefits.map((benefit) => `${benefit.toLowerCase()} Calgary`),
+    ...(service.keywords || []),
+    `${baseTitle.toLowerCase()} Calgary`,
+    `${baseTitle.toLowerCase()} treatment`,
+    `${baseTitle.toLowerCase()} spa`,
+    ...(service.benefits?.map((benefit: string) => `${benefit.toLowerCase()} Calgary`) || []),
   ];
 
-  const fullCanonicalUrl = `${baseUrl}/services/${slug}`;
-  const ogImageUrl = imageUrl || `${baseUrl}/images/services/${slug}-og.webp`;
+  const fullCanonicalUrl = service.canonicalUrl || `${baseUrl}/services/${service.slug}`;
+
+  // Generate OpenGraph and Twitter data using the utility functions
+  const finalOpenGraphData = generateOpenGraphData(service);
+  const finalTwitterData = generateTwitterData(service);
 
   return {
-    ...defaultMetadata,
+    ...defaultMetadata, // Spread defaultMetadata first
     title,
     description,
     keywords: [...defaultKeywords, ...enhancedKeywords],
@@ -293,28 +295,12 @@ export function generateServicePageMetadata({
         en: fullCanonicalUrl,
       },
     },
-    openGraph: {
-      ...defaultMetadata.openGraph,
-      type: "article",
-      title,
-      description,
-      url: fullCanonicalUrl,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${serviceName} at ${siteConfig.name}`,
-          type: "image/webp",
-        },
-      ],
-    },
-    twitter: {
-      ...defaultMetadata.twitter,
-      title,
-      description,
-      images: [ogImageUrl],
-    },
+    openGraph: finalOpenGraphData, // Use the generated OpenGraph data
+    twitter: finalTwitterData, // Use the generated Twitter data
+    // Ensure other parts of defaultMetadata are not unintentionally overridden if they shouldn't be
+    // For example, if defaultMetadata.openGraph has more specific general fallbacks not covered by generateOpenGraphData
+    // you might need to merge them: { ...defaultMetadata.openGraph, ...finalOpenGraphData }
+    // However, the utility functions are designed to be comprehensive for a service.
   };
 }
 
@@ -427,27 +413,18 @@ export function generateOrganizationSchema() {
 /**
  * Enhanced service schema generation
  */
-export function generateServiceSchema(service: {
-  title: string;
-  previewDescription: string;
-  slug: string;
-  image: string;
-  benefits: string[];
-  expectedResults: string;
-  procedure: string;
-  preparationAndAftercare: string;
-}) {
+export function generateServiceSchema(service: Service) { // Updated to use Service type
   return {
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
     "@id": `${baseUrl}/services/${service.slug}#service`,
-    name: service.title,
-    description: service.previewDescription,
-    procedureType: service.title,
-    bodyLocation: "Face, Body",
+    name: service.title, // Assuming service.title is the correct field
+    description: service.previewDescription, // Assuming service.previewDescription
+    procedureType: service.title, // Or perhaps a more specific field if available
+    bodyLocation: service.bodyLocation || "Face, Body", // Example: use service.bodyLocation or default
     image: {
       "@type": "ImageObject",
-      url: service.image,
+      url: service.image, // Assuming service.image is the correct field
       width: 1200,
       height: 630,
     },
@@ -459,10 +436,10 @@ export function generateServiceSchema(service: {
       "@type": "City",
       name: "Calgary",
     },
-    howPerformed: service.procedure,
-    preparation: service.preparationAndAftercare,
-    expectedOutcome: service.expectedResults,
-    benefits: service.benefits,
+    howPerformed: service.procedure, // Assuming service.procedure
+    preparation: service.preparationAndAftercare, // Assuming service.preparationAndAftercare
+    expectedOutcome: service.expectedResults, // Assuming service.expectedResults
+    benefits: service.benefits?.join(", "), // Join benefits array into a string if schema expects string
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${baseUrl}/services/${service.slug}`,

@@ -26,15 +26,8 @@ export async function generateMetadata({
   const { slug } = params;
   const service = getServiceOrNotFound(slug);
 
-  return generateServicePageMetadata({
-    serviceName: service.title,
-    serviceDescription: service.metaDescription,
-    serviceKeywords: service.keywords,
-    imageUrl: service.image,
-    slug: slug,
-    benefits: service.benefits,
-    locationSpecific: true,
-  });
+  // Pass the entire service object and locationSpecific flag
+  return generateServicePageMetadata(service, true);
 }
 
 export const getServiceWithEnhancedData = cache((slug: string) => {

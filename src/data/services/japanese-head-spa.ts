@@ -51,14 +51,13 @@ export const japaneseHeadSpaService: Service = {
     title: "Japanese Head Spa Calgary | Vivi Aesthetics & Spa",
     description:
       "Experience traditional Japanese head spa therapy for ultimate relaxation and scalp health. Ancient techniques meet modern wellness.",
-    image:
-      "/images/services/japanese-head-spa/japanese-head-spa-in-calgary-003.webp",
-    url: "https://vivispa.ca/services/japanese-head-spa",
-    type: "website",
+    // image field removed (same as service.image)
+    // url field removed (same as service.canonicalUrl)
+    // type field removed (will default to "article")
   },
 
   twitter: {
-    card: "summary_large_image",
+    // card field removed (defaults to "summary_large_image")
     title: "Japanese Head Spa Calgary | Vivi Aesthetics & Spa",
     description:
       "Discover the ancient art of Japanese head spa therapy. Relief tension and promote hair health with traditional techniques.",

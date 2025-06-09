@@ -47,14 +47,13 @@ export const eyelashExtensionsService: Service = {
     title: "Eyelash Extensions Calgary | Vivi Aesthetics & Spa",
     description:
       "Transform your look with professional eyelash extensions. Natural-looking, semi-permanent lashes for effortless beauty every day.",
-    image:
-      "/images/services/eyelash-extensions/eyelash-extensions-in-calgary-001.webp",
-    url: "https://vivispa.ca/services/eyelash-extensions",
-    type: "website",
+    // image field removed (same as service.image)
+    // url field removed (same as service.canonicalUrl)
+    // type field removed (will default to "article")
   },
 
   twitter: {
-    card: "summary_large_image",
+    // card field removed (defaults to "summary_large_image")
     title: "Eyelash Extensions Calgary | Vivi Aesthetics & Spa",
     description:
       "Wake up beautiful with natural-looking eyelash extensions. Expert application for stunning, low-maintenance lashes.",
