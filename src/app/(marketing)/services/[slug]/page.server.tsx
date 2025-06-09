@@ -51,10 +51,18 @@ export const getServiceWithEnhancedData = cache((slug: string) => {
   ]);
   const faqSchema = generateFAQSchema(service.faqs);
 
+  const formattedBenefits = service.benefits.map((benefit: string) => ({
+    id: benefit,
+    title: benefit,
+    description: `Enjoy the benefit of ${benefit.toLowerCase()} with our advanced treatment technology.`,
+    icon: "Zap",
+  }));
+
   return {
     service,
     relatedServices,
     serviceTestimonials,
+    formattedBenefits, // Added new property
     schemas: {
       organization: organizationSchema,
       service: serviceSchema,

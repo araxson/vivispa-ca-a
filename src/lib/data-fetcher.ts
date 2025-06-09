@@ -1,17 +1,9 @@
 import { cache } from "react";
 import { notFound } from "next/navigation";
-import { Service } from "@/types/service";
+import { Service, ServiceCardData } from "@/types/service";
 import { OfferItem } from "@/data/pricing/offers";
-import { hydrofacialService } from "@/data/services/hydrofacial";
-import { eyelashExtensionsService } from "@/data/services/eyelash-extensions";
-import { iplPhotofacial } from "@/data/services/ipl-photofacial";
-import { japaneseHeadSpaService } from "@/data/services/japanese-head-spa";
-import { laserHairRemovalService } from "@/data/services/laser-hair-removal";
-import { laserPigmentationRemovalService } from "@/data/services/laser-pigmentation-removal";
-import { laserSkinTighteningService } from "@/data/services/laser-skin-tightening";
-import { microneedlingService } from "@/data/services/microneedling";
-import { skinTagRemovalService } from "@/data/services/skin-tag-removal";
-import { vascularVeinRemovalService } from "@/data/services/vascular-vein-removal";
+import { services } from "@/data/services";
+import { homePageData } from "@/data/home";
 
 // Import all the data modules
 import {
@@ -19,19 +11,6 @@ import {
   AVAILABLE_LOCATIONS,
 } from "@/data/pricing/offers";
 import { testimonials, getTestimonialsByService } from "@/data/testimonials";
-
-const services: Service[] = [
-  hydrofacialService,
-  eyelashExtensionsService,
-  iplPhotofacial,
-  japaneseHeadSpaService,
-  laserHairRemovalService,
-  laserPigmentationRemovalService,
-  laserSkinTighteningService,
-  microneedlingService,
-  skinTagRemovalService,
-  vascularVeinRemovalService,
-];
 
 /**
  * Performance-optimized data fetcher with Next.js 15 cache function
@@ -222,6 +201,32 @@ export const getDataMetrics = cache(() => {
     lastUpdated: now.toISOString(),
     buildTime: now.getTime(),
   };
+});
+
+// Cached function to get featured service cards for the home page
+export const getHomePageFeaturedServiceCards = cache((): ServiceCardData[] => {
+  const mappedServices: (ServiceCardData | null)[] = homePageData.featuredServices
+    .map((serviceHighlight): ServiceCardData | null => {
+      // Assuming serviceHighlight.id is the slug.
+      const service = getServiceBySlug(serviceHighlight.id);
+
+      if (service) {
+        // The Service type has availableLocations as required (LocationType[])
+        // ServiceCardData has availableLocations as optional (LocationType[] | undefined)
+        // This assignment is valid.
+        return {
+          id: service.id,
+          title: service.title,
+          slug: service.slug,
+          previewDescription: service.previewDescription,
+          image: service.image,
+          availableLocations: service.availableLocations,
+        };
+      }
+      return null; // Service not found
+    });
+
+  return mappedServices.filter((cardData): cardData is ServiceCardData => cardData !== null);
 });
 
 /**

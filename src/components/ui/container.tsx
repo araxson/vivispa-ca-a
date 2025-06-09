@@ -16,7 +16,7 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     | "7xl"
     | "full";
   paddingSize?: SpacingSize;
-  className?: string;
+  className?: string | undefined;
 }
 
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(

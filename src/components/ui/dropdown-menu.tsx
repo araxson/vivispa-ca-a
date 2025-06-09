@@ -92,9 +92,18 @@ const DropdownMenuItem = React.forwardRef<
 ));
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
+// Define a more explicit type for our wrapper's props
+type RadixCheckboxItemProps = React.ComponentPropsWithoutRef<
+  typeof DropdownMenuPrimitive.CheckboxItem
+>;
+// Allow `checked` to be explicitly undefined in our wrapper's props
+type CustomDropdownMenuCheckboxItemProps = Omit<RadixCheckboxItemProps, "checked"> & {
+  checked?: RadixCheckboxItemProps["checked"] | undefined;
+};
+
 const DropdownMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
+  CustomDropdownMenuCheckboxItemProps
 >(({ className, children, checked, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
@@ -105,7 +114,9 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       "my-1 min-h-[44px]",
       className,
     )}
-    checked={checked}
+    // Only pass checked to the primitive if it's not undefined,
+    // as the primitive's prop `checked?: CheckedState` means "must be CheckedState if present".
+    {...(checked !== undefined && { checked })}
     {...props}
   >
     <span className="absolute left-3 flex h-3.5 w-3.5 items-center justify-center">

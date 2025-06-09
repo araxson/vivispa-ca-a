@@ -8,9 +8,9 @@ import type { Location } from "@/data/contact";
 // Extended offer type to match the one used in the offers page
 interface ExtendedOfferItem extends OfferItem {
   location?: string;
-  locationDetails?: Location;
+  locationDetails?: Location | undefined;
   dynamicUrl?: string;
-  allAvailableLocations?: OfferLocationData[];
+  allAvailableLocations?: OfferLocationData[] | undefined;
   isAvailableAtSelectedLocation?: boolean;
 }
 

@@ -32,12 +32,12 @@ interface HeroProps {
   backgroundImage?: {
     src: string;
     alt: string;
-  };
+  } | undefined;
   backgroundVideo?: {
     src: string;
     poster?: string;
-  };
-  heroType?: "image" | "video" | "none";
+  } | undefined;
+  heroType?: "image" | "video" | "none" | undefined;
   className?: string;
   spacing?: SpacingSize;
 }
