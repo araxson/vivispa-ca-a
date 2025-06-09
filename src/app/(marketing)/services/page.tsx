@@ -126,10 +126,9 @@ export default function ServicesPage() {
             href: "/pricing",
             variant: "default",
             icon: "calendar",
-            external: true,
           }}
           secondaryCTA={{
-            text: "View Offers",
+            text: "See the current offers",
             href: "/offers",
             variant: "outline",
           }}

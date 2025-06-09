@@ -83,8 +83,8 @@ export const homePageData: HomePageData = {
       href: "/pricing",
     },
     secondaryCTA: {
-      text: "View Services",
-      href: "/services",
+      text: "See the current offers",
+      href: "/offers",
     },
     heroType: "video",
     backgroundImage: {
@@ -285,12 +285,12 @@ export const homePageData: HomePageData = {
     description:
       "Book your complimentary consultation today and discover how our personalized treatments can help you achieve your aesthetic goals.",
     primaryCTA: {
-      text: "Book Free Consultation",
-      href: "/contact",
+      text: "Book Your Appointment",
+      href: "/pricing",
     },
     secondaryCTA: {
-      text: "Call (403) 708-7654",
-      href: "tel:+14037087654",
+      text: "See the current offers",
+      href: "/offers",
     },
   },
 };
