@@ -24,7 +24,7 @@ export function MarketingLayoutClient({
           </Container>
         </section>
       )}
-      <main className="flex-1 w-full">{children}</main>
+      <main className="flex-1 w-full max-w-7xl mx-auto">{children}</main>
     </div>
   );
 }
