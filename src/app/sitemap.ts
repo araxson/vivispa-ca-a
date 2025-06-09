@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next';
-import { getSitemapData } from '@/lib/data-fetcher';
+import type { MetadataRoute } from "next";
+import { getSitemapData } from "@/lib/data-fetcher";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapData = getSitemapData();

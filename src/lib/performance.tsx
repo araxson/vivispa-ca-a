@@ -138,8 +138,7 @@ export class PerformanceMonitor {
     // Interaction to Next Paint (INP)
     this.createObserver("event", (entries) => {
       for (const entry of entries) {
-        const eventTiming =
-          entry as PerformanceEventTimingWithInteractionId;
+        const eventTiming = entry as PerformanceEventTimingWithInteractionId;
         if (eventTiming.interactionId) {
           const inp = eventTiming.processingEnd - eventTiming.startTime;
           this.recordMetric("INP", inp);
@@ -421,10 +420,7 @@ export function reportWebVitals(metric: WebVital | PerformanceMetric): void {
   const existingMetric = monitor.getLatestMetric(metric.name);
 
   // Avoid reporting duplicates
-  if (
-    existingMetric &&
-    Math.abs(existingMetric.value - metric.value) < 0.1
-  ) {
+  if (existingMetric && Math.abs(existingMetric.value - metric.value) < 0.1) {
     return;
   }
 

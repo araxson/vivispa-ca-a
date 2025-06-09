@@ -29,14 +29,18 @@ interface HeroProps {
       | "ghost"
       | "link";
   };
-  backgroundImage?: {
-    src: string;
-    alt: string;
-  } | undefined;
-  backgroundVideo?: {
-    src: string;
-    poster?: string;
-  } | undefined;
+  backgroundImage?:
+    | {
+        src: string;
+        alt: string;
+      }
+    | undefined;
+  backgroundVideo?:
+    | {
+        src: string;
+        poster?: string;
+      }
+    | undefined;
   heroType?: "image" | "video" | "none" | undefined;
   className?: string;
   spacing?: SpacingSize;

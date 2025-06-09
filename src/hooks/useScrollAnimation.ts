@@ -10,17 +10,17 @@ type ScrollAnimationOptions = {
    * 1 = entire element must be in viewport
    */
   threshold?: number;
-  
+
   /**
    * Root margin to adjust the observer's bounding box
    */
   rootMargin?: string;
-  
+
   /**
    * Whether the animation should trigger only once
    */
   triggerOnce?: boolean;
-  
+
   /**
    * Whether the animation should start with elements visible
    */
@@ -38,12 +38,14 @@ const defaultOptions: ScrollAnimationOptions = {
  * Hook for creating scroll triggered animations
  */
 export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
-  options: ScrollAnimationOptions = {}
+  options: ScrollAnimationOptions = {},
 ) {
   const mergedOptions = { ...defaultOptions, ...options };
   const ref = useRef<T>(null);
-  const [state, setState] = useState<typeof AnimationState[keyof typeof AnimationState]>(
-    mergedOptions.startVisible ? AnimationState.VISIBLE : AnimationState.HIDDEN
+  const [state, setState] = useState<
+    (typeof AnimationState)[keyof typeof AnimationState]
+  >(
+    mergedOptions.startVisible ? AnimationState.VISIBLE : AnimationState.HIDDEN,
   );
 
   useEffect(() => {
@@ -68,8 +70,8 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
         Object.entries({
           threshold: mergedOptions.threshold,
           rootMargin: mergedOptions.rootMargin,
-        }).filter(([, value]) => value !== undefined)
-      ) as IntersectionObserverInit
+        }).filter(([, value]) => value !== undefined),
+      ) as IntersectionObserverInit,
     );
 
     observer.observe(element);
@@ -79,7 +81,11 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
         observer.unobserve(element);
       }
     };
-  }, [mergedOptions.threshold, mergedOptions.rootMargin, mergedOptions.triggerOnce]);
+  }, [
+    mergedOptions.threshold,
+    mergedOptions.rootMargin,
+    mergedOptions.triggerOnce,
+  ]);
 
   return { ref, state };
-} 
+}

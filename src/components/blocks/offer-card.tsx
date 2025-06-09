@@ -296,11 +296,12 @@ export function OfferCard({ offer }: OfferCardProps) {
                 <span className="text-base sm:text-lg font-bold text-primary">
                   {offer.pricing.display}
                 </span>
-                {offer.pricing.isSpecialOffer && offer.pricing.originalPrice && (
-                  <span className="text-xs text-muted-foreground line-through">
-                    {offer.pricing.originalPrice}
-                  </span>
-                )}
+                {offer.pricing.isSpecialOffer &&
+                  offer.pricing.originalPrice && (
+                    <span className="text-xs text-muted-foreground line-through">
+                      {offer.pricing.originalPrice}
+                    </span>
+                  )}
               </div>
               {offer.pricing.isSpecialOffer && offer.pricing.originalPrice && (
                 <div className="text-right">
@@ -329,7 +330,9 @@ export function OfferCard({ offer }: OfferCardProps) {
                 >
                   <label
                     className={`flex items-center gap-2 p-2.5 hover:bg-accent transition-colors ${
-                      !location.isAvailable ? "opacity-50 cursor-not-allowed" : ""
+                      !location.isAvailable
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     <input
@@ -387,7 +390,8 @@ export function OfferCard({ offer }: OfferCardProps) {
                     {offer.location}
                   </div>
                   <div className="text-xs text-muted-foreground truncate leading-tight">
-                    {offer.locationDetails.address}, {offer.locationDetails.city}
+                    {offer.locationDetails.address},{" "}
+                    {offer.locationDetails.city}
                   </div>
                 </div>
               </div>

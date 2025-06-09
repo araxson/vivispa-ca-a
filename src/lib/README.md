@@ -21,11 +21,7 @@ import { AnimatedSection } from "@/components/ui";
 
 export default function MyPage() {
   return (
-    <AnimatedSection
-      variant="slideUp"
-      timing="normal"
-      delay="none"
-    >
+    <AnimatedSection variant="slideUp" timing="normal" delay="none">
       <h2>My Section Title</h2>
       <p>Content goes here...</p>
     </AnimatedSection>
@@ -42,10 +38,7 @@ import { Animated } from "@/components/ui";
 
 export default function MyComponent() {
   return (
-    <Animated 
-      variant="fade" 
-      timing="normal"
-    >
+    <Animated variant="fade" timing="normal">
       <div>My content to animate</div>
     </Animated>
   );
@@ -63,9 +56,9 @@ export default function ItemList() {
   return (
     <div className="grid grid-cols-3 gap-4">
       {items.map((item, index) => (
-        <AnimatedItem 
+        <AnimatedItem
           key={item.id}
-          variant="scale" 
+          variant="scale"
           timing="normal"
           index={index} // Use index for staggered animations
         >
@@ -144,11 +137,7 @@ export function MyCustomAnimatedComponent() {
   });
 
   return (
-    <div 
-      ref={ref} 
-      data-state={state}
-      className={animationClasses}
-    >
+    <div ref={ref} data-state={state} className={animationClasses}>
       My content
     </div>
   );
@@ -175,4 +164,4 @@ export default function FilterExample() {
 
 ## Example Page
 
-Check out the example page at `/examples/animations` to see all animation variants in action. 
+Check out the example page at `/examples/animations` to see all animation variants in action.

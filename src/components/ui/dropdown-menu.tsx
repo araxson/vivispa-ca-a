@@ -97,7 +97,10 @@ type RadixCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof DropdownMenuPrimitive.CheckboxItem
 >;
 // Allow `checked` to be explicitly undefined in our wrapper's props
-type CustomDropdownMenuCheckboxItemProps = Omit<RadixCheckboxItemProps, "checked"> & {
+type CustomDropdownMenuCheckboxItemProps = Omit<
+  RadixCheckboxItemProps,
+  "checked"
+> & {
   checked?: RadixCheckboxItemProps["checked"] | undefined;
 };
 

@@ -22,11 +22,7 @@ export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {}
 
-function Card({
-  className,
-  variant,
-  ...props
-}: CardProps) {
+function Card({ className, variant, ...props }: CardProps) {
   return (
     <div
       data-slot="card"

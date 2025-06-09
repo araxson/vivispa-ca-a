@@ -64,11 +64,7 @@ export function FAQSection({
 
   if (variant === "card") {
     return (
-      <Section
-        spacing={spacing}
-        className={className}
-        maxWidth="6xl"
-      >
+      <Section spacing={spacing} className={className} maxWidth="6xl">
         <div className="text-center">
           <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4 sm:mb-6">
             <HelpCircle
@@ -79,9 +75,7 @@ export function FAQSection({
           <SectionHeader title={title} subtitle={subtitle} />
         </div>
 
-        <div
-          className="grid md:grid-cols-2 gap-4 sm:gap-6"
-        >
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
           {displayFaqs.map((faq, index) => (
             <FadeIn key={faq.id || index}>
               <Card>
@@ -110,11 +104,7 @@ export function FAQSection({
 
   if (variant === "minimal") {
     return (
-      <Section
-        spacing={spacing}
-        className={className}
-        maxWidth="3xl"
-      >
+      <Section spacing={spacing} className={className} maxWidth="3xl">
         <SectionHeader title={title} subtitle={subtitle} />
         <div className="space-y-6">
           {displayFaqs.map((faq, index) => (
@@ -150,17 +140,9 @@ export function FAQSection({
 
   if (variant === "simple") {
     return (
-      <Section
-        spacing={spacing}
-        className={className}
-        maxWidth="3xl"
-      >
+      <Section spacing={spacing} className={className} maxWidth="3xl">
         <SectionHeader title={title} subtitle={subtitle} />
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full space-y-4"
-        >
+        <Accordion type="single" collapsible className="w-full space-y-4">
           {displayFaqs.map((faq, index) => (
             <AccordionItem
               key={faq.id || index}
@@ -188,11 +170,7 @@ export function FAQSection({
 
   if (variant === "category") {
     return (
-      <Section
-        spacing={spacing}
-        className={className}
-        maxWidth="4xl"
-      >
+      <Section spacing={spacing} className={className} maxWidth="4xl">
         <SectionHeader title={title} subtitle={subtitle} />
         <div className="space-y-8">
           {groupedFAQs.map(([category, faqs]) => (
@@ -200,11 +178,7 @@ export function FAQSection({
               <h3 className="text-xl font-bold text-foreground mb-4 border-b border-border pb-2">
                 {category}
               </h3>
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full space-y-3"
-              >
+              <Accordion type="single" collapsible className="w-full space-y-3">
                 {faqs.map((faq, index) => (
                   <AccordionItem
                     key={faq.id || index}
@@ -235,17 +209,9 @@ export function FAQSection({
 
   // Default variant
   return (
-    <Section
-      spacing={spacing}
-      className={className}
-      maxWidth="3xl"
-    >
+    <Section spacing={spacing} className={className} maxWidth="3xl">
       <SectionHeader title={title} subtitle={subtitle} />
-      <Accordion
-        type="single"
-        collapsible
-        className="w-full"
-      >
+      <Accordion type="single" collapsible className="w-full">
         {displayFaqs.map((faq, index) => (
           <AccordionItem
             key={faq.id || index}

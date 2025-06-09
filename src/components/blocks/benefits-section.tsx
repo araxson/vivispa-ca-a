@@ -1,9 +1,4 @@
-import {
-  Container,
-  Section,
-  Card,
-  CardContent,
-} from "@/components/ui";
+import { Container, Section, Card, CardContent } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import * as icons from "lucide-react";
 import { SectionHeader } from "./section-header";
@@ -43,11 +38,7 @@ export function BenefitsSection({
   }
 
   return (
-    <Section
-      spacing={spacing}
-      background="muted"
-      className={className}
-    >
+    <Section spacing={spacing} background="muted" className={className}>
       <SectionHeader title={title} subtitle={subtitle} />
       <div
         className={cn(

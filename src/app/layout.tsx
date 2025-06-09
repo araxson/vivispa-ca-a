@@ -3,7 +3,7 @@ import { Playfair_Display, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { baseMetadata, viewport } from "@/lib/metadata-utils";
-import { WhatsAppWidget } from '@/components/ui/whatsapp-widget';
+import { WhatsAppWidget } from "@/components/ui/whatsapp-widget";
 
 /**
  * Configure fonts with next/font
@@ -37,9 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const predefinedMessages = [
-    'I have a question about a service.',
+    "I have a question about a service.",
     "I'd like to book an appointment.",
-    'What are your opening hours?',
+    "What are your opening hours?",
   ];
 
   return (
@@ -49,8 +49,16 @@ export default function RootLayout({
       className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}
     >
       <head>
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#252525" />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="#FFFFFF"
+        />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: dark)"
+          content="#252525"
+        />
         {/* DNS prefetch for performance */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />

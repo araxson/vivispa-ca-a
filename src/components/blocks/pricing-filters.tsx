@@ -50,10 +50,7 @@ const PricingFilters: React.FC<PricingFiltersProps> = ({
         {/* Filter Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Location Filter */}
-          <Select
-            value={selectedLocation}
-            onValueChange={onLocationChange}
-          >
+          <Select value={selectedLocation} onValueChange={onLocationChange}>
             <SelectTrigger className="w-full" aria-label="Select location">
               <SelectValue placeholder="Select a Location" />
             </SelectTrigger>
