@@ -1,30 +1,18 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
-import { getContainerClasses, type SpacingSize } from "@/lib/spacing";
+import { cn, containerVariants, type ContainerVariants as ContainerVariantProps } from "@/lib/utils";
 
-export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  maxWidth?:
-    | "sm"
-    | "md"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "7xl"
-    | "full";
-  paddingSize?: SpacingSize;
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement>, Omit<ContainerVariantProps, "size" | "padding"> {
+  maxWidth?: ContainerVariantProps["size"]; // Use the keys from utils.ts directly
+  paddingSize?: ContainerVariantProps["padding"]; // Use the keys from utils.ts directly
   className?: string | undefined;
 }
 
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ className, maxWidth = "7xl", paddingSize = "md", ...props }, ref) => {
+  ({ className, maxWidth, paddingSize, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn(getContainerClasses(maxWidth, paddingSize), className)}
+        className={cn(containerVariants({ size: maxWidth, padding: paddingSize }), className)}
         {...props}
       />
     );
