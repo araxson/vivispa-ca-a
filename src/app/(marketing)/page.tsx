@@ -85,7 +85,7 @@ export default function HomePage() {
           title="Why Clients Choose Us"
           subtitle="We're committed to excellence in every aspect of our service"
           variant="highlighted"
-          spacing="xl"
+          spacing="lg"
         />
       </Suspense>
 
@@ -106,7 +106,7 @@ export default function HomePage() {
           benefits={homePageData.benefits}
           title="The Vivi Aesthetics Advantage"
           subtitle="Experience premium care with our unique approach to aesthetics"
-          spacing="xl"
+          spacing="lg"
         />
       </Suspense>
 
@@ -128,7 +128,7 @@ export default function HomePage() {
           subtitle="Get answers to common questions about our services and treatments"
           variant="default"
           maxItems={6}
-          spacing="xl"
+          spacing="lg"
         />
       </Suspense>
 

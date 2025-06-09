@@ -3,13 +3,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "bg-card text-card-foreground flex flex-col rounded-xl border overflow-hidden",
+  "bg-card text-card-foreground flex flex-col rounded-lg border overflow-hidden",
   {
     variants: {
       variant: {
-        default: "border-border/50 shadow-sm",
+        default: "border-border/50 shadow",
         service:
-          "group border-border/50 shadow-sm transition-all duration-300 hover:border-primary/20",
+          "group border-border/50 shadow transition-colors,border-color,box-shadow duration-300 hover:border-primary/50",
       },
     },
     defaultVariants: {
@@ -53,7 +53,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("leading-snug font-semibold", className)}
       {...props}
     />
   );
@@ -86,7 +86,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6 pb-6", className)}
+      className={cn("p-6 pt-0", className)}
       {...props}
     />
   );

@@ -60,7 +60,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             />
           ))}
         </div>
-        <blockquote className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed line-clamp-3 text-xs sm:text-sm md:text-base">
+         <blockquote className="text-foreground/90 mb-4 sm:mb-6 leading-relaxed line-clamp-3 text-sm sm:text-base">
           "{testimonialText}"
         </blockquote>
         <div className="mt-auto">

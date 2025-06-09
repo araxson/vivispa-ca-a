@@ -5,6 +5,7 @@ import { HoursTable } from "@/components/blocks/hours-table";
 import { LocationDetailsCard } from "@/components/blocks/location-details-card";
 import { CTASection } from "@/components/blocks/cta-section";
 import { FadeIn } from "@/components/ui/fade-in";
+import { Section } from "@/components/ui";
 import { SectionHeader } from "@/components/blocks";
 
 export const metadata: Metadata = {
@@ -16,32 +17,38 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <FadeIn>
-        <SectionHeader
-          title="Contact Us"
-          subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
-        />
-      </FadeIn>
+      <Section spacing="xl">
+        <FadeIn>
+          <SectionHeader
+            title="Contact Us"
+            subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
+          />
+        </FadeIn>
+      </Section>
 
-      <FadeIn>
-        <div className="grid md:grid-cols-2 gap-8">
-          <ContactInfoTable />
-          <HoursTable />
-        </div>
-      </FadeIn>
-
-      <FadeIn>
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-center">Location Details</h2>
+      <Section spacing="xl">
+        <FadeIn>
           <div className="grid md:grid-cols-2 gap-8">
-            {locations.map((location) => (
-              <FadeIn key={location.id}>
-                <LocationDetailsCard location={location} />
-              </FadeIn>
-            ))}
+            <ContactInfoTable />
+            <HoursTable />
           </div>
-        </div>
-      </FadeIn>
+        </FadeIn>
+      </Section>
+
+      <Section spacing="xl">
+        <FadeIn>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center">Location Details</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {locations.map((location) => (
+                <FadeIn key={location.id}>
+                  <LocationDetailsCard location={location} />
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </Section>
 
       <FadeIn>
         <CTASection

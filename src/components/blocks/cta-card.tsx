@@ -41,7 +41,10 @@ export function CtaCard({
             {description}
           </CardDescription>
           <Link href={buttonLink}>
-            <Button variant="secondary" className="group">
+            <Button
+              variant={null} // Explicitly remove variant to rely on custom classes
+              className="group bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            >
               {buttonText}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -50,4 +53,4 @@ export function CtaCard({
       </div>
     </Card>
   );
-} 
+}

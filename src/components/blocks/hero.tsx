@@ -73,7 +73,7 @@ export function Hero({
           >
             <source src={`${backgroundVideo.src}.mp4`} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
+          <div className="absolute inset-0 bg-background/70" /> {/* Overlay */}
         </div>
       )}
 
@@ -87,7 +87,7 @@ export function Hero({
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-background/60" /> {/* Overlay */}
+          <div className="absolute inset-0 bg-background/70" /> {/* Overlay */}
         </div>
       )}
 

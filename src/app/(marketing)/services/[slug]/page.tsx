@@ -112,47 +112,56 @@ export default function ServicePage({ params }: ServicePageProps) {
         }
         backgroundVideo={service.heroVideo}
       />
+      <Section spacing="xl">
+        <Suspense fallback={<div className="h-96 bg-muted" />}>
+          <ServiceOverview
+            overview={service.overview}
+            benefits={service.benefits}
+            sessionInfo={{
+              recommended: 3,
+              interval: "4-6 weeks",
+            }}
+          />
+        </Suspense>
+      </Section>
 
-      <Suspense fallback={<div className="h-96 bg-muted" />}>
-        <ServiceOverview
-          overview={service.overview}
-          benefits={service.benefits}
-          sessionInfo={{
-            recommended: 3,
-            interval: "4-6 weeks",
-          }}
+      <Section spacing="xl">
+        <BenefitsSection
+          variant="default"
+          title="Treatment Benefits"
+          subtitle="Experience the comprehensive benefits of this advanced treatment"
+          benefits={formattedBenefits}
         />
-      </Suspense>
+      </Section>
 
-      <BenefitsSection
-        variant="default"
-        title="Treatment Benefits"
-        subtitle="Experience the comprehensive benefits of this advanced treatment"
-        benefits={formattedBenefits}
-      />
-
-      <ServiceGallery
-        images={service.galleryImages.map((img: string) => ({
-          id: img,
-          src: img,
-          alt: `${service.title} - Result`,
-        }))}
-        title={`${service.title} Gallery`}
-      />
+      <Section spacing="xl">
+        <ServiceGallery
+          images={service.galleryImages.map((img: string) => ({
+            id: img,
+            src: img,
+            alt: `${service.title} - Result`,
+          }))}
+          title={`${service.title} Gallery`}
+        />
+      </Section>
 
       {serviceTestimonials.length > 0 && (
-        <Testimonials
-          testimonials={serviceTestimonials}
-          title={`What Our Clients Say About ${service.title}`}
-          subtitle="Real experiences from our valued clients"
-        />
+        <Section spacing="xl">
+          <Testimonials
+            testimonials={serviceTestimonials}
+            title={`What Our Clients Say About ${service.title}`}
+            subtitle="Real experiences from our valued clients"
+          />
+        </Section>
       )}
 
-      <FAQSection
-        faqs={service.faqs}
-        title="Frequently Asked Questions"
-        subtitle={`Common questions about ${service.title}`}
-      />
+      <Section spacing="xl">
+        <FAQSection
+          faqs={service.faqs}
+          title="Frequently Asked Questions"
+          subtitle={`Common questions about ${service.title}`}
+        />
+      </Section>
 
       {/* Related Services Section */}
       {relatedServices.length > 0 && (

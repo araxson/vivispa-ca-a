@@ -52,7 +52,11 @@ export function ServiceCard({
         </div>
 
         <CardHeader
-          className={cn("pb-3", isCompact ? "p-3 sm:p-4" : "p-4 sm:p-6")}
+          className={cn(
+            isCompact
+              ? "px-3 sm:px-4 pt-3 sm:pt-4 pb-2"
+              : "px-4 sm:px-6 pt-4 sm:pt-6 pb-3",
+          )}
         >
           <CardTitle
             className={cn(
@@ -67,7 +71,7 @@ export function ServiceCard({
         <CardContent
           className={cn(
             "flex-1 flex flex-col",
-            isCompact ? "p-3 sm:p-4 pt-0" : "p-4 sm:p-6 pt-0",
+            isCompact ? "px-3 sm:px-4 pt-0" : "p-4 sm:p-6 pt-0", // Matched CardHeader's px, but pt-0 is crucial
           )}
         >
           <p

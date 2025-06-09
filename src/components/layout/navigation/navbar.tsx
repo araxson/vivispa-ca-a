@@ -23,11 +23,11 @@ import { cva } from "class-variance-authority";
 // --- Subcomponents ---
 
 const navLinkVariants = cva(
-  "relative px-4 py-2 text-sm font-medium rounded-t-lg transition-all duration-300 hover:bg-muted/60 hover:text-foreground before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:bg-primary before:rounded-full before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100",
+  "relative px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-300 hover:bg-muted/60 hover:text-foreground before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:bg-primary before:rounded-full before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100",
   {
     variants: {
       isActive: {
-        true: "text-primary before:scale-x-100 bg-primary/5",
+        true: "text-primary before:scale-x-100 bg-primary/10",
         false: "text-muted-foreground",
       },
     },
@@ -65,7 +65,7 @@ const DesktopNav = ({
         href="/offers"
         className={cn(
           navLinkVariants({ isActive: isActiveLink("/offers") }),
-          "bg-destructive/10 text-destructive hover:bg-destructive/20",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-secondary",
         )}
       >
         Offers
@@ -154,7 +154,7 @@ const MobileNav = ({
                 className={cn(
                   "block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:bg-muted/70 focus:bg-muted/70 focus:outline-none",
                   isActiveLink(item.href) &&
-                    "text-primary font-semibold bg-primary/10 hover:bg-primary/15",
+                    "text-primary bg-primary/10 hover:bg-primary/15",
                 )}
               >
                 {item.name}
@@ -169,7 +169,7 @@ const MobileNav = ({
             <Link
               href="/offers"
               onClick={handleItemClick}
-              className="block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 bg-destructive/10 text-destructive hover:bg-destructive/20 focus:bg-destructive/20 focus:outline-none"
+              className="block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:bg-secondary/80 focus:outline-none"
             >
               Offers
             </Link>
@@ -221,7 +221,7 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 w-full transition-transform,background-color,backdrop-filter,border-color duration-300",
         isScrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border/50"
           : "bg-transparent",

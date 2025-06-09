@@ -118,7 +118,7 @@ export function Footer() {
             ))}
 
             {/* Location & Contact */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-2">
               <h3 className="text-lg font-semibold text-foreground mb-4">
                 Visit Us
               </h3>
@@ -163,7 +163,7 @@ export function Footer() {
               </div>
             </div>
             {/* Business Hours */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-2">
               <h3 className="text-lg font-semibold text-foreground mb-4">
                 Opening Hours
               </h3>
@@ -196,7 +196,7 @@ export function Footer() {
         </Container>
       </Section>
 
-      <div className="bg-muted/40 py-6">
+      <div className="bg-muted py-6">
         <Container>
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
             <p>
