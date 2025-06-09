@@ -15,10 +15,10 @@ export function SharedCTA() {
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button asChild size="lg">
-            <Link href="/pricing">Book Appointment</Link>
+            <Link href="/pricing">Book Your Appointment</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="/contact">Contact Us</Link>
+            <Link href="/offers">See the current offers</Link>
           </Button>
         </div>
       </div>

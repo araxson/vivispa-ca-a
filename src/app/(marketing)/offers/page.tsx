@@ -46,10 +46,9 @@ export default function OffersPage() {
             icon: "calendar",
           }}
           secondaryCTA={{
-            text: "Contact Us",
-            href: "/contact",
+            text: "See the current offers",
+            href: "/offers",
             variant: "outline",
-            icon: "phone",
           }}
         />
       </FadeIn>
