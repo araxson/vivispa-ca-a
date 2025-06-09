@@ -58,7 +58,7 @@ export function WhatsAppWidget({
   return (
     <>
       <Button
-        className="fixed bottom-4 right-4 z-50 flex items-center rounded-full bg-[#25D366] px-4 py-3 shadow-lg transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-[#128C7E] dark:hover:bg-[#128C7E]"
+        className="fixed bottom-4 right-4 z-50 flex items-center rounded-full bg-[#25D366] px-4 py-3 shadow-lg transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-[#128C7E] dark:hover:bg-[#128C7E] md:hidden"
         onClick={handleToggle}
         aria-label="Open WhatsApp chat"
       >
@@ -68,7 +68,7 @@ export function WhatsAppWidget({
 
       <div
         className={cn(
-          'fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out',
+          'fixed bottom-24 right-4 z-50 w-full max-w-sm origin-bottom-right transform rounded-lg border bg-card text-card-foreground shadow-xl transition-transform duration-300 ease-in-out w-[70%] md:hidden',
           {
             'translate-x-0 translate-y-0 scale-100': isOpen,
             'pointer-events-none -translate-x-8 translate-y-12 scale-0':
