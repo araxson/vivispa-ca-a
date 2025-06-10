@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui";
 import Link from "next/link";
 
-export function SharedCTA() {
+export function CallToAction() {
   return (
     <Section background="muted" spacing="md">
       <div className="mx-auto max-w-2xl text-center">
@@ -24,4 +24,4 @@ export function SharedCTA() {
       </div>
     </Section>
   );
-}
+} 

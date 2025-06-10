@@ -7,7 +7,7 @@ import {
   generateOrganizationSchema,
 } from "@/app/metadata";
 import { siteConfig } from "@/data/constant";
-import { CTASection } from "@/components/blocks/cta-section";
+import { CallToAction } from "@/components/blocks/call-to-action";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Services - Professional Beauty & Wellness Treatments",
@@ -117,22 +117,7 @@ export default function ServicesPage() {
           </div>
         </Section>
 
-        <CTASection
-          variant="minimal"
-          title="Ready to Transform Your Look?"
-          description="Book your appointment today and experience our premium beauty services."
-          primaryCTA={{
-            text: "Book Your Appointment",
-            href: "/pricing",
-            variant: "default",
-            icon: "calendar",
-          }}
-          secondaryCTA={{
-            text: "See the current offers",
-            href: "/offers",
-            variant: "outline",
-          }}
-        />
+        <CallToAction />
       </main>
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { Suspense, use } from "react";
 import { default as dynamicImport } from "next/dynamic";
-import { SharedCTA } from "@/components/blocks/shared-cta";
+import { CallToAction } from "@/components/blocks/call-to-action";
 
 // Component imports
 import {
@@ -166,7 +166,7 @@ export default function ServicePage({ params }: ServicePageProps) {
         />
       )}
 
-      <SharedCTA />
+      <CallToAction />
     </>
   );
 }

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Playfair_Display, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { baseMetadata, viewport } from "@/lib/metadata-utils";
+import { defaultMetadata, viewport } from "@/lib/metadata-utils";
+import { CallWidget } from '@/components/ui/call-widget';
 import { WhatsAppWidget } from '@/components/ui/whatsapp-widget';
+import { contactInfo } from '@/data/contact/contact';
 
 /**
  * Configure fonts with next/font
@@ -27,7 +29,7 @@ const roboto = Roboto({
 
 // Export metadata and viewport for Next.js 15.2+ performance optimization
 export const metadata: Metadata = {
-  ...baseMetadata,
+  ...defaultMetadata,
 };
 export { viewport };
 
@@ -49,18 +51,10 @@ export default function RootLayout({
       className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}
     >
       <head>
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#252525" />
         {/* DNS prefetch for performance */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* Preconnect to external domains */}
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-          crossOrigin=""
-        />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -70,12 +64,15 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">{children}</div>
-          <WhatsAppWidget
-            phoneNumber="+15551234567"
-            brandName="Vivi Aesthetics Spa"
-            welcomeMessage="Hello! How can we help you today?"
-            predefinedMessages={predefinedMessages}
-          />
+          <div className="md:hidden">
+            <WhatsAppWidget
+              phoneNumber={contactInfo.phone.formatted}
+              brandName={contactInfo.businessName}
+              welcomeMessage="Hello! How can we help you today?"
+              predefinedMessages={predefinedMessages}
+            />
+            <CallWidget phoneNumber={contactInfo.phone.formatted} />
+          </div>
         </ThemeProvider>
       </body>
     </html>

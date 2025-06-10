@@ -4,10 +4,10 @@ import {
   Hero,
   FAQSection,
   Testimonials,
-  CTASection,
   StatsSection,
   BenefitsSection,
   ServiceShowcase,
+  CallToAction,
 } from "@/components/blocks";
 import { Section } from "@/components/ui";
 import {
@@ -133,27 +133,7 @@ export default function HomePage() {
       </Suspense>
 
       {/* Call to Action */}
-      <CTASection
-        title={homePageData.ctaSection.headline}
-        description={homePageData.ctaSection.description}
-        primaryCTA={{
-          text: homePageData.ctaSection.primaryCTA.text,
-          href: homePageData.ctaSection.primaryCTA.href,
-          variant: "default",
-          icon: "calendar",
-        }}
-        secondaryCTA={
-          homePageData.ctaSection.secondaryCTA
-            ? {
-                text: homePageData.ctaSection.secondaryCTA.text,
-                href: homePageData.ctaSection.secondaryCTA.href,
-                variant: "outline",
-                icon: "phone",
-              }
-            : undefined
-        }
-        spacing="xl"
-      />
+      <CallToAction />
     </>
   );
 }

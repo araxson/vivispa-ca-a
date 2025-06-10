@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CTASection, SectionHeader } from "@/components/blocks";
+import { SectionHeader, CallToAction } from "@/components/blocks";
 import { OffersPageClient } from "@/components/blocks/offers-page-client";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Section } from "@/components/ui";
@@ -36,21 +36,7 @@ export default function OffersPage() {
       </Section>
 
       <FadeIn>
-        <CTASection
-          title="Ready to Book Your Appointment?"
-          description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
-          primaryCTA={{
-            text: "Book Your Appointment",
-            href: "/pricing",
-            variant: "default",
-            icon: "calendar",
-          }}
-          secondaryCTA={{
-            text: "See the current offers",
-            href: "/offers",
-            variant: "outline",
-          }}
-        />
+        <CallToAction />
       </FadeIn>
     </>
   );

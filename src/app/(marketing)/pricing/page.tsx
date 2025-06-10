@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Section } from "@/components/ui";
-import { SharedCTA } from "@/components/blocks/shared-cta";
+import { CallToAction } from "@/components/blocks/call-to-action";
 import { PricingFilters } from "@/components/blocks/pricing-filters";
 import { PricingResultsSummary } from "@/components/blocks/pricing-results-summary";
 import { PricingAccordion } from "@/components/blocks/pricing-accordion";
@@ -81,7 +81,7 @@ export default function PricingPage() {
       </Section>
 
       {/* CTA Section */}
-      <SharedCTA />
+      <CallToAction />
     </>
   );
 }

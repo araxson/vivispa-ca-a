@@ -3,7 +3,7 @@ import { locations } from "@/data/contact/contact";
 import { ContactInfoTable } from "@/components/blocks/contact-info-table";
 import { HoursTable } from "@/components/blocks/hours-table";
 import { LocationDetailsCard } from "@/components/blocks/location-details-card";
-import { CTASection } from "@/components/blocks/cta-section";
+import { CallToAction } from "@/components/blocks/call-to-action";
 import { FadeIn } from "@/components/ui/fade-in";
 import { SectionHeader } from "@/components/blocks";
 
@@ -44,21 +44,7 @@ export default function ContactPage() {
       </FadeIn>
 
       <FadeIn>
-        <CTASection
-          title="Ready to Book Your Appointment?"
-          description="Experience luxury beauty treatments at Vivi Aesthetics & Spa. Book your appointment today and discover why we're Calgary's premier destination for aesthetic treatments."
-          primaryCTA={{
-            text: "Book Your Appointment",
-            href: "/pricing",
-            icon: "calendar",
-          }}
-          secondaryCTA={{
-            text: "See the current offers",
-            href: "/offers",
-            variant: "outline",
-          }}
-          variant="gradient"
-        />
+        <CallToAction />
       </FadeIn>
     </>
   );

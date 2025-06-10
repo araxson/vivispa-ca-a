@@ -1,5 +1,5 @@
 // Existing exports
-export { CTASection } from "./cta-section";
+export { CallToAction } from "./call-to-action";
 export { FAQSection } from "./faq-section";
 export { SectionHeader } from "./section-header";
 export { OfferCard } from "./offer-card";
