@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { SectionHeader, CallToAction } from "@/components/blocks";
 import { OffersPageClient } from "@/components/blocks/offers-page-client";
-import { FadeIn } from "@/components/ui/fade-in";
-import { Section } from "@/components/ui";
 import { getAllOffers, getAvailableOfferLocations } from "@/lib/data-fetcher";
 import { generatePageMetadata } from "@/app/metadata";
+import { MarketingPageLayout } from "@/components/layout/marketing-page-layout";
+import { Section } from "@/components/ui"; // Keep Section for Skeleton
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Special Offers",
@@ -16,29 +15,15 @@ export default function OffersPage() {
   const availableLocations = getAvailableOfferLocations();
 
   return (
-    <>
-      <Section spacing="md">
-        <FadeIn>
-          <SectionHeader
-            title="Special Offers"
-            subtitle="Take advantage of our exclusive offers and packages."
-          />
-        </FadeIn>
-      </Section>
-
-      <Section spacing="md">
-        <FadeIn>
-          <OffersPageClient
-            initialOffers={offers}
-            availableLocations={availableLocations}
-          />
-        </FadeIn>
-      </Section>
-
-      <FadeIn>
-        <CallToAction />
-      </FadeIn>
-    </>
+    <MarketingPageLayout
+      title="Special Offers"
+      subtitle="Take advantage of our exclusive offers and packages."
+    >
+      <OffersPageClient
+        initialOffers={offers}
+        availableLocations={availableLocations}
+      />
+    </MarketingPageLayout>
   );
 }
 

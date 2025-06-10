@@ -3,9 +3,8 @@ import { locations } from "@/data/contact/contact";
 import { ContactInfoTable } from "@/components/blocks/contact-info-table";
 import { HoursTable } from "@/components/blocks/hours-table";
 import { LocationDetailsCard } from "@/components/blocks/location-details-card";
-import { CallToAction } from "@/components/blocks/call-to-action";
 import { FadeIn } from "@/components/ui/fade-in";
-import { SectionHeader } from "@/components/blocks";
+import { MarketingPageLayout } from "@/components/layout/marketing-page-layout";
 
 export const metadata: Metadata = {
   title: "Contact Us | Vivi Aesthetics & Spa",
@@ -15,37 +14,31 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
-      <FadeIn>
-        <SectionHeader
-          title="Contact Us"
-          subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
-        />
-      </FadeIn>
-
-      <FadeIn>
-        <div className="grid md:grid-cols-2 gap-8">
-          <ContactInfoTable />
-          <HoursTable />
-        </div>
-      </FadeIn>
-
-      <FadeIn>
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-center">Location Details</h2>
+    <MarketingPageLayout
+      title="Contact Us"
+      subtitle="We'd love to hear from you! Visit one of our locations or contact us using the information below."
+    >
+      <div className="space-y-12">
+        <FadeIn>
           <div className="grid md:grid-cols-2 gap-8">
-            {locations.map((location) => (
-              <FadeIn key={location.id}>
-                <LocationDetailsCard location={location} />
-              </FadeIn>
-            ))}
+            <ContactInfoTable />
+            <HoursTable />
           </div>
-        </div>
-      </FadeIn>
+        </FadeIn>
 
-      <FadeIn>
-        <CallToAction />
-      </FadeIn>
-    </>
+        <FadeIn>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-center">Location Details</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {locations.map((location) => (
+                <FadeIn key={location.id}>
+                  <LocationDetailsCard location={location} />
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </MarketingPageLayout>
   );
 }

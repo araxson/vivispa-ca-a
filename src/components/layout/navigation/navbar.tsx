@@ -210,10 +210,7 @@ export const Navbar = () => {
     setMounted(true);
   }, []);
 
-  const isDarkTheme = mounted && (theme === "dark" || resolvedTheme === "dark");
-  const logoSrc = isDarkTheme
-    ? "/images/logo-dark.svg"
-    : "/images/logo-light.svg";
+  const logoSrc = "/images/logo.svg";
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === href;
