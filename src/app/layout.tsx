@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { baseMetadata, viewport } from "@/lib/metadata-utils";
+import { defaultMetadata, viewport } from "@/app/metadata";
 import { CallWidget } from '@/components/ui/call-widget';
 import { WhatsAppWidget } from '@/components/ui/whatsapp-widget';
 import { contactInfo } from '@/data/contact/contact';
@@ -29,7 +29,7 @@ const roboto = Roboto({
 
 // Export metadata and viewport for Next.js 15.2+ performance optimization
 export const metadata: Metadata = {
-  ...baseMetadata,
+  ...defaultMetadata,
 };
 export { viewport };
 
