@@ -44,13 +44,13 @@ export const vascularVeinRemovalService: Service = {
     title: "Vascular Vein Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Eliminate spider veins and broken capillaries with advanced laser treatments. Clear, beautiful skin with professional vascular removal.",
-    // image field removed (same as service.image)
-    // url field removed (same as service.canonicalUrl)
-    // type field removed (will default to "article")
+    image: "/images/services/vascular-vein-removal/vascular-vein-removal-in-calgary-001.webp", // Added using service.image
+    url: "https://vivispa.ca/services/vascular-vein-removal", // Added using service.canonicalUrl
+    type: "website", // Added default type
   },
 
   twitter: {
-    // card field removed (defaults to "summary_large_image")
+    card: "summary_large_image", // Added back, as it's required by TwitterData
     title: "Vascular Vein Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Say goodbye to spider veins and facial redness. Advanced treatments for clear, confident skin.",

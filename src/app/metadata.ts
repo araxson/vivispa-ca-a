@@ -295,8 +295,14 @@ export function generateServicePageMetadata(
         en: fullCanonicalUrl,
       },
     },
-    openGraph: finalOpenGraphData, // Use the generated OpenGraph data
-    twitter: finalTwitterData, // Use the generated Twitter data
+    openGraph: {
+      ...defaultMetadata.openGraph, // Keep defaults like siteName, locale
+      ...finalOpenGraphData, // Service-specific data overrides (title, description, image, url, type)
+    },
+    twitter: {
+      ...defaultMetadata.twitter, // Keep defaults like site, creator
+      ...finalTwitterData, // Service-specific data overrides (card, title, description, image)
+    },
     // Ensure other parts of defaultMetadata are not unintentionally overridden if they shouldn't be
     // For example, if defaultMetadata.openGraph has more specific general fallbacks not covered by generateOpenGraphData
     // you might need to merge them: { ...defaultMetadata.openGraph, ...finalOpenGraphData }
@@ -421,7 +427,7 @@ export function generateServiceSchema(service: Service) { // Updated to use Serv
     name: service.title, // Assuming service.title is the correct field
     description: service.previewDescription, // Assuming service.previewDescription
     procedureType: service.title, // Or perhaps a more specific field if available
-    bodyLocation: service.bodyLocation || "Face, Body", // Example: use service.bodyLocation or default
+    bodyLocation: service.structuredData.bodyLocation || "Face, Body", // Example: use service.structuredData.bodyLocation or default
     image: {
       "@type": "ImageObject",
       url: service.image, // Assuming service.image is the correct field

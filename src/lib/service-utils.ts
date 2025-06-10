@@ -29,9 +29,8 @@ export function generateOpenGraphData(service: Service): OpenGraphData {
     description,
     type: service.openGraph?.type || "article",
     url,
-    images: image ? [{ url: image }] : undefined, // Ensure images is an array of objects
-    siteName: siteConfig.name,
-    locale: "en_CA",
+    image: image || "", // Corrected to 'image: string'
+    // siteName and locale removed to match OpenGraphData type
   };
 }
 
@@ -57,8 +56,7 @@ export function generateTwitterData(service: Service): TwitterData {
     card: service.twitter?.card || "summary_large_image",
     title,
     description,
-    images: image ? [image] : undefined, // Ensure images is an array of strings
-    site: siteConfig.twitterUsername || "@vivispa_ca", // Use siteConfig if available
-    creator: service.twitter?.creator || siteConfig.twitterUsername || "@vivispa_ca", // Use siteConfig if available
+    image: image || "", // Corrected to 'image: string'
+    // site and creator removed to match TwitterData type
   };
 }

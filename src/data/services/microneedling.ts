@@ -50,13 +50,13 @@ export const microneedlingService: Service = {
     title: "Microneedling Treatment Calgary | Vivi Aesthetics & Spa",
     description:
       "Rejuvenate your skin with professional microneedling. Advanced collagen induction therapy for smoother, firmer skin and improved texture.",
-    // image field removed (same as service.image)
-    // url field removed (same as service.canonicalUrl)
-    // type field removed (will default to "article")
+    image: "/images/services/microneedling/microneedling-in-calgary-004.webp", // Added using service.image
+    url: "https://vivispa.ca/services/microneedling", // Added using service.canonicalUrl
+    type: "website", // Added default type
   },
 
   twitter: {
-    // card field removed (defaults to "summary_large_image")
+    card: "summary_large_image", // Added back, as it's required by TwitterData
     title: "Microneedling Calgary | Vivi Aesthetics & Spa",
     description:
       "Transform your skin with collagen induction therapy. Reduce scars, improve texture, and achieve radiant skin naturally.",

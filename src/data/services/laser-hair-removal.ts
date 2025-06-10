@@ -53,13 +53,13 @@ export const laserHairRemovalService: Service = {
     title: "Laser Hair Removal Services in Calgary | Vivi Aesthetics & Spa",
     description:
       "Advanced laser hair removal treatments at Vivi Aesthetics & Spa in Calgary. Safe, effective, and long-lasting results for all skin types.",
-    // image field removed (same as service.image)
-    // url field removed (same as service.canonicalUrl)
-    // type field removed (will default to "article")
+    image: "/images/services/laser-hair-removal/laser-hair-removal-in-calgary-001.webp", // Added using service.image
+    url: "https://vivispa.ca/services/laser-hair-removal", // Added using service.canonicalUrl
+    type: "website", // Added default type
   },
 
   twitter: {
-    // card field removed (defaults to "summary_large_image")
+    card: "summary_large_image", // Added back, as it's required by TwitterData
     title: "Laser Hair Removal Calgary | Vivi Aesthetics & Spa",
     description:
       "Say goodbye to unwanted hair with our advanced laser hair removal. Permanent results with minimal discomfort.",

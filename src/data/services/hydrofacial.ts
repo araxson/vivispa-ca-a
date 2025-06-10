@@ -49,12 +49,12 @@ export const hydrofacialService: Service = {
       "Experience the ultimate skin rejuvenation with our HydroFacial treatment. Cleanse, exfoliate, and hydrate your skin in one session.",
     // Use jpg for OpenGraph as it has better compatibility across platforms
     image: "/images/services/hydrofacial/hydrofacial-in-calgary-001.webp",
-    // url field removed (same as service.canonicalUrl)
-    // type field removed (will default to "article")
+    url: "https://vivispa.ca/services/hydrofacial", // Added using service.canonicalUrl
+    type: "website", // Added default type
   },
 
   twitter: {
-    // card field removed (defaults to "summary_large_image")
+    card: "summary_large_image", // Added back, as it's required by TwitterData
     title: "HydroFacial Calgary | Vivi Aesthetics & Spa",
     description:
       "Get smooth, hydrated, and youthful skin with our HydroFacial treatment. Book now!",
