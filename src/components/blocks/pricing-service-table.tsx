@@ -43,13 +43,13 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
       <Table className="w-full">
         <TableHeader>
           <TableRow className="border-border hover:bg-muted/50">
-            <TableHead className="text-left text-sm md:text-base font-semibold">
+            <TableHead className="px-4 py-3 text-left text-sm font-semibold md:px-6 md:text-base">
               Service
             </TableHead>
-            <TableHead className="text-right text-sm md:text-base font-semibold">
+            <TableHead className="px-4 py-3 text-right text-sm font-semibold md:px-6 md:text-base">
               Price
             </TableHead>
-            <TableHead className="text-center text-sm md:text-base font-semibold w-24 sm:w-28">
+            <TableHead className="w-24 px-4 py-3 text-center text-sm font-semibold sm:w-28 md:px-6 md:text-base">
               Book
             </TableHead>
           </TableRow>
@@ -59,7 +59,7 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
           {services.map((service, index) => (
             <TableRow
               key={`${service.name}-${index}`}
-              className="border-border hover:bg-muted/30 transition-colors"
+              className="border-border transition-colors hover:bg-muted/30"
               onClick={() => handleRowClick(service)}
               role="button"
               tabIndex={0}
@@ -71,24 +71,24 @@ const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
               }}
               aria-label={`Book ${service.name} - ${service.price}`}
             >
-              <TableCell>
+              <TableCell className="px-4 py-4 md:px-6">
                 <div className="space-y-1">
-                  <span className="text-sm md:text-base lg:text-lg font-normal text-foreground leading-tight">
+                  <span className="text-sm font-normal leading-tight text-foreground md:text-base lg:text-lg">
                     {service.name}
                   </span>
                 </div>
               </TableCell>
 
-              <TableCell className="text-right">
-                <span className="text-sm md:text-base lg:text-lg font-semibold text-primary whitespace-nowrap">
+              <TableCell className="px-4 py-4 text-right md:px-6">
+                <span className="whitespace-nowrap text-sm font-semibold text-primary md:text-base lg:text-lg">
                   {service.price}
                 </span>
               </TableCell>
 
-              <TableCell className="text-center">
+              <TableCell className="px-4 py-4 text-center md:px-6">
                 <Button
                   size="sm"
-                  className="bg-primary hover:bg-primary/90 text-xs h-8 px-3 font-medium transition-colors pointer-events-none"
+                  className="pointer-events-none h-8 bg-primary px-3 text-xs font-medium transition-colors hover:bg-primary/90"
                   asChild
                 >
                   <span className="flex items-center gap-1 whitespace-nowrap">

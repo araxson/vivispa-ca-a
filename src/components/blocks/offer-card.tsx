@@ -198,7 +198,10 @@ export function OfferCard({ offer }: OfferCardProps) {
     <FadeIn>
       <Card className="border border-border bg-card overflow-hidden rounded-lg h-full flex flex-col">
         {/* Featured Image - Ultra compact height */}
-        <div className="relative h-64 overflow-hidden flex-shrink-0 group">
+        <div
+          className="relative overflow-hidden flex-shrink-0 group"
+          style={{ height: "16rem" }}
+        >
           <Image
             src={offer.featuredImage}
             alt={offer.name}

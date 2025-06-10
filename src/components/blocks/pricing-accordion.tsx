@@ -67,9 +67,9 @@ const PricingAccordion: React.FC<PricingAccordionProps> = ({
                         <AccordionItem
                           key={subcategory}
                           value={subcategory}
-                          className="border-b last:border-b-0 md:px-6"
+                          className="border-b last:border-b-0"
                         >
-                          <AccordionTrigger className="group py-3 hover:no-underline">
+                          <AccordionTrigger className="group py-3 hover:no-underline px-4 md:px-6">
                             <div className="flex w-full items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <h3 className="text-left text-sm font-medium transition-colors group-hover:text-primary md:text-base lg:text-lg">
@@ -95,7 +95,7 @@ const PricingAccordion: React.FC<PricingAccordionProps> = ({
                     )}
                   </Accordion>
                 ) : (
-                  <div className="bg-background p-4 md:p-6">
+                  <div className="bg-background">
                     <PricingServiceTable
                       services={subcategories.main ?? []}
                       variant="main"
