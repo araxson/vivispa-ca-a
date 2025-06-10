@@ -509,3 +509,10 @@ export function generateReviewSchema(
     reviewBody: testimonial.content,
   }));
 }
+
+/**
+ * Generate JSON-LD script tag
+ */
+export function generateJsonLdScript(data: Record<string, any>): string {
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
