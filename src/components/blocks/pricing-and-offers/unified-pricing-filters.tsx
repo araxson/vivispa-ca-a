@@ -67,7 +67,7 @@ export function UnifiedPricingFilters({
     if (filterValues.location && filterValues.location !== 'all') {
       // Note: In the original implementation, location filtering was done differently
       // This maintains compatibility with the existing data structure
-      filtered = services.filter(service => {
+      filtered = services.filter(() => { // 'service' parameter removed as it was unused
         // Location filtering logic would depend on how services are associated with locations
         // For now, we'll assume all services are available at selected location
         return true;
@@ -120,7 +120,7 @@ export function UnifiedPricingFilters({
       onFilterChange={setFilter}
       onClearFilter={clearFilter}
       onClearAllFilters={clearAllFilters}
-      className={className}
+      className={className || ""}
       showFilterBadges={true}
       gridPreset="filters"
     />
@@ -143,6 +143,10 @@ export interface CompatiblePricingFiltersProps {
   onClearFilter: (filterType: string) => void;
   onClearAllFilters: () => void;
 }
+
+// Define allowed icon keys based on IconMaps.filter
+const ALLOWED_FILTER_ICONS = ["location", "category", "search", "tag"] as const;
+type AllowedFilterIcon = typeof ALLOWED_FILTER_ICONS[number];
 
 /**
  * Backward-compatible wrapper for existing pricing filters usage
@@ -184,7 +188,21 @@ export function CompatiblePricingFilters(props: CompatiblePricingFiltersProps) {
     <UniversalFilterControls
       config={filterConfig}
       filters={filters}
-      activeFilters={props.activeFilters}
+      activeFilters={
+        props.activeFilters.map(f => {
+          const iconKey = f.icon as AllowedFilterIcon | undefined;
+          const validIcon = iconKey && ALLOWED_FILTER_ICONS.includes(iconKey) ? iconKey : undefined;
+          const mappedItem: { type: string; label: string; value: string; icon?: AllowedFilterIcon } = {
+            type: f.type,
+            label: f.label,
+            value: String(f.value), // Ensure value is string
+          };
+          if (validIcon) {
+            mappedItem.icon = validIcon;
+          }
+          return mappedItem;
+        })
+      }
       hasActiveFilters={props.activeFilters.length > 0}
       onFilterChange={handleFilterChange}
       onClearFilter={props.onClearFilter}

@@ -232,7 +232,7 @@ export function UnifiedOffersFilters({
       onFilterChange={setFilter}
       onClearFilter={clearFilter}
       onClearAllFilters={clearAllFilters}
-      className={className}
+      className={className || ""}
       showFilterBadges={true}
       gridPreset="filters"
     />

@@ -16,6 +16,7 @@ export interface OfferItem {
   title: string;
   category: string;
   shortDescription: string;
+  description?: string; // Optional full description
   featuredImage: string;
   url: string; // Default/primary URL
   pricing: {
@@ -24,6 +25,7 @@ export interface OfferItem {
     originalPrice?: string;
   };
   badges?: string[];
+  tags?: string[]; // Optional tags for filtering
   // New fields for multi-location support
   availableLocations?: OfferLocationData[]; // Multiple locations with different URLs
   isMultiLocation?: boolean; // Flag to indicate if service is available at multiple locations
@@ -101,6 +103,35 @@ export const locationIds = {
  * Active offers - only the 6 services currently being offered
  */
 export const consolidatedOffers: OfferItem[] = [
+  // Free Meeting - Available at both locations
+  {
+    id: "free-meeting",
+    slug: "free-meeting",
+    name: "Free Meeting",
+    title: "Book a Free Meeting",
+    category: "Consultation",
+    shortDescription: "Book a free meeting with one of our specialists to discuss your needs.",
+    featuredImage: DEFAULT_IMAGE, // Or a specific image if available
+    url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=FREE-MEETING-DOWNTOWN", // Placeholder URL
+    pricing: {
+      display: "Free",
+      isSpecialOffer: true,
+    },
+    badges: [BADGES.NEW_CLIENT], // Or a custom badge like "Free Consultation"
+    isMultiLocation: true,
+    availableLocations: [
+      {
+        location: "Downtown",
+        url: "https://squareup.com/appointments/book/LSX0A4Z6HJE2E/services?service_id=FREE-MEETING-DOWNTOWN", // Placeholder URL
+        squareId: "LSX0A4Z6HJE2E", // Needs actual Square ID if applicable
+      },
+      {
+        location: "Edmonton Trail",
+        url: "https://squareup.com/appointments/book/LR77SHRSPMK0X/services?service_id=FREE-MEETING-EDMONTON", // Placeholder URL
+        squareId: "LR77SHRSPMK0X", // Needs actual Square ID if applicable
+      },
+    ],
+  },
   // Hydrofacial Express - Available at both locations
   {
     id: "hydrofacial-express",

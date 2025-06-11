@@ -1,4 +1,3 @@
-import type { FilterItem } from "@/components/ui/filter-badges";
 import { Badge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { getLayoutClasses } from "@/lib/layout-utils";

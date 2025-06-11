@@ -61,6 +61,12 @@ export const ALL_SERVICE_CATEGORIES = [
     slug: "vascular-vein-removal",
     mappedCategory: "laser-treatments",
   },
+  {
+    id: "consultation",
+    name: "Consultation",
+    slug: "consultation",
+    mappedCategory: "consultation",
+  },
 ];
 
 export const useCategoryMapping = (offer: {

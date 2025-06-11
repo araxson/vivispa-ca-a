@@ -17,10 +17,8 @@ interface PricingServiceTableProps {
 
 const PricingServiceTable: React.FC<PricingServiceTableProps> = ({
   services,
-  variant = "main",
+  // variant = "main", // Removed as it's unused
 }) => {
-  const isNested = variant === "nested";
-
   if (!services || services.length === 0) {
     return (
       <div className="p-6 text-center text-muted-foreground">

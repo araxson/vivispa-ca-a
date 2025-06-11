@@ -19,9 +19,9 @@ import { cn } from "@/lib/utils";
 // Extended offer type to include dynamic location info and booking URLs
 type SmartOfferItem = OfferItem & {
   location?: string;
-  locationDetails?: (typeof locations)[0] | undefined;
+  locationDetails?: (typeof locations)[0]; // undefined is implied by ?
   dynamicUrl?: string;
-  allAvailableLocations?: OfferLocationData[] | undefined;
+  allAvailableLocations?: OfferLocationData[]; // undefined is implied by ?
   isAvailableAtSelectedLocation?: boolean;
 };
 
@@ -147,7 +147,7 @@ export const OffersPageClient = memo(function OffersPageClient({
     } = filters;
 
     let processedOffers: SmartOfferItem[] = initialOffers
-      .map((offer) => {
+      .map((offer): SmartOfferItem => { // Explicit return type
         const locationData =
           typeof selectedLocation === "string" && selectedLocation !== "all"
             ? offer.availableLocations?.find(
@@ -160,20 +160,47 @@ export const OffersPageClient = memo(function OffersPageClient({
             ? locations.find((loc) => loc.name === selectedLocation)
             : undefined;
 
-        return {
-          ...offer,
-          location:
-            typeof selectedLocation === "string" && selectedLocation !== "all"
-              ? selectedLocation
-              : undefined,
-          locationDetails,
-          dynamicUrl: locationData?.url,
-          allAvailableLocations: offer.availableLocations,
+        const item: SmartOfferItem = {
+          // OfferItem properties
+          id: offer.id,
+          slug: offer.slug,
+          name: offer.name,
+          title: offer.title,
+          category: offer.category,
+          shortDescription: offer.shortDescription,
+          featuredImage: offer.featuredImage,
+          url: offer.url,
+          pricing: offer.pricing,
+          // Optional OfferItem properties
+          ...(offer.description && { description: offer.description }),
+          ...(offer.badges && { badges: offer.badges }),
+          ...(offer.tags && { tags: offer.tags }),
+          ...(offer.availableLocations && { availableLocations: offer.availableLocations }),
+          ...(typeof offer.isMultiLocation === 'boolean' && { isMultiLocation: offer.isMultiLocation }),
+
+          // SmartOfferItem specific properties
+          // allAvailableLocations: offer.availableLocations, // Conditionally added below
           isAvailableAtSelectedLocation:
             typeof selectedLocation !== "string" ||
             selectedLocation === "all" ||
             !!locationData,
         };
+
+        // Conditionally add optional SmartOfferItem properties
+        if (offer.availableLocations) { // Add only if defined
+          item.allAvailableLocations = offer.availableLocations;
+        }
+        if (typeof selectedLocation === "string" && selectedLocation !== "all") {
+          item.location = selectedLocation;
+        }
+        if (locationDetails) {
+          item.locationDetails = locationDetails;
+        }
+        if (locationData?.url) {
+          item.dynamicUrl = locationData.url;
+        }
+
+        return item;
       })
       .filter((offer) => {
         if (
