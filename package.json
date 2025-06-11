@@ -5,16 +5,18 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "analyze": "node scripts/analyze-bundle.js",
-    "analyze:check": "node scripts/analyze-bundle.js check",
-    "analyze:performance": "node scripts/analyze-performance.js",
-    "perf:test": "npm run build && npm run analyze:performance",
-    "perf:full": "npm run build && npm run analyze && npm run analyze:performance",
-    "preload:critical": "node scripts/preload-critical.js"
+    "format:check": "prettier --check .",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbo",
+    "prebuild": "npm run type-check",
+    "postinstall": "next telemetry disable",
+    "dev:turbo-debug": "next dev --turbo --experimental-turbo-log"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -69,17 +71,11 @@
     "zod": "^3.25.51"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@next/eslint-plugin-next": "^15.3.3",
     "@tailwindcss/postcss": "^4.1.8",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19",
-    "@typescript-eslint/eslint-plugin": "^8.33.1",
-    "@typescript-eslint/parser": "^8.33.1",
-    "eslint": "^9.28.0",
-    "eslint-config-next": "15.3.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4",

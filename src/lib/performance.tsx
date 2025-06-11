@@ -173,7 +173,9 @@ export class PerformanceMonitor {
       observer.observe({ type: entryType, buffered: true });
       this.observers.push(observer);
     } catch (error) {
-      console.warn(`Failed to observe ${entryType}:`, error);
+      if (process.env.NODE_ENV === "development") {
+        console.warn(`Failed to observe ${entryType}:`, error);
+      }
     }
   }
 
@@ -364,8 +366,10 @@ export class PerformanceMonitor {
       const resourceEntries = entries as PerformanceResourceTiming[];
       for (const entry of resourceEntries) {
         if (entry.duration > 200) {
-          // Log slow resources
-          console.warn(`Slow resource: ${entry.name} (${entry.duration}ms)`);
+          // Log slow resources in development only
+          if (process.env.NODE_ENV === "development") {
+            console.warn(`Slow resource: ${entry.name} (${entry.duration}ms)`);
+          }
         }
       }
       this.analyzeBundleSize();
@@ -444,7 +448,9 @@ export class ResourceLoadTracker {
   static endTracking(resourceUrl: string): number {
     const startTime = this.loadTimes.get(resourceUrl);
     if (!startTime) {
-      console.warn(`ResourceLoadTracker: ${resourceUrl} was not tracked.`);
+      if (process.env.NODE_ENV === "development") {
+        console.warn(`ResourceLoadTracker: ${resourceUrl} was not tracked.`);
+      }
       return -1;
     }
     const duration = performance.now() - startTime;

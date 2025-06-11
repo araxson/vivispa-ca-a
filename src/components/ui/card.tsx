@@ -1,36 +1,25 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-
-const cardVariants = cva(
-  "bg-card text-card-foreground flex flex-col rounded-xl border overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default: "border-border/50 shadow-sm",
-        service:
-          "group border-border/50 shadow-sm transition-all duration-300 hover:border-primary/20",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  },
-);
+import { cardVariants, type CardVariants } from "@/lib/component-variants";
+import type { UniversalCardProps } from "@/types/universal";
 
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+  extends Omit<UniversalCardProps, 'variant' | 'size'>,
+    CardVariants {
+  // All card props now use CardVariants for variant and size
+  // This eliminates duplicate prop definitions across card variants
+}
 
 function Card({
   className,
   variant,
+  size,
   ...props
 }: CardProps) {
   return (
     <div
       data-slot="card"
-      className={cn(cardVariants({ variant, className }))}
+      className={cn(cardVariants({ variant, size }), className)}
       {...props}
     />
   );
@@ -86,7 +75,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("p-6", className)}
+      className={cn("px-6 pb-6", className)}
       {...props}
     />
   );

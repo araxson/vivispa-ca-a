@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { services } from "@/data/services";
 import { Section } from "@/components/ui";
-import { ServiceCard } from "@/components/blocks/service-card";
+import { ServiceCard } from "@/components/blocks/cards-and-displays/service-card";
+import { ResponsiveGrid } from "@/components/ui/responsive-grid";
 import {
   generatePageMetadata,
   generateOrganizationSchema,
 } from "@/app/metadata";
 import { siteConfig } from "@/data/constant";
-import { CallToAction } from "@/components/blocks/call-to-action";
+import { CTASection } from "@/components/blocks";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Services - Professional Beauty & Wellness Treatments",
@@ -106,7 +107,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <ResponsiveGrid preset="services" showAnimation={true}>
             {services.map((service) => (
               <ServiceCard
                 key={service.id}
@@ -114,10 +115,26 @@ export default function ServicesPage() {
                 showLocations={true}
               />
             ))}
-          </div>
+          </ResponsiveGrid>
         </Section>
 
-        <CallToAction />
+        <CTASection
+          variant="minimal"
+          title="Ready to Transform Your Look?"
+          description="Book your appointment today and experience our premium beauty services."
+          primaryCTA={{
+            text: "Book Your Appointment",
+            href: "/pricing",
+            variant: "default",
+            icon: "calendar",
+            external: true,
+          }}
+          secondaryCTA={{
+            text: "View Offers",
+            href: "/offers",
+            variant: "outline",
+          }}
+        />
       </main>
     </>
   );

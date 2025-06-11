@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { baseMetadata, viewport } from "@/lib/metadata-utils";
-import { CallWidget } from '@/components/ui/call-widget';
-import { WhatsAppWidget } from '@/components/ui/whatsapp-widget';
-import { contactInfo } from '@/data/contact/contact';
+import { defaultMetadata, viewport as viewportConfig } from "@/app/metadata";
+import { WhatsAppWidget } from '@/components/ui';
+import { AppErrorBoundary, ErrorHandlingInitializer } from "@/components/layout";
 
 /**
  * Configure fonts with next/font
+ * Using optimized font loading with next/font for React 19
  * See: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
  */
 const playfairDisplay = Playfair_Display({
@@ -17,6 +17,7 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
   display: "swap",
   preload: true,
+  adjustFontFallback: 'Times New Roman',
 });
 
 const roboto = Roboto({
@@ -25,55 +26,93 @@ const roboto = Roboto({
   variable: "--font-roboto",
   display: "swap",
   preload: true,
+  adjustFontFallback: 'Arial',
 });
 
-// Export metadata and viewport for Next.js 15.2+ performance optimization
-export const metadata: Metadata = {
-  ...baseMetadata,
-};
-export { viewport };
+// Pre-defined WhatsApp messages for better performance
+const predefinedMessages = [
+  'I have a question about a service.',
+  "I'd like to book an appointment.",
+  'What are your opening hours?',
+] as const;
 
+// Export metadata for Next.js 15
+export const metadata: Metadata = {
+  ...defaultMetadata,
+  verification: {
+    google: "google-site-verification=YOUR_CODE",
+    other: {
+      me: ["info@vivispa.ca"],
+    },
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Vivi Aesthetics Spa",
+  },
+  formatDetection: {
+    telephone: true,
+    date: false,
+    address: false,
+    email: true,
+    url: false,
+  },
+};
+
+// Export viewport configuration separately for better performance
+export const viewport: Viewport = viewportConfig;
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+// Using a function component for better compatibility with React 19
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  const predefinedMessages = [
-    'I have a question about a service.',
-    "I'd like to book an appointment.",
-    'What are your opening hours?',
-  ];
-
+}: Readonly<RootLayoutProps>) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`scroll-smooth ${roboto.variable} ${playfairDisplay.variable}`}
+      className={`${roboto.variable} ${playfairDisplay.variable}`}
     >
-      <head>
-        {/* DNS prefetch for performance */}
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-
-        {/* Preconnect to external domains */}
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-      </head>
-      <body className="min-h-screen antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">{children}</div>
-          <div className="md:hidden">
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        <ErrorHandlingInitializer />
+        <AppErrorBoundary>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* Skip to content link for accessibility */}
+            <a 
+              href="#main-content" 
+              className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground"
+              tabIndex={0}
+              aria-label="Skip to main content"
+            >
+              Skip to content
+            </a>
+            
+            <div className="relative flex min-h-screen flex-col">
+              <main 
+                id="main-content" 
+                className="flex-1"
+                aria-label="Main content"
+              >
+                {children}
+              </main>
+            </div>
+            
             <WhatsAppWidget
-              phoneNumber={contactInfo.phone.formatted}
-              brandName={contactInfo.businessName}
+              phoneNumber="+15551234567"
+              brandName="Vivi Aesthetics Spa"
               welcomeMessage="Hello! How can we help you today?"
               predefinedMessages={predefinedMessages}
             />
-            <CallWidget phoneNumber={contactInfo.phone.formatted} />
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AppErrorBoundary>
       </body>
     </html>
   );

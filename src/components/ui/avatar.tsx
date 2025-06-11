@@ -1,30 +1,14 @@
 'use client';
 
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-
-const avatarVariants = cva(
-  'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
-  {
-    variants: {
-      size: {
-        default: 'h-10 w-10',
-        sm: 'h-8 w-8',
-        lg: 'h-12 w-12',
-      },
-    },
-    defaultVariants: {
-      size: 'default',
-    },
-  },
-);
+import { avatarVariants, type AvatarVariants } from '@/lib/component-variants';
 
 interface AvatarProps
   extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
-    VariantProps<typeof avatarVariants> {}
+    AvatarVariants {}
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,

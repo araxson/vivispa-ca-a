@@ -41,13 +41,14 @@ export const iplPhotofacial: Service = {
     title: "IPL Photofacial Calgary | Vivi Aesthetics & Spa",
     description:
       "Transform your skin with advanced IPL Photofacial treatments. Reduce sun damage, age spots, and rosacea for radiant, youthful skin.",
-    // image field removed (same as service.image)
-    // url field removed (same as service.canonicalUrl)
-    // type field removed (will default to "article")
+    image:
+      "/images/services/ipl-photofacial/ipl-photofacial-in-calgary-001.webp",
+    url: "https://vivispa.ca/services/ipl-photofacial",
+    type: "website",
   },
 
   twitter: {
-    // card field removed (defaults to "summary_large_image")
+    card: "summary_large_image",
     title: "IPL Photofacial Calgary | Vivi Aesthetics & Spa",
     description:
       "Achieve clearer, more radiant skin with IPL Photofacial treatments. Target multiple skin concerns in one session.",

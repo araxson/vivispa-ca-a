@@ -23,114 +23,58 @@ export const getAllServices = cache((): Service[] => {
   return services.sort((a, b) => a.popularityRank - b.popularityRank);
 });
 
+export const getAllServiceCards = cache((): ServiceCardData[] => {
+  return getAllServices().map((service) => ({
+    title: service.title,
+    description: service.previewDescription,
+    slug: service.slug,
+    image: service.image,
+    benefits: service.benefits?.slice(0, 3) || [],
+    isPremium: service.isPremium || false,
+    status: service.status || "active",
+    availableLocations: service.availableLocations || AVAILABLE_LOCATIONS,
+    popularityRank: service.popularityRank,
+  }));
+});
+
 export const getServiceBySlug = cache((slug: string): Service | undefined => {
-  return services.find((service) => service.slug === slug);
+  return getAllServices().find((service) => service.slug === slug);
 });
 
-export const getServiceById = cache((id: string): Service | undefined => {
-  return services.find((service) => service.id === id);
+export const getHomePageData = cache(() => {
+  return homePageData;
 });
 
-export const getFeaturedServices = cache((limit?: number): Service[] => {
-  const sortedServices = services.sort(
-    (a, b) => a.popularityRank - b.popularityRank,
-  );
-  return limit ? sortedServices.slice(0, limit) : sortedServices;
+export const getAllTestimonials = cache(() => {
+  return testimonials;
 });
 
-// Enhanced cached offer fetchers with ISR metadata
-export const getAllOffers = cache((): OfferItem[] => {
-  return consolidatedOffers.sort((a, b) => {
-    const aIsBestSeller = (a.badges || []).includes("Best Seller");
-    const bIsBestSeller = (b.badges || []).includes("Best Seller");
-    if (aIsBestSeller !== bIsBestSeller) return aIsBestSeller ? -1 : 1;
-    return a.title.localeCompare(b.title);
-  });
+export const getServiceTestimonials = cache((serviceSlug: string) => {
+  return getTestimonialsByService(serviceSlug);
+});
+
+export const getAllOffers = cache(() => {
+  return consolidatedOffers;
 });
 
 export const getOfferBySlug = cache((slug: string): OfferItem | undefined => {
-  return consolidatedOffers.find((offer) => offer.slug === slug);
+  return getAllOffers().find((offer) => offer.slug === slug);
 });
 
-export const getAvailableOfferLocations = cache((): string[] => {
+export const getAvailableOfferLocations = cache(() => {
   return AVAILABLE_LOCATIONS;
 });
 
-export const getFeaturedOffers = cache((limit?: number): OfferItem[] => {
-  const featured = consolidatedOffers
-    .filter((offer) => (offer.badges || []).includes("Best Seller"))
-    .sort((a, b) => a.title.localeCompare(b.title));
-  return limit ? featured.slice(0, limit) : featured;
-});
-
-// Enhanced cached testimonial fetchers
-export const getAllTestimonials = cache(() => {
-  return testimonials.sort((a, b) => {
-    if (a.featured !== b.featured) return a.featured ? -1 : 1;
-    return a.name.localeCompare(b.name);
-  });
-});
-
-export const getFeaturedTestimonials = cache((limit?: number) => {
-  const featured = testimonials
-    .filter((testimonial) => testimonial.featured)
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((testimonial) => ({
-      ...testimonial,
-      location: testimonial.location || "Calgary, AB",
-    }));
-  return limit ? featured.slice(0, limit) : featured;
-});
-
-export const getServiceTestimonials = cache((service: string) => {
-  // First try to get testimonials from the testimonials.ts file
-  const testimonialsFromData = getTestimonialsByService(service).map(
-    (testimonial) => ({
-      ...testimonial,
-      location: testimonial.location || "Calgary, AB",
-    }),
-  );
-
-  // If we found testimonials in the data file, return them
-  if (testimonialsFromData.length > 0) {
-    return testimonialsFromData;
-  }
-
-  // Otherwise, try to find the service and get its testimonials
-  const serviceObject = services.find(
-    (s) => s.title === service || s.slug === service || s.id === service,
-  );
-
-  if (serviceObject?.testimonials) {
-    // Map the service testimonials to match the expected format
-    return serviceObject.testimonials.map((testimonial) => ({
-      id: testimonial.name.replace(/\s+/g, "-").toLowerCase(),
-      name: testimonial.name,
-      rating: testimonial.rating,
-      content: testimonial.quote,
-      service: testimonial.treatment || service,
-      location: "Calgary, AB",
-    }));
-  }
-
-  // If no testimonials are found, return an empty array
-  return [];
-});
-
 /**
- * Enhanced static params generation for SSG
- * Returns params with lastModified for ISR optimization
+ * Next.js 15 optimized data fetching with explicit static generation
+ * Used for dynamically generated pages
  */
-export const generateServiceStaticParams = cache(() => {
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
+export const getServiceSlugs = cache((): string[] => {
+  return getAllServices().map((service) => service.slug);
 });
 
-export const generateOfferStaticParams = cache(() => {
-  return consolidatedOffers.map((offer) => ({
-    slug: offer.slug,
-  }));
+export const getOfferSlugs = cache((): string[] => {
+  return getAllOffers().map((offer) => offer.slug);
 });
 
 /**

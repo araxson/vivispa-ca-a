@@ -19,6 +19,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
+    "verbatimModuleSyntax": true,
     "plugins": [
       {
         "name": "next"
@@ -26,7 +27,25 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "strictNullChecks": true,
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "declaration": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": false,
+    "useDefineForClassFields": true,
+    "downlevelIteration": true,
+    "checkJs": true,
+    "stripInternal": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "jsxImportSource": "react",
+    "types": ["node", "react", "react-dom"],
+    "baseUrl": ".",
+    "skipDefaultLibCheck": true,
+    "assumeChangesOnlyAffectDirectDependencies": true
   },
   "include": [
     "**/*.ts",

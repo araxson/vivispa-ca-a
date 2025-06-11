@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "./utils";
 
 /**
  * Standardized spacing system for consistent layouts
@@ -49,6 +50,88 @@ export const spacing = {
 } as const;
 
 export type SpacingSize = keyof typeof spacing.section;
+
+/**
+ * Container variant definitions using CVA
+ */
+export const containerVariants = cva("mx-auto w-full", {
+  variants: {
+    size: {
+      sm: "max-w-sm",
+      md: "max-w-4xl",
+      lg: "max-w-6xl",
+      xl: "max-w-7xl",
+      full: "max-w-full",
+    },
+    padding: {
+      none: "",
+      xs: "px-3 sm:px-4",
+      sm: "px-4 sm:px-6",
+      md: "px-4 sm:px-6 lg:px-8",
+      lg: "px-6 sm:px-8 lg:px-12",
+    },
+  },
+  defaultVariants: {
+    size: "xl",
+    padding: "md",
+  },
+});
+
+/**
+ * Section variant definitions using CVA
+ */
+export const sectionVariants = cva("w-full", {
+  variants: {
+    spacing: {
+      none: "",
+      xs: "py-6 sm:py-8",
+      sm: "py-8 sm:py-12",
+      md: "py-12 sm:py-16",
+      lg: "py-16 sm:py-20",
+      xl: "py-20 sm:py-24 lg:py-32",
+    },
+    background: {
+      default: "bg-background",
+      muted: "bg-muted/30",
+      card: "bg-card",
+      primary: "bg-primary text-primary-foreground",
+      transparent: "",
+    },
+  },
+  defaultVariants: {
+    spacing: "md",
+    background: "default",
+  },
+});
+
+/**
+ * Grid variant definitions using CVA
+ */
+export const gridVariants = cva("grid", {
+  variants: {
+    cols: {
+      1: "grid-cols-1",
+      2: "grid-cols-1 md:grid-cols-2",
+      3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+      4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+      6: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6",
+      12: "grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12",
+      auto: "grid-cols-[repeat(auto-fit,minmax(280px,1fr))]",
+    },
+    gap: {
+      none: "gap-0",
+      xs: "gap-3",
+      sm: "gap-4",
+      md: "gap-6",
+      lg: "gap-8",
+      xl: "gap-12",
+    },
+  },
+  defaultVariants: {
+    cols: "auto",
+    gap: "md",
+  },
+});
 
 /**
  * Get section wrapper classes
@@ -148,3 +231,10 @@ export function getGridClasses(
 
   return cn(classes);
 }
+
+/**
+ * Type exports for component props
+ */
+export type ContainerVariants = VariantProps<typeof containerVariants>;
+export type SectionVariants = VariantProps<typeof sectionVariants>;
+export type GridVariants = VariantProps<typeof gridVariants>;

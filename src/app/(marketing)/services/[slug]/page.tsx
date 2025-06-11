@@ -1,7 +1,4 @@
-"use client";
-import { Suspense, use } from "react";
-import { default as dynamicImport } from "next/dynamic";
-import { CallToAction } from "@/components/blocks/call-to-action";
+import { Suspense } from "react";
 
 // Component imports
 import {
@@ -10,163 +7,186 @@ import {
   BenefitsSection,
   ServiceProcedure,
   ServiceResults,
+  SharedCTA,
+  ServiceGallery,
+  Testimonials,
+  FAQSection,
+  ServiceShowcase,
 } from "@/components/blocks";
 import { Section, Skeleton } from "@/components/ui";
 
 // Data and utilities
 import { getServiceWithEnhancedData } from "./page.server";
 
-const ServiceGallery = dynamicImport(
-  () =>
-    import("@/components/blocks/service-gallery").then(
-      (mod) => mod.ServiceGallery
-    ),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-const Testimonials = dynamicImport(
-  () =>
-    import("@/components/blocks/testimonials").then((mod) => mod.Testimonials),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-const FAQSection = dynamicImport(
-  () => import("@/components/blocks/faq-section").then((mod) => mod.FAQSection),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
-const ServiceShowcase = dynamicImport(
-  () =>
-    import("@/components/blocks/service-showcase").then(
-      (mod) => mod.ServiceShowcase
-    ),
-  {
-    loading: () => <Skeleton className="h-96 w-full" />,
-  }
-);
-
+// Type definition for consistent props
 interface ServicePageProps {
   params: { slug: string };
-  // searchParams?: { [key: string]: string | string[] | undefined }; // Example if searchParams were needed
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  // const paramsFromHook = use(params); // This would be incorrect now if params is not a promise
-  // The line `const params = use(props.params)` was specific to props.params being a Promise.
-  // If params is directly { slug: string }, then slug can be destructured.
+/**
+ * Service detail page
+ * Optimized for Next.js 15 App Router with React 19 Suspense boundaries
+ */
+export default async function ServicePage({ params }: Readonly<ServicePageProps>) {
   const { slug } = params;
 
-  // NOTE: Calling getServiceWithEnhancedData (a server function) directly in a Client Component
-  // is problematic. This would typically be done in a Server Component,
-  // and the data passed as props to this Client Component.
-  // For the purpose of this type update, we are addressing the page props.
-  // The data fetching architecture is a separate concern.
+  // Get all service data with optimized fetch using unstable_cache
   const { service, relatedServices, serviceTestimonials, schemas, formattedBenefits } =
-    getServiceWithEnhancedData(slug);
+    await getServiceWithEnhancedData(slug);
 
   return (
     <>
-      {/* Comprehensive structured data for enhanced SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.organization),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.service),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.breadcrumb),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.faq),
-        }}
-      />
+      {/* Structured data for enhanced SEO */}
+      {Object.entries(schemas).map(([key, schema]) => (
+        <script
+          key={key}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema),
+          }}
+        />
+      ))}
 
       <Hero
         title={service.title}
-        description={service.fullDescription}
-        heroType={service.heroType || "image"}
-        backgroundImage={
-          service.image
-            ? {
-                src: service.image,
-                alt: service.title,
-              }
-            : undefined
-        }
-        backgroundVideo={service.heroVideo}
+        description={service.previewDescription}
+        primaryCTA={{
+          text: "Book Consultation",
+          href: "/contact",
+        }}
+        secondaryCTA={{
+          text: "View Pricing",
+          href: "/pricing",
+        }}
+        backgroundImage={{
+          src: service.image,
+          alt: service.title,
+        }}
+        heroType="image"
+        spacing="lg"
       />
 
-      <Suspense fallback={<div className="h-96 bg-muted" />}>
+      <Section spacing="lg" background="default">
         <ServiceOverview
           overview={service.overview}
           benefits={service.benefits}
           sessionInfo={{
-            recommended: 3,
-            interval: "4-6 weeks",
+            recommended: service.recommendedSessions || 3,
+            interval: service.sessionInterval || "4-6 weeks",
           }}
         />
+      </Section>
+
+      <Section spacing="lg" background="muted">
+        <BenefitsSection
+          title="Key Benefits"
+          subtitle="Discover the transformative benefits of this treatment"
+          benefits={formattedBenefits}
+          variant="default"
+          spacing="md"
+        />
+      </Section>
+
+      <Section spacing="lg" background="default">
+        <ServiceProcedure
+          steps={[
+            {
+              title: "Consultation",
+              description: "Initial assessment and treatment planning",
+            },
+            {
+              title: "Preparation",
+              description: "Skin preparation and area cleaning",
+            },
+            {
+              title: "Treatment",
+              description: service.procedure,
+            },
+            {
+              title: "Aftercare",
+              description: service.preparationAndAftercare,
+            },
+          ]}
+          title="The Procedure"
+          subtitle="What to expect during your treatment"
+        />
+      </Section>
+
+      <Section spacing="lg" background="muted">
+        <ServiceResults
+          results={[
+            {
+              value: "95%",
+              metric: "Satisfaction Rate",
+              description: "Client satisfaction with results",
+            },
+            {
+              value: service.recommendedSessions?.toString() || "2-4",
+              metric: "Sessions",
+              description: "Average sessions for optimal results",
+            },
+            {
+              value: service.downtime || "0",
+              metric: "Downtime",
+              description: service.downtimeDescription || "No recovery time needed",
+            },
+          ]}
+          title="Expected Results"
+          subtitle="What you can expect from this treatment"
+        />
+      </Section>
+
+      {service.galleryImages && service.galleryImages.length > 0 && (
+        <Suspense fallback={<Section spacing="lg" background="default"><Skeleton className="h-96 w-full" /></Section>}>
+          <Section spacing="lg" background="default">
+            <ServiceGallery
+              images={service.galleryImages.map((image, index) => ({
+                id: `gallery-${index}`,
+                src: image,
+                alt: `${service.title} - Gallery Image ${index + 1}`,
+              }))}
+              title="Treatment Gallery"
+            />
+          </Section>
+        </Suspense>
+      )}
+
+      {serviceTestimonials && serviceTestimonials.length > 0 && (
+        <Suspense fallback={<Section spacing="lg" background="muted"><Skeleton className="h-96 w-full" /></Section>}>
+          <Section spacing="lg" background="muted">
+            <Testimonials
+              testimonials={serviceTestimonials}
+              title="Client Testimonials"
+              subtitle="Real experiences from our valued clients"
+            />
+          </Section>
+        </Suspense>
+      )}
+
+      <Suspense fallback={<Section spacing="lg" background="default"><Skeleton className="h-96 w-full" /></Section>}>
+        <Section spacing="lg" background="default">
+          <FAQSection
+            faqs={service.faqs || []}
+            title="Frequently Asked Questions"
+            subtitle="Get answers to common questions about this treatment"
+          />
+        </Section>
       </Suspense>
 
-      <BenefitsSection
-        variant="default"
-        title="Treatment Benefits"
-        subtitle="Experience the comprehensive benefits of this advanced treatment"
-        benefits={formattedBenefits}
-      />
-
-      <ServiceGallery
-        images={service.galleryImages.map((img: string) => ({
-          id: img,
-          src: img,
-          alt: `${service.title} - Result`,
-        }))}
-        title={`${service.title} Gallery`}
-      />
-
-      {serviceTestimonials.length > 0 && (
-        <Testimonials
-          testimonials={serviceTestimonials}
-          title={`What Our Clients Say About ${service.title}`}
-          subtitle="Real experiences from our valued clients"
-        />
+      {relatedServices && relatedServices.length > 0 && (
+        <Suspense fallback={<Section spacing="lg" background="muted"><Skeleton className="h-96 w-full" /></Section>}>
+          <Section spacing="lg" background="muted">
+            <ServiceShowcase
+              title="Related Services"
+              subtitle="Explore our other premium treatments"
+              services={relatedServices}
+              showLocations={true}
+            />
+          </Section>
+        </Suspense>
       )}
 
-      <FAQSection
-        faqs={service.faqs}
-        title="Frequently Asked Questions"
-        subtitle={`Common questions about ${service.title}`}
-      />
-
-      {/* Related Services Section */}
-      {relatedServices.length > 0 && (
-        <ServiceShowcase
-          title="Related Services"
-          subtitle={`Explore other treatments that complement ${service.title}`}
-          services={relatedServices}
-          showLocations={true}
-          spacing="lg"
-          background="muted"
-        />
-      )}
-
-      <CallToAction />
+      <SharedCTA />
     </>
   );
 }

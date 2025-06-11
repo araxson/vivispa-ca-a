@@ -1,17 +1,10 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
-import { getSectionClasses, type SpacingSize } from "@/lib/spacing";
+import { cn, getSectionClasses, type SpacingSize } from "@/lib/utils";
 import { Container, type ContainerProps } from "./container";
+import type { UniversalSectionProps } from "@/types/universal";
 
-export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface SectionProps extends UniversalSectionProps {
   children: React.ReactNode;
-  className?: string | undefined;
-  containerClassName?: string | undefined;
-  maxWidth?: ContainerProps["maxWidth"];
-  paddingSize?: ContainerProps["paddingSize"];
-  spacing?: SpacingSize;
-  background?: "default" | "muted" | "card" | "primary" | "transparent";
-  id?: string;
 }
 
 export function Section({

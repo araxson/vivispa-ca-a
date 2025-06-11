@@ -2,12 +2,27 @@ import { useMemo, useState } from "react";
 import { allServices, allLocations } from "@/data/pricing/index";
 import type { ServiceItem } from "@/types/pricing";
 import type { FilterItem } from "@/components/ui/filter-badges";
+import { useLocationServices } from "./use-location-services";
 
+/**
+ * @deprecated Use useUniversalFilters with pricing preset instead
+ * This hook is maintained for backward compatibility only
+ * 
+ * Migration example:
+ * ```tsx
+ * import { useUniversalFilters, getFilterPreset } from '@/hooks/use-universal-filters';
+ * 
+ * const config = getFilterPreset('pricing');
+ * const { filters, activeFilters, setFilter } = useUniversalFilters({ config });
+ * ```
+ */
 const usePricingFilters = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLocation, setSelectedLocation] = useState<string>("Downtown");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>("all");
+
+  const { allServicesForLocation } = useLocationServices(selectedLocation);
 
   // Clear specific filter
   const handleClearFilter = (filterType: string) => {
@@ -38,8 +53,8 @@ const usePricingFilters = () => {
   }, []);
 
   const categories = useMemo(() => {
-    return [...new Set(allServices.map((service) => service.category))].sort();
-  }, []);
+    return [...new Set(allServicesForLocation.map((service) => service.category))].sort();
+  }, [allServicesForLocation]);
 
   // Get active filters for badges
   const activeFilters: FilterItem[] = useMemo(() => {
@@ -89,17 +104,7 @@ const usePricingFilters = () => {
 
   // Filter services based on search and filters
   const filteredServices = useMemo(() => {
-    let services: ServiceItem[] = [];
-
-    // Filter by location first
-    const locationData = allLocations.find(
-      (loc) => loc.location === selectedLocation,
-    );
-    if (locationData) {
-      services = locationData.categories.flatMap(
-        (category) => category.services,
-      );
-    }
+    let services: ServiceItem[] = [...allServicesForLocation];
 
     // Filter by search term
     if (searchTerm) {
@@ -141,7 +146,7 @@ const usePricingFilters = () => {
     }
 
     return services;
-  }, [searchTerm, selectedCategory, selectedLocation, selectedPriceRange]);
+  }, [searchTerm, selectedCategory, selectedPriceRange, allServicesForLocation]);
 
   // Group services by category and subcategory
   const servicesByCategory = useMemo(() => {

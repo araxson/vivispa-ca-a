@@ -1,16 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/data/constant";
-import { Service } from "@/types/service"; // Import Service type
-import {
-  generateOpenGraphData,
-  generateTwitterData,
-} from "@/lib/service-utils"; // Import new utils
 
 // Base URL for all metadata
 const baseUrl = siteConfig.url;
 
 /**
- * Modern viewport configuration (Next.js 14+)
+ * Modern viewport configuration (Next.js 15+)
  * Separated from metadata for better performance
  */
 export const viewport: Viewport = {
@@ -19,8 +14,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "oklch(1 0 0)" },
-    { media: "(prefers-color-scheme: dark)", color: "oklch(0.145 0 0)" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#252525" },
   ],
   colorScheme: "light dark",
   viewportFit: "cover",
@@ -28,6 +23,7 @@ export const viewport: Viewport = {
 
 /**
  * Enhanced keywords for better SEO targeting
+ * Optimized for Next.js 15 metadata API
  */
 const defaultKeywords: string[] = [
   "aesthetics spa Calgary",
@@ -55,7 +51,7 @@ const defaultKeywords: string[] = [
 ];
 
 /**
- * Enhanced default metadata with performance optimizations
+ * Enhanced default metadata with performance optimizations for Next.js 15
  */
 export const defaultMetadata: Metadata = {
   // Basic metadata
@@ -140,53 +136,27 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  // App icons and manifest are handled automatically by Next.js
-  // when placed in the /app directory (favicon.ico, icon.png, apple-icon.png, site.webmanifest)
-
   // Additional metadata for better SEO
   category: "Health & Beauty",
   classification: "Business",
-
-  // Verification tags (add these when you get them)
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
-    other: {
-      bing: ["your-bing-verification-code"],
-    },
-  },
-
-  // Additional metadata
-  other: {
-    "application-name": siteConfig.name,
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "apple-mobile-web-app-title": siteConfig.name,
-    "format-detection": "telephone=no",
-    "mobile-web-app-capable": "yes",
-    "msapplication-config": "/browserconfig.xml",
-    "msapplication-TileColor": "oklch(1 0 0)",
-    "msapplication-tap-highlight": "no",
-    "theme-color": "oklch(1 0 0)",
-  },
 };
 
 /**
  * Interface for page-specific SEO metadata
  */
 export interface PageSeoProps {
-  title?: string;
-  description?: string;
-  keywords?: string[];
+  title: string;
+  description: string;
+  keywords: string[];
   ogImage?: string;
-  canonicalUrl?: string;
+  canonicalUrl: string;
   noindex?: boolean;
   jsonLd?: Record<string, any>;
 }
 
 /**
- * Generates optimized metadata for a specific page with performance considerations
+ * Generates optimized metadata for a specific page
+ * Performance optimized for Next.js 15 and React 19
  */
 export function generatePageMetadata({
   title,
@@ -196,9 +166,12 @@ export function generatePageMetadata({
   canonicalUrl,
   noindex = false,
 }: PageSeoProps): Metadata {
+  // Using more efficient string concatenation for better performance
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
   const pageDescription = description || siteConfig.description;
-  const fullCanonicalUrl = canonicalUrl ? `${baseUrl}${canonicalUrl}` : baseUrl;
+  const fullCanonicalUrl = canonicalUrl.startsWith('http') 
+    ? canonicalUrl 
+    : `${baseUrl}${canonicalUrl}`;
 
   return {
     ...defaultMetadata,
@@ -221,7 +194,7 @@ export function generatePageMetadata({
       images: ogImage
         ? [
             {
-              url: ogImage,
+              url: ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`,
               width: 1200,
               height: 630,
               alt: pageTitle,
@@ -233,12 +206,28 @@ export function generatePageMetadata({
       ...defaultMetadata.twitter,
       title: pageTitle,
       description: pageDescription,
-      images: ogImage ? [ogImage] : defaultMetadata.twitter?.images,
+      images: ogImage 
+        ? [{ 
+            url: ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`,
+            width: 1200,
+            height: 630,
+            alt: pageTitle, 
+          }] 
+        : defaultMetadata.twitter?.images,
     },
     robots: noindex
       ? {
           index: false,
           follow: false,
+          nocache: true,
+          googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
         }
       : defaultMetadata.robots,
   };
@@ -250,160 +239,140 @@ export function generatePageMetadata({
 export interface ServicePageMetadataProps {
   serviceName: string;
   serviceDescription: string;
+  serviceKeywords?: string[];
+  imageUrl?: string;
+  slug: string;
+  benefits?: string[];
+  locationSpecific?: boolean;
 }
 
 /**
- * Enhanced service page metadata with local SEO optimization
+ * Generates optimized metadata for a service page
  */
-export function generateServicePageMetadata(
-  service: Service,
-  locationSpecific: boolean = true,
-): Metadata {
-  const locationSuffix = locationSpecific ? " in Calgary" : "";
-  // Use service.metaTitle or service.title for the main title component
-  const baseTitle = service.metaTitle || service.title;
-  const title = `${baseTitle}${locationSuffix}`;
-  // Use service.metaDescription or service.previewDescription for the main description
-  const description = `${
-    service.metaDescription || service.previewDescription || ""
-  } Book your ${baseTitle.toLowerCase()} treatment at Vivi Aesthetics & Spa Calgary. Professional, safe, and effective results.`;
+export function generateServicePageMetadata({
+  serviceName,
+  serviceDescription,
+  serviceKeywords = [],
+  imageUrl,
+  slug,
+  benefits = [],
+  locationSpecific = true,
+}: ServicePageMetadataProps): Metadata {
+  const locationKeywords = locationSpecific
+    ? ["Calgary", "Alberta", "Canada"]
+    : [];
+  const benefitKeywords = benefits.map((benefit) => benefit.toLowerCase());
 
-  const enhancedKeywords = [
-    ...(service.keywords || []),
-    `${baseTitle.toLowerCase()} Calgary`,
-    `${baseTitle.toLowerCase()} treatment`,
-    `${baseTitle.toLowerCase()} spa`,
-    ...(service.benefits?.map((benefit: string) => `${benefit.toLowerCase()} Calgary`) || []),
+  // Enhanced keyword optimization with location
+  const allKeywords = [
+    ...serviceKeywords,
+    ...locationKeywords,
+    ...benefitKeywords,
+    `${serviceName.toLowerCase()} Calgary`,
+    `professional ${serviceName.toLowerCase()}`,
+    `${serviceName.toLowerCase()} treatment`,
+    `best ${serviceName.toLowerCase()} Calgary`,
   ];
 
-  const fullCanonicalUrl = service.canonicalUrl || `${baseUrl}/services/${service.slug}`;
-
-  // Generate OpenGraph and Twitter data using the utility functions
-  const finalOpenGraphData = generateOpenGraphData(service);
-  const finalTwitterData = generateTwitterData(service);
-
-  return {
-    ...defaultMetadata, // Spread defaultMetadata first
-    title,
-    description,
-    keywords: [...defaultKeywords, ...enhancedKeywords],
-    alternates: {
-      canonical: fullCanonicalUrl,
-      languages: {
-        "en-CA": fullCanonicalUrl,
-        "en-US": fullCanonicalUrl,
-        en: fullCanonicalUrl,
-      },
-    },
-    openGraph: finalOpenGraphData, // Use the generated OpenGraph data
-    twitter: finalTwitterData, // Use the generated Twitter data
-    // Ensure other parts of defaultMetadata are not unintentionally overridden if they shouldn't be
-    // For example, if defaultMetadata.openGraph has more specific general fallbacks not covered by generateOpenGraphData
-    // you might need to merge them: { ...defaultMetadata.openGraph, ...finalOpenGraphData }
-    // However, the utility functions are designed to be comprehensive for a service.
-  };
+  return generatePageMetadata({
+    title: `${serviceName} in Calgary | Professional ${serviceName} Treatment`,
+    description: serviceDescription,
+    keywords: allKeywords,
+    ogImage: imageUrl || undefined,
+    canonicalUrl: `/services/${slug}`,
+  });
 }
 
 /**
- * Enhanced organization schema with local business data
+ * Generates JSON-LD Schema for the organization
  */
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "MedicalSpa",
-    "@id": `${baseUrl}/#organization`,
+    "@type": "MedSpa",
     name: siteConfig.name,
-    alternateName: "Vivi Spa",
     description: siteConfig.description,
     url: baseUrl,
-    logo: {
-      "@type": "ImageObject",
-      url: `${baseUrl}/images/logos/vivi-logo.webp`,
-      width: 500,
-      height: 500,
-    },
-    image: {
-      "@type": "ImageObject",
-      url: `${baseUrl}/images/spa-interior.webp`,
-      width: 1200,
-      height: 630,
-    },
-    telephone: "+1-587-200-7772",
-    email: "info@vivispa.ca",
+    logo: `${baseUrl}/images/logo.svg`,
+    image: `${baseUrl}/images/og-image-1200x630.webp`,
+    telephone: siteConfig.contact.phone,
+    email: siteConfig.contact.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "1240 Kensington Rd NW #512",
-      addressLocality: "Calgary",
-      addressRegion: "AB",
-      postalCode: "T2N 3P7",
       addressCountry: "CA",
+      addressRegion: "AB",
+      addressLocality: "Calgary",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 51.0547,
-      longitude: -114.0794,
+      latitude: siteConfig.location.latitude,
+      longitude: siteConfig.location.longitude,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "16:00",
-      },
-    ],
+    openingHoursSpecification: siteConfig.businessHours.map((hours) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: hours.days,
+      opens: hours.opens,
+      closes: hours.closes,
+    })),
     sameAs: [
-      "https://www.facebook.com/vivispa.ca",
-      "https://www.instagram.com/vivi_aesthetics_spa",
-      "https://www.google.com/maps/place/Vivi+Aesthetics+%26+Spa",
+      siteConfig.socialLinks.instagram,
+      siteConfig.socialLinks.facebook,
+      siteConfig.socialLinks.linkedin,
     ],
-    areaServed: {
-      "@type": "City",
-      name: "Calgary",
-      containedInPlace: {
-        "@type": "AdministrativeArea",
-        name: "Alberta",
-        containedInPlace: {
-          "@type": "Country",
-          name: "Canada",
-        },
-      },
-    },
-    priceRange: "$$-$$$",
-    paymentAccepted: ["Cash", "Credit Card", "Debit Card", "E-transfer"],
+    priceRange: "$$",
+    paymentAccepted: "Cash, Credit Card",
     currenciesAccepted: "CAD",
+    availableLanguage: {
+      "@type": "Language",
+      name: "English",
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Medical Aesthetics Services",
+      name: "Aesthetics Services",
       itemListElement: [
         {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Laser Hair Removal",
-            description: "Professional laser hair removal treatments",
-          },
+          "@type": "OfferCatalog",
+          name: "Laser Treatments",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Laser Hair Removal",
+                url: `${baseUrl}/services/laser-hair-removal`,
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Laser Skin Tightening",
+                url: `${baseUrl}/services/laser-skin-tightening`,
+              },
+            },
+          ],
         },
         {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "HydraFacial",
-            description: "Deep cleansing and hydrating facial treatments",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Microneedling",
-            description: "Skin rejuvenation through controlled micro-injuries",
-          },
+          "@type": "OfferCatalog",
+          name: "Facial Treatments",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "HydroFacial",
+                url: `${baseUrl}/services/hydrofacial`,
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Microneedling",
+                url: `${baseUrl}/services/microneedling`,
+              },
+            },
+          ],
         },
       ],
     },
@@ -411,44 +380,42 @@ export function generateOrganizationSchema() {
 }
 
 /**
- * Enhanced service schema generation
+ * Generates JSON-LD Schema for a service
  */
-export function generateServiceSchema(service: Service) { // Updated to use Service type
+export function generateServiceSchema(service: {
+  title: string;
+  previewDescription: string;
+  slug: string;
+  image: string;
+  benefits: string[];
+  expectedResults?: string;
+  procedure: string;
+  preparationAndAftercare: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
-    "@id": `${baseUrl}/services/${service.slug}#service`,
-    name: service.title, // Assuming service.title is the correct field
-    description: service.previewDescription, // Assuming service.previewDescription
-    procedureType: service.title, // Or perhaps a more specific field if available
-    bodyLocation: service.bodyLocation || "Face, Body", // Example: use service.bodyLocation or default
-    image: {
-      "@type": "ImageObject",
-      url: service.image, // Assuming service.image is the correct field
-      width: 1200,
-      height: 630,
-    },
+    name: service.title,
+    description: service.previewDescription,
     url: `${baseUrl}/services/${service.slug}`,
+    image: service.image.startsWith('http') ? service.image : `${baseUrl}${service.image}`,
+    procedureType: "https://www.wikidata.org/wiki/Q1025381",
+    bodyLocation: "Face",
+    preparation: service.preparationAndAftercare,
+    followup: service.preparationAndAftercare,
+    howPerformed: service.procedure,
+    purpose: service.benefits.join(", "),
     provider: {
-      "@id": `${baseUrl}/#organization`,
+      "@type": "MedSpa",
+      name: siteConfig.name,
+      url: baseUrl,
     },
-    areaServed: {
-      "@type": "City",
-      name: "Calgary",
-    },
-    howPerformed: service.procedure, // Assuming service.procedure
-    preparation: service.preparationAndAftercare, // Assuming service.preparationAndAftercare
-    expectedOutcome: service.expectedResults, // Assuming service.expectedResults
-    benefits: service.benefits?.join(", "), // Join benefits array into a string if schema expects string
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${baseUrl}/services/${service.slug}`,
-    },
+    status: "Available",
   };
 }
 
 /**
- * Enhanced breadcrumb schema
+ * Generates JSON-LD Schema for breadcrumbs
  */
 export function generateBreadcrumbSchema(
   breadcrumbs: Array<{ name: string; url: string }>,
@@ -456,20 +423,17 @@ export function generateBreadcrumbSchema(
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((crumb, index) => ({
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: crumb.name,
-      item: {
-        "@type": "WebPage",
-        "@id": crumb.url,
-      },
+      name: breadcrumb.name,
+      item: breadcrumb.url,
     })),
   };
 }
 
 /**
- * FAQ Schema generation
+ * Generates JSON-LD Schema for FAQs
  */
 export function generateFAQSchema(
   faqs: Array<{ question: string; answer: string }>,
@@ -489,23 +453,35 @@ export function generateFAQSchema(
 }
 
 /**
- * Review schema generation
+ * Generates JSON-LD Schema for testimonials/reviews
  */
 export function generateReviewSchema(
   testimonials: Array<{ name: string; rating: number; content: string }>,
 ) {
-  return testimonials.map((testimonial) => ({
+  return {
     "@context": "https://schema.org",
-    "@type": "Review",
-    author: {
-      "@type": "Person",
-      name: testimonial.name,
+    "@type": "Product",
+    name: siteConfig.name,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: testimonials.length.toString(),
+      bestRating: "5",
+      worstRating: "1",
     },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: testimonial.rating,
-      bestRating: 5,
-    },
-    reviewBody: testimonial.content,
-  }));
+    review: testimonials.map((testimonial) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: testimonial.name,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: testimonial.rating.toString(),
+        bestRating: "5",
+        worstRating: "1",
+      },
+      reviewBody: testimonial.content,
+    })),
+  };
 }

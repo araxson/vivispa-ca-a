@@ -96,4 +96,46 @@ export const AnimationState = {
 /**
  * Add filter transition classes
  */
-export const filterTransitionClasses = "transition-all duration-300 ease-in-out"; 
+export const filterTransitionClasses = "transition-all duration-300 ease-in-out";
+
+/**
+ * Pre-configured animation presets for common use cases
+ */
+export const ANIMATION_PRESETS = {
+  // Card animations
+  cardHover: { variant: "scale" as const, timing: "fast" as const },
+  cardEntrance: { variant: "slideUp" as const, timing: "normal" as const, delay: "short" as const },
+  
+  // Section animations
+  sectionFade: { variant: "fade" as const, timing: "slow" as const },
+  sectionSlide: { variant: "slideUp" as const, timing: "normal" as const },
+  
+  // Item list animations (for staggered effects)
+  listItemStagger: { variant: "slideUp" as const, timing: "normal" as const },
+  
+  // Filter and badge animations
+  filterBadge: { variant: "scale" as const, timing: "fast" as const },
+  
+  // Hero and banner animations
+  heroBanner: { variant: "fade" as const, timing: "slow" as const, delay: "short" as const },
+} as const;
+
+/**
+ * Get preset animation configuration
+ */
+export function getAnimationPreset(presetName: keyof typeof ANIMATION_PRESETS): AnimationProps {
+  return ANIMATION_PRESETS[presetName];
+}
+
+/**
+ * Enhanced staggered animation helper with better defaults
+ */
+export function createStaggeredAnimation(
+  itemCount: number,
+  baseDelay: number = 100,
+  maxDelay: number = 1000
+): Array<{ customDelay: number }> {
+  return Array.from({ length: itemCount }, (_, index) => ({
+    customDelay: Math.min(index * baseDelay, maxDelay)
+  }));
+}

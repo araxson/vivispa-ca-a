@@ -56,12 +56,10 @@ const DesktopNav = ({
 }: {
   isActiveLink: (href: string) => boolean;
 }) => (
-  <nav className="hidden md:flex items-center">
-    <div className="flex items-center gap-2">
-      {NAV_ITEMS.map((item) => (
-        <NavLink key={item.href} item={item} isActive={isActiveLink(item.href)} />
-      ))}
-    </div>
+  <nav className="hidden md:flex items-center gap-2">
+    {NAV_ITEMS.map((item) => (
+      <NavLink key={item.href} item={item} isActive={isActiveLink(item.href)} />
+    ))}
     <div className="ml-6 pl-6 border-l border-border/30 flex items-center gap-2">
       <Link
         href="/offers"
@@ -72,21 +70,18 @@ const DesktopNav = ({
       >
         Offers
       </Link>
-      <a
+      <Link
         href="/pricing"
-        target="_blank"
-        rel="noopener noreferrer"
         className={cn(
           navLinkVariants({ isActive: false }),
           "bg-primary/10 text-primary hover:bg-primary/20",
         )}
       >
         Book Now
-        <span className="sr-only">(opens in a new tab)</span>
-      </a>
-    </div>
-    <div className="ml-4 flex items-center pl-4 border-l border-border/30">
-      <ThemeToggle />
+      </Link>
+      <div className="ml-4 pl-4 border-l border-border/30">
+        <ThemeToggle />
+      </div>
     </div>
   </nav>
 );
@@ -180,16 +175,13 @@ const MobileNav = ({
             asChild
             className="p-0"
           >
-            <a
+            <Link
               href="/pricing"
               onClick={handleItemClick}
-              target="_blank"
-              rel="noopener noreferrer"
               className="block w-full px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 bg-primary/10 text-primary hover:bg-primary/20 focus:bg-primary/20 focus:outline-none"
             >
               Book Now
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -212,13 +204,13 @@ export const Navbar = () => {
 
   const isDarkTheme = mounted && (theme === "dark" || resolvedTheme === "dark");
   const logoSrc = isDarkTheme
-    ? "/images/logo-dark.svg"
-    : "/images/logo-light.svg";
+    ? "/images/brand/logo-dark.svg"
+    : "/images/brand/logo-light.svg";
 
-  const isActiveLink = (href: string) => {
+  const isActiveLink = React.useCallback((href: string) => {
     if (href === "/") return pathname === href;
     return pathname.startsWith(href);
-  };
+  }, [pathname]);
 
   return (
     <header
@@ -250,7 +242,7 @@ export const Navbar = () => {
               <div className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-muted rounded-full animate-pulse" />
             )}
             <span className="font-serif text-base md:text-lg lg:text-xl font-semibold transition-colors duration-300 group-hover:text-primary">
-              Vivi Aesthetics & Spa
+              Vivi Aesthetics
             </span>
           </Link>
 

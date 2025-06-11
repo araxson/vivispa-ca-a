@@ -12,6 +12,7 @@ import {
 import { siteConfig, locations } from "@/data/constant";
 import { CtaCard } from "@/components/blocks/cta-card";
 import { Container, Section } from "@/components/ui";
+import { cn, gridVariants } from "@/lib/utils";
 
 const socialLinks = [
   {
@@ -54,6 +55,9 @@ const footerNav = [
     title: "Help",
     items: [
       { title: "Contact Us", href: "/contact" },
+      { title: "FAQs", href: "/faq" },
+      { title: "Privacy Policy", href: "/privacy" },
+      { title: "Terms of Service", href: "/terms" },
     ],
   },
 ];
@@ -66,7 +70,7 @@ export function Footer() {
     <footer className="border-t border-border">
       <Section className="py-12 sm:py-16 lg:py-20">
         <Container>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12">
+          <div className={cn(gridVariants({ cols: 12, gap: "lg" }))}>
             {/* Company Info */}
             <div className="md:col-span-2 lg:col-span-4">
               <Link href="/" className="inline-block mb-4">
@@ -95,7 +99,7 @@ export function Footer() {
 
             {/* Quick Links */}
             {footerNav.map((section) => (
-              <div key={section.title} className={section.title === 'Help' ? 'lg:col-span-1' : 'lg:col-span-2'}>
+              <div key={section.title} className="lg:col-span-2">
                 <h3 className="text-lg font-semibold text-foreground mb-4">
                   {section.title}
                 </h3>

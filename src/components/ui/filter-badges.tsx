@@ -1,14 +1,14 @@
-import React from "react";
 import { Badge, Button } from "@/components/ui";
 import { X, MapPin, Filter, Search, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { filterTransitionClasses } from "@/lib/animation";
+import { IconMaps } from "@/lib/icons";
 
 export interface FilterItem {
   type: string;
   label: string;
   value: string;
-  icon?: "location" | "category" | "search" | "tag";
+  icon?: keyof typeof IconMaps.filter;
 }
 
 interface FilterBadgesProps {

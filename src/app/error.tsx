@@ -12,7 +12,13 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error("Global error boundary caught:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Global error boundary caught:", error);
+    } else {
+      // In production, silently report to error service
+      // You could integrate with services like Sentry, LogRocket, etc.
+      // reportError(error);
+    }
   }, [error]);
 
   return (
